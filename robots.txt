@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow internal or test folders (if any)
+Disallow: /temp/
+Disallow: /test/
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://www.jasyooc.com/sitemap.xml
