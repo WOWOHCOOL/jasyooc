@@ -1,6 +1,3 @@
-*, *::before, *::after {
-    box-sizing: border-box; /* 防止 padding 或 border 撐大元素總寬度 */
-}
 /* --- 基礎樣式 --- */
 body {
     font-family: 'Noto Sans TC', 'Microsoft YaHei', sans-serif;
@@ -422,18 +419,10 @@ nav a:hover {
 
 /* --- RWD 響應式設計 --- */
 @media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        /* align-items: flex-start; /* 👈 移除或修改此行 */ */
-        align-items: center; /* 👈 讓整個標頭區塊居中更美觀 */
-        padding: 10px 20px;
+    .container {
+        margin: 20px auto;
+        padding: 20px;
     }
-
-    nav {
-        /* ... */
-        justify-content: center; /* 👈 確保 nav 連結本身在手機上居中 */
-    }
-}
 
     .header-content {
         flex-direction: column;
