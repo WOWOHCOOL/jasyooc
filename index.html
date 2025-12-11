@@ -6,100 +6,221 @@
     <title>知遇籤 (jasyooc.com) - 神機妙算，知曉人生際遇的線上抽籤服務</title>
     <link rel="stylesheet" href="style.css">
     
+    <!-- 字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 圖標 -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
     
+    <!-- SEO Meta -->
     <meta name="description" content="知遇籤 (jasyooc.com) 是一個結合知曉、預知與相遇寓意的線上抽籤平台。透過神機妙算，知曉人生的際遇和方向。提供觀音靈籤、黃大仙籤等籤詩解讀，免費為您指引人生方向。">
     <meta name="keywords" content="知遇籤, jasyooc, 抽籤, 求籤, 知曉, 際遇, 預知, 線上占卜, 觀音靈籤, 免費求籤, 今日運勢, 籤文">
+    <meta name="author" content="知遇籤 jasyooc.com">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="知遇籤 - 神機妙算，知曉人生際遇">
+    <meta property="og:description" content="誠心求籤，知曉人生際遇的線上抽籤服務">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jasyooc.com">
+    <meta property="og:image" content="images/og-image.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="知遇籤 - 神機妙算，知曉人生際遇">
+    <meta name="twitter:description" content="誠心求籤，知曉人生際遇的線上抽籤服務">
 </head>
 <body>
+    <!-- 加載動畫 -->
+    <div id="loading" style="display:none;">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- 頁頭 -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo-link">
-            <div class="logo">
-                <img src="images/logo.png" alt="知遇籤 jasyooc.com 網站 Logo" class="site-logo"> </a>
-                <span class="logo-text">知遇籤 jasyooc.com</span> 
-            </div>
+                <div class="logo">
+                    <img src="images/logo.png" alt="知遇籤 jasyooc.com 網站 Logo" class="site-logo">
+                    <span class="logo-text">知遇籤 jasyooc.com</span>
+                </div>
+            </a>
             <nav>
                 <a href="#about">文化介紹</a>
                 <a href="#faq">常見問題</a>
+                <a href="#contact">聯繫我們</a>
                 <a href="privacy.html" target="_blank">隱私政策</a>
                 <a href="disclaimer.html" target="_blank">免責聲明</a>
             </nav>
         </div>
     </header>
 
+    <!-- 主內容區 -->
     <div class="container">
         <h1 class="main-title">🙏 誠心請示知遇籤的神機妙算</h1>
         
         <div class="query-input">
             <label for="user-query">請在心中默念您的問題 (例如：我的姻緣何時到來？)</label>
-            <input type="text" id="user-query" placeholder="輸入您的提問..." minlength="5" maxlength="50">
+            <input type="text" id="user-query" placeholder="輸入您的提問，至少五個字..." minlength="5" maxlength="100">
+            <div class="query-examples">
+                <small>範例：事業發展如何？ / 感情運勢怎樣？ / 投資要注意什麼？</small>
+            </div>
         </div>
         
-        <div id="draw-area">
-            </div>
+        <!-- 抽籤區域 -->
+        <div id="draw-area"></div>
 
+        <!-- 控制按鈕 -->
         <div class="controls">
             <button id="draw-button" class="primary-button">🙏 搖晃籤筒，抽取神籤</button>
             <button id="reset-button" class="secondary-button" style="display: none;">🔄 重新求籤問事</button>
         </div>
+        
+        <!-- 提醒文字 -->
+        <div class="reminder-box">
+            <p>💡 提示：請專注思考您的問題，誠心搖籤。同一問題每日只會得到一次結果。</p>
+        </div>
 
+        <!-- 結果顯示區 -->
         <div id="result-display" style="display: none;">
-            <div id="drawn-stick-magnified">
-                </div>
+            <div class="result-header">
+                <h2>📜 您的籤文結果</h2>
+                <div class="result-timestamp" id="result-time"></div>
+            </div>
+            
+            <div id="drawn-stick-magnified"></div>
+            
             <div id="interpretation">
-                <h2>📜 籤文解讀</h2>
+                <h3>📖 籤文解讀</h3>
                 <div id="interpretation-text"></div>
+            </div>
+            
+            <!-- 分享功能 -->
+            <div class="share-section">
+                <button id="share-button" class="share-button">📤 分享此籤文</button>
+                <button id="save-button" class="secondary-button">💾 儲存結果</button>
             </div>
         </div>
 
+        <!-- SEO 內容區 -->
         <div class="seo-content" id="about">
             <h2>📜 「知遇籤」文化：知曉際遇，指引人生</h2>
             <p><strong>知遇籤 (jasyooc.com)</strong> 承襲千年華人傳統文化，提供便捷且具啟發性的線上抽籤服務。我們的名字「知遇籤」寓意深遠：</p>
             <ul>
-                <li>知 (Zhī)：透過籤文，知曉可能的趨勢或建議，助您明辨方向。</li>
-                <li>遇 (Yù)：寓意您能與生命中的良機、貴人或適切的指引相遇，不失良緣。</li>
-                <li>籤 (Qiān)：神機妙算的載體，是您在思慮時尋求啟發的工具。</li>
+                <li><strong>知 (Zhī)</strong>：透過籤文，知曉可能的趨勢或建議，助您明辨方向。</li>
+                <li><strong>遇 (Yù)</strong>：寓意您能與生命中的良機、貴人或適切的指引相遇，不失良緣。</li>
+                <li><strong>籤 (Qiān)</strong>：神機妙算的載體，是您在思慮時尋求啟發的工具。</li>
             </ul>
+            
             <p><strong>知遇籤 (jasyooc.com)</strong> 旨在：透過一份啟示，協助您知曉人生的際遇，並從中獲得前行的智慧。無論您身處何方，只要心懷誠敬，皆可在此獲得一份來自籤文的參考。</p>
             
-            <h3>🔍 線上求籤的優勢</h3>
-            <ul>
-                <li>隨時隨地：無需前往寺廟，手機或電腦即可誠心求籤。</li>
-                <li>多種籤系：涵蓋觀音靈籤、黃大仙籤等經典籤詩體系，提供多元啟示。</li>
-                <li>清晰解讀：每支籤詩都配有詳盡的白話解說和指示，助您理解。</li>
-            </ul>
+            <div class="cultural-features">
+                <div class="feature">
+                    <h3>🏮 傳統文化的現代詮釋</h3>
+                    <p>我們將傳統籤詩文化以現代科技呈現，保留其精神內核的同時，讓求籤體驗更加便利直觀。</p>
+                </div>
+                <div class="feature">
+                    <h3>🎯 精準的籤文匹配</h3>
+                    <p>系統會根據您的提問內容智能匹配最相關的籤文，提供更具針對性的指引。</p>
+                </div>
+                <div class="feature">
+                    <h3>🔮 多元的籤詩體系</h3>
+                    <p>涵蓋觀音靈籤、黃大仙籤、月老籤等多種傳統籤詩，滿足不同需求。</p>
+                </div>
+            </div>
         </div>
         
+        <!-- FAQ 區 -->
         <div class="seo-content" id="faq">
             <h2>❓ 常見問題 (FAQ)</h2>
-            <details>
-                <summary>線上抽籤如何進行？</summary>
-                <p>請您在心中專注默念您的問題，然後點擊「搖晃籤筒」按鈕。系統將根據您的提問和當日情境，為您抽取一支籤文並提供詳細解讀。每次求籤前，請確保問題明確且專一。</p>
-            </details>
-            <details>
-                <summary>籤詩中的「大吉」、「下籤」應如何理解？</summary>
-                <p>籤文的吉凶等級是古人對事物發展趨勢的一種參考性判斷，其重點在於籤詩內容的啟示與建議。一支「大吉」籤可能鼓勵您把握時機、積極作為；一支「下籤」則可能提醒您謹慎行事、避免風險，並非絕對的結果。請仔細閱讀解籤，領會其中智慧。</p>
-            </details>
-            <details>
-                <summary>如果我再次問同樣的問題，結果會一樣嗎？</summary>
-                <p>為確保求籤體驗的一致性，同一台設備在同一天內針對相同的問題，將會得到相同的籤文結果。這是為了避免反覆求籤可能造成的困惑，鼓勵您專注思考所得籤文的啟示。若需重新求籤，建議更改日期或提出不同面向的問題。</p>
-            </details>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>🤔 線上抽籤如何進行？</h3>
+                    <p>請您在心中專注默念您的問題，然後點擊「搖晃籤筒」按鈕。系統將根據您的提問和當日情境，為您抽取一支籤文並提供詳細解讀。每次求籤前，請確保問題明確且專一。</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>📊 籤詩中的「大吉」、「下籤」應如何理解？</h3>
+                    <p>籤文的吉凶等級是古人對事物發展趨勢的一種參考性判斷，其重點在於籤詩內容的啟示與建議。一支「大吉」籤可能鼓勵您把握時機、積極作為；一支「下籤」則可能提醒您謹慎行事、避免風險，並非絕對的結果。</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>🔄 如果我再次問同樣的問題，結果會一樣嗎？</h3>
+                    <p>為確保求籤體驗的一致性，同一台設備在同一天內針對相同的問題，將會得到相同的籤文結果。這是為了避免反覆求籤可能造成的困惑，鼓勵您專注思考所得籤文的啟示。</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>⏰ 抽籤結果的有效期是多久？</h3>
+                    <p>籤文結果的有效性取決於您的情況變化。一般建議在問題情況有明顯變化時重新求籤，或在一個月後重新詢問。</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>💼 抽籤結果會儲存嗎？</h3>
+                    <p>是的，您的抽籤結果會儲存在瀏覽器的本地存儲中，方便您日後查看。但請注意，清除瀏覽器數據可能會導致結果丟失。</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>📱 可以在手機上使用嗎？</h3>
+                    <p>當然可以！知遇籤完全響應式設計，在手機、平板和電腦上都能獲得良好的使用體驗。</p>
+                </div>
+            </div>
         </div>
         
-        <div class="seo-content-simplified">
-            <p>知遇籤 (jasyooc.com) 提供免費線上抽籤服務，助您在人生道路上獲得一份參考。請誠心默念問題，搖動籤筒，知曉您的際遇。</p>
+        <!-- 聯繫我們 -->
+        <div class="seo-content" id="contact">
+            <h2>📞 聯繫我們</h2>
+            <p>如果您有任何問題、建議或合作機會，歡迎通過以下方式聯繫我們：</p>
+            <div class="contact-info">
+                <p>📧 電子郵件：contact@jasyooc.com</p>
+                <p>🌐 網站：<a href="https://jasyooc.com" target="_blank">https://jasyooc.com</a></p>
+            </div>
         </div>
+        
+        <!-- 簡化說明 -->
+        <div class="seo-content-simplified">
+            <p><strong>知遇籤 (jasyooc.com)</strong> 提供免費線上抽籤服務，助您在人生道路上獲得一份參考。請誠心默念問題，搖動籤筒，知曉您的際遇。</p>
+            <p class="disclaimer-note">免責聲明：本網站提供的籤文僅供參考和娛樂目的，不應作為人生重大決策的唯一依據。請理性看待，並在重要決策時諮詢專業人士。</p>
+        </div>
+        
+        <!-- 頁尾 -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">知遇籤 jasyooc.com</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">首頁</a>
+                    <a href="#about">關於我們</a>
+                    <a href="#faq">常見問題</a>
+                    <a href="privacy.html" target="_blank">隱私政策</a>
+                    <a href="disclaimer.html" target="_blank">免責聲明</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2023 知遇籤 jasyooc.com 版權所有</p>
+                    <p>保留所有權利。本網站內容僅供參考和娛樂用途。</p>
+                </div>
+            </div>
+        </footer>
     </div>
     
+    <!-- 音效 -->
     <audio id="shaking-sound" src="sounds/shaking.mp3" preload="auto"></audio>
     <audio id="drop-sound" src="sounds/drop.mp3" preload="auto"></audio>
-
+    <audio id="success-sound" src="sounds/success.mp3" preload="auto"></audio>
+    
+    <!-- 腳本 -->
     <script src="script.js"></script>
+    
+    <!-- Google Analytics (示例) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </body>
-
 </html>
-
-
-

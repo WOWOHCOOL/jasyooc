@@ -1,3 +1,8 @@
+// ============================================
+// 知遇籤 (jasyooc.com) 主程式
+// Version: 3.0.0
+// ============================================
+
 // --- 預設籤文庫 (完整的 60 支籤文數據) ---
 const fortuneSticks = [
     {
@@ -302,8 +307,7 @@ const fortuneSticks = [
     }
 ];
 
-
-// --- 匹配權重配置 (保持不變) ---
+// --- 匹配權重配置 ---
 const WEIGHTS = {
     '事業': ['工作', '職位', '升職', '跳槽', '發展', '創業', '公司', '業務', '職場'],
     '財運': ['錢', '財富', '投資', '買房', '股票', '賺錢', '收入', '資金', '債務', '理財', '利潤'],
@@ -317,14 +321,56 @@ const WEIGHTS = {
     '負面意圖': ['風險', '危機', '失敗', '不好', '怎麼辦', '停止', '難嗎', '避免', '結束', '會失去', '嚴重'],
 };
 
+// --- 全局變量 ---
+let isDrawing = false;
+let drawnStickData = null;
+let currentAnimation = null;
 
-// --- 確定性隨機數生成器 (PRNG) ---
+// --- 工具函數 ---
+/**
+ * 安全的音效播放
+ */
+function safePlayAudio(audioId) {
+    try {
+        const audio = document.getElementById(audioId);
+        if (audio) {
+            audio.currentTime = 0;
+            return audio.play().catch(e => {
+                console.warn(`音效 ${audioId} 播放失敗:`, e);
+                return Promise.resolve();
+            });
+        }
+    } catch (error) {
+        console.warn(`音效 ${audioId} 播放錯誤:`, error);
+    }
+    return Promise.resolve();
+}
+
+/**
+ * 顯示加載動畫
+ */
+function showLoading() {
+    const loading = document.getElementById('loading');
+    if (loading) loading.style.display = 'flex';
+}
+
+/**
+ * 隱藏加載動畫
+ */
+function hideLoading() {
+    const loading = document.getElementById('loading');
+    if (loading) loading.style.display = 'none';
+}
+
+/**
+ * 生成確定性隨機數
+ */
 function seededRandom(seed) {
     let hash = 0;
     for (let i = 0; i < seed.length; i++) {
         const char = seed.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
-        hash |= 0; 
+        hash |= 0;
     }
     
     let x = (hash * 0x7fffffff) & 0xfffffff;
@@ -335,47 +381,29 @@ function seededRandom(seed) {
     };
 }
 
-
-// --- 生成唯一的查詢種子 (Seed) ---
+/**
+ * 生成查詢種子
+ */
 function generateQuerySeed(query) {
     const today = new Date();
     const dateStr = today.toISOString().split('T')[0];
     
-    const cleanQuery = query.trim().replace(/[^\w\s]/gi, '').toLowerCase(); 
+    const cleanQuery = query.trim().replace(/[^\w\s]/gi, '').toLowerCase();
     
-    const queryKey = `fortune-result-${dateStr}-${cleanQuery}`;
-    const seed = `${dateStr}:${cleanQuery}:jasyooc_v1`; 
-
-    return { queryKey, seed };
+    return { 
+        queryKey: `fortune-${dateStr}-${cleanQuery.substring(0, 20)}`,
+        seed: `${dateStr}:${cleanQuery}:jasyooc_v3`
+    };
 }
 
-
 /**
- * 根據權重分數進行 確定性選擇
- */
-function deterministicSelect(scoredSticks, nextRandom) {
-    const totalScore = scoredSticks.reduce((sum, stick) => sum + stick.score, 0);
-    let randomNum = nextRandom() * totalScore; 
-    
-    for (const stick of scoredSticks) {
-        randomNum -= stick.score;
-        if (randomNum < 0) {
-            return stick;
-        }
-    }
-    
-    return scoredSticks.sort((a, b) => b.score - a.score)[0];
-}
-
-
-/**
- * 根據使用者問題計算每支籤文的權重分數。
+ * 計算籤文分數
  */
 function calculateStickScores(query) {
+    const normalizedQuery = query.toLowerCase().replace(/\s/g, '');
     const scores = [];
-    const normalizedQuery = query.toLowerCase().replace(/\s/g, ''); 
-
-    // 1. 識別使用者問題意圖
+    
+    // 識別意圖
     let userIntent = '中性意圖';
     if (WEIGHTS['正面意圖'].some(word => normalizedQuery.includes(word))) {
         userIntent = '正面意圖';
@@ -383,341 +411,850 @@ function calculateStickScores(query) {
         userIntent = '負面意圖';
     }
     
-    // 2. 遍歷所有籤文，計算分數
-    fortuneSticks.forEach((stick) => {
+    // 計算每支籤分數
+    fortuneSticks.forEach(stick => {
         let score = 0;
         
-        // A. 核心關鍵詞匹配得分 (10分/詞)
-        // 🚨 修正：確保 stick.keywords 存在
+        // 關鍵詞匹配
         if (stick.keywords && Array.isArray(stick.keywords)) {
             stick.keywords.forEach(keyword => {
                 if (normalizedQuery.includes(keyword.toLowerCase())) {
-                    score += 10; 
+                    score += 10;
                 }
             });
         }
-
-        // B. 領域匹配加權得分 (15分/領域)
-        Object.keys(WEIGHTS).filter(k => k.length > 2 && k !== '正面意圖' && k !== '負面意圖').forEach(field => {
-            const fieldKeywords = WEIGHTS[field];
-            if (fieldKeywords.some(word => normalizedQuery.includes(word))) {
-                if (stick.keywords && stick.keywords.includes(field)) {
-                    score += 15; 
-                }
-            }
-        });
         
-        // C. 意圖調整分數 (吉凶傾向調整)
+        // 領域匹配
+        Object.keys(WEIGHTS)
+            .filter(k => k.length > 2 && !['正面意圖', '負面意圖'].includes(k))
+            .forEach(field => {
+                if (WEIGHTS[field].some(word => normalizedQuery.includes(word))) {
+                    if (stick.keywords && stick.keywords.includes(field)) {
+                        score += 15;
+                    }
+                }
+            });
+        
+        // 意圖調整
         const isFavorable = stick.title.includes('上吉') || stick.title.includes('中吉');
         const isCautious = stick.title.includes('下籤') || stick.title.includes('中下籤');
-
+        
         if (userIntent === '正面意圖') {
-            if (isFavorable) {
-                score += 20;
-            } else if (isCautious) {
-                score -= 10; 
-            }
+            score += isFavorable ? 20 : (isCautious ? -10 : 0);
         } else if (userIntent === '負面意圖') {
-            if (isCautious) {
-                score += 20;
-            } else if (isFavorable) {
-                score -= 10; 
-            }
+            score += isCautious ? 20 : (isFavorable ? -10 : 0);
         }
         
-        // 確保最低分數 (基礎機率)
-        score = Math.max(1, score); 
-
-        scores.push({ ...stick, score });
+        scores.push({ ...stick, score: Math.max(1, score) });
     });
     
     return scores;
 }
 
+/**
+ * 確定性選擇籤文
+ */
+function deterministicSelect(scoredSticks, nextRandom) {
+    const totalScore = scoredSticks.reduce((sum, stick) => sum + stick.score, 0);
+    if (totalScore === 0) return scoredSticks[0];
+    
+    let randomNum = nextRandom() * totalScore;
+    
+    for (const stick of scoredSticks) {
+        randomNum -= stick.score;
+        if (randomNum < 0) return stick;
+    }
+    
+    return scoredSticks[scoredSticks.length - 1];
+}
 
 // --- SVG 繪製函數 ---
-const censerWidth = 150;
-const censerHeight = 350;
-const censerOffsetX = 50; 
-const svgContainerWidth = censerWidth + 100;
-const svgContainerHeight = censerHeight + 50;
-
 /**
- * 繪製籤筒的 SVG 元素
+ * 創建精美籤筒 SVG
  */
 function createCenserSVG(width, height) {
-    const baseColor = "#8b4513"; 
-    const edgeColor = "#a0522d"; 
+    const baseColor = "#8b4513";
+    const edgeColor = "#a0522d";
+    const accentColor = "#d4a017";
+    const goldColor = "#ffd700";
+    
     const topRadius = width / 2;
     const bottomRadius = topRadius * 0.9;
     
-    const topEllipse = `<ellipse cx="${width / 2}" cy="10" rx="${topRadius}" ry="5" fill="${edgeColor}" stroke="${baseColor}" stroke-width="2"/>`;
+    // 籤筒主體路徑（開口朝上）
+    const bodyPath = `M ${width/2 - topRadius} ${height-20} 
+                      L ${width/2 - bottomRadius} 20 
+                      A ${bottomRadius} 6 0 0 0 ${width/2 + bottomRadius} 20 
+                      L ${width/2 + topRadius} ${height-20} Z`;
     
-    const bodyPath = `M ${width / 2 - topRadius} 10 
-                      L ${width / 2 - bottomRadius} ${height - 10} 
-                      A ${bottomRadius} 5 0 0 0 ${width / 2 + bottomRadius} ${height - 10} 
-                      L ${width / 2 + topRadius} 10 Z`;
-    
-    const bottomRect = `<rect x="${width / 2 - bottomRadius}" y="${height - 15}" width="${bottomRadius * 2}" height="10" rx="3" fill="${edgeColor}"/>`;
-
-    return `<svg class="censer" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-                <g>
-                    ${bottomRect}
-                    <path d="${bodyPath}" fill="${baseColor}" stroke="${baseColor}" stroke-width="1"/>
-                    ${topEllipse}
+    return `
+        <svg class="censer" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+            <defs>
+                <linearGradient id="censerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#a0522d;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#8b4513;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                </linearGradient>
+                
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.8" />
+                    <stop offset="100%" style="stop-color:#ffed4e;stop-opacity:0.9" />
+                </linearGradient>
+                
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+                
+                <pattern id="woodPattern" patternUnits="userSpaceOnUse" width="20" height="20">
+                    <path d="M0,0 L20,20 M20,0 L0,20" stroke="#5d4037" stroke-width="0.5" opacity="0.2"/>
+                </pattern>
+            </defs>
+            
+            <!-- 籤筒陰影 -->
+            <ellipse cx="${width/2}" cy="${height-10}" rx="${topRadius+5}" ry="10" fill="#000" opacity="0.2" filter="url(#glow)"/>
+            
+            <!-- 籤筒主體 -->
+            <g filter="url(#glow)">
+                <path d="${bodyPath}" fill="url(#censerGradient)" stroke="${edgeColor}" stroke-width="3"/>
+                
+                <!-- 木紋效果 -->
+                <path d="${bodyPath}" fill="url(#woodPattern)" opacity="0.3"/>
+                
+                <!-- 裝飾邊框 -->
+                <ellipse cx="${width/2}" cy="${height-20}" rx="${topRadius}" ry="10" fill="none" stroke="${goldColor}" stroke-width="2" opacity="0.8"/>
+                <ellipse cx="${width/2}" cy="20" rx="${bottomRadius}" ry="8" fill="none" stroke="${goldColor}" stroke-width="2" opacity="0.8"/>
+                
+                <!-- 中間裝飾線 -->
+                <ellipse cx="${width/2}" cy="${height/2}" rx="${topRadius*0.85}" ry="4" fill="none" stroke="${accentColor}" stroke-width="1.5" opacity="0.6"/>
+                
+                <!-- 裝飾圖案 -->
+                <g opacity="0.4">
+                    <path d="M ${width/2-25} ${height/2-30} Q ${width/2} ${height/2-40} ${width/2+25} ${height/2-30}" 
+                          fill="none" stroke="${goldColor}" stroke-width="1"/>
+                    <path d="M ${width/2-20} ${height/2+30} Q ${width/2} ${height/2+40} ${width/2+20} ${height/2+30}" 
+                          fill="none" stroke="${goldColor}" stroke-width="1"/>
                 </g>
-            </svg>`;
+            </g>
+            
+            <!-- 頂部裝飾環 -->
+            <rect x="${width/2-topRadius}" y="${height-25}" width="${topRadius*2}" height="8" rx="4" fill="#654321" opacity="0.9"/>
+            
+            <!-- "知遇籤"文字容器 -->
+            <rect x="${width/2-55}" y="${height/2-45}" width="110" height="90" rx="15" 
+                  fill="rgba(255, 255, 255, 0.1)" 
+                  stroke="rgba(255, 215, 0, 0.3)" 
+                  stroke-width="1.5"
+                  filter="url(#glow)"/>
+            
+            <!-- 文字陰影 -->
+            <text x="${width/2}" y="${height/2-15}" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="22"
+                  font-weight="900"
+                  fill="#000"
+                  text-anchor="middle"
+                  opacity="0.3"
+                  filter="url(#glow)">
+                知
+            </text>
+            <text x="${width/2}" y="${height/2+5}" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="22"
+                  font-weight="900"
+                  fill="#000"
+                  text-anchor="middle"
+                  opacity="0.3"
+                  filter="url(#glow)">
+                遇
+            </text>
+            <text x="${width/2}" y="${height/2+25}" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="22"
+                  font-weight="900"
+                  fill="#000"
+                  text-anchor="middle"
+                  opacity="0.3"
+                  filter="url(#glow)">
+                籤
+            </text>
+            
+            <!-- 金色文字 -->
+            <text x="${width/2}" y="${height/2-15}" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="22"
+                  font-weight="900"
+                  fill="url(#goldGradient)"
+                  text-anchor="middle"
+                  text-shadow="0 0 10px rgba(255, 215, 0, 0.7)"
+                  opacity="0.95">
+                知
+            </text>
+            <text x="${width/2}" y="${height/2+5}" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="22"
+                  font-weight="900"
+                  fill="url(#goldGradient)"
+                  text-anchor="middle"
+                  text-shadow="0 0 10px rgba(255, 215, 0, 0.7)"
+                  opacity="0.95">
+                遇
+            </text>
+            <text x="${width/2}" y="${height/2+25}" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="22"
+                  font-weight="900"
+                  fill="url(#goldGradient)"
+                  text-anchor="middle"
+                  text-shadow="0 0 10px rgba(255, 215, 0, 0.7)"
+                  opacity="0.95">
+                籤
+            </text>
+            
+            <!-- 裝飾光點 -->
+            <circle cx="${width/2-40}" cy="${height/2-35}" r="2" fill="${goldColor}" opacity="0.6" filter="url(#glow)"/>
+            <circle cx="${width/2+40}" cy="${height/2-35}" r="2" fill="${goldColor}" opacity="0.6" filter="url(#glow)"/>
+            <circle cx="${width/2-40}" cy="${height/2+35}" r="2" fill="${goldColor}" opacity="0.6" filter="url(#glow)"/>
+            <circle cx="${width/2+40}" cy="${height/2+35}" r="2" fill="${goldColor}" opacity="0.6" filter="url(#glow)"/>
+        </svg>
+    `;
 }
 
 /**
- * 初始化抽籤區域和籤筒
+ * 初始化抽籤區域
  */
 function initializeDrawing() {
     const drawArea = document.getElementById('draw-area');
     
-    let svgContent = `<svg id="main-svg" width="${svgContainerWidth}" height="${svgContainerHeight}" viewBox="0 0 ${svgContainerWidth} ${svgContainerHeight}" style="overflow: visible;">`;
+    let svgContent = `
+        <svg id="main-svg" width="320" height="500" viewBox="0 0 320 500" style="overflow: visible;">
+            <!-- 背景裝飾 -->
+            <defs>
+                <radialGradient id="bgGradient" cx="50%" cy="50%" r="80%">
+                    <stop offset="0%" stop-color="#f9f5eb" stop-opacity="0.9"/>
+                    <stop offset="50%" stop-color="#f5f0e3" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="#f0e6d6" stop-opacity="0.5"/>
+                </radialGradient>
+                
+                <filter id="softShadow">
+                    <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000" flood-opacity="0.15"/>
+                </filter>
+            </defs>
+            
+            <!-- 背景 -->
+            <rect width="100%" height="100%" fill="url(#bgGradient)"/>
+            
+            <!-- 背景祥雲 -->
+            <g opacity="0.08">
+                <path d="M40,80 Q60,60 80,80 T120,80" fill="none" stroke="#8b4513" stroke-width="3"/>
+                <path d="M220,120 Q240,100 260,120 T300,120" fill="none" stroke="#8b4513" stroke-width="3"/>
+                <path d="M80,350 Q100,330 120,350 T160,350" fill="none" stroke="#8b4513" stroke-width="3"/>
+            </g>
+            
+            <!-- 筒內籤文 -->
+            <g id="sticks-in-censer">`;
     
-    const stickCountVisual = 15; 
-    
-    // 繪製筒內籤文
-    for (let i = 0; i < stickCountVisual; i++) {
-        const stickX = censerOffsetX + censerWidth / 2 + (i - stickCountVisual / 2) * 2 - 5; 
-        const stickY = censerHeight - 20; 
+    // 繪製20支籤
+    const stickCount = 20;
+    for (let i = 0; i < stickCount; i++) {
+        const angle = (i - stickCount/2) * 0.15;
+        const offsetX = Math.sin(angle) * 30;
+        const stickX = 160 + offsetX + (i - stickCount/2) * 1.5;
+        const stickY = 100;
+        const stickHeight = 200 + Math.random() * 30;
+        const stickColor = i % 4 === 0 ? '#f5deb3' : 
+                          i % 4 === 1 ? '#e6b36a' : 
+                          i % 4 === 2 ? '#d4a017' : '#b8860b';
         
-        svgContent += `<rect class="stick-in-censer" data-index="${i}" x="${stickX - 3}" y="${stickY - 200}" width="6" height="200" rx="2" fill="#e6b36a" stroke="#8b4513" stroke-width="1"/>`;
+        svgContent += `
+            <rect class="stick-in-censer" data-index="${i}"
+                  x="${stickX - 4}" y="${stickY}"
+                  width="8" height="${stickHeight}"
+                  rx="3"
+                  fill="${stickColor}"
+                  stroke="#8b4513"
+                  stroke-width="1.2"
+                  opacity="0.9"
+                  transform="rotate(${angle * 2}, ${stickX}, ${stickY})"
+                  style="transition: all 0.5s ease"/>
+        `;
     }
-
-    // 繪製籤筒
-    const censerSVG = createCenserSVG(censerWidth, censerHeight).replace('<svg', `<svg x="${censerOffsetX}" y="0"`);
-    svgContent += censerSVG.replace('class="censer"', 'class="censer" id="censer-svg-group"');
-
-    svgContent += `</svg>`;
+    
+    svgContent += `
+            </g>
+            
+            <!-- 籤筒 -->
+            ${createCenserSVG(200, 350).replace('<svg', `<svg x="60" y="80" id="censer-svg-group"`)}
+            
+            <!-- 底座 -->
+            <g filter="url(#softShadow)">
+                <ellipse cx="160" cy="450" rx="120" ry="20" fill="#654321" opacity="0.8"/>
+                <ellipse cx="160" cy="450" rx="100" ry="15" fill="#8b4513" opacity="0.9"/>
+            </g>
+            
+            <!-- 底座裝飾文字 -->
+            <text x="160" y="480" 
+                  font-family="'Noto Serif TC', serif"
+                  font-size="14"
+                  fill="#8b4513"
+                  text-anchor="middle"
+                  opacity="0.7"
+                  font-weight="500">
+                誠心求籤 • 有求必應
+            </text>
+            
+            <!-- 光暈效果 -->
+            <circle cx="160" cy="250" r="80" fill="none" stroke="rgba(255, 215, 0, 0.05)" stroke-width="40"/>
+        </svg>
+    `;
+    
     drawArea.innerHTML = svgContent;
     
+    // 重置UI狀態
     document.getElementById('result-display').style.display = 'none';
     document.getElementById('draw-button').style.display = 'block';
     document.getElementById('reset-button').style.display = 'none';
+    document.getElementById('draw-button').disabled = false;
+    document.getElementById('draw-button').textContent = "🙏 搖晃籤筒，抽取神籤";
     
-    document.getElementById('user-query').value = '';
+    // 重置輸入框
+    const queryInput = document.getElementById('user-query');
+    queryInput.value = '';
+    queryInput.focus();
+    
+    console.log('[知遇籤] 籤筒初始化完成');
 }
 
-// --- 动画和逻辑 ---
-
-let isDrawing = false;
-let drawnStickData = null;
-let shakingSound;
-let dropSound;
-
-
-function startDrawing() {
-    if (isDrawing) return;
+/**
+ * 開始抽籤
+ */
+async function startDrawing() {
+    if (isDrawing) {
+        console.log('[知遇籤] 抽籤進行中，請稍候');
+        return;
+    }
     
     const userQuery = document.getElementById('user-query').value.trim();
     
+    // 驗證輸入
     if (userQuery.length < 5) {
-        alert("請誠心輸入您的問題，至少五個字，以示虔誠！");
+        showMessage("請誠心輸入您的問題，至少五個字，以示虔誠！", "warning");
         document.getElementById('user-query').focus();
         return;
     }
     
+    if (userQuery.length > 100) {
+        showMessage("問題過長，請簡要說明您的疑問（100字以內）", "warning");
+        return;
+    }
+    
+    // 設置狀態
     isDrawing = true;
-
     const drawButton = document.getElementById('draw-button');
     const censerGroup = document.getElementById('censer-svg-group');
-    const sticksInCenser = document.querySelectorAll('.stick-in-censer');
     
     drawButton.disabled = true;
     drawButton.textContent = "🙏 正在感應神機...";
-
-    // ⭐ 確定性抽籤邏輯 ⭐
-    const { queryKey, seed } = generateQuerySeed(userQuery);
-    let resultIndex = -1; 
-    const storedResult = localStorage.getItem(queryKey);
     
-    if (storedResult) {
-        resultIndex = parseInt(storedResult);
-        drawnStickData = fortuneSticks[resultIndex];
-        console.log(`[知遇籤] 從 LocalStorage 獲取今日結果: 第 ${resultIndex + 1} 籤`);
-    } else {
-        const scoredSticks = calculateStickScores(userQuery);
-        const nextRandom = seededRandom(seed); 
+    try {
+        // 1. 確定性抽籤邏輯
+        const { queryKey, seed } = generateQuerySeed(userQuery);
+        let resultIndex = -1;
+        const storedResult = localStorage.getItem(queryKey);
         
-        drawnStickData = deterministicSelect(scoredSticks, nextRandom);
+        if (storedResult !== null && storedResult !== undefined) {
+            resultIndex = parseInt(storedResult);
+            if (resultIndex >= 0 && resultIndex < fortuneSticks.length) {
+                drawnStickData = fortuneSticks[resultIndex];
+                console.log(`[知遇籤] 從本地儲存獲取結果: 第 ${resultIndex + 1} 籤`);
+            }
+        }
         
-        resultIndex = fortuneSticks.findIndex(stick => stick.number === drawnStickData.number);
-        localStorage.setItem(queryKey, resultIndex.toString());
-        console.log(`[知遇籤] 確定性抽籤完成，結果已儲存: 第 ${resultIndex + 1} 籤`);
-    }
-
-    // 2. 播放搖籤音效並開始搖晃動畫
-    if (shakingSound) {
-        shakingSound.loop = true; 
-        shakingSound.play().catch(e => console.error("播放搖籤音效失敗:", e)); 
-    }
-    censerGroup.classList.add('shaking');
-
-    // 隨機選定一根筒內籤用於視覺掉落
-    const stickToHide = sticksInCenser[Math.floor(Math.random() * sticksInCenser.length)];
-    
-    // 3. 延遲後籤子「彈出」
-    setTimeout(() => {
-        // 停止搖晃動畫和音效
+        if (!drawnStickData) {
+            const scoredSticks = calculateStickScores(userQuery);
+            const nextRandom = seededRandom(seed);
+            
+            if (scoredSticks && scoredSticks.length > 0) {
+                drawnStickData = deterministicSelect(scoredSticks, nextRandom);
+                resultIndex = fortuneSticks.findIndex(stick => stick.number === drawnStickData.number);
+                
+                if (resultIndex !== -1) {
+                    localStorage.setItem(queryKey, resultIndex.toString());
+                    console.log(`[知遇籤] 新抽籤結果已儲存: 第 ${resultIndex + 1} 籤`);
+                }
+            }
+        }
+        
+        // 確保有結果
+        if (!drawnStickData && fortuneSticks.length > 0) {
+            drawnStickData = fortuneSticks[Math.floor(Math.random() * fortuneSticks.length)];
+        }
+        
+        // 2. 開始搖籤動畫
+        censerGroup.classList.add('shaking');
+        safePlayAudio('shaking-sound');
+        
+        // 隨機選擇一支籤隱藏
+        const sticksInCenser = document.querySelectorAll('.stick-in-censer');
+        if (sticksInCenser.length > 0) {
+            const stickToHide = sticksInCenser[Math.floor(Math.random() * sticksInCenser.length)];
+            stickToHide.style.opacity = '0';
+            stickToHide.style.transform += ' translateY(-50px)';
+        }
+        
+        // 3. 延遲後開始掉落動畫
+        await new Promise(resolve => setTimeout(resolve, 1800));
+        
+        // 停止搖籤
         censerGroup.classList.remove('shaking');
+        const shakingSound = document.getElementById('shaking-sound');
         if (shakingSound) {
             shakingSound.pause();
-            shakingSound.currentTime = 0; 
+            shakingSound.currentTime = 0;
         }
-
-        // 隱藏筒內其中一根籤
-        stickToHide.style.opacity = '0'; 
-
+        
+        // 4. 創建掉落籤
         const svgContainer = document.getElementById('main-svg');
-        const stickWidth = 8; 
-        const stickHeight = 250;
+        const fallingStick = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         
-        const startX = parseFloat(stickToHide.getAttribute('x'));
-        const startY = parseFloat(stickToHide.getAttribute('y')); 
-
-        const fallingStickSVG = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        fallingStickSVG.setAttribute('class', 'drawn-stick-svg falling');
-        fallingStickSVG.setAttribute('x', startX.toString());
-        fallingStickSVG.setAttribute('y', startY.toString());
-        fallingStickSVG.setAttribute('width', stickWidth.toString());
-        fallingStickSVG.setAttribute('height', stickHeight.toString());
-        fallingStickSVG.setAttribute('rx', '2');
+        // 設置籤子屬性
+        fallingStick.setAttribute('class', 'drawn-stick-svg falling');
+        fallingStick.setAttribute('x', '156');
+        fallingStick.setAttribute('y', '100');
+        fallingStick.setAttribute('width', '8');
+        fallingStick.setAttribute('height', '250');
+        fallingStick.setAttribute('rx', '3');
         
-        // 設定 CSS 變數，用於控制 fallAndBounce 動畫
-        const initialBounceX = (Math.random() * 20) - 10; 
-        const dropX = (Math.random() * 80) - 40; 
-        const dropY = censerHeight + 30; 
-        const dropRot = (Math.random() * 60) - 30; 
-
-        fallingStickSVG.style.setProperty('--start-x', `0px`);
-        fallingStickSVG.style.setProperty('--start-y', `0px`);
-        fallingStickSVG.style.setProperty('--initial-bounce-x', `${initialBounceX}px`);
-        fallingStickSVG.style.setProperty('--initial-rot', `${(Math.random() * 10) - 5}deg`); 
-        fallingStickSVG.style.setProperty('--drop-x', `${dropX}px`);
-        fallingStickSVG.style.setProperty('--drop-y', `${dropY}px`);
-        fallingStickSVG.style.setProperty('--drop-rot', `${dropRot}deg`);
+        // 設置動畫參數
+        const dropX = (Math.random() * 100) - 50;
+        const dropY = 420;
+        const dropRot = (Math.random() * 80) - 40;
         
-        fallingStickSVG.style.animationDuration = '2.0s'; 
+        fallingStick.style.cssText = `
+            --drop-x: ${dropX}px;
+            --drop-y: ${dropY}px;
+            --drop-rot: ${dropRot}deg;
+            animation-duration: 2s;
+            opacity: 0;
+            fill: #fdf5e6;
+            stroke: #d2b48c;
+            stroke-width: 1.5;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+        `;
         
-        fallingStickSVG.style.opacity = '1';
-        svgContainer.appendChild(fallingStickSVG);
-
-        // 播放落定聲響
-        if (dropSound) {
-            setTimeout(() => {
-                 dropSound.play().catch(e => console.error("播放落籤音效失敗:", e));
-            }, 1500); 
-        }
-
-        // 4. 掉落動畫結束後顯示結果
+        svgContainer.appendChild(fallingStick);
+        
+        // 觸發動畫
         setTimeout(() => {
-            svgContainer.removeChild(fallingStickSVG);
-
-            displayResult(drawnStickData, userQuery);
-
-            drawButton.disabled = false;
-            drawButton.textContent = "🙏 搖晃籤筒，抽取神籤";
-            drawButton.style.display = 'none';
-            document.getElementById('reset-button').style.display = 'block';
-
-            isDrawing = false;
-        }, 2000); 
+            fallingStick.style.opacity = '1';
+        }, 10);
         
-    }, 1800); 
+        // 播放掉落音效
+        setTimeout(() => {
+            safePlayAudio('drop-sound');
+        }, 1500);
+        
+        // 5. 顯示結果
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        svgContainer.removeChild(fallingStick);
+        
+        // 顯示結果
+        displayResult(drawnStickData, userQuery);
+        
+        // 播放成功音效
+        safePlayAudio('success-sound');
+        
+        // 更新UI
+        drawButton.disabled = false;
+        drawButton.textContent = "🙏 搖晃籤筒，抽取神籤";
+        drawButton.style.display = 'none';
+        document.getElementById('reset-button').style.display = 'block';
+        
+        isDrawing = false;
+        
+        // 記錄分析
+        logFortuneDraw(userQuery, drawnStickData.number);
+        
+    } catch (error) {
+        console.error('[知遇籤] 抽籤過程中出錯:', error);
+        showMessage("抽籤過程中發生錯誤，請刷新頁面重試。", "error");
+        resetDrawingState();
+    }
 }
 
 /**
- * 顯示放大後的籤子和解籤
+ * 顯示結果
  */
 function displayResult(stickData, query) {
+    if (!stickData) {
+        console.error('[知遇籤] 無有效的籤文數據');
+        return;
+    }
+    
     const resultDisplay = document.getElementById('result-display');
     const stickMagnified = document.getElementById('drawn-stick-magnified');
     const interpretationText = document.getElementById('interpretation-text');
-
-    const userQueryHtml = query ? `<p style="font-style: italic; color: #555; margin-bottom: 15px;">您所問：${query} </p>` : '';
-
-    const verseLines = stickData.verse.split('，').join('，\n').split('。').join('。\n\n');
-
-    const stickHTML = `
+    const resultTime = document.getElementById('result-time');
+    
+    // 設置時間戳
+    const now = new Date();
+    resultTime.textContent = `抽取時間: ${now.toLocaleString('zh-TW')}`;
+    
+    // 格式化籤文
+    const verseLines = stickData.verse
+        .split('，')
+        .join('，\n')
+        .split('。')
+        .join('。\n\n');
+    
+    // 創建籤文顯示
+    stickMagnified.innerHTML = `
         <div class="magnified-stick-container">
-            <h3 style="color:#a52a2a; margin-bottom: 10px;">${stickData.number} - ${stickData.title}</h3>
-            <div class="stick-content">
-                ${verseLines}
+            <h3>${stickData.number} • ${stickData.title}</h3>
+            <div class="stick-content">${verseLines}</div>
+            <div class="stick-grade">
+                <span class="grade-badge">${getGradeBadge(stickData.title)}</span>
             </div>
         </div>
     `;
-
-    stickMagnified.innerHTML = stickHTML;
     
+    // 創建解讀
+    const aspects = ['事業', '財運', '婚姻', '健康', '學業', '尋人', '失物'];
     let interpretationParts = stickData.interpretation.split('。');
     let interpretedHtml = '';
     
-    const aspects = ['事業', '財運', '婚姻', '健康', '學業', '尋人', '失物'];
-    
+    // 總體解讀
     let generalInterpretation = interpretationParts.shift();
     if (generalInterpretation) {
-         interpretedHtml += `<p><strong>總體解讀：</strong>${generalInterpretation}。</p>`;
+        interpretedHtml += `
+            <div class="interpretation-section">
+                <h4>📋 總體解讀</h4>
+                <p>${generalInterpretation}。</p>
+            </div>
+        `;
     }
     
+    // 各領域解讀
     aspects.forEach(aspect => {
         let part = interpretationParts.find(p => p.includes(`**${aspect}：**`));
         if (part) {
-            let formattedPart = part.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            interpretedHtml += `<p>${formattedPart}。</p>`;
+            const formattedPart = part.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            interpretedHtml += `
+                <div class="interpretation-section">
+                    <h4>${getAspectIcon(aspect)} ${aspect}</h4>
+                    <p>${formattedPart}。</p>
+                </div>
+            `;
         }
     });
     
-    // 增加提醒，避免誤導
-    interpretedHtml += `<p style="font-size: 0.9em; color: #999; margin-top: 20px;">溫馨提醒：籤文是一種指引與參考，最終決策仍需依據您的理性判斷和實際情況。</p>`;
-
-
+    // 添加用戶問題
+    const userQueryHtml = query ? `
+        <div class="user-query-container">
+            <h4>❓ 您的問題</h4>
+            <p class="user-query">${query}</p>
+        </div>
+    ` : '';
+    
+    // 添加提醒
+    interpretedHtml += `
+        <div class="reminder">
+            <h4>💡 溫馨提醒</h4>
+            <p>籤文是一種指引與參考，最終決策仍需依據您的理性判斷和實際情況。保持積極心態，勇敢面對生活中的挑戰。</p>
+        </div>
+    `;
+    
     interpretationText.innerHTML = userQueryHtml + interpretedHtml;
     
+    // 顯示結果區域
     resultDisplay.style.display = 'block';
     
-    resultDisplay.scrollIntoView({ behavior: 'smooth' });
+    // 平滑滾動到結果
+    setTimeout(() => {
+        resultDisplay.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }, 100);
 }
 
+/**
+ * 獲取吉凶等級標籤
+ */
+function getGradeBadge(title) {
+    if (title.includes('上吉')) return '🔴 上上大吉';
+    if (title.includes('中吉')) return '🟢 中吉';
+    if (title.includes('中平')) return '🟡 中平';
+    if (title.includes('中下籤')) return '🟠 中下籤';
+    if (title.includes('下籤')) return '🔵 下籤';
+    return '⚪ 平籤';
+}
 
 /**
- * 重置網頁到初始狀態
+ * 獲取領域圖標
+ */
+function getAspectIcon(aspect) {
+    const icons = {
+        '事業': '💼',
+        '財運': '💰',
+        '婚姻': '💑',
+        '健康': '🏥',
+        '學業': '📚',
+        '尋人': '🔍',
+        '失物': '🔎'
+    };
+    return icons[aspect] || '📌';
+}
+
+/**
+ * 顯示消息
+ */
+function showMessage(message, type = 'info') {
+    // 移除現有消息
+    const existingMsg = document.querySelector('.message-box');
+    if (existingMsg) existingMsg.remove();
+    
+    // 創建新消息
+    const messageBox = document.createElement('div');
+    messageBox.className = `message-box message-${type}`;
+    messageBox.innerHTML = `
+        <span class="message-text">${message}</span>
+        <button class="message-close" onclick="this.parentElement.remove()">×</button>
+    `;
+    
+    // 添加到容器
+    const container = document.querySelector('.container');
+    container.insertBefore(messageBox, container.firstChild);
+    
+    // 自動消失
+    setTimeout(() => {
+        if (messageBox.parentElement) {
+            messageBox.remove();
+        }
+    }, 5000);
+}
+
+/**
+ * 重置抽籤狀態
+ */
+function resetDrawingState() {
+    isDrawing = false;
+    
+    const drawButton = document.getElementById('draw-button');
+    const censerGroup = document.getElementById('censer-svg-group');
+    
+    if (censerGroup) {
+        censerGroup.classList.remove('shaking');
+    }
+    
+    if (drawButton) {
+        drawButton.disabled = false;
+        drawButton.textContent = "🙏 搖晃籤筒，抽取神籤";
+        drawButton.style.display = 'block';
+    }
+    
+    document.getElementById('reset-button').style.display = 'none';
+    
+    // 停止所有音效
+    ['shaking-sound', 'drop-sound', 'success-sound'].forEach(id => {
+        const audio = document.getElementById(id);
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    });
+}
+
+/**
+ * 重置抽籤
  */
 function resetDrawing() {
     initializeDrawing();
     drawnStickData = null;
-    document.getElementById('draw-area').style.opacity = '1';
-    document.getElementById('user-query').value = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    const resultDisplay = document.getElementById('result-display');
+    resultDisplay.style.display = 'none';
+    
+    window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+    });
+    
+    // 聚焦到輸入框
+    const queryInput = document.getElementById('user-query');
+    setTimeout(() => {
+        queryInput.focus();
+    }, 300);
 }
 
-// --- 事件監聽 ---
-document.addEventListener('DOMContentLoaded', () => {
-    initializeDrawing(); 
-    
-    // 載入音效
-    shakingSound = document.getElementById('shaking-sound');
-    dropSound = document.getElementById('drop-sound');
-
-    // 檢查音效是否已經載入，如果沒有，設置一個預設的靜音函數以防報錯
-    if (!shakingSound || !dropSound) {
-        console.warn("音效文件未找到，動畫將靜音運行。請確保 'sounds/shaking.mp3' 和 'sounds/drop.mp3' 存在。");
-        // 為了不讓 startDrawing 報錯，重新定義靜音 'play' 函數
-        shakingSound = { play: () => Promise.resolve(), pause: () => {}, currentTime: 0, loop: false };
-        dropSound = { play: () => Promise.resolve(), pause: () => {}, currentTime: 0, loop: false };
+/**
+ * 分享籤文
+ */
+function shareFortune() {
+    if (!drawnStickData) {
+        showMessage("請先抽取籤文", "warning");
+        return;
     }
+    
+    const shareText = `我在「知遇籤」抽到的籤文：
+${drawnStickData.number} ${drawnStickData.title}
+${drawnStickData.verse}
 
+解讀：${drawnStickData.interpretation.substring(0, 100)}...
+
+👉 前往 jasyooc.com 抽籤`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: '知遇籤 - 我的籤文結果',
+            text: shareText,
+            url: window.location.href
+        }).catch(err => {
+            console.log('[知遇籤] 分享取消或失敗:', err);
+        });
+
+    } else {
+        // 複製到剪貼板
+        navigator.clipboard.writeText(shareText).then(() => {
+            showMessage("籤文已複製到剪貼板，可以分享給朋友了！", "success");
+        }).catch(err => {
+            console.error('[知遇籤] 複製失敗:', err);
+            showMessage("複製失敗，請手動複製", "error");
+        });
+    }
+}
+
+/**
+ * 儲存結果
+ */
+function saveResult() {
+    if (!drawnStickData) {
+        showMessage("請先抽取籤文", "warning");
+        return;
+    }
+    
+    const results = JSON.parse(localStorage.getItem('fortune-history') || '[]');
+    
+    const resultEntry = {
+        id: Date.now(),
+        date: new Date().toISOString(),
+        query: document.getElementById('user-query').value.trim(),
+        stick: drawnStickData.number,
+        title: drawnStickData.title
+    };
+    
+    results.unshift(resultEntry);
+    
+    // 只保留最近的20條記錄
+    if (results.length > 20) {
+        results.pop();
+    }
+    
+    localStorage.setItem('fortune-history', JSON.stringify(results));
+    showMessage("結果已儲存到歷史記錄", "success");
+}
+
+/**
+ * 記錄抽籤日誌
+ */
+function logFortuneDraw(query, stickNumber) {
+    const logEntry = {
+        timestamp: new Date().toISOString(),
+        query: query.substring(0, 50),
+        stick: stickNumber,
+        referrer: document.referrer || 'direct'
+    };
+    
+    const logs = JSON.parse(localStorage.getItem('fortune-logs') || '[]');
+    logs.push(logEntry);
+    
+    if (logs.length > 100) {
+        logs.shift();
+    }
+    
+    localStorage.setItem('fortune-logs', JSON.stringify(logs));
+    
+    console.log(`[知遇籤] 抽籤記錄: ${query.substring(0, 30)}... → ${stickNumber}`);
+}
+
+// --- 事件監聽器 ---
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('[知遇籤] 應用程式初始化...');
+    
+    // 初始化籤筒
+    initializeDrawing();
+    
+    // 設置事件監聽器
     document.getElementById('draw-button').addEventListener('click', startDrawing);
     document.getElementById('reset-button').addEventListener('click', resetDrawing);
     
-    // 允許 Enter 鍵提交問題
+    // 分享按鈕
+    const shareButton = document.getElementById('share-button');
+    if (shareButton) {
+        shareButton.addEventListener('click', shareFortune);
+    }
+    
+    // 儲存按鈕
+    const saveButton = document.getElementById('save-button');
+    if (saveButton) {
+        saveButton.addEventListener('click', saveResult);
+    }
+    
+    // Enter鍵提交
     document.getElementById('user-query').addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !isDrawing) {
+            e.preventDefault();
             startDrawing();
         }
     });
+    
+    // 音效加載
+    ['shaking-sound', 'drop-sound', 'success-sound'].forEach(id => {
+        const audio = document.getElementById(id);
+        if (audio) {
+            audio.load();
+            audio.addEventListener('error', () => {
+                console.warn(`[知遇籤] 音效 ${id} 加載失敗`);
+            });
+        }
+    });
+    
+    // 頁面可見性變化處理
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            // 頁面隱藏時停止動畫和音效
+            const censerGroup = document.getElementById('censer-svg-group');
+            if (censerGroup) {
+                censerGroup.classList.remove('shaking');
+            }
+            
+            ['shaking-sound', 'drop-sound', 'success-sound'].forEach(id => {
+                const audio = document.getElementById(id);
+                if (audio) {
+                    audio.pause();
+                }
+            });
+        }
+    });
+    
+    console.log('[知遇籤] 應用程式初始化完成');
 });
 
-initializeDrawing();
+// --- 全局錯誤處理 ---
+window.addEventListener('error', function(event) {
+    console.error('[知遇籤] 全局錯誤:', event.error);
+    showMessage("應用程式發生錯誤，請刷新頁面重試", "error");
+});
+
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('[知遇籤] 未處理的 Promise 拒絕:', event.reason);
+    showMessage("操作發生意外錯誤，請重試", "error");
+});
+
+// 導出全局函數
+window.resetDrawing = resetDrawing;
+window.shareFortune = shareFortune;
