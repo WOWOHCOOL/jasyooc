@@ -40,23 +40,6 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-/* 新增：Logo 連結樣式，確保沒有底線 */
-.logo-link {
-    text-decoration: none; /* 移除超連結底線 */
-    color: inherit;        /* 繼承顏色，通常是白色 */
-}
-
-/* 確保 Logo 容器內的內容仍能保持 Flexbox 排列 */
-.logo {
-    display: flex; 
-    align-items: center;
-    cursor: pointer; /* 增加滑鼠指標，提示可點擊 */
-}
-/* ⭐ LOGO 樣式修改區域 START ⭐ */
-.logo {
-    display: flex; 
-    align-items: center;
-}
 
 /* 1. Logo 連結容器樣式 */
 .logo-link {
@@ -90,6 +73,25 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+/* 新增：Logo 連結樣式，確保沒有底線 */
+.logo-link {
+    text-decoration: none; /* 移除超連結底線 */
+    color: inherit;        /* 繼承顏色，通常是白色 */
+}
+
+/* 確保 Logo 容器內的內容仍能保持 Flexbox 排列 */
+.logo {
+    display: flex; 
+    align-items: center;
+    cursor: pointer; /* 增加滑鼠指標，提示可點擊 */
+}
+/* ⭐ LOGO 樣式修改區域 START ⭐ */
+.logo {
+    display: flex; 
+    align-items: center;
+}
+
 .site-logo {
     width: 45px; /* 調整 Logo 圖片大小 */
     height: 45px;
@@ -580,6 +582,7 @@ nav a:hover {
         margin: 10px auto; /* 讓按鈕在垂直模式下水平居中 */
     }
 }
+
 
 
 
