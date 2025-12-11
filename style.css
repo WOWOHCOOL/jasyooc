@@ -169,22 +169,22 @@ nav a:hover {
     transition: opacity 0.5s, transform 0.3s;
 }
 
-/* --- 按鈕樣式 --- */
+/* --- 按鈕容器樣式修正：使用 Flexbox 確保居中 --- */
 .controls {
-    text-align: center;
+    /* 核心修正：使用 Flexbox 居中 */
+    display: flex;             /* 啟用 Flex 佈局 */
+    justify-content: center;   /* 👈 水平居中對齊 Flex 項目 */
+    align-items: center;       /* 垂直居中對齊 Flex 項目 (如果按鈕高度不同) */
+    
     margin-top: 30px;
+    margin-bottom: 20px; /* 可選：增加底部間距 */
 }
 
+/* 確保按鈕本身樣式不變 */
 .primary-button, .secondary-button {
     padding: 15px 35px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    margin: 10px; /* 增加按鈕間距 */
-    letter-spacing: 1px;
+    /* ... (其他樣式保持不變) ... */
+    margin: 0 10px; /* 👈 將間距調整為左右間距 */
 }
 
 .primary-button {
@@ -521,3 +521,4 @@ nav a:hover {
         width: 95%;
     }
 }
+
