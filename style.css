@@ -521,4 +521,20 @@ nav a:hover {
         width: 95%;
     }
 }
+/* --- RWD 響應式設計 --- */
+@media (max-width: 480px) {
+    /* ... (其他樣式保持不變) ... */
+
+    /* 針對手機版 controls 進行修正：讓按鈕垂直堆疊並居中 */
+    .controls {
+        flex-direction: column; /* 👈 將 Flex 項目改為垂直堆疊 */
+        /* justify-content: center; 和 align-items: center; 保持不變 */
+    }
+
+    .primary-button, .secondary-button {
+        display: block;   /* 讓按鈕佔滿父容器寬度 */
+        width: 80%;       /* 設置按鈕寬度 */
+        margin: 10px auto; /* 讓按鈕在垂直模式下水平居中 */
+    }
+}
 
