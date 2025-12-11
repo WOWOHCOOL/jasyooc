@@ -1,0 +1,523 @@
+/* --- 基礎樣式 --- */
+body {
+    font-family: 'Noto Sans TC', 'Microsoft YaHei', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f0f0e0 0%, #e0d0c0 100%); /* 漸變背景，更溫潤 */
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto; /* 增加上下間距 */
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* 更明顯的陰影 */
+    border-radius: 18px; /* 更圓潤的邊角 */
+    flex-grow: 1; /* 讓容器佔滿可用空間 */
+}
+
+/* --- 頁首 (Header) --- */
+.main-header {
+    background: linear-gradient(to right, #a52a2a, #8b2323); /* 棗紅色漸變 */
+    color: white;
+    padding: 10px 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    position: sticky; /* 粘性導航 */
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ⭐ LOGO 樣式修改區域 START ⭐ */
+.logo {
+    display: flex; 
+    align-items: center;
+}
+
+.site-logo {
+    width: 45px; /* 調整 Logo 圖片大小 */
+    height: 45px;
+    margin-right: 12px; /* 與文字間距 */
+    object-fit: contain;
+    border-radius: 8px; /* 輕微圓角，與容器風格一致 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 圖片陰影 */
+}
+
+.logo-text {
+    font-family: 'Noto Serif TC', serif; /* 更典雅的字體 */
+    font-size: 1.4em; /* 調整文字大小 */
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* 文字陰影 */
+}
+/* ⭐ LOGO 樣式修改區域 END ⭐ */
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 1em;
+    opacity: 0.9;
+    transition: opacity 0.3s, transform 0.3s;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+nav a::after { /* 下劃線動畫 */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #ffd700; /* 金色下劃線 */
+    left: 50%;
+    bottom: 0;
+    transition: width 0.3s ease-out, left 0.3s ease-out;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+nav a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+
+/* --- 標題和輸入框 --- */
+.main-title {
+    text-align: center;
+    color: #a52a2a;
+    font-size: 2.5em; /* 標題字體更大 */
+    margin-bottom: 30px;
+    font-family: 'Noto Serif TC', serif;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.query-input {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.query-input label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #666;
+    font-size: 1.1em;
+}
+
+#user-query {
+    width: 70%;
+    max-width: 500px;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#user-query:focus {
+    border-color: #a52a2a;
+    box-shadow: 0 0 8px rgba(165, 42, 42, 0.4);
+    outline: none;
+}
+
+/* --- 抽籤區域 SVG --- */
+#draw-area {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* 確保超出部分不顯示 */
+}
+
+#main-svg {
+    display: block;
+    margin: 0 auto;
+    /* 移除邊框和背景，由父容器 #draw-area 控制 */
+}
+
+/* 籤筒本體 */
+.censer {
+    transform-origin: center bottom; 
+    transition: transform 0.2s ease-out; /* 增加平滑過渡 */
+}
+
+/* 筒內籤文 */
+.stick-in-censer {
+    transition: opacity 0.5s, transform 0.3s;
+}
+
+/* --- 按鈕樣式 --- */
+.controls {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.primary-button, .secondary-button {
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    margin: 10px; /* 增加按鈕間距 */
+    letter-spacing: 1px;
+}
+
+.primary-button {
+    background-color: #a52a2a;
+    color: white;
+    box-shadow: 0 6px 12px rgba(165, 42, 42, 0.4);
+}
+
+.primary-button:hover:not(:disabled) {
+    background-color: #8b2323;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(165, 42, 42, 0.5);
+}
+
+.primary-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.secondary-button {
+    background-color: #fff;
+    color: #a52a2a;
+    border: 2px solid #a52a2a;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-button:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 結果顯示區 --- */
+#result-display {
+    margin-top: 50px;
+    padding: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 18px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInScale 0.7s ease-out;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+#drawn-stick-magnified {
+    margin-bottom: 40px;
+}
+
+.magnified-stick-container {
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #fff8e1; /* 籤文紙張顏色 */
+    border: 4px solid #a52a2a; /* 更粗的邊框 */
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), inset 0 0 8px rgba(255, 215, 0, 0.3); /* 增加內部光暈 */
+    font-family: 'Noto Serif TC', serif;
+    animation: cardAppear 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* 彈出動畫 */
+}
+
+@keyframes cardAppear {
+    0% { transform: translateY(50px) scale(0.7); opacity: 0; }
+    60% { transform: translateY(-10px) scale(1.05); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.magnified-stick-container h3 {
+    color: #a52a2a;
+    font-size: 1.8em; /* 籤文標題更大 */
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.stick-content {
+    font-size: 1.2em; /* 籤文內容字體更大 */
+    line-height: 2; /* 行高更大，閱讀舒適 */
+    color: #5d4037; /* 深棕色字體 */
+    font-style: italic;
+    white-space: pre-wrap; /* 保留換行 */
+}
+
+#interpretation h2 {
+    color: #a52a2a;
+    border-bottom: 3px solid #f0f0e0; /* 更粗的底線 */
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-family: 'Noto Serif TC', serif;
+}
+
+#interpretation-text p {
+    text-align: left;
+    margin-bottom: 18px;
+    padding: 12px;
+    border-left: 6px solid #ffd700; /* 金色指示條更粗 */
+    background-color: #f9f9f9;
+    border-radius: 8px; /* 圓角化 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#interpretation-text strong {
+    color: #4a148c; /* 紫色強調重點 */
+    font-weight: bold;
+}
+
+/* --- SEO & 額外內容 --- */
+.seo-content {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 2px dashed #ccc; /* 更明顯的虛線 */
+    text-align: left;
+}
+
+.seo-content h2 {
+    color: #a52a2a;
+    font-size: 1.8em;
+    font-family: 'Noto Serif TC', serif;
+    margin-bottom: 20px;
+}
+
+.seo-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.seo-content li {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="6" fill="%23a52a2a"/></svg>') no-repeat left 8px; /* 項目符號更大且居中 */
+    background-size: 10px;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+
+.seo-content-simplified {
+    margin-top: 30px;
+    font-size: 1em;
+    color: #999;
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+
+/* --- 核心 CSS 動畫優化 --- */
+
+/* 1. 籤筒搖晃動畫 */
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(3px, -2px) rotate(1.5deg); }
+    20% { transform: translate(-3px, 2px) rotate(-1.5deg); }
+    30% { transform: translate(4px, -3px) rotate(2deg); }
+    40% { transform: translate(-4px, 3px) rotate(-2deg); }
+    50% { transform: translate(2px, -2px) rotate(1deg); }
+    60% { transform: translate(-2px, 2px) rotate(-1deg); }
+    70% { transform: translate(3px, -3px) rotate(1.5deg); }
+    80% { transform: translate(-3px, 3px) rotate(-1.5deg); }
+    90% { transform: translate(1px, -1px) rotate(0.5deg); }
+}
+
+.shaking {
+    animation: shake 0.08s infinite alternate; /* 更快頻率，更劇烈搖晃 */
+    /* 確保搖晃原點設置在底部，在 script.js 的 censer 元素中設置 */
+}
+
+/* 2. 籤子掉落動畫 */
+
+/* 設置 CSS 變量給 JS 控制 */
+.drawn-stick-svg {
+    transform-origin: center;
+    animation-name: fallAndBounce;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* 平滑開始，加速到底 */
+    opacity: 0;
+    fill: #fdf5e6; /* 籤子顏色更淺更神聖 */
+    stroke: #d2b48c; /* 邊框顏色 */
+    stroke-width: 1.5;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* 籤子陰影 */
+}
+
+/* 核心掉落動畫 */
+@keyframes fallAndBounce {
+    /* 籤子彈出 (Upward Arc) */
+    0% {
+        opacity: 0; /* 開始時不可見 */
+        transform: translate(var(--start-x), var(--start-y)) rotate(0deg) scale(0.8); /* 從筒內某處開始 */
+        filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8)); /* 視覺上突出，帶光暈 */
+    }
+    
+    /* 籤子快速掉落，帶旋轉 */
+    10% {
+        opacity: 1;
+        transform: 
+            translate(var(--start-x) + var(--initial-bounce-x), var(--start-y) - 30px) /* 向上彈出 */
+            rotate(var(--initial-rot, 0deg)) scale(1);
+        filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+    
+    /* 自由落體加速 */
+    80% {
+        opacity: 1;
+        transform: 
+            translate(var(--drop-x), var(--drop-y)) 
+            rotate(var(--drop-rot)); 
+        filter: brightness(1);
+    }
+    
+    /* 輕微回彈 (模擬落地緩衝) */
+    90% {
+        transform: 
+            translate(var(--drop-x), calc(var(--drop-y) - 8px)) /* 回彈高度增加 */
+            rotate(var(--drop-rot));
+    }
+    
+    /* 最終落定 */
+    100% {
+        opacity: 1;
+        transform: 
+            translate(var(--drop-x), var(--drop-y)) 
+            rotate(var(--drop-rot));
+    }
+}
+
+/* --- RWD 響應式設計 --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    nav {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        margin: 5px 10px;
+        font-size: 0.9em;
+    }
+
+    .main-title {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    #user-query {
+        width: 90%;
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .primary-button, .secondary-button {
+        padding: 12px 25px;
+        font-size: 1em;
+        margin: 8px;
+    }
+
+    #result-display {
+        padding: 25px;
+        margin-top: 30px;
+    }
+
+    .magnified-stick-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .magnified-stick-container h3 {
+        font-size: 1.5em;
+    }
+
+    .stick-content {
+        font-size: 1.1em;
+        line-height: 1.8;
+    }
+
+    #interpretation h2 {
+        font-size: 1.5em;
+    }
+
+    .seo-content h2 {
+        font-size: 1.5em;
+    }
+
+    .seo-content li {
+        padding-left: 20px;
+        background-position: left 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.8em;
+    }
+
+    .logo-text {
+        font-size: 1.2em;
+    }
+
+    .site-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .primary-button, .secondary-button {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    #user-query {
+        width: 95%;
+    }
+}
