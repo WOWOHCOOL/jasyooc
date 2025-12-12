@@ -1,6 +1,6 @@
 /* ============================================
    知遇籤 (jasyooc.com) 樣式表
-   Version: 3.0.0
+   Version: 3.0.1 - 移除分享按钮版本
    Author: 知遇籤團隊
    Date: 2024
 ============================================= */
@@ -409,7 +409,7 @@ nav a:active {
     padding: 0 20px;
 }
 
-.primary-button, .secondary-button, .share-button {
+.primary-button, .secondary-button {
     padding: 18px 40px;
     font-size: 1.15em;
     font-weight: 600;
@@ -427,7 +427,7 @@ nav a:active {
     overflow: hidden;
 }
 
-.primary-button::before, .secondary-button::before, .share-button::before {
+.primary-button::before, .secondary-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -438,7 +438,7 @@ nav a:active {
     transition: left 0.5s ease;
 }
 
-.primary-button:hover::before, .secondary-button:hover::before, .share-button:hover::before {
+.primary-button:hover::before, .secondary-button:hover::before {
     left: 100%;
 }
 
@@ -493,22 +493,6 @@ nav a:active {
         inset 0 1px 0 rgba(255, 255, 255, 0.8),
         0 0 0 1px rgba(212, 160, 23, 0.3);
     border-color: #a52a2a;
-}
-
-.share-button {
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-    color: white;
-    box-shadow: 
-        0 6px 20px rgba(74, 144, 226, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.share-button:hover {
-    background: linear-gradient(135deg, #357abd 0%, #4a90e2 100%);
-    transform: translateY(-3px);
-    box-shadow: 
-        0 10px 30px rgba(74, 144, 226, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 /* --- 提醒框 --- */
@@ -781,15 +765,9 @@ nav a:active {
         0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* 分享區域 */
+/* 分享區域 - 已移除按鈕 */
 .share-section {
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 2px dashed #e8dcc9;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: none;
 }
 
 /* --- SEO 內容區域 --- */
@@ -1074,7 +1052,7 @@ nav a:active {
         font-size: 0.95em;
     }
     
-    .primary-button, .secondary-button, .share-button {
+    .primary-button, .secondary-button {
         padding: 16px 35px;
         font-size: 1.1em;
         min-width: 220px;
@@ -1163,7 +1141,7 @@ nav a:active {
         gap: 15px;
     }
     
-    .primary-button, .secondary-button, .share-button {
+    .primary-button, .secondary-button {
         width: 100%;
         max-width: 300px;
         min-width: unset;
@@ -1292,7 +1270,7 @@ nav a:active {
         min-height: 400px;
     }
     
-    .primary-button, .secondary-button, .share-button {
+    .primary-button, .secondary-button {
         padding: 14px 25px;
         font-size: 1em;
         border-radius: 14px;
@@ -1346,11 +1324,6 @@ nav a:active {
     .reminder {
         padding: 16px;
         font-size: 0.9em;
-    }
-    
-    .share-section {
-        flex-direction: column;
-        gap: 15px;
     }
     
     .seo-content {
@@ -1438,7 +1411,7 @@ nav a:active {
         font-size: 0.9em;
     }
     
-    .primary-button, .secondary-button, .share-button {
+    .primary-button, .secondary-button {
         padding: 12px 20px;
         font-size: 0.95em;
         max-width: 260px;
