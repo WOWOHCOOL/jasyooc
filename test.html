@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江湖性格測試 - 江湖禪心｜免費古風人格測評</title>
+    <meta name="description" content="免費江湖性格測試，6道題測出您的古風人格：俠客、浪子、隱士或居士，附專屬詩詞解讀。">
+    <meta name="keywords" content="江湖性格測試,古風MBTI,性格測評免費,古風人格,詩詞性格">
+	<!-- Favicon -->
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="canonical" href="https://jasyooc.com/test.html">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 強制全站使用楷體，繁體優化 */
+        body {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            letter-spacing: 2px;
+        }
+        h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        /* 修正按鈕與選項字體 */
+        .btn, .option-btn {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+            font-size: 1.2em !important;
+            font-weight: bold !important;
+        }
+
+        /* 關鍵修正：題目容器與按鈕 */
+        #questions {
+            position: relative;
+            padding-bottom: 50px; /* 增加底部留白，避免裁切 */
+        }
+        .question {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+            text-align: center;
+            padding: 20px 20px 80px 20px; /* 底部大留白 */
+        }
+        .question.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative; /* 確保正常流布局 */
+        }
+        .question h3 {
+            font-size: 1.5em;
+            margin: 30px 0 40px;
+            line-height: 1.6;
+        }
+        .option-btn {
+            display: block;
+            width: 85%; /* 減窄，避免過寬 */
+            max-width: 460px;
+            padding: 14px 20px; /* 高度減小，更緊湊 */
+            margin: 12px auto; /* 間距減小 */
+            background: var(--gray);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .option-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        #progress {
+            text-align: center;
+            margin: 30px 0 20px;
+            font-size: 1.2em;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        #test-result {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        #result-title {
+            font-size: 1.8em;
+            color: var(--gold);
+            margin: 30px 0;
+        }
+        #result-desc, #result-poem {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+        #result-poem {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>江湖性格測試</h1>
+        <p style="font-size:1.3em; margin:15px 0;">回答幾道問題，測出您的古風人格</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <div id="intro">
+                <p>在這紛擾江湖中，您會是哪一類人？<br>輕鬆回答6道題，找到屬於您的古風靈魂～</p>
+                <button class="btn" onclick="startTest()">開始測試</button>
+            </div>
+
+            <div id="questions" style="display:none;">
+                <div id="progress">第 1 / 6 題</div>
+
+                <!-- 第1題 -->
+                <div class="question active" data-q="1">
+                    <h3>週末無事，您最想做什麼？</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="choose(1, 0)">獨自登山，靜觀雲起</button>
+                        <button class="option-btn" onclick="choose(1, 1)">與三五好友，飲酒談笑</button>
+                        <button class="option-btn" onclick="choose(1, 2)">仗劍走天涯，尋找奇遇</button>
+                        <button class="option-btn" onclick="choose(1, 3)">在家品茶讀書，怡然自得</button>
+                    </div>
+                </div>
+
+                <!-- 第2題 -->
+                <div class="question" data-q="2">
+                    <h3>遇到不公之事，您會？</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="choose(2, 0)">冷眼旁觀，世事無常</button>
+                        <button class="option-btn" onclick="choose(2, 1)">拔劍相助，路見不平</button>
+                        <button class="option-btn" onclick="choose(2, 2)">調解雙方，以和為貴</button>
+                        <button class="option-btn" onclick="choose(2, 3)">遠走高飛，不染塵埃</button>
+                    </div>
+                </div>
+
+                <!-- 第3題 -->
+                <div class="question" data-q="3">
+                    <h3>您最欣賞哪種人生態度？</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="choose(3, 0)">長風破浪會有時</button>
+                        <button class="option-btn" onclick="choose(3, 1)">人生得意須盡歡</button>
+                        <button class="option-btn" onclick="choose(3, 2)">竹杖芒鞋輕勝馬</button>
+                        <button class="option-btn" onclick="choose(3, 3)">一簾幽夢任平生</button>
+                    </div>
+                </div>
+
+                <!-- 第4題 -->
+                <div class="question" data-q="4">
+                    <h3>深夜難眠時，您會？</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="choose(4, 0)">對月獨酌，成三人</button>
+                        <button class="option-btn" onclick="choose(4, 1)">回想往事，感慨萬千</button>
+                        <button class="option-btn" onclick="choose(4, 2)">提筆寫詩，寄情山水</button>
+                        <button class="option-btn" onclick="choose(4, 3)">靜坐冥想，觀心息念</button>
+                    </div>
+                </div>
+
+                <!-- 第5題 -->
+                <div class="question" data-q="5">
+                    <h3>您認為江湖中最重要的是？</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="choose(5, 0)">俠義</button>
+                        <button class="option-btn" onclick="choose(5, 1)">自由</button>
+                        <button class="option-btn" onclick="choose(5, 2)">智慧</button>
+                        <button class="option-btn" onclick="choose(5, 3)">灑脫</button>
+                    </div>
+                </div>
+
+                <!-- 第6題 -->
+                <div class="question" data-q="6">
+                    <h3>若能選擇一種武器，您選？</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="choose(6, 0)">長劍（鋒芒畢露）</button>
+                        <button class="option-btn" onclick="choose(6, 1)">酒壺（人生得意）</button>
+                        <button class="option-btn" onclick="choose(6, 2)">竹杖（輕勝萬軍）</button>
+                        <button class="option-btn" onclick="choose(6, 3)">無（心即是劍）</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 結果區 -->
+            <div id="test-result" class="card">
+                <h3 id="result-title"></h3>
+                <p id="result-desc"></p>
+                <p id="result-poem"></p>
+                <button class="btn" id="share-btn" onclick="shareResult()">分享到微信</button>
+                <button class="btn" onclick="resetTest()" style="margin-top:10px; background:#666;">重新測試</button>
+            </div>
+        </div>
+
+        <!-- 廣告位 -->
+        <div class="adsense-placeholder">【Google AdSense 廣告位】</div>
+    </main>
+
+    <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
+    <!-- Logo 完美居中 -->
+    <div style="margin:0 auto 30px; width:200px; height:200px;">
+        <img src="images/logo.png" alt="江湖禪心 Logo" 
+             style="width:200px; height:200px; object-fit:contain; display:block;">
+    </div>
+
+    <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
+    <p style="margin:10px 0;">
+        <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+        <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+        <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+    </p>
+    <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+</footer>
+
+    <nav>
+        <a href="index.html">🏠</a>
+        <a href="sign.html">🀄</a>
+        <a href="mood.html">🎡</a>
+        <a href="ancient.html">📜</a>
+        <a href="test.html" class="active">🧪</a>
+    </nav>
+
+    <script>
+        let currentQuestion = 1;
+        let scores = { xia: 0, lang: 0, yin: 0, ju: 0 };
+
+        function startTest() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('questions').style.display = 'block';
+        }
+
+        function choose(q, type) {
+            if (type === 0) scores.yin++;
+            else if (type === 1) scores.lang++;
+            else if (type === 2) scores.xia++;
+            else if (type === 3) scores.ju++;
+
+            const current = document.querySelector(`.question[data-q="${q}"]`);
+            current.classList.remove('active');
+
+            currentQuestion++;
+            if (currentQuestion <= 6) {
+                const next = document.querySelector(`.question[data-q="${currentQuestion}"]`);
+                next.classList.add('active');
+                document.getElementById('progress').textContent = `第 ${currentQuestion} / 6 題`;
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('questions').style.display = 'none';
+            const max = Math.max(scores.xia, scores.lang, scores.yin, scores.ju);
+            let result;
+
+            if (scores.xia === max) result = { title: "仗義俠客", desc: "您心懷俠義，路見不平一聲吼。滿腔熱血，最愛《滿江紅》式的豪情。", poem: "精忠報國，怒髮衝冠，憑欄處、瀟瀟雨歇。" };
+            else if (scores.lang === max) result = { title: "灑脫浪子", desc: "您隨性不羈，人生得意須盡歡。一壺濁酒喜相逢，最像李白那樣的詩人。", poem: "人生得意須盡歡，莫使金樽空對月。" };
+            else if (scores.yin === max) result = { title: "隱世高人", desc: "您淡泊名利，獨愛山水之間。竹杖芒鞋，輕勝萬軍，誰怕？", poem: "莫聽穿林打葉聲，何妨吟嘯且徐行。" };
+            else result = { title: "禪意居士", desc: "您內心寧靜，最懂在紛擾中尋得一方清淨。一簾幽夢任平生。", poem: "滾滾紅塵何必戀，一任身心向禪定。" };
+
+            document.getElementById('result-title').textContent = result.title;
+            document.getElementById('result-desc').textContent = result.desc;
+            document.getElementById('result-poem').textContent = result.poem;
+            document.getElementById('test-result').style.display = 'block';
+        }
+
+        function resetTest() {
+            location.reload();
+        }
+
+        function shareResult() {
+            const title = document.getElementById('result-title').textContent;
+            const text = `我的江湖性格是：「${title}」🍃 快來測測您是哪種古風人格！`;
+            prompt('複製以下文字，分享到微信或朋友圈：', text + '\n\nhttps://jasyooc.com/test.html');
+        }
+    </script>
+</body>
+</html>

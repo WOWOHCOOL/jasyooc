@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>今日一籤 - 江湖禪心｜古風抽籤心靈指引</title>
+ <meta name="description" content="每日古風抽籤，抽一支古籤獲心靈指引。結合古詩詞與現代解讀，舒緩情緒低落、無聊時刻。">
+ <meta name="keywords" content="今日抽籤,古籤解讀,情緒籤,文王卦,古風占卜,心靈指引">
+	<!-- Favicon -->
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon.png">
+ <link rel="canonical" href="https://jasyooc.com/sign.html">
+ <link rel="stylesheet" href="css/style.css">
+ <style>
+ /* 強制全站使用楷體，繁體優化 */
+ body {
+ font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+ -webkit-font-smoothing: antialiased;
+ }
+ h1, h2, h3, h4, h5, h6 {
+ font-family: 'KaiTi', 'STKaiTi', serif !important;
+ letter-spacing: 2px;
+ }
+ h1 {
+ font-size: 2.2em;
+ font-weight: bold;
+ }
+ h2 {
+ font-size: 1.6em;
+ font-weight: bold;
+ margin: 40px 0 20px;
+ color: var(--gold);
+ }
+ .card h3 {
+ font-size: 1.3em;
+ margin-bottom: 10px;
+ color: var(--text);
+ }
+ small {
+ font-size: 0.9em;
+ color: #666;
+ }
+ /* 修正按鈕字體 */
+ .btn {
+ font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+ font-size: 1.2em !important;
+ font-weight: bold !important;
+ }
+ .youtube-btn {
+ font-family: 'KaiTi', 'STKaiTi', serif !important;
+ }
+ #signResult {
+ font-size: 1.3em;
+ line-height: 1.8;
+ margin: 30px 20px;
+ min-height: 120px;
+ }
+ </style>
+</head>
+<body>
+ <header>
+ <h1>今日一籤</h1>
+ <p style="font-size:1.3em; margin:15px 0;">抽一支古籤，得心靈慰藉</p>
+ </header>
+
+ <main>
+ <div class="card">
+ <button class="btn" onclick="drawSign()">🀄 抽 籤</button>
+ <p id="signResult"></p>
+ </div>
+
+ <!-- 廣告位 -->
+ <div class="adsense-placeholder">【Google AdSense 廣告位】</div>
+ </main>
+
+ <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
+    <!-- Logo 完美居中 -->
+    <div style="margin:0 auto 30px; width:200px; height:200px;">
+        <img src="images/logo.png" alt="江湖禪心 Logo" 
+             style="width:200px; height:200px; object-fit:contain; display:block;">
+    </div>
+
+    <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
+    <p style="margin:10px 0;">
+        <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+        <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+        <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+    </p>
+    <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+</footer>
+
+ <nav>
+ <a href="index.html">🏠</a>
+ <a href="sign.html" class=" active">🀄</a>
+ <a href="mood.html">🎡</a>
+ <a href="ancient.html">📜</a>
+ <a href="test.html">🧪</a>
+ </nav>
+
+ <script>
+ function drawSign() {
+ const signs = [
+ '上籤：長風破浪會有時，直掛雲帆濟滄海。——堅持到底，必有收穫。',
+ '中籤：人生如夢，一尊還酹江月。——多一點灑脫，少一點執著。',
+ '上籤：海到無邊天作岸，山登絕頂我為峰。——自信前行，你就是頂峰。',
+ '中籤：舉杯邀明月，對影成三人。——孤獨時，也要好好愛自己。',
+ '上籤：天生我材必有用，千金散盡還復來。——相信自己，未來可期。',
+ '中籤：莫聽穿林打葉聲，何妨吟嘯且徐行。——從容面對，一切皆安。',
+ '上籤：會當凌絕頂，一覽眾山小。——登高望遠，心胸自寬。'
+ ];
+ const result = signs[Math.floor(Math.random() * signs.length)];
+ document.getElementById('signResult').textContent = result;
+ }
+ </script>
+</body>
+</html>

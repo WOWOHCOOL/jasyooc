@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古風決策轉盤 - 江湖禪心｜選擇困難症免費工具</title>
+    <meta name="description" content="免費古風決策轉盤，結合傳統智慧幫助解決選擇困難。從日常小事到重大抉擇，古詩啟發您的內心。">
+    <meta name="keywords" content="決策轉盤,選擇困難症,古風占卜,易經轉盤,古詩抉擇,心靈指引">
+	<!-- Favicon -->
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="canonical" href="https://jasyooc.com/mood.html">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 強制全站使用楷體，繁體優化 */
+        body {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            letter-spacing: 2px;
+        }
+        h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        .card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        /* 修正按鈕與輸入元件字體 */
+        .btn {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+            font-size: 1.2em !important;
+            font-weight: bold !important;
+        }
+        .youtube-btn, textarea, .option-tag {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+        }
+
+        /* 修正bug1：加大輸入框 */
+        textarea {
+            width: 90%;
+            max-width: 500px;
+            height: 180px; /* 原120px → 180px，更舒適 */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.1em;
+            margin: 20px auto;
+            display: block;
+            line-height: 1.6; /* 讓示例文字自然換行 */
+            white-space: pre-wrap; /* 保留換行 */
+        }
+
+        /* 修正bug2：選項標籤美化顯示 */
+        #options-list {
+            display: flex;
+            flex-wrap: wrap; /* 自動換行 */
+            gap: 12px;
+            justify-content: center;
+            margin: 30px 0 20px;
+            padding: 10px;
+        }
+        .option-tag {
+            background: var(--gray);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 轉盤樣式保持不變 */
+        #wheel-container {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 40px auto;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        #pointer {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 28px solid transparent;
+            border-right: 28px solid transparent;
+            border-top: 55px solid var(--gold);
+            z-index: 10;
+        }
+        #final-choice {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: var(--gold);
+        }
+        #inspiration {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>古風決策轉盤</h1>
+        <p style="font-size:1.3em; margin:15px 0;">結合傳統智慧，助您突破選擇困難</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <p>請在下方輸入您的選項，每行一個（2~6個最佳）</p>
+            
+            <textarea id="user-options" placeholder="例如：&#10;去旅行&#10;留在家休息&#10;見朋友聚餐&#10;歐洲漫步&#10;亞洲短遊&#10;山林乎"></textarea>
+            
+            <button class="btn" onclick="generateWheel()">生成轉盤</button>
+            
+            <div id="options-input" style="display:none;">
+                <p>您的選項：</p>
+                <div id="options-list"></div>
+                <button class="btn" onclick="startSpin()">開始轉動</button>
+            </div>
+        </div>
+
+        <div id="wheel-container" style="display:none;">
+            <div id="pointer"></div>
+            <canvas id="wheel" width="340" height="340"></canvas>
+        </div>
+
+        <div class="card" id="result-card">
+            <h3>轉盤指引：</h3>
+            <p id="final-choice"></p>
+            <p id="inspiration"></p>
+            <button class="btn" id="share-btn" onclick="shareResult()">分享到微信</button>
+            <button class="btn" onclick="resetWheel()" style="margin-top:10px; background:#666;">重新選擇</button>
+        </div>
+
+        <!-- 廣告位 -->
+        <div class="adsense-placeholder">【Google AdSense 廣告位】</div>
+    </main>
+
+    <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
+    <!-- Logo 完美居中 -->
+    <div style="margin:0 auto 30px; width:200px; height:200px;">
+        <img src="images/logo.png" alt="江湖禪心 Logo" 
+             style="width:200px; height:200px; object-fit:contain; display:block;">
+    </div>
+
+    <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
+    <p style="margin:10px 0;">
+        <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+        <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+        <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+    </p>
+    <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+</footer>
+
+    <nav>
+        <a href="index.html">🏠</a>
+        <a href="sign.html">🀄</a>
+        <a href="mood.html" class="active">🎡</a>
+        <a href="ancient.html">📜</a>
+        <a href="test.html">🧪</a>
+    </nav>
+
+    <!-- 轉盤腳本保持不變（指針邏輯已完美） -->
+    <script>
+        let options = [];
+        let canvas, ctx;
+        let spinning = false;
+
+        const inspirations = [
+            "長風破浪會有時，直掛雲帆濟滄海。——相信直覺，勇往直前。",
+            "人生如逆旅，我亦是行人。——蘇軾 此路雖難，亦是必經。",
+            "山重水複疑無路，柳暗花明又一村。——轉角處自有驚喜。",
+            "天生我材必有用，千金散盡還復來。——李白 每條路都值得一試。",
+            "海到無邊天作岸，山登絕頂我為峰。——您已站在最高處。",
+            "舉杯邀明月，對影成三人。——有時，獨自前行也是答案。",
+            "莫聽穿林打葉聲，何妨吟嘯且徐行。——竹杖芒鞋輕勝馬，誰怕？",
+            "一簾幽夢任平生。——跟隨內心，那便是最好的歸宿。"
+        ];
+
+        function generateWheel() {
+            const input = document.getElementById('user-options').value.trim();
+            if (!input) { alert('請至少輸入兩個選項～'); return; }
+            options = input.split('\n').map(s => s.trim()).filter(s => s);
+            if (options.length < 2 || options.length > 6) { alert('請輸入 2~6 個選項哦～'); return; }
+
+            const list = document.getElementById('options-list');
+            list.innerHTML = '';
+            options.forEach(opt => {
+                const tag = document.createElement('span');
+                tag.className = 'option-tag';
+                tag.textContent = opt;
+                list.appendChild(tag);
+            });
+
+            document.getElementById('options-input').style.display = 'block';
+            document.getElementById('wheel-container').style.display = 'block';
+            drawWheel();
+        }
+
+        function drawWheel() {
+            canvas = document.getElementById('wheel');
+            ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2 - 25;
+
+            const colors = ['#f5f0e8', '#ece6de', '#e3dcd4', '#dad3ca', '#d1cac0', '#c8c1b6'];
+            const segmentAngle = (2 * Math.PI) / options.length;
+
+            options.forEach((option, i) => {
+                const startAngle = i * segmentAngle - Math.PI / 2;
+                const endAngle = (i + 1) * segmentAngle - Math.PI / 2;
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 6;
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(startAngle + segmentAngle / 2);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 20px KaiTi, STKaiTi, serif';
+                ctx.fillText(option.substring(0, 10), radius / 2 + 5, 0);
+                ctx.restore();
+            });
+        }
+
+        function startSpin() {
+            if (spinning) return;
+            spinning = true;
+            document.querySelectorAll('button').forEach(b => b.disabled = true);
+
+            const winningIndex = Math.floor(Math.random() * options.length);
+            const segmentAngleDeg = 360 / options.length;
+            const offsetDeg = (Math.random() - 0.5) * segmentAngleDeg * 0.8;
+            const targetCenterDeg = winningIndex * segmentAngleDeg + segmentAngleDeg / 2 + offsetDeg;
+            const extraSpins = 5 + Math.random();
+            const finalAngleDeg = targetCenterDeg + extraSpins * 360;
+
+            canvas.style.transition = 'transform 5.2s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            canvas.style.transform = `rotate(${finalAngleDeg}deg)`;
+
+            setTimeout(() => {
+                document.getElementById('final-choice').textContent = options[winningIndex];
+                document.getElementById('inspiration').textContent = inspirations[Math.floor(Math.random() * inspirations.length)];
+                document.getElementById('result-card').style.display = 'block';
+                spinning = false;
+                document.querySelectorAll('button').forEach(b => b.disabled = false);
+            }, 5400);
+        }
+
+        function resetWheel() { location.reload(); }
+
+        function shareResult() {
+            const choice = document.getElementById('final-choice').textContent;
+            const text = `古風決策轉盤指引我：${choice} 🍃 快來試試您的選擇！`;
+            prompt('複製以下文字，分享到微信或朋友圈：', text + '\n\nhttps://jasyooc.com/mood.html');
+        }
+    </script>
+</body>
+</html>
