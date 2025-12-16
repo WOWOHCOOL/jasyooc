@@ -1,0 +1,159 @@
+/* 极简国风禅意 - Mobile First */
+:root {
+    --bg: #f8f5f0;         /* 米白底 */
+    --text: #2b1e1a;        /* 深墨色 */
+    --accent: #8ca89b;     /* 淡青竹 */
+    --gold: #c9a66b;       /* 淡金点缀 */
+    --gray: #f0ece8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Noto Serif TC', 'KaiTi', 'STKaiTi', 'Kai', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 18px;
+    padding-bottom: 70px;
+    font-weight: 400; /* 默认正常体 */
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: url('../images/header-bg.jpg') center/cover no-repeat;
+    color: white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+h1 { font-size: 2em; margin-bottom: 10px; letter-spacing: 3px; }
+h2 { font-size: 1.6em; margin: 30px 0 20px; text-align: center; }
+p { padding: 0 20px; }
+h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+.card h3 {
+    font-size: 1.4em;
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 14px;
+    background: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover { background: var(--accent); }
+
+.card {
+    background: white;
+    margin: 20px auto;
+    max-width: 90%;
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    cursor: pointer; /* 加上手指光標，表示可點 */
+    transition: all 0.3s ease; /* 平滑過渡 */
+    user-select: none; /* 防止長按選字 */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* 向上浮起 */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* 陰影加深 */
+    background: #f8f5f0; /* 輕微變色，禪意米白 */
+}
+
+.card:active {
+    transform: translateY(2px); /* 點擊時下沉反饋 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 卡片內標題更突出 */
+.card h3 {
+    font-size: 1.5em;
+    margin-bottom: 12px;
+    color: var(--gold);
+    pointer-events: none; /* 避免標題干擾點擊 */
+}
+
+.card small {
+    font-size: 1em;
+    color: #666;
+    pointer-events: none;
+}
+
+.youtube-btn {
+    display: inline-block;
+    background: #ff0000;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+/* 广告预留位置（后面直接替换为AdSense代码） */
+.adsense-placeholder {
+    background: #eee;
+    height: 280px;
+    margin: 30px auto;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* 底部导航 */
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+nav a {
+    color: var(--text);
+    font-size: 1.6em;
+    padding: 8px;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+nav a.active, nav a:hover { opacity: 1; }
+
+/* 响应式 */
+@media (min-width: 768px) {
+    body { font-size: 20px; }
+    .card { max-width: 600px; }
+}
