@@ -13,89 +13,122 @@
     <link rel="canonical" href="https://jasyooc.com/ancient.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        body {
-            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-            -webkit-font-smoothing: antialiased;
-        }
-        h1, h2, h3 {
-            font-family: 'KaiTi', 'STKaiTi', serif !important;
-            letter-spacing: 2px;
-        }
-        h1 {
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-        .intro-text {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin: 20px 0;
-            color: #555;
-            text-align: center;
-        }
-        .story-card {
-            background: white;
-            margin: 35px auto;
-            max-width: 90%;
-            border-radius: 16px;
-            padding: 35px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+    body {
+        font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+        -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 {
+        font-family: 'KaiTi', 'STKaiTi', serif !important;
+        letter-spacing: 2px;
+    }
+    h1 {
+        font-size: 2.2em;
+        font-weight: bold;
+    }
+    .intro-text {
+        font-size: 1.15em;
+        line-height: 1.8;
+        margin: 20px 0;
+        color: #555;
+        text-align: center;
+    }
+    .story-card {
+        background: white;
+        margin: 30px auto;
+        max-width: 92%;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .story-title {
+        font-size: 1.7em;
+        color: var(--gold);
+        margin-bottom: 20px;
+    }
+    .歪說 {
+        font-size: 1.15em;
+        line-height: 1.85;
+        margin: 25px 0;
+        color: #444;
+    }
+    .歌詞 {
+        font-size: 1.25em;
+        line-height: 2;
+        color: var(--accent);
+        margin: 30px 0;
+        font-style: italic;
+        font-weight: bold;
+    }
+    .共鳴 {
+        font-size: 1.1em;
+        line-height: 1.8;
+        margin: 25px 0;
+        color: #666;
+    }
+    .youtube-embed {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+        margin: 35px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .youtube-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    .youtube-btn {
+        font-family: 'KaiTi', 'STKaiTi', serif !important;
+        font-size: 1.15em !important; /* 手機端縮小 */
+        font-weight: bold !important;
+        padding: 14px 35px; /* 減小padding */
+        background: #ff0000;
+        color: white;
+        border-radius: 50px;
+        display: inline-block;
+        margin: 20px 0;
+        max-width: 80%; /* 限制寬度 */
+        box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+        transition: all 0.3s;
+    }
+    .youtube-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255,0,0,0.4);
+    }
+
+    /* 手機端專屬優化 */
+    @media (max-width: 768px) {
         .story-title {
-            font-size: 1.9em;
-            color: var(--gold);
-            margin-bottom: 25px;
+            font-size: 1.55em;
         }
         .歪說 {
-            font-size: 1.3em;
-            line-height: 1.9;
-            margin: 30px 0;
-            color: #444;
+            font-size: 1.1em;
+            line-height: 1.8;
         }
         .歌詞 {
-            font-size: 1.4em;
-            line-height: 2.1;
-            color: var(--accent);
-            margin: 35px 0;
-            font-style: italic;
-            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1.9;
         }
         .共鳴 {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin: 25px 0;
-            color: #666;
-        }
-        .youtube-embed {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-            margin: 40px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        .youtube-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+            font-size: 1.05em;
         }
         .youtube-btn {
-            font-family: 'KaiTi', 'STKaiTi', serif !important;
-            font-size: 1.3em !important;
-            font-weight: bold !important;
-            padding: 16px 40px;
-            background: #ff0000; /* YouTube紅 */
-            color: white;
-            border-radius: 50px;
-            display: inline-block;
-            margin: 20px 0;
+            font-size: 1.1em !important;
+            padding: 12px 30px;
         }
-    </style>
+        .story-card {
+            padding: 25px;
+            margin: 25px auto;
+        }
+    }
+</style>
 </head>
 <body>
     <header>
