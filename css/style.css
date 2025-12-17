@@ -1,4 +1,4 @@
-/* 极简国风禅意 - Mobile First */
+/* 江湖禪心 - 极简国风禅意 - Mobile First */
 :root {
     --bg: #f8f5f0;         /* 米白底 */
     --text: #2b1e1a;        /* 深墨色 */
@@ -8,44 +8,64 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    font-family: 'Noto Serif TC', 'KaiTi', 'STKaiTi', 'Kai', serif;
+    font-family: 'Noto Serif TC', 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', serif !important;
     background: var(--bg);
     color: var(--text);
     line-height: 1.8;
     font-size: 18px;
     padding-bottom: 70px;
-    font-weight: 400; /* 默认正常体 */
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* Header 背景圖 + 文字清晰優化 */
 header {
     text-align: center;
-    padding: 40px 20px 20px;
-    background: url('../images/header-bg.jpg') center/cover no-repeat;
-    color: white;
+    padding: 60px 20px 40px;
+    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('../images/header-bg.jpg') center/cover no-repeat fixed;
+    color: white; /* 文字改白 */
     min-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    text-shadow: 0 3px 10px rgba(0,0,0,0.8); /* 強陰影 */
 }
 
-h1 { font-size: 2em; margin-bottom: 10px; letter-spacing: 3px; }
-h2 { font-size: 1.6em; margin: 30px 0 20px; text-align: center; }
-p { padding: 0 20px; }
-h1, h2, h3 {
-    font-weight: 700;
-    letter-spacing: 2px;
+header h1, header p, header .btn {
+    color: white;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.8);
 }
 
-h1 {
-    font-size: 2em;
+h1 { 
+    font-size: 2.2em; 
+    margin-bottom: 15px; 
+    letter-spacing: 3px; 
+}
+header p { 
+    font-size: 1.3em; 
+    margin: 15px 0; 
+}
+
+h2 { 
+    font-size: 1.6em; 
+    margin: 30px 0 20px; 
+    text-align: center; 
+    color: var(--gold);
 }
 
 .card h3 {
-    font-size: 1.4em;
+    font-size: 1.5em;
+    margin-bottom: 12px;
     color: var(--gold);
-    margin-bottom: 10px;
+    pointer-events: none;
+}
+
+.card small {
+    font-size: 1em;
+    color: #666;
+    pointer-events: none;
 }
 
 .btn {
@@ -53,17 +73,21 @@ h1 {
     width: 80%;
     max-width: 300px;
     margin: 20px auto;
-    padding: 14px;
-    background: rgba(0,0,0,0.4);
+    padding: 16px;
+    background: var(--accent);
     color: white;
     border: none;
-    border-radius: 30px;
-    font-size: 1.1em;
+    border-radius: 50px;
+    font-size: 1.2em;
     cursor: pointer;
     transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.btn:hover { background: var(--accent); }
+.btn:hover {
+    background: #6f8a80;
+    transform: translateY(-3px);
+}
 
 .card {
     background: white;
@@ -73,61 +97,45 @@ h1 {
     padding: 30px 25px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     text-align: center;
-    cursor: pointer; /* 加上手指光標，表示可點 */
-    transition: all 0.3s ease; /* 平滑過渡 */
-    user-select: none; /* 防止長按選字 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
 }
 
 .card:hover {
-    transform: translateY(-8px); /* 向上浮起 */
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15); /* 陰影加深 */
-    background: #f8f5f0; /* 輕微變色，禪意米白 */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    background: #f8f5f0;
 }
 
 .card:active {
-    transform: translateY(2px); /* 點擊時下沉反饋 */
+    transform: translateY(2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* 卡片內標題更突出 */
-.card h3 {
-    font-size: 1.5em;
-    margin-bottom: 12px;
-    color: var(--gold);
-    pointer-events: none; /* 避免標題干擾點擊 */
-}
-
-.card small {
-    font-size: 1em;
-    color: #666;
-    pointer-events: none;
 }
 
 .youtube-btn {
     display: inline-block;
     background: #ff0000;
     color: white;
-    padding: 10px 25px;
-    border-radius: 8px;
+    padding: 14px 35px;
+    border-radius: 50px;
     text-decoration: none;
-    margin-top: 15px;
-    font-size: 0.95em;
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
-/* 广告预留位置（后面直接替换为AdSense代码） */
 .adsense-placeholder {
     background: #eee;
-    height: 280px;
     margin: 30px auto;
     max-width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 40px;
+    text-align: center;
     color: #999;
     font-style: italic;
+    min-height: 100px;
 }
 
-/* 底部导航 */
 nav {
     position: fixed;
     bottom: 0;
@@ -143,17 +151,21 @@ nav {
 
 nav a {
     color: var(--text);
-    font-size: 1.6em;
+    font-size: 1.8em;
     padding: 8px;
     text-decoration: none;
     opacity: 0.7;
     transition: opacity 0.3s;
 }
 
-nav a.active, nav a:hover { opacity: 1; }
+nav a.active, nav a:hover { 
+    opacity: 1; 
+    color: var(--gold); 
+}
 
 /* 响应式 */
 @media (min-width: 768px) {
     body { font-size: 20px; }
     .card { max-width: 600px; }
+    header { padding: 80px 20px; }
 }
