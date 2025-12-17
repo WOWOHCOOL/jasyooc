@@ -13,130 +13,124 @@
     <link rel="canonical" href="https://jasyooc.com/ancient.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
-    body {
-        font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-        -webkit-font-smoothing: antialiased;
-    }
-    h1, h2, h3 {
-        font-family: 'KaiTi', 'STKaiTi', serif !important;
-        letter-spacing: 2px;
-    }
-    h1 {
-        font-size: 2.2em;
-        font-weight: bold;
-    }
-    .intro-text {
-        font-size: 1.15em;
-        line-height: 1.8;
-        margin: 20px 0;
-        color: #555;
-        text-align: center;
-    }
-    .story-card {
-        background: white;
-        margin: 30px auto;
-        max-width: 92%;
-        border-radius: 16px;
-        padding: 28px;
-        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-    .story-title {
-        font-size: 1.7em;
-        color: var(--gold);
-        margin-bottom: 20px;
-    }
-    .歪說 {
-        font-size: 1.15em;
-        line-height: 1.85;
-        margin: 25px 0;
-        color: #444;
-    }
-    .歌詞 {
-        font-size: 1.25em;
-        line-height: 2;
-        color: var(--accent);
-        margin: 30px 0;
-        font-style: italic;
-        font-weight: bold;
-    }
-    .共鳴 {
-        font-size: 1.1em;
-        line-height: 1.8;
-        margin: 25px 0;
-        color: #666;
-    }
-    .youtube-embed {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%;
-        margin: 35px 0;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    .youtube-embed iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    .youtube-btn {
-        font-family: 'KaiTi', 'STKaiTi', serif !important;
-        font-size: 1.15em !important; /* 手機端縮小 */
-        font-weight: bold !important;
-        padding: 14px 35px; /* 減小padding */
-        background: #ff0000;
-        color: white;
-        border-radius: 50px;
-        display: inline-block;
-        margin: 20px 0;
-        max-width: 80%; /* 限制寬度 */
-        box-shadow: 0 4px 15px rgba(255,0,0,0.3);
-        transition: all 0.3s;
-    }
-    .youtube-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(255,0,0,0.4);
-    }
-
-    /* 手機端專屬優化 */
-    @media (max-width: 768px) {
-        .story-title {
-            font-size: 1.55em;
+        body {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+            -webkit-font-smoothing: antialiased;
         }
-        .歪說 {
-            font-size: 1.1em;
-            line-height: 1.8;
+        h1, h2, h3 {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            letter-spacing: 2px;
         }
-        .歌詞 {
+        h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        .intro-text {
             font-size: 1.2em;
-            line-height: 1.9;
-        }
-        .共鳴 {
-            font-size: 1.05em;
-        }
-        .youtube-btn {
-            font-size: 1.1em !important;
-            padding: 12px 30px;
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #555;
+            text-align: center;
         }
         .story-card {
-            padding: 25px;
-            margin: 25px auto;
+            background: white;
+            margin: 35px auto;
+            max-width: 90%;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+            text-align: center;
         }
-    }
-		/* 結尾大紅訂閱按鈕手機優化 */
-@media (max-width: 768px) {
-    .youtube-btn {
-        font-size: 1.15em !important;
-        padding: 12px 35px !important;
-        max-width: 80%;
-    }
-}
-</style>
+        .story-title {
+            font-size: 1.9em;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+        .歪說 {
+            font-size: 1.3em;
+            line-height: 1.9;
+            margin: 30px 0;
+            color: #444;
+        }
+        .歌詞 {
+            font-size: 1.4em;
+            line-height: 2.1;
+            color: var(--accent);
+            margin: 35px 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+        .共鳴 {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 25px 0;
+            color: #666;
+        }
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin: 40px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .youtube-btn {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            font-size: 1.2em !important;
+            font-weight: bold !important;
+            padding: 14px 35px;
+            background: #ff0000;
+            color: white;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px auto;
+            max-width: 80%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+            transition: all 0.3s;
+        }
+        .youtube-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,0,0,0.4);
+        }
+
+        /* 手機端優化 */
+        @media (max-width: 768px) {
+            .story-title {
+                font-size: 1.7em;
+            }
+            .歪說 {
+                font-size: 1.2em;
+                line-height: 1.8;
+            }
+            .歌詞 {
+                font-size: 1.3em;
+                line-height: 2;
+            }
+            .共鳴 {
+                font-size: 1.1em;
+            }
+            .youtube-btn {
+                font-size: 1.15em !important;
+                padding: 12px 30px !important;
+                max-width: 75%;
+            }
+            .story-card {
+                padding: 28px;
+                margin: 25px auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -148,110 +142,106 @@
         <p class="intro-text">歷史不正經講，老歌來療傷。<br>那些曾讓我們心潮澎湃、淚濕衣襟的故事，<br>原來古人也經歷過。</p>
 
         <!-- 故事1：趙匡胤 -->
-<div class="story-card">
-    <h2 class="story-title">趙匡胤 · 陳橋兵變</h2>
-    <p class="歪說">深夜聽伍佰《淚橋》時，總想起趙匡胤：一個大兵喝醉睡一覺，醒來被兄弟們披上黃袍，直接當了皇帝。演都不用演，「恭敬不如從命」，這劇本比任何宮鬥劇都離譜。他大概心裡想：這杯酒，我喝得太突然了。</p>
-    <p class="歌詞">改編《陳橋》（伍佰《淚橋》旋律）<br>
-    「不勝酒力美夢醒來 袍已披了起來<br>
-    恭敬不如從命改 改宋定都京<br>
-    命好的人總是習慣天意的安排<br>
-    至少這次兵變真的太突然<br>
-    想想站在烈日驕陽陳橋上<br>
-    三千佳麗向我襲來敞開懷」</p>
-    <p class="共鳴">中年男人突然升職加薪、被推上高位，<br>錯愕、無奈、又不得不接受——<br>不就是現代版的黃袍加身？</p>
-    <div class="youtube-embed">
-    <iframe src="https://www.youtube.com/embed/WFGHwI1qLdI" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-    <a href="https://www.youtube.com/embed/WFGHwI1qLdI" class="youtube-btn" target="_blank">去YouTube看完整版</a>
-</div>
-		
-     <!-- 故事2：崖山海戰 · 陸秀夫背帝投海 -->
-<div class="story-card">
-    <h2 class="story-title">崖山海戰 · 陸秀夫背帝投海</h2>
-    <p class="歪說">深夜聽張雨生《大海》時，總想起崖山：十萬南宋軍民隨樓船沉沒，陸秀夫背著八歲小皇帝躍入茫茫大海，「宋可亡，天下不可亡」。那一刻，海水不是哀愁，而是最後的忠義與不屈。歷史上最悲壯的一躍，比任何悲劇都讓人心碎。</p>
-    <p class="歌詞">改編《大海》（崖山版 · 張雨生《大海》旋律）<br>
-    「丞相負帝蹣跚 躍入茫茫深淵<br>
-    十萬忠魂似海 化作濁浪滔天<br>
-    寧死不屈殉國 樓船龍旗沉海底<br>
-    終成往事 後人追憶<br>
-    如果大海能夠帶走你的哀愁<br>
-    卻帶不走九世之仇<br>
-    所有亡國的傷 所有遺民的淚 入夢來<br>
-    永誌在心頭<br>
-    宋可亡 天下永不朽」</p>
-    <p class="共鳴">當一切都守不住時，選擇用最悲壯的方式結束——
-中年男人最懂的，是寧可玉碎，也不為瓦全的驕傲與絕望。</p>
-    <div class="youtube-embed">
-    <iframe src="https://www.youtube.com/embed/pcFSm7EBHVA" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-    <a href="https://www.youtube.com/embed/pcFSm7EBHVA" class="youtube-btn" target="_blank">去YouTube看完整版</a>
-</div>
+        <div class="story-card">
+            <h2 class="story-title">趙匡胤 · 陳橋兵變</h2>
+            <p class="歪說">深夜聽伍佰《淚橋》時，總想起趙匡胤：一個大兵喝醉睡一覺，醒來被兄弟們披上黃袍，直接當了皇帝。演都不用演，「恭敬不如從命」，這劇本比任何宮鬥劇都離譜。他大概心裡想：這杯酒，我喝得太突然了。</p>
+            <p class="歌詞">改編《陳橋》（伍佰《淚橋》旋律）<br>
+            「不勝酒力美夢醒來 袍已披了起來<br>
+            恭敬不如從命改 改宋定都京<br>
+            命好的人總是習慣天意的安排<br>
+            至少這次兵變真的太突然<br>
+            想想站在烈日驕陽陳橋上<br>
+            三千佳麗向我襲來敞開懷」</p>
+            <p class="共鳴">中年男人突然升職加薪、被推上高位，<br>錯愕、無奈、又不得不接受——<br>不就是現代版的黃袍加身？</p>
+            <div class="youtube-embed">
+                <iframe src="https://www.youtube.com/embed/WFGHwI1qLdI" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <a href="https://www.youtube.com/watch?v=WFGHwI1qLdI" class="youtube-btn" target="_blank">去YouTube看完整版</a>
+        </div>
+
+        <!-- 故事2：崖山海戰 · 陸秀夫背帝投海 -->
+        <div class="story-card">
+            <h2 class="story-title">崖山海戰 · 陸秀夫背帝投海</h2>
+            <p class="歪說">深夜聽張雨生《大海》時，總想起崖山：十萬南宋軍民隨樓船沉沒，陸秀夫背著八歲小皇帝躍入茫茫大海，「宋可亡，天下不可亡」。那一刻，海水不是哀愁，而是最後的忠義與不屈。歷史上最悲壯的一躍，比任何悲劇都讓人心碎。</p>
+            <p class="歌詞">改編《大海》（崖山版 · 張雨生《大海》旋律）<br>
+            「丞相負帝蹣跚 躍入茫茫深淵<br>
+            十萬忠魂似海 化作濁浪滔天<br>
+            寧死不屈殉國 樓船龍旗沉海底<br>
+            終成往事 後人追憶<br>
+            如果大海能夠帶走你的哀愁<br>
+            卻帶不走九世之仇<br>
+            所有亡國的傷 所有遺民的淚 入夢來<br>
+            永誌在心頭<br>
+            宋可亡 天下永不朽」</p>
+            <p class="共鳴">當一切都守不住時，選擇用最悲壯的方式結束——<br>中年男人最懂的，是寧可玉碎，也不為瓦全的驕傲與絕望。</p>
+            <div class="youtube-embed">
+                <iframe src="https://www.youtube.com/embed/pcFSm7EBHVA" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <a href="https://www.youtube.com/watch?v=pcFSm7EBHVA" class="youtube-btn" target="_blank">去YouTube看完整版</a>
+        </div>
 
         <!-- 故事3：李煜 · 南唐亡國 -->
-<div class="story-card">
-    <h2 class="story-title">李煜 · 南唐亡國</h2>
-    <p class="歪說">深夜聽劉德華《孤星淚》時，總想起李煜：前半生是風流詞人，後宮佳麗三千，寫盡春花秋月；後半生成了階下囚，一首《虞美人》換來毒酒一杯。自古多情難為帝王，他大概心裡想：如果能重來，我寧願只做個詞人，不做皇帝。</p>
-    <p class="歌詞">改編《孤星淚》（劉德華《孤星淚》旋律）<br>
-    「我是一江向東流去的春水<br>
-    孤独的等待 已過千年<br>
-    所有亡國舊事 一一在重演<br>
-    自古多情 難為帝王<br>
-    只想隱居鐘山 安度這時光<br>
-    金陵的煙雨 重擔落在肩上<br>
-    辜負佳偶知音 伊人難再回<br>
-    夢裡忘了她的臉 縱使相見也無言<br>
-    輪迴之後 我還是那個我」</p>
-    <p class="共鳴">沉迷才情與愛情，卻守不住江山——<br>
-中年男人最懂的，是曾經擁有一切美好，<br>
-卻因一念之差，終成遺憾。</p>
-    <div class="youtube-embed">
-    <iframe src="https://www.youtube.com/embed/SPHe5o6iA_0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-    <a href="https://youtu.be/SPHe5o6iA_0" class="youtube-btn" target="_blank">去YouTube看完整版</a>
-</div>
+        <div class="story-card">
+            <h2 class="story-title">李煜 · 南唐亡國</h2>
+            <p class="歪說">深夜聽劉德華《孤星淚》時，總想起李煜：前半生是風流詞人，後宮佳麗三千，寫盡春花秋月；後半生成了階下囚，一首《虞美人》換來毒酒一杯。自古多情難為帝王，他大概心裡想：如果能重來，我寧願只做個詞人，不做皇帝。</p>
+            <p class="歌詞">改編《孤星淚》（劉德華《孤星淚》旋律）<br>
+            「我是一江向東流去的春水<br>
+            孤独的等待 已過千年<br>
+            所有亡國舊事 一一在重演<br>
+            自古多情 難為帝王<br>
+            只想隱居鐘山 安度這時光<br>
+            金陵的煙雨 重擔落在肩上<br>
+            辜負佳偶知音 伊人難再回<br>
+            夢裡忘了她的臉 縱使相見也無言<br>
+            輪迴之後 我還是那個我」</p>
+            <p class="共鳴">沉迷才情與愛情，卻守不住江山——<br>中年男人最懂的，是曾經擁有一切美好，<br>卻因一念之差，終成遺憾。</p>
+            <div class="youtube-embed">
+                <iframe src="https://www.youtube.com/embed/SPHe5o6iA_0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <a href="https://www.youtube.com/watch?v=SPHe5o6iA_0" class="youtube-btn" target="_blank">去YouTube看完整版</a>
+        </div>
 
         <!-- 故事4：宋徽宗 · 靖康恥 -->
-<div class="story-card">
-    <h2 class="story-title">宋徽宗 · 靖康恥</h2>
-    <p class="歪說">深夜聽伍佰《挪威的森林》時，總想起宋徽宗父子：一天到晚畫畫寫字搞花石綱，夢想豐亨豫大，結果金人南下，東京淪陷，二聖被擄北上。從燈火闌珊的上元之夜，到五國城裡的囚徒生活，這落差，比任何悲劇都慘。</p>
-    <p class="歌詞">改編《建炎的森林》（伍佰《挪威的森林》旋律）<br>
-    「那日朕從井邊落下<br>
-    群臣聲聲呼喚官家<br>
-    催我放下執念 邁開南行的步伐<br>
-    是否依然懷念豐亨豫大<br>
-    依然任由鐵蹄南下<br>
-    靖康恥臣子恨 讓那平靜水波再起漣漪<br>
-    金吾纛旓 立在八公山頭<br>
-    畫押落款 滄州趙玖<br>
-    恍然明白項王徘徊 烏江時的落寞」</p>
-    <p class="共鳴">沉迷藝術與享樂，忽略現實危機，最終一無所有——<br>中年男人最怕的，不是失敗，而是曾經擁有一切卻親手丟掉。</p>
-    <div class="youtube-embed">
-    <iframe src="https://www.youtube.com/embed/ARKoG9ZQ0jo" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-</div>
-    <a href="https://youtu.be/ARKoG9ZQ0jo" class="youtube-btn" target="_blank">去YouTube看完整版</a>
-</div>
+        <div class="story-card">
+            <h2 class="story-title">宋徽宗 · 靖康恥</h2>
+            <p class="歪說">深夜聽伍佰《挪威的森林》時，總想起宋徽宗父子：一天到晚畫畫寫字搞花石綱，夢想豐亨豫大，結果金人南下，東京淪陷，二聖被擄北上。從燈火闌珊的上元之夜，到五國城裡的囚徒生活，這落差，比任何悲劇都慘。</p>
+            <p class="歌詞">改編《建炎的森林》（伍佰《挪威的森林》旋律）<br>
+            「那日朕從井邊落下<br>
+            群臣聲聲呼喚官家<br>
+            催我放下執念 邁開南行的步伐<br>
+            是否依然懷念豐亨豫大<br>
+            依然任由鐵蹄南下<br>
+            靖康恥臣子恨 讓那平靜水波再起漣漪<br>
+            金吾纛旓 立在八公山頭<br>
+            畫押落款 滄州趙玖<br>
+            恍然明白項王徘徊 烏江時的落寞」</p>
+            <p class="共鳴">沉迷藝術與享樂，忽略現實危機，最終一無所有——<br>中年男人最怕的，不是失敗，而是曾經擁有一切卻親手丟掉。</p>
+            <div class="youtube-embed">
+                <iframe src="https://www.youtube.com/embed/ARKoG9ZQ0jo" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <a href="https://www.youtube.com/watch?v=ARKoG9ZQ0jo" class="youtube-btn" target="_blank">去YouTube看完整版</a>
+        </div>
 
         <!-- 結尾呼籲區 -->
-<div class="story-card">
-    <p style="font-size:1.3em; line-height:1.8; margin-bottom:20px;">哪位古人最戳您？<br>哪首歌最像您的故事？</p>
-    <p style="font-size:1.1em; color:#777; margin:20px 0;">留言告訴我們，下期講誰～</p>
-    <a href="https://www.youtube.com/@TangSongRock" class="youtube-btn" target="_blank" 
-       style="background:#ff0000; padding:14px 40px; font-size:1.3em; max-width:85%;">訂閱YouTube，不錯過新歪說</a>
-</div>
+        <div class="story-card">
+            <p style="font-size:1.3em; line-height:1.8; margin-bottom:20px;">哪位古人最戳您？<br>哪首歌最像您的故事？</p>
+            <p style="font-size:1.1em; color:#777; margin:20px 0;">留言告訴我們，下期講誰～</p>
+            <a href="https://www.youtube.com/@TangSongRock" class="youtube-btn" target="_blank">訂閱YouTube，不錯過新歪說</a>
+        </div>
 
     </main>
 
     <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-    <img src="images/logo.png" alt="江湖禪心 Logo" 
-         style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
-    <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
-    <p style="margin:10px 0;">
-        <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
-        <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
-        <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
-    </p>
-    <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
-</footer>
+        <img src="images/logo.png" alt="江湖禪心 Logo" 
+             style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+        <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
+        <p style="margin:10px 0;">
+            <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+            <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+            <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+        </p>
+        <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+    </footer>
 
     <nav>
         <a href="index.html">🏠</a>
