@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>江湖性格測試 - 江湖禪心｜免費古風人格測評</title>
-    <meta name="description" content="免費江湖性格測試，6道題測出您的古風人格：俠客、浪子、隱士或居士，附專屬詩詞解讀。">
-    <meta name="keywords" content="江湖性格測試,古風MBTI,性格測評免費,古風人格,詩詞性格">
-	<!-- Favicon -->
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="images/favicon.png">
+    <title>您的江湖人格 - 江湖禪心｜李白岳飛伍佰古風測評</title>
+    <meta name="description" content="6道輕鬆題，測出您的江湖人格：李白般的灑脫浪子、岳飛般的仗義俠客，還是伍佰歌詞裡的孤獨旅人？滿江紅、挪威的森林、鐵血丹心，哪個最像您？">
+    <meta name="keywords" content="伍佰,挪威的森林,淚橋,滿江紅,唐宋搖滾,晚風,鐵血丹心,羅文,李白,岳飛,情緒療癒,中年男人懷舊,古風人格">
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
     <link rel="canonical" href="https://jasyooc.com/test.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* 強制全站使用楷體，繁體優化 */
         body {
             font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
             -webkit-font-smoothing: antialiased;
@@ -26,17 +25,22 @@
             font-size: 2.2em;
             font-weight: bold;
         }
-        /* 修正按鈕與選項字體 */
-        .btn, .option-btn {
-            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-            font-size: 1.2em !important;
-            font-weight: bold !important;
+        .intro-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #555;
         }
-
-        /* 關鍵修正：題目容器與按鈕 */
+        .hint {
+            font-size: 1em;
+            color: #777;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        /* 題目容器與按鈕 */
         #questions {
             position: relative;
-            padding-bottom: 50px; /* 增加底部留白，避免裁切 */
+            padding-bottom: 50px;
         }
         .question {
             position: absolute;
@@ -47,12 +51,12 @@
             visibility: hidden;
             transition: opacity 0.5s ease;
             text-align: center;
-            padding: 20px 20px 80px 20px; /* 底部大留白 */
+            padding: 20px 20px 80px 20px;
         }
         .question.active {
             opacity: 1;
             visibility: visible;
-            position: relative; /* 確保正常流布局 */
+            position: relative;
         }
         .question h3 {
             font-size: 1.5em;
@@ -61,10 +65,10 @@
         }
         .option-btn {
             display: block;
-            width: 85%; /* 減窄，避免過寬 */
+            width: 85%;
             max-width: 460px;
-            padding: 14px 20px; /* 高度減小，更緊湊 */
-            margin: 12px auto; /* 間距減小 */
+            padding: 16px 20px;
+            margin: 14px auto;
             background: var(--gray);
             border: none;
             border-radius: 12px;
@@ -90,31 +94,39 @@
             padding: 40px 20px;
         }
         #result-title {
-            font-size: 1.8em;
+            font-size: 1.9em;
             color: var(--gold);
             margin: 30px 0;
         }
         #result-desc, #result-poem {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin: 20px 0;
+            font-size: 1.3em;
+            line-height: 1.9;
+            margin: 25px 0;
         }
         #result-poem {
             color: var(--accent);
+            font-style: italic;
+        }
+        .btn {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            font-size: 1.2em !important;
+            font-weight: bold !important;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>江湖性格測試</h1>
-        <p style="font-size:1.3em; margin:15px 0;">回答幾道問題，測出您的古風人格</p>
+        <h1>您的江湖人格</h1>
+        <p style="font-size:1.3em; margin:15px 0;">深夜自問：我到底是什麼樣的人？</p>
     </header>
 
     <main>
         <div class="card">
             <div id="intro">
-                <p>在這紛擾江湖中，您會是哪一類人？<br>輕鬆回答6道題，找到屬於您的古風靈魂～</p>
-                <button class="btn" onclick="startTest()">開始測試</button>
+                <p class="intro-text">在這紛擾江湖中，<br>您會是哪一類人？</p>
+                <p class="hint">李白舉杯邀明月，岳飛滿江紅怒髮衝冠，<br>還是伍佰《挪威的森林》裡的孤獨旅人？</p>
+                <p class="intro-text">輕鬆回答6道題，<br>找到那個最像您的古風靈魂。</p>
+                <button class="btn" onclick="startTest()">開始測評</button>
             </div>
 
             <div id="questions" style="display:none;">
@@ -192,22 +204,16 @@
                 <h3 id="result-title"></h3>
                 <p id="result-desc"></p>
                 <p id="result-poem"></p>
-                <button class="btn" id="share-btn" onclick="shareResult()">分享到微信</button>
-                <button class="btn" onclick="resetTest()" style="margin-top:10px; background:#666;">重新測試</button>
+                <button class="btn" onclick="shareResult()">分享我的江湖人格</button>
+                <button class="btn" onclick="resetTest()" style="margin-top:15px; background:#666;">重新測評</button>
             </div>
         </div>
 
-        <!-- 廣告位 -->
-        <div class="adsense-placeholder">【Google AdSense 廣告位】</div>
     </main>
 
     <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-    <!-- Logo 完美居中 -->
-    <div style="margin:0 auto 30px; width:200px; height:200px;">
-        <img src="images/logo.png" alt="江湖禪心 Logo" 
-             style="width:200px; height:200px; object-fit:contain; display:block;">
-    </div>
-
+    <img src="images/logo.png" alt="江湖禪心 Logo" 
+         style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
     <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
     <p style="margin:10px 0;">
         <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
@@ -258,10 +264,31 @@
             const max = Math.max(scores.xia, scores.lang, scores.yin, scores.ju);
             let result;
 
-            if (scores.xia === max) result = { title: "仗義俠客", desc: "您心懷俠義，路見不平一聲吼。滿腔熱血，最愛《滿江紅》式的豪情。", poem: "精忠報國，怒髮衝冠，憑欄處、瀟瀟雨歇。" };
-            else if (scores.lang === max) result = { title: "灑脫浪子", desc: "您隨性不羈，人生得意須盡歡。一壺濁酒喜相逢，最像李白那樣的詩人。", poem: "人生得意須盡歡，莫使金樽空對月。" };
-            else if (scores.yin === max) result = { title: "隱世高人", desc: "您淡泊名利，獨愛山水之間。竹杖芒鞋，輕勝萬軍，誰怕？", poem: "莫聽穿林打葉聲，何妨吟嘯且徐行。" };
-            else result = { title: "禪意居士", desc: "您內心寧靜，最懂在紛擾中尋得一方清淨。一簾幽夢任平生。", poem: "滾滾紅塵何必戀，一任身心向禪定。" };
+            if (scores.xia === max) {
+                result = {
+                    title: "仗義俠客",
+                    desc: "您心懷俠義，路見不平一聲吼。滿腔熱血，最愛滿江紅怒髮衝冠、羅文鐵血丹心般的豪情。",
+                    poem: "精忠報國，怒髮衝冠，憑欄處、瀟瀟雨歇。"
+                };
+            } else if (scores.lang === max) {
+                result = {
+                    title: "灑脫浪子",
+                    desc: "您隨性不羈，人生得意須盡歡。一壺濁酒喜相逢，最像李白舉杯邀明月，也像伍佰的挪威的森林與淚橋。",
+                    poem: "人生得意須盡歡，莫使金樽空對月。"
+                };
+            } else if (scores.yin === max) {
+                result = {
+                    title: "隱世高人",
+                    desc: "您淡泊名利，獨愛山水之間。竹杖芒鞋輕勝馬，像晚風輕拂，也像世間始終你好般的灑脫。",
+                    poem: "莫聽穿林打葉聲，何妨吟嘯且徐行。"
+                };
+            } else {
+                result = {
+                    title: "禪意居士",
+                    desc: "您內心寧靜，最懂在紛擾中尋得一方清淨。一簾幽夢任平生，像一首老歌，溫柔而堅定。",
+                    poem: "滾滾紅塵何必戀，一任身心向禪定。"
+                };
+            }
 
             document.getElementById('result-title').textContent = result.title;
             document.getElementById('result-desc').textContent = result.desc;
@@ -275,7 +302,7 @@
 
         function shareResult() {
             const title = document.getElementById('result-title').textContent;
-            const text = `我的江湖性格是：「${title}」🍃 快來測測您是哪種古風人格！`;
+            const text = `我的江湖人格是：「${title}」🍃 快來測測您是李白、岳飛還是伍佰歌詞裡的那個人！`;
             prompt('複製以下文字，分享到微信或朋友圈：', text + '\n\nhttps://jasyooc.com/test.html');
         }
     </script>
