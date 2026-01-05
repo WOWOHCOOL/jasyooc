@@ -13,6 +13,58 @@
     <link rel="canonical" href="https://jasyooc.com/">
     <link rel="stylesheet" href="css/style.css">
     <style>
+		/* 基礎 card 樣式（保持原有） */
+.card, .feature-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px 25px;
+    margin: 20px auto;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* 電腦端加寬（大螢幕） */
+@media (min-width: 1025px) {
+    .feature-card,
+    .recommend-card {
+        max-width: 1000px;              /* 電腦端寬度，可調成 1100px / 1200px 更寬 */
+        margin: 30px auto;              /* 居中 + 上下間距 */
+        padding: 40px 60px;             /* 內距更大，文字更舒適 */
+        font-size: 1.15em;              /* 文字稍大，提升氣勢 */
+    }
+    
+    .recommend-card {
+        max-width: 1000px;              /* 底部推薦也同寬 */
+        margin-top: 50px;               /* 與上方卡片拉開距離 */
+    }
+}
+
+/* 手機端保持不變（全寬或自動） */
+@media (max-width: 768px) {
+    .feature-card,
+    .recommend-card {
+        max-width: 100%;                /* 手機全寬 */
+        margin: 15px 10px;              /* 兩側留一點邊距 */
+        padding: 25px 20px;             /* 減小內距，避免擠壓 */
+        font-size: 1em;                 /* 手機文字適中 */
+    }
+    
+    .recommend-card {
+        margin-top: 30px;
+    }
+}
+
+/* hover 效果（電腦專用） */
+@media (hover: hover) {
+    .feature-card:hover,
+    .recommend-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+}
         /* 強制全站使用楷體，繁體優化 */
         body {
             font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
@@ -61,29 +113,38 @@
 
     <main>
         <h2>當您需要時</h2>
+<div class="feature-card" onclick="location.href='woobai.html'">
+    <h3>伍佰歌詞療癒錄</h3>
+    <small>挪威的森林、淚橋、晚風…深夜聽歌時的共鳴</small>
+</div>
 
-<div class="card" onclick="location.href='ancient.html'">
+<div class="feature-card" onclick="location.href='ancient.html'">
     <h3>古人歪說錄</h3>
     <small>陳橋兵變、崖山海戰、李煜亡國、靖康恥…歷史不正經講，老歌來療傷</small>
 </div>
 
-<div class="card" onclick="location.href='sign.html'">
+<div class="feature-card" onclick="location.href='prompt.html'">
+    <h3>古風提示詞錄</h3>
+    <small>nano banana、GPT-4o、ChatGPT 專用中年療癒提示詞</small>
+</div>
+
+<div class="feature-card" onclick="location.href='sign.html'">
     <h3>隨心一籤</h3>
     <small>深夜難眠時，抽一支，得伍佰或滿江紅般的慰藉</small>
 </div>
 
-<div class="card" onclick="location.href='mood.html'">
+<div class="feature-card" onclick="location.href='mood.html'">
     <h3>古風決策指引</h3>
     <small>選擇困難時，轉一轉，像一首老歌輕輕推您向前</small>
 </div>
 
-<div class="card" onclick="location.href='test.html'">
+<div class="feature-card" onclick="location.href='test.html'">
     <h3>您的江湖人格</h3>
     <small>測測您是李白般的灑脫浪子，還是岳飛般的仗義俠客</small>
 </div>
 
         <h2>推薦內容</h2>
-        <div class="card">
+        <div class="feature-card">
             <h3>伍佰經典歌單</h3>
             <p>挪威的森林、淚橋、晚風、突然的自我…那些戳中中年男人的歌</p>
             <a href="https://www.youtube.com/playlist?list=PL8o0lNZw8MUky-IPh3nMdXNtoe3sMscxo" class="youtube-btn" target="_blank">去YouTube聽完整歌單</a>
@@ -110,6 +171,7 @@
 		<a href="woobai.html">🎵</a>
         <a href="ancient.html">📜</a>
         <a href="test.html">🧪</a>
+		<a href="prompt.html">✨</a>
     </nav>
 </body>
 </html>
