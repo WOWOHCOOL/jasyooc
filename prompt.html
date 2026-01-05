@@ -12,6 +12,11 @@
     <link rel="canonical" href="https://jasyooc.com/prompt.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        :root {
+            --gold: #d4af37;    /* 金色範例 */
+            --accent: #c62828;  /* 強調色範例 */
+            --bg: #f8f5f0;      /* 背景色範例 */
+        }
         body {
             font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
             -webkit-font-smoothing: antialiased;
@@ -31,7 +36,6 @@
             color: #555;
             text-align: center;
         }
-
         /* 提示詞網格 */
         .prompt-grid {
             display: grid;
@@ -68,7 +72,6 @@
             color: #666;
             padding: 0 20px 25px;
         }
-
         /* 彈出層 */
         #modal {
             display: none;
@@ -122,6 +125,7 @@
             line-height: 1.8;
             white-space: pre-wrap;
             margin-bottom: 25px;
+            word-wrap: break-word;  /* 確保長英文/符號自動換行 */
         }
         .copy-btn {
             background: var(--accent);
@@ -140,7 +144,6 @@
             color: white;
             cursor: pointer;
         }
-
         /* 手機端適應 */
         @media (max-width: 1024px) {
             .prompt-grid {
@@ -169,25 +172,20 @@
         <h1>古風提示詞錄</h1>
         <p style="font-size:1.3em; margin:15px 0;">用AI生成屬於你的深夜療癒文字</p>
     </header>
-
     <main>
         <div class="card">
             <p class="intro-text">以下提示詞專為中年男人設計，<br>點擊卡片查看大圖與完整提示詞，<br>一鍵複製到 ChatGPT、GPT-4o、nano banana，<br>讓AI用伍佰的滄桑、古人的歪說，寫出懂你的文字。</p>
         </div>
-
         <div class="prompt-grid" id="prompt-container">
-  <div class="loading" style="grid-column: 1 / -1; text-align:center; padding:60px 0; color:#888; display:flex; justify-content:center; align-items:center; min-height:300px;">
-    正在載入提示詞...
-  </div>
-			</div>
-
+            <div class="loading" style="grid-column: 1 / -1; display: flex; justify-content: center; align-items: center; min-height: 300px; text-align: center; padding: 60px 0; color: #888;">
+                正在載入提示詞...
+            </div>
+        </div>
         <div class="card">
             <p style="font-size:1.3em;">更多提示詞持續更新中～</p>
             <a href="https://www.youtube.com/@TangSongRock" class="youtube-btn" target="_blank">訂閱YouTube，獲取最新靈感</a>
         </div>
-
     </main>
-
     <!-- 彈出層 -->
     <div id="modal">
         <span id="close-modal" onclick="closeModal()">×</span>
@@ -202,7 +200,6 @@
             </div>
         </div>
     </div>
-
     <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
         <img src="images/logo.webp" alt="江湖禪心 Logo" 
      width="200" height="200" <style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
@@ -214,7 +211,6 @@
         </p>
         <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
     </footer>
-
     <nav>
         <a href="index.html">🏠</a>
         <a href="sign.html">🀄</a>
@@ -224,114 +220,86 @@
         <a href="woobai.html">🎵</a>
         <a href="prompt.html" class="active">✨</a>
     </nav>
-
     <script>
-    // 事件委託：所有 .prompt-card 點擊彈出
-    document.querySelectorAll('.prompt-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const img = this.getAttribute('data-img');
-            const title = this.getAttribute('data-title');
-            const prompt = this.getAttribute('data-prompt');
-            if (img && title && prompt) {
-                openModal(img, title, prompt);
+        // 彈出層打開函數
+        function openModal(imgSrc, title, promptText) {
+            document.getElementById('modal-image').src = imgSrc;
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-prompt').textContent = promptText;  // 直接設定 textContent 確保所有符號/換行完整
+            document.getElementById('modal').classList.add('active');
+        }
+        // 關閉彈出層
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.getElementById('modal-image').src = '';
+        }
+        // 一鍵複製提示詞（確保複製完整原始文本，包括符號/長度/換行）
+        function copyPrompt() {
+            const text = document.getElementById('modal-prompt').textContent;  // textContent 保留所有原始字符
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已複製到剪貼簿！完整提示詞（包含符號/英文/換行）可直接貼到 ChatGPT / nano banana～');
+            }).catch(() => {
+                alert('複製失敗，請手動選取文字複製');
+            });
+        }
+        // 點擊彈出層背景關閉
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
         });
-    });
-
-    // 彈出層打開函數
-    function openModal(imgSrc, title, promptText) {
-        document.getElementById('modal-image').src = imgSrc;
-        document.getElementById('modal-title').textContent = title;
-        document.getElementById('modal-prompt').textContent = promptText;
-        document.getElementById('modal').classList.add('active');
-    }
-
-    // 關閉彈出層
-    function closeModal() {
-        document.getElementById('modal').classList.remove('active');
-        // 可選：清空圖片避免重複載入
-        document.getElementById('modal-image').src = '';
-    }
-
-    // 一鍵複製提示詞
-    function copyPrompt() {
-        const text = document.getElementById('modal-prompt').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            alert('已複製到剪貼簿！直接貼到 ChatGPT / nano banana 就好～');
-        }).catch(() => {
-            alert('複製失敗，請手動選取文字複製');
+        // 按 Esc 鍵關閉
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
         });
-    }
-
-    // 點擊彈出層背景關閉
-    document.getElementById('modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModal();
+        // 事件委託：綁在容器上，支援動態卡片
+        document.getElementById('prompt-container').addEventListener('click', function(e) {
+            const card = e.target.closest('.prompt-card');
+            if (card) {
+                const img = card.dataset.img;
+                const title = card.dataset.title;
+                const prompt = card.dataset.prompt;
+                if (img && title && prompt) {
+                    openModal(img, title, prompt);
+                }
+            }
+        });
+    </script>
+    <script>
+        // 載入提示詞卡片
+        async function loadPromptCards() {
+            const container = document.getElementById('prompt-container');
+            try {
+                const response = await fetch('prompts-data.json');  // 假設 JSON 在同目錄
+                if (!response.ok) throw new Error('無法載入提示詞資料: ' + response.status);
+                const prompts = await response.json();
+                container.innerHTML = '';  // 清空 loading
+                prompts.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'prompt-card';
+                    card.dataset.img = `images/prompt/${item.filename}`;
+                    card.dataset.title = item.title;
+                    card.dataset.prompt = item.prompt;  // JS 設定 dataset，能安全處理任何符號/長文本
+                    card.innerHTML = `
+                        <img src="images/prompt/${item.filename}" alt="${item.title}" loading="lazy">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('載入提示詞失敗:', error.message);
+                container.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#c00;">
+                        載入提示詞失敗<br><small>請檢查網路、JSON 檔案是否正常，或確認路徑正確</small>
+                    </div>
+                `;
+            }
         }
-    });
-
-    // 按 Esc 鍵關閉（加分體驗）
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeModal();
-        }
-    });
-</script>
-<script>
-// 建議把下面這整段放在 </body> 前
-
-async function loadPromptCards() {
-  const container = document.getElementById('prompt-container');
-  
-  try {
-    // 可以改成相對路徑或絕對路徑
-    const response = await fetch('prompts-data.json');  
-    if (!response.ok) throw new Error('無法載入提示詞資料');
-    
-    const prompts = await response.json();
-    
-    container.innerHTML = ''; // 清空 loading 提示
-
-    prompts.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'prompt-card';
-      card.dataset.img = `images/prompt/${item.filename}`;
-      card.dataset.title = item.title;
-      card.dataset.prompt = item.prompt;
-
-      card.innerHTML = `
-        <img src="images/prompt/${item.filename}" alt="${item.title}" loading="lazy">
-        <h3>${item.title}</h3>
-        <p>${item.description}</p>
-      `;
-
-      container.appendChild(card);
-    });
-
-    // 重新綁定所有卡片的點擊事件
-    document.querySelectorAll('.prompt-card').forEach(card => {
-      card.addEventListener('click', function() {
-        const img = this.dataset.img;
-        const title = this.dataset.title;
-        const prompt = this.dataset.prompt;
-        openModal(img, title, prompt);
-      });
-    });
-
-  } catch (error) {
-    console.error('載入提示詞失敗:', error);
-    container.innerHTML = `
-      <div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#c00;">
-        載入提示詞失敗<br><small>請檢查網路或資料檔案是否正常</small>
-      </div>
-    `;
-  }
-}
-
-// 頁面載入完成後執行
-window.addEventListener('DOMContentLoaded', loadPromptCards);
-
-// 原有的 openModal, closeModal, copyPrompt 函數保持不變
-</script>
+        // 頁面載入完成後執行
+        window.addEventListener('DOMContentLoaded', loadPromptCards);
+    </script>
 </body>
 </html>
