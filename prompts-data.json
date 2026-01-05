@@ -27,5 +27,4 @@
     "description": "鉛筆寫實＋手機參考",
     "prompt": "perfect composition, impeccable attention to detail, highest quality, rich detail, sharp focus, 8K/4K resolution, clear edges, exquisite details, perfect composition, depth of field, cinematic lighting, vibrant colors, award-winning style, professional level, perfect depiction. Create an extremely detailed, hyper-realistic 3D graphite pencil sketch depicting the face of a Chinese idol girl, drawn on textured white notebook paper with clear paper quality, delicate details, and subtle imperfections. The facial sketch should be perfectly identical to the reference photo displayed on an iPhone placed next to the notebook. ...（完整內容）"
   }
-  // 之後每新增一張，只要複製一塊物件，加在陣列最後即可
 ]
