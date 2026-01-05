@@ -91,6 +91,7 @@
             max-height: 90%;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            touch-action: pan-y;
         }
         .modal-img {
             flex: 1;
@@ -140,6 +141,9 @@
             color: white;
             cursor: pointer;
         }
+		body.modal-open {
+    overflow: hidden;  /* 禁止背景滾動 */
+}
 
         /* 手機端適應 */
         @media (max-width: 1024px) {
@@ -211,6 +215,18 @@
         font-size: 0.95em;
         white-space: pre-wrap;
         word-break: break-all;
+    }
+}
+		@media (max-width: 768px) {
+    .modal-img, .modal-img img {
+        pointer-events: none !important;          /* 禁止所有點擊/觸控事件 */
+        touch-action: pan-y;                      /* 只允許垂直滑動 */
+    }
+
+    /* 如果你想保留「點擊圖片放大」功能，則改成這樣 */
+    .modal-img {
+        pointer-events: auto !important;
+        touch-action: manipulation;               /* 優化觸控，但不會誤觸 */
     }
 }
 
@@ -743,6 +759,7 @@
         document.getElementById('modal-title').textContent = title;
         document.getElementById('modal-prompt').textContent = promptText;
         document.getElementById('modal').classList.add('active');
+		document.body.classList.add('modal-open');
 
         // 延遲重置 flag，避免快速連點
         setTimeout(() => { isModalOpening = false; }, 300);
@@ -752,6 +769,7 @@
         document.getElementById('modal').classList.remove('active');
         document.getElementById('modal-image').src = '';
         isModalOpening = false;
+		document.body.classList.remove('modal-open');
     }
 
     function copyPrompt() {
@@ -779,30 +797,48 @@
     const container = document.getElementById('prompt-container');
 
     function handleCard(e) {
-        e.preventDefault();
-        e.stopPropagation();  // 阻止事件繼續冒泡，避免重複
+    e.preventDefault();
+    e.stopPropagation();
 
-        const card = e.target.closest('.prompt-card');
-        if (!card) return;
+    // 防滑動誤觸：只在觸控時間短（< 200ms）才觸發
+    if (e.type === 'touchstart') {
+        const touch = e.touches[0];
+        const startTime = Date.now();
 
+        const onTouchEnd = () => {
+            const duration = Date.now() - startTime;
+            if (duration < 200) {  // 短觸控才算點擊
+                const card = e.target.closest('.prompt-card');
+                if (card) {
+                    const img = card.dataset.img;
+                    const title = card.dataset.title;
+                    const prompt = card.dataset.prompt;
+                    if (img && title && prompt) {
+                        openModal(img, title, prompt);
+                    }
+                }
+            }
+            // 清理事件
+            document.removeEventListener('touchend', onTouchEnd);
+            document.removeEventListener('touchcancel', onTouchEnd);
+        };
+
+        document.addEventListener('touchend', onTouchEnd, { once: true });
+        document.addEventListener('touchcancel', onTouchEnd, { once: true });
+        return;  // 等待 touchend 再決定
+    }
+
+    // 電腦 click 正常處理
+    const card = e.target.closest('.prompt-card');
+    if (card) {
         const img = card.dataset.img;
         const title = card.dataset.title;
         const prompt = card.dataset.prompt;
-
         if (img && title && prompt) {
             openModal(img, title, prompt);
         }
     }
-
-    // 綁定 click + touchstart
-    container.addEventListener('click', handleCard, { passive: false });
-    container.addEventListener('touchstart', handleCard, { passive: false });
-
-    // 點擊圖片區域 → 簡單放大效果（可選，模擬幻燈片頂層）
-    document.getElementById('modal-img-container').addEventListener('click', function(e) {
-        const img = document.getElementById('modal-image');
-        img.classList.toggle('zoomed');
-    });
+}
 </script>
 </body>
 </html>
