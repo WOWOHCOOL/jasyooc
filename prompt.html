@@ -17,6 +17,32 @@
         --accent: #c62828;      /* 強調色（按鈕等） */
         --bg: #f8f5f0;          /* 淺米背景 */
     }
+	
+	/* 讓兩個 .card 在電腦端與 .prompt-grid 同寬 */
+.card {
+    width: 100%;
+    max-width: 95%;                /* 與 .prompt-grid 一致 */
+    margin: 20px auto;             /* 居中 + 間距 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 電腦端（>1024px）加強同寬效果 */
+@media (min-width: 1025px) {
+    .card {
+        max-width: calc(95% - 60px);  /* 與 grid 的 gap 30px 對齊，視覺更一致 */
+        margin: 40px auto;            /* 更大間距，看起來更協調 */
+    }
+}
+
+/* 手機端（<768px）保持原樣，不強制寬度 */
+@media (max-width: 768px) {
+    .card {
+        max-width: 100%;              /* 手機全寬 */
+        margin: 15px auto;            /* 減小間距 */
+        padding: 15px;
+    }
+}
 
     body {
         font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
