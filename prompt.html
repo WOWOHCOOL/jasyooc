@@ -675,17 +675,23 @@
     </nav>
 
     <script>
-    // 事件委託：所有 .prompt-card 點擊彈出
-    document.querySelectorAll('.prompt-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const img = this.getAttribute('data-img');
-            const title = this.getAttribute('data-title');
-            const prompt = this.getAttribute('data-prompt');
-            if (img && title && prompt) {
-                openModal(img, title, prompt);
-            }
-        });
+    // 放在 load 完成後或 window.onload
+document.querySelectorAll('.prompt-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const img = this.dataset.img;
+        const title = this.dataset.title;
+        const prompt = this.dataset.prompt;
+        openModal(img, title, prompt);
     });
+    card.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        const img = this.dataset.img;
+        const title = this.dataset.title;
+        const prompt = this.dataset.prompt;
+        openModal(img, title, prompt);
+    }, { passive: false });
+});
 
     // 彈出層打開函數
     function openModal(imgSrc, title, promptText) {
