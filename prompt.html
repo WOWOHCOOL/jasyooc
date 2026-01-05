@@ -632,19 +632,25 @@
     </main>
 
     <!-- 彈出層 -->
-    <div id="modal">
-        <span id="close-modal" onclick="closeModal()">×</span>
-        <div class="modal-content">
-            <div class="modal-img">
-                <img id="modal-image" alt="提示詞配圖" loading="lazy">
-            </div>
-            <div class="modal-text">
-                <h2 id="modal-title"></h2>
-                <pre class="modal-prompt" id="modal-prompt"></pre>
-                <button class="copy-btn" onclick="copyPrompt()">一鍵複製提示詞</button>
-            </div>
+    <!-- 彈出層 HTML 改成這樣：把 copy-btn 移到 modal-img 下方 -->
+<div id="modal">
+    <span id="close-modal" onclick="closeModal()">×</span>
+    <div class="modal-content">
+        <!-- 先放圖片區 -->
+        <div class="modal-img">
+            <img id="modal-image" alt="提示詞配圖" loading="lazy">
+        </div>
+        <!-- 圖片下方放複製按鈕（手機端會自動移到這裡） -->
+        <div class="copy-btn-wrapper">
+            <button class="copy-btn" onclick="copyPrompt()">一鍵複製提示詞</button>
+        </div>
+        <!-- 最後放文字區 -->
+        <div class="modal-text">
+            <h2 id="modal-title"></h2>
+            <pre class="modal-prompt" id="modal-prompt"></pre>
         </div>
     </div>
+</div>
 
     <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
         <img src="images/logo.webp" alt="江湖禪心 Logo" 
@@ -719,8 +725,7 @@
             closeModal();
         }
     });
-</script>
-<script>
+
 // 建議把下面這整段放在 </body> 前
 
 async function loadPromptCards() {
@@ -775,7 +780,51 @@ async function loadPromptCards() {
 window.addEventListener('DOMContentLoaded', loadPromptCards);
 
 // 原有的 openModal, closeModal, copyPrompt 函數保持不變
+	
+
+    /* 加強 modal 手機端適應 */
+    @media (max-width: 768px) {
+        .modal-content {
+            flex-direction: column;                /* 上下排列 */
+            width: 95vw;                           /* 佔滿寬度 */
+            height: 90vh;                          /* 佔滿高度，避免滾動過多 */
+            max-height: 90vh;
+        }
+        .modal-img {
+            flex: none;                            /* 不再等比例伸展 */
+            height: 40vh;                          /* 固定高度，留空間給文字 */
+            width: 100%;
+            background: #f8f5f0;
+        }
+        .modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;                   /* 保持比例，不變形 */
+            max-height: 100%;
+        }
+        .modal-text {
+            flex: 1;
+            padding: 20px 15px;                    /* 減小內距，更適合手機 */
+            overflow-y: auto;
+        }
+        .modal-prompt {
+            font-size: 1em;                        /* 文字稍小，避免過擠 */
+            padding: 15px;
+        }
+        /* 新增：複製按鈕移到圖片下方，居中大一點 */
+        .copy-btn-wrapper {
+            text-align: center;
+            padding: 15px 0;
+            background: #f8f5f0;
+            border-top: 1px solid #eee;
+        }
+        .copy-btn {
+            font-size: 1.2em;                      /* 手機上更大好按 */
+            padding: 14px 40px;
+            min-width: 200px;
+        }
+    }
+
 </script>
 </body>
-
 </html>
