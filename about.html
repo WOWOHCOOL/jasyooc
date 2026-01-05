@@ -13,6 +13,57 @@
     <link rel="canonical" href="https://jasyooc.com/about.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
+		
+		/* about 頁面的介紹 card 容器 */
+.about-card {  /* 建議給這個 card 加 class="about-card" 以區分 */
+    width: 100%;
+    max-width: 800px;               /* 電腦端最大寬度，可調成 900px 或 1000px 更寬 */
+    margin: 40px auto;              /* 上下左右居中 */
+    padding: 40px 60px;             /* 電腦端內距更大，看起來更舒適 */
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    line-height: 1.8;
+    font-size: 1.15em;
+    color: #444;
+    box-sizing: border-box;
+}
+
+/* 電腦端（寬螢幕）加強寬度與氣勢 */
+@media (min-width: 1025px) {
+    .about-card {
+        max-width: 1000px;          /* 電腦端更寬，視覺更開闊，可再調大 */
+        padding: 60px 80px;         /* 更大內距，文字更舒適 */
+        margin: 60px auto;          /* 上下間距更大 */
+    }
+}
+
+/* 手機端（<768px）保持原樣，不強制寬度 */
+@media (max-width: 768px) {
+    .about-card {
+        max-width: 100%;            /* 手機全寬 */
+        padding: 25px 20px;         /* 減小內距，避免擠壓 */
+        margin: 20px 10px;          /* 手機兩側留一點邊距 */
+        font-size: 1.05em;          /* 文字稍小，易讀 */
+    }
+}
+
+/* 內部強調文字樣式（可選，視覺更突出） */
+.about-card .highlight {
+    font-weight: bold;
+    color: var(--gold);
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.about-card .signature {
+    margin-top: 40px;
+    text-align: right;
+    font-style: italic;
+    color: #777;
+    font-size: 1.1em;
+}
         body {
             font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
             -webkit-font-smoothing: antialiased;
@@ -53,25 +104,21 @@
     </header>
 
     <main>
-        <div class="card">
-            <p>江湖禪心，創於2025年，是一處專為中年男子而設的線上避風港。</p>
-
-            <p>我們深知，人生過半，肩負重擔，卻常在深夜難眠、通勤無聊、情緒低落時，想聽一首伍佰的《挪威的森林》、《淚橋》、《晚風》，或羅文的《滿江紅》、《鐵血丹心》，李宗盛的《夢醒時分》、《有多少愛可以重來》，甚至迪克牛仔的《第一滴淚》。</p>
-
-            <p class="highlight">那些曾讓我們心潮澎湃、淚濕衣襟的老歌，<br>那些滿江紅怒髮衝冠、世間始終你好般的灑脫，<br>在這裡，與古人故事、古風工具相遇。</p>
-
-            <p>這裡有：</p>
-            <p>・古風決策轉盤，轉一轉解決選擇困難，如歌詞般跟隨內心<br>
-            ・今日一籤，抽一支古籤，得岳飛般的豪情或李白般的灑脫<br>
-            ・江湖性格測試，測測你是仗義俠客還是隱世高人<br>
-            ・古人歪說錄，陳橋兵變、安史之亂、靖難、靖康恥…歷史不正經講，配伍佰老歌療傷</p>
-
-            <p>我們不做心理治療，只願在您疲憊時，遞上一首老歌、一句古詩、一段歪說、一支古籤。</p>
-
-            <p class="highlight">唐宋搖滾，滿江紅，挪威的森林，淚橋，晚風……<br>這些歌，這些故事，這些情緒，<br>江湖禪心為您珍藏。</p>
-
-            <p class="signature">——江湖禪心 敬上</p>
-        </div>
+        <div class="card about-card">
+    <p>江湖禪心，創於2025年，是一處專為中年男子而設的線上避風港。</p>
+    <p>我們深知，人生過半，肩負重擔，卻常在深夜難眠、通勤無聊、情緒低落時，想聽一首伍佰的《挪威的森林》、《淚橋》、《晚風》，或羅文的《滿江紅》、《鐵血丹心》，李宗盛的《夢醒時分》、《有多少愛可以重來》，甚至迪克牛仔的《第一滴淚》。</p>
+    
+    <p class="highlight">那些曾讓我們心潮澎湃、淚濕衣襟的老歌，<br>那些滿江紅怒髮衝冠、世間始終你好般的灑脫，<br>在這裡，與古人故事、古風工具相遇。</p>
+    
+    <p>這裡有：</p>
+    <p>・古風決策轉盤，轉一轉解決選擇困難，如歌詞般跟隨內心<br> ・今日一籤，抽一支古籤，得岳飛般的豪情或李白般的灑脫<br> ・江湖性格測試，測測你是仗義俠客還是隱世高人<br> ・古人歪說錄，陳橋兵變、安史之亂、靖難、靖康恥…歷史不正經講，配伍佰老歌療傷</p>
+    
+    <p>我們不做心理治療，只願在您疲憊時，遞上一首老歌、一句古詩、一段歪說、一支古籤。</p>
+    
+    <p class="highlight">唐宋搖滾，滿江紅，挪威的森林，淚橋，晚風……<br>這些歌，這些故事，這些情緒，<br>江湖禪心為您珍藏。</p>
+    
+    <p class="signature">——江湖禪心 敬上</p>
+</div>
 
     </main>
 
@@ -94,6 +141,7 @@
 		<a href="woobai.html">🎵</a>
         <a href="ancient.html">📜</a>
         <a href="test.html">🧪</a>
+		<a href="prompt.html">✨</a>
     </nav>
 </body>
 </html>
