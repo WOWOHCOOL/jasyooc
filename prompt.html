@@ -12,230 +12,202 @@
     <link rel="canonical" href="https://jasyooc.com/prompt.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        body {
-            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-            -webkit-font-smoothing: antialiased;
-        }
-        h1, h2, h3 {
-            font-family: 'KaiTi', 'STKaiTi', serif !important;
-            letter-spacing: 2px;
-        }
-        h1 {
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-        .intro-text {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin: 20px 0;
-            color: #555;
-            text-align: center;
-        }
-
-        /* 提示詞網格 */
-        .prompt-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin: 40px auto;
-            max-width: 95%;
-        }
-        .prompt-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        .prompt-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        .prompt-card img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-        }
-        .prompt-card h3 {
-            font-size: 1.5em;
-            color: var(--gold);
-            margin: 20px 0 10px;
-        }
-        .prompt-card p {
-            font-size: 1.1em;
-            color: #666;
-            padding: 0 20px 25px;
-        }
-
-        /* 彈出層 */
-        #modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.9);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        #modal.active {
-            display: flex;
-        }
-        .modal-content {
-            display: flex;
-            background: white;
-            border-radius: 16px;
-            max-width: 90%;
-            max-height: 90%;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            touch-action: pan-y;
-        }
-        .modal-img {
-            flex: 1;
-            min-width: 300px;
-        }
-        .modal-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #f8f5f0;
-        }
-        .modal-text {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-            text-align: left;
-        }
-        .modal-text h2 {
-            font-size: 1.8em;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-        .modal-prompt {
-            background: #f8f5f0;
-            padding: 25px;
-            border-radius: 12px;
-            font-family: monospace;
-            font-size: 1.1em;
-            line-height: 1.8;
-            white-space: pre-wrap;
-            margin-bottom: 25px;
-        }
-        .copy-btn {
-            background: var(--accent);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1em;
-            display: inline-block;
-        }
-        #close-modal {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2.5em;
-            color: white;
-            cursor: pointer;
-        }
-		body.modal-open {
-    overflow: hidden;  /* 禁止背景滾動 */
-}
-
-        /* 手機端適應 */
-        @media (max-width: 1024px) {
-            .prompt-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 768px) {
-            .prompt-grid {
-                grid-template-columns: 1fr;
-            }
-            .modal-content {
-                flex-direction: column;
-            }
-            .modal-img {
-                min-width: auto;
-                height: 40vh;
-            }
-            .modal-text {
-                padding: 30px;
-            }
-        }
-		
-		/* 手機端 modal 優化 */
-@media (max-width: 768px) {
-    .modal-content {
-        flex-direction: column;
-        width: 96vw;
-        height: 92vh;
-        max-height: 92vh;
-        border-radius: 12px;
+    :root {
+        --gold: #d4af37;        /* 金色主色 */
+        --accent: #c62828;      /* 強調色（按鈕等） */
+        --bg: #f8f5f0;          /* 淺米背景 */
     }
-    .modal-img {
-        height: 45vh;                /* 圖片佔比稍大 */
+
+    body {
+        font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+        font-family: 'KaiTi', 'STKaiTi', serif !important;
+        letter-spacing: 2px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+        font-weight: bold;
+    }
+
+    .intro-text {
+        font-size: 1.2em;
+        line-height: 1.8;
+        margin: 20px 0;
+        color: #555;
+        text-align: center;
+    }
+
+    /* 提示詞網格 */
+    .prompt-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin: 40px auto;
+        max-width: 95%;
+    }
+
+    .prompt-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        touch-action: manipulation; /* 提升手機觸控響應 */
+    }
+
+    .prompt-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .prompt-card img {
         width: 100%;
-        background: #f8f5f0;
-        cursor: pointer;             /* 提示可點 */
+        height: 280px;
+        object-fit: cover;
     }
+
+    .prompt-card h3 {
+        font-size: 1.5em;
+        color: var(--gold);
+        margin: 20px 0 10px;
+    }
+
+    .prompt-card p {
+        font-size: 1.1em;
+        color: #666;
+        padding: 0 20px 25px;
+    }
+
+    /* 彈出層 - 基礎樣式 */
+    #modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.9);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+    }
+
+    #modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        display: flex;
+        background: white;
+        border-radius: 16px;
+        max-width: 90%;
+        max-height: 90%;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        touch-action: pan-y; /* 允許垂直滾動 */
+    }
+
+    .modal-img {
+        flex: 1;
+        min-width: 300px;
+        background: var(--bg);
+    }
+
     .modal-img img {
         width: 100%;
         height: 100%;
         object-fit: contain;
     }
+
     .modal-text {
         flex: 1;
-        padding: 15px;
+        padding: 40px;
         overflow-y: auto;
-        position: relative;
+        text-align: left;
     }
-    /* 小巧複製按鈕：放在提示詞容器內 */
-    .copy-btn-container {
-        text-align: right;
-        margin-bottom: 10px;
+
+    .modal-text h2 {
+        font-size: 1.8em;
+        color: var(--gold);
+        margin-bottom: 20px;
     }
-    .copy-btn-small {
-        font-size: 0.9em;
-        padding: 6px 14px;
-        background: var(--accent);
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        min-width: 100px;
-    }
-    .copy-btn-small:hover {
-        opacity: 0.9;
-    }
+
     .modal-prompt {
-        font-size: 0.95em;
+        background: var(--bg);
+        padding: 25px;
+        border-radius: 12px;
+        font-family: monospace;
+        font-size: 1.1em;
+        line-height: 1.8;
         white-space: pre-wrap;
-        word-break: break-all;
-    }
-}
-		@media (max-width: 768px) {
-    .modal-img, .modal-img img {
-        pointer-events: none !important;          /* 禁止所有點擊/觸控事件 */
-        touch-action: pan-y;                      /* 只允許垂直滑動 */
+        word-break: break-word;
+        margin-bottom: 25px;
     }
 
-    /* 如果你想保留「點擊圖片放大」功能，則改成這樣 */
-    .modal-img {
-        pointer-events: auto !important;
-        touch-action: manipulation;               /* 優化觸控，但不會誤觸 */
+    #close-modal {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 2.5em;
+        color: white;
+        cursor: pointer;
     }
-}
 
-/* 電腦端小調整 */
-.copy-btn-container {
-    text-align: right;
-    margin: 10px 0;
-}
-    </style>
+    /* 禁止背景滾動 */
+    body.modal-open {
+        overflow: hidden;
+    }
+
+    /* 響應式斷點 */
+    @media (max-width: 1024px) {
+        .prompt-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .prompt-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-content {
+            flex-direction: column;
+            width: 96vw;
+            height: 92vh;
+            max-height: 92vh;
+            border-radius: 12px;
+        }
+
+        .modal-img {
+            height: 45vh;
+            width: 100%;
+        }
+
+        .modal-text {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .modal-prompt {
+            font-size: 0.95em;
+        }
+
+        /* 防止圖片區域誤觸 */
+        .modal-img,
+        .modal-img img {
+            pointer-events: none !important;
+            touch-action: pan-y;
+        }
+
+        /* 如果需要保留圖片點擊功能（如放大），可改成： */
+        /* .modal-img { pointer-events: auto !important; touch-action: manipulation; } */
+    }
+</style>
 </head>
 <body>
     <header>
@@ -748,97 +720,174 @@
     </nav>
 
 <script>
-    // 防止重複觸發的 flag
-    let isModalOpening = false;
+(function() {
+    'use strict';
+    
+    // 狀態管理
+    let modalState = {
+        isOpening: false,
+        touchStartTime: 0,
+        touchStartY: 0
+    };
 
+    // DOM 元素快取
+    const elements = {
+        modal: document.getElementById('modal'),
+        modalImage: document.getElementById('modal-image'),
+        modalTitle: document.getElementById('modal-title'),
+        modalPrompt: document.getElementById('modal-prompt'),
+        container: document.getElementById('prompt-container')
+    };
+
+    // Modal 操作
     function openModal(imgSrc, title, promptText) {
-        if (isModalOpening) return;
-        isModalOpening = true;
-
-        document.getElementById('modal-image').src = imgSrc;
-        document.getElementById('modal-title').textContent = title;
-        document.getElementById('modal-prompt').textContent = promptText;
-        document.getElementById('modal').classList.add('active');
-		document.body.classList.add('modal-open');
-
-        // 延遲重置 flag，避免快速連點
-        setTimeout(() => { isModalOpening = false; }, 300);
+        if (modalState.isOpening) return;
+        
+        modalState.isOpening = true;
+        elements.modal.classList.add('active');
+        document.body.classList.add('modal-open');
+        
+        elements.modalImage.src = imgSrc;
+        elements.modalTitle.textContent = title;
+        elements.modalPrompt.textContent = promptText;
+        
+        // 防連點 + 動畫完成後重置
+        setTimeout(() => {
+            modalState.isOpening = false;
+        }, 350);
     }
 
     function closeModal() {
-        document.getElementById('modal').classList.remove('active');
-        document.getElementById('modal-image').src = '';
-        isModalOpening = false;
-		document.body.classList.remove('modal-open');
+        elements.modal.classList.remove('active');
+        elements.modalImage.src = '';
+        document.body.classList.remove('modal-open');
+        modalState.isOpening = false;
     }
 
     function copyPrompt() {
-        const text = document.getElementById('modal-prompt').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            alert('提示詞已複製！');
-        }).catch(() => {
-            alert('複製失敗，請手動選取');
-        });
-    }
-
-    // 背景點擊關閉
-    document.getElementById('modal').addEventListener('click', e => {
-        if (e.target === document.getElementById('modal')) {
-            closeModal();
+        const text = elements.modalPrompt.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('提示詞已複製！');
+            }).catch(() => {
+                fallbackCopy(text);
+            });
+        } else {
+            fallbackCopy(text);
         }
-    });
-
-    // Esc 關閉
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // 事件委託（電腦 + 手機）
-    const container = document.getElementById('prompt-container');
-
-    function handleCard(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // 防滑動誤觸：只在觸控時間短（< 200ms）才觸發
-    if (e.type === 'touchstart') {
-        const touch = e.touches[0];
-        const startTime = Date.now();
-
-        const onTouchEnd = () => {
-            const duration = Date.now() - startTime;
-            if (duration < 200) {  // 短觸控才算點擊
-                const card = e.target.closest('.prompt-card');
-                if (card) {
-                    const img = card.dataset.img;
-                    const title = card.dataset.title;
-                    const prompt = card.dataset.prompt;
-                    if (img && title && prompt) {
-                        openModal(img, title, prompt);
-                    }
-                }
-            }
-            // 清理事件
-            document.removeEventListener('touchend', onTouchEnd);
-            document.removeEventListener('touchcancel', onTouchEnd);
-        };
-
-        document.addEventListener('touchend', onTouchEnd, { once: true });
-        document.addEventListener('touchcancel', onTouchEnd, { once: true });
-        return;  // 等待 touchend 再決定
     }
 
-    // 電腦 click 正常處理
-    const card = e.target.closest('.prompt-card');
-    if (card) {
+    // 備用複製方法（老瀏覽器）
+    function fallbackCopy(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast('提示詞已複製！');
+        } catch (err) {
+            showToast('請手動選取複製');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    // Toast 提示（比 alert 美觀）
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.8);
+            color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px;
+            z-index: 1001; transform: translateX(100%); transition: transform 0.3s;
+            max-width: 300px; word-break: break-word;
+        `;
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => toast.style.transform = 'translateX(0)');
+        
+        setTimeout(() => {
+            toast.style.transform = 'translateX(100%)';
+            setTimeout(() => document.body.removeChild(toast), 300);
+        }, 2000);
+    }
+
+    // 觸控事件處理（手機優化）
+    function handleTouchStart(e) {
+        if (modalState.isOpening) return;
+        
+        const touch = e.touches[0];
+        modalState.touchStartTime = Date.now();
+        modalState.touchStartY = touch.clientY;
+    }
+
+    function handleTouchEnd(e) {
+        if (modalState.isOpening) return;
+        
+        const duration = Date.now() - modalState.touchStartTime;
+        const endY = e.changedTouches[0].clientY;
+        const moveDistance = Math.abs(modalState.touchStartY - endY);
+        
+        // 短按 + 小移動距離才觸發（防滑動誤觸）
+        if (duration < 250 && moveDistance < 25) {
+            e.preventDefault();
+            handleCardClick(e);
+        }
+    }
+
+    // 統一點擊處理（電腦 + 手機）
+    function handleCardClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const card = e.target.closest('.prompt-card');
+        if (!card) return;
+        
         const img = card.dataset.img;
         const title = card.dataset.title;
         const prompt = card.dataset.prompt;
+        
         if (img && title && prompt) {
             openModal(img, title, prompt);
         }
     }
-}
+
+    // 初始化事件綁定
+    function initEvents() {
+        // Modal 關閉事件
+        elements.modal.addEventListener('click', (e) => {
+            if (e.target === elements.modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 卡片點擊事件（事件委託）
+        elements.container.addEventListener('click', handleCardClick);
+        
+        // 手機觸控事件（防誤觸優化）
+        elements.container.addEventListener('touchstart', handleTouchStart, { passive: true });
+        elements.container.addEventListener('touchend', handleTouchEnd, { passive: false });
+        elements.container.addEventListener('touchcancel', handleTouchEnd, { passive: false });
+
+        // 暴露全域函數（給 HTML onclick 用）
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.copyPrompt = copyPrompt;
+    }
+
+    // 頁面載入完成後初始化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initEvents);
+    } else {
+        initEvents();
+    }
+
+})();
 </script>
 </body>
 </html>
