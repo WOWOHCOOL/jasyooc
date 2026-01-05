@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古風提示詞錄 - 江湖禪心｜nano banana GPT-4o ChatGPT 療癒提示詞</title>
+    <meta name="description" content="專為中年男人設計的ChatGPT、GPT-4o、nano banana提示詞案例庫，用伍佰歌詞、古人歪說風格生成深夜療癒文字。">
+    <meta name="keywords" content="ChatGPT提示詞,GPT-4o,nano banana,伍佰,古風提示詞,中年療癒,深夜共鳴">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="canonical" href="https://jasyooc.com/prompt.html">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3 {
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            letter-spacing: 2px;
+        }
+        h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        .intro-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #555;
+            text-align: center;
+        }
+
+        /* 提示詞網格 */
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 95%;
+        }
+        .prompt-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .prompt-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .prompt-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        .prompt-card h3 {
+            font-size: 1.5em;
+            color: var(--gold);
+            margin: 20px 0 10px;
+        }
+        .prompt-card p {
+            font-size: 1.1em;
+            color: #666;
+            padding: 0 20px 25px;
+        }
+
+        /* 彈出層 */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        #modal.active {
+            display: flex;
+        }
+        .modal-content {
+            display: flex;
+            background: white;
+            border-radius: 16px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .modal-img {
+            flex: 1;
+            min-width: 300px;
+        }
+        .modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #f8f5f0;
+        }
+        .modal-text {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .modal-text h2 {
+            font-size: 1.8em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        .modal-prompt {
+            background: #f8f5f0;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            margin-bottom: 25px;
+        }
+        .copy-btn {
+            background: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: inline-block;
+        }
+        #close-modal {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2.5em;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* 手機端適應 */
+        @media (max-width: 1024px) {
+            .prompt-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .prompt-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-content {
+                flex-direction: column;
+            }
+            .modal-img {
+                min-width: auto;
+                height: 40vh;
+            }
+            .modal-text {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>古風提示詞錄</h1>
+        <p style="font-size:1.3em; margin:15px 0;">用AI生成屬於你的深夜療癒文字</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <p class="intro-text">以下提示詞專為中年男人設計，<br>點擊卡片查看大圖與完整提示詞，<br>一鍵複製到 ChatGPT、GPT-4o、nano banana，<br>讓AI用伍佰的滄桑、古人的歪說，寫出懂你的文字。</p>
+        </div>
+
+        <div class="prompt-grid">
+            <!-- 示例卡片1 -->
+            <div class="prompt-grid" id="prompt-container">
+  <!-- 這裡會被 JS 自動填入卡片 -->
+  <div class="loading" style="grid-column: 1 / -1; text-align:center; padding:60px 0; color:#888;">
+    正在載入提示詞...
+  </div>
+</div>
+			</div>
+
+        <div class="card">
+            <p style="font-size:1.3em;">更多提示詞持續更新中～</p>
+            <a href="https://www.youtube.com/@TangSongRock" class="youtube-btn" target="_blank">訂閱YouTube，獲取最新靈感</a>
+        </div>
+
+    </main>
+
+    <!-- 彈出層 -->
+    <div id="modal">
+        <span id="close-modal" onclick="closeModal()">×</span>
+        <div class="modal-content">
+            <div class="modal-img">
+                <img id="modal-image" alt="提示詞配圖" loading="lazy">
+            </div>
+            <div class="modal-text">
+                <h2 id="modal-title"></h2>
+                <pre class="modal-prompt" id="modal-prompt"></pre>
+                <button class="copy-btn" onclick="copyPrompt()">一鍵複製提示詞</button>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
+        <img src="images/logo.webp" alt="江湖禪心 Logo" 
+     width="200" height="200" <style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+        <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
+        <p style="margin:10px 0;">
+            <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+            <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+            <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+        </p>
+        <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+    </footer>
+
+    <nav>
+        <a href="index.html">🏠</a>
+        <a href="sign.html">🀄</a>
+        <a href="mood.html">🎡</a>
+        <a href="ancient.html">📜</a>
+        <a href="test.html">🧪</a>
+        <a href="woobai.html">🎵</a>
+        <a href="prompt.html" class="active">✨</a>
+    </nav>
+
+    <script>
+    // 事件委託：所有 .prompt-card 點擊彈出
+    document.querySelectorAll('.prompt-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const img = this.getAttribute('data-img');
+            const title = this.getAttribute('data-title');
+            const prompt = this.getAttribute('data-prompt');
+            if (img && title && prompt) {
+                openModal(img, title, prompt);
+            }
+        });
+    });
+
+    // 彈出層打開函數
+    function openModal(imgSrc, title, promptText) {
+        document.getElementById('modal-image').src = imgSrc;
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-prompt').textContent = promptText;
+        document.getElementById('modal').classList.add('active');
+    }
+
+    // 關閉彈出層
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+        // 可選：清空圖片避免重複載入
+        document.getElementById('modal-image').src = '';
+    }
+
+    // 一鍵複製提示詞
+    function copyPrompt() {
+        const text = document.getElementById('modal-prompt').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('已複製到剪貼簿！直接貼到 ChatGPT / nano banana 就好～');
+        }).catch(() => {
+            alert('複製失敗，請手動選取文字複製');
+        });
+    }
+
+    // 點擊彈出層背景關閉
+    document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    // 按 Esc 鍵關閉（加分體驗）
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>
+<script>
+// 建議把下面這整段放在 </body> 前
+
+async function loadPromptCards() {
+  const container = document.getElementById('prompt-container');
+  
+  try {
+    // 可以改成相對路徑或絕對路徑
+    const response = await fetch('prompts-data.json');  
+    if (!response.ok) throw new Error('無法載入提示詞資料');
+    
+    const prompts = await response.json();
+    
+    container.innerHTML = ''; // 清空 loading 提示
+
+    prompts.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'prompt-card';
+      card.dataset.img = `images/prompt/${item.filename}`;
+      card.dataset.title = item.title;
+      card.dataset.prompt = item.prompt;
+
+      card.innerHTML = `
+        <img src="images/prompt/${item.filename}" alt="${item.title}" loading="lazy">
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+      `;
+
+      container.appendChild(card);
+    });
+
+    // 重新綁定所有卡片的點擊事件
+    document.querySelectorAll('.prompt-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.dataset.img;
+        const title = this.dataset.title;
+        const prompt = this.dataset.prompt;
+        openModal(img, title, prompt);
+      });
+    });
+
+  } catch (error) {
+    console.error('載入提示詞失敗:', error);
+    container.innerHTML = `
+      <div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#c00;">
+        載入提示詞失敗<br><small>請檢查網路或資料檔案是否正常</small>
+      </div>
+    `;
+  }
+}
+
+// 頁面載入完成後執行
+window.addEventListener('DOMContentLoaded', loadPromptCards);
+
+// 原有的 openModal, closeModal, copyPrompt 函數保持不變
+</script>
+</body>
+</html>
