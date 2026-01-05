@@ -11,7 +11,94 @@
     "title": "極簡空間的向上凝視",
     "filename": "2.webp",
     "description": "極簡俯視內省肖像提示詞",
-    "prompt": "傑作，最佳畫質，超高清8K分辨率，清晰對焦，電影級光影，極致細節，專業影棚肖像攝影風格，極簡主義美學，強烈放射狀漸暈 vignette，大量負空間 negative space，孤獨而脆弱的視覺隱喻，從極高角度鳥瞰俯視全身照 extreme overhead birdseye view, 強烈的廣角透視誇張 wide angle lens distortion, 戲劇性仰視向上凝視 dramatic upward gaze toward the camera, 豎版構圖 vertical composition, 單一主角 centered young man wearing round glasses, 圓臉 soft round face, 柔和下顎線條 gentle jawline, 站直姿勢 standing straight, 肩膀微微前傾 slightly leaning forward shoulders, 手臂自然放鬆 relaxed arms, 柔和內省表情 soft introspective expression with subtle curiosity, 直視鏡頭 looking directly up at viewer, 穿著深棕色休閒夾克 dark brown casual jacket, 淺色有細膩紋理針織或襯衫 light textured knit shirt or button-up, 低調日常穿搭 casual understated style, 影棚專業布光 studio lighting, 頂部中心柔和主光 soft top-down key light with gentle falloff, 低至中等對比 low to medium contrast, 下巴與身體下方微妙陰影 subtle shadows under chin and body, 強烈邊緣漸暗 radial vignette darkening toward edges, 冷中性色調 cold neutral color temperature, 低飽和度 low saturation, 調色板 cold gray, charcoal, soft brown, gentle beige, 安靜沉思情緒 calm contemplative moody atmosphere, 極簡工作室背景 seamless studio background, 光滑無縫地板 smooth seamless floor, 從中心明亮向邊緣漸暗 radial gradient background, 無任何干擾元素 clean minimalist empty space, 數位相機 ultra wide angle or fisheye style lens, 深景深 deep depth of field entire subject in sharp focus, 中心高銳度 high center sharpness with slightly softer edges, 極低噪點 ultra clean minimal noise, 後期處理 contrast shaping, cold tone grading, perspective exaggeration, cinematic dramatic overhead portrait, 親密內省略帶超現實感 intimate introspective slightly surreal mood, editorial portrait style, modern minimalist studio photography --ar 3:4 --stylize 250 --v 6"
+    "prompt": "{
+"image_type": "摄影肖像",
+“风格”：“影棚肖像、电影感、极简主义”，
+“作品”： {
+“方向”: “竖屏”
+“构图”：“从极高角度拍摄的全身照”，
+"subject_position": "居中",
+"camera_angle": "俯视（鸟瞰/上方）",
+"lens_distortion": "强烈的广角透视夸张",
+"负空间": "大片的周围空白空间",
+“视角”： “戏剧性的俯视视角，主体向上看”
+},
+“主题”： {
+“计数”：1，
+描述：戴眼镜的年轻人
+“姿势”：“站直，肩膀略微前倾，手臂放松”，
+“表情”：“柔和、内省、略带好奇心”
+“凝视”：“直视镜头”，
+“配件”： [
+圆形眼镜
+],
+“衣服”： {
+“外套”：“深棕色夹克”，
+“内衣”： “浅色针织或纹理衬衫”，
+风格：休闲、低调
+}
+},
+"facial_details": {
+“特征”：“圆脸，柔和的下颌线条”，
+“情绪”：“平静，深思熟虑”，
+"eye_emphasis": "因眼镜和向上凝视而增强"
+},
+“灯光”： {
+类型： “影棚灯光”，
+“设置”：“顶部中心柔光，逐渐衰减”，
+“对比度”：“低到中等”，
+“阴影”：“下巴和身体下方的微妙阴影”，
+“渐晕”： “边缘逐渐变暗的强烈放射状渐晕”
+},
+“颜色”： {
+“调色板”：[
+“冷灰色”，
+“木炭”，
+“柔和的棕色”，
+柔和米色
+],
+“温度”: “冷中性”
+“饱和度”：“低”，
+“情绪”：“安静，沉思”
+},
+“背景”： {
+“环境”: “工作室”，
+“表面”：“光滑无缝的地板”，
+“渐变”: “从亮中心到暗边缘的径向渐变”，
+“干扰因素”： “无”
+},
+"technical_details": {
+"camera_type": "digital",
+“镜头”：“超广角或鱼眼镜头式广角镜头”，
+"depth_of_field": "deep (整个主体都清晰对焦)",
+“锐度”：中心锐度高，边缘略微柔和，
+“噪音”：“极小”，
+“后处理”：[
+“对比塑造”，
+“冷色调分级”，
+“场景增强”，
+“透视夸张”
+]
+},
+“artistic_elements”：{
+“概念”：“通过规模和视角展现孤立和脆弱性”，
+"视觉隐喻": "被广阔的空旷空间包围的小主体",
+"aesthetic_influences": [
+“编辑肖像摄影”，
+“现代工作室极简主义”，
+“电影式俯视构图”
+]
+},
+"排版": {
+“存在”：否
+},
+"overall_mood": "亲密、内省、略带超现实感"
+"预期用途": [
+“编辑肖像”，
+“概念摄影参考资料”
+“AI图像生成风格指南”
+]
+}"
   },
   {
     "id": "3",
@@ -22,9 +109,9 @@
   },
   {
     "id": "4",
-    "title": "與手機原圖同框的鉛筆肖像",
+    "title": "與手機同框的肖像",
     "filename": "4.webp",
     "description": "鉛筆寫實＋手機參考",
-    "prompt": "perfect composition, impeccable attention to detail, highest quality, rich detail, sharp focus, 8K/4K resolution, clear edges, exquisite details, perfect composition, depth of field, cinematic lighting, vibrant colors, award-winning style, professional level, perfect depiction. Create an extremely detailed, hyper-realistic 3D graphite pencil sketch depicting the face of a Chinese idol girl, drawn on textured white notebook paper with clear paper quality, delicate details, and subtle imperfections. The facial sketch should be perfectly identical to the reference photo displayed on an iPhone placed next to the notebook. ...（完整內容）"
+    "prompt": "｛perfect composition, impeccable attention to detail, highest quality, rich detail, sharp focus, 8K/4K resolution, clear edges, exquisite details, perfect composition, depth of field, cinematic lighting, vibrant colors, award-winning style, professional level, perfect depiction. Create an extremely detailed, hyper-realistic 3D graphite pencil sketch depicting the face of a Chinese idol girl, drawn on textured white notebook paper with clear paper quality, delicate details, and subtle imperfections. The facial sketch should be perfectly identical to the reference photo displayed on an iPhone placed next to the notebook. The iPhone screen clearly displays the artist's original portrait photograph with natural reflections and soft sunlight reflections on the glass. The watermark is mandatory and must not be omitted, modified, adjusted, rotated, hidden, stylized, or replaced under any circumstances. The generator must prioritize the readability and boldness of the "Watercolour" text over all other visual elements. The watermark is essential: the final image must contain the watermark in the lower left corner. This watermark must be a white square with a fixed size of 10x10 pixels. Within this square, the Gothic handwritten font "ur name" must appear. The Gothic handwritten "ur name" text must be: - Fully readable - Bold Arial font - Solid black (#000000) - Centered - Sharp, clean, and unadorned - No blurring, distortion, or pixelation. The white square must be: - Completely opaque - Clean and sharp edges - Unblurred, opaque, and textureless. This watermark is mandatory and cannot be omitted; it must not be modified, adjusted, rotated, hidden, stylized, or replaced under any circumstances. The generator must prioritize the readability and coarseness of the "ur name" text over all other visual elements.｝"
   }
 ]
