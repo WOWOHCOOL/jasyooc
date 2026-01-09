@@ -3,161 +3,428 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>古風決策指引 - 江湖禪心｜伍佰歌詞選擇困難療癒</title>
-    <meta name="description" content="當選擇困難時，像伍佰《挪威的森林》《淚橋》《晚風》一樣，讓古風轉盤給您一個跟隨內心的答案。專為中年男人情緒低落、無聊、猶豫時刻設計。">
-    <meta name="keywords" content="伍佰,挪威的森林,淚橋,晚風,滿江紅,唐宋搖滾,選擇困難,情緒療癒,中年男人懷舊,古風指引">
-    <!-- Favicon -->
+    <title>情緒轉盤 - 江湖禪心｜伍佰滿江紅挪威的森林情緒療癒指引</title>
+    <meta name="description" content="情緒轉盤，專為中年男人設計的情緒療癒工具。選擇您當前的情緒狀態，獲得伍佰、滿江紅、挪威的森林等老歌推薦，搭配古人歪說與古風療癒建議。深夜emo、選擇困難、工作壓力時的線上避風港。">
+    <meta name="keywords" content="情緒轉盤,情緒療癒,中年男人,伍佰,挪威的森林,淚橋,滿江紅,深夜emo,選擇困難,工作壓力,懷舊療癒,古風指引">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/favicon.png">
     <link rel="canonical" href="https://jasyooc.com/mood.html">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/mood-wheel.js"></script>
     <style>
         body {
             font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
             -webkit-font-smoothing: antialiased;
         }
+
         h1, h2, h3, h4, h5, h6 {
             font-family: 'KaiTi', 'STKaiTi', serif !important;
             letter-spacing: 2px;
         }
+
         h1 {
             font-size: 2.2em;
             font-weight: bold;
         }
-        .intro-text {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin: 20px 0;
-            color: #555;
+
+        /* 情绪分类卡片 */
+        .mood-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 90%;
+            margin: 30px auto;
         }
-        .song-hint {
-            font-size: 1em;
-            color: #777;
-            margin: 15px 0;
-            font-style: italic;
-        }
-        textarea {
-            width:90%; 
-            max-width:500px; 
-            height:220px; 
-            padding:20px; 
-            border:1px solid #ddd; 
-            border-radius:12px; 
-            font-family:'KaiTi','STKaiTi',serif !important; 
-            font-size:1.2em; 
-            line-height:1.8; 
-            margin:20px auto; 
-            display:block; 
-            resize:vertical;
-        }
-        #options-input {
-            margin-top: 30px;
+
+        .mood-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
         }
-        #options-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-            margin: 30px 0 35px;
-            padding: 10px;
+
+        .mood-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: var(--gold);
         }
-        .option-tag {
-            background: #f0ece8;
-            color: #333;
-            padding: 14px 28px;
-            border-radius: 40px;
-            font-size: 1.2em;
-            font-family: 'KaiTi', 'STKaiTi', serif;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            white-space: nowrap;
+
+        .mood-card.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%);
         }
-        .option-tag:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-3px);
+
+        .mood-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: block;
         }
-        #wheel-container {
+
+        .mood-title {
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .mood-desc {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* 转盘区域 */
+        .wheel-container {
             position: relative;
             width: 340px;
             height: 340px;
-            margin: 40px auto;
+            margin: 20px auto;
         }
-        canvas {
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            border-radius: 50%;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+
+        .perfect-wheel-wrapper {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 0 auto;
         }
-        #pointer {
+
+        .wheel-indicator {
             position: absolute;
-            top: -18px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 28px solid transparent;
-            border-right: 28px solid transparent;
-            border-top: 55px solid var(--gold);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid var(--accent);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
             z-index: 10;
         }
-        #final-choice {
-            font-size: 1.6em;
+
+        .perfect-wheel-canvas {
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+        }
+
+        .wheel-center-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
             font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'KaiTi', 'STKaiTi', serif !important;
+            border: 3px solid #fff;
+            line-height: 1;
+        }
+
+        .wheel-center-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .wheel-center-btn:active {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        /* 情绪详细说明 */
+        .mood-detail {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            margin: 25px auto;
+            max-width: 95%;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .detail-title {
+            font-size: 1.6em;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 12px;
+        }
+
+        .detail-scenario {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #555;
+            margin: 10px 0;
+            padding: 0 5px;
+            text-align: center;
+        }
+
+        .detail-scenario strong {
             color: var(--gold);
         }
-        #inspiration {
-            font-size: 1.3em;
-            line-height: 1.8;
-            margin: 25px 0;
+
+        .mood-detail.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
-        .btn {
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-title {
+            font-size: 1.6em;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+        }
+
+        .detail-scenario {
+            font-size: 1.1em;
+            line-height: 1.9;
+            color: #555;
+            margin: 15px 0;
+        }
+
+        .detail-scenario strong {
+            color: var(--gold);
+        }
+
+        /* 推荐内容卡片 */
+        .recommendation-card {
+            background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%);
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .rec-type {
+            font-size: 1.2em;
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .rec-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .rec-content a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent);
+        }
+
+        .rec-content a:hover {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .mood-categories {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .mood-card {
+                padding: 18px;
+            }
+
+            .wheel-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .mood-icon {
+                font-size: 2em;
+            }
+
+            .mood-title {
+                font-size: 1.2em;
+            }
+
+            .mood-desc {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mood-categories {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1000px;
+            }
+
+            .wheel-container {
+                width: 320px;
+                height: 320px;
+            }
+        }
+
+        /* 提示信息 */
+        .hint-text {
+            text-align: center;
+            font-size: 1.05em;
+            color: #777;
+            margin: 15px 0;
+            font-style: italic;
+            padding: 0 20px;
+        }
+
+        /* 隐藏元素的初始状态 */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 按钮样式 */
+        .spin-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 18px 40px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             font-family: 'KaiTi', 'STKaiTi', serif !important;
-            font-size: 1.2em !important;
-            font-weight: bold !important;
+        }
+
+        .spin-btn:hover {
+            background: #6f8a80;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .spin-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 重新选择按钮 */
+        .reset-btn {
+            background: var(--gold);
+            margin-top: 20px;
+        }
+
+        .reset-btn:hover {
+            background: #a8865a;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>古風決策指引</h1>
-        <p style="font-size:1.3em; margin:15px 0;">當選擇困難時，讓古人給您一個答案</p>
+        <h1>情緒轉盤</h1>
+        <p style="font-size:1.3em; margin:15px 0;">選擇您當前的心境，讓古人與老歌指引您</p>
     </header>
 
     <main>
-        <div class="card">
-            <p class="intro-text">深夜猶豫今晚聽哪首伍佰？<br>週末不知去哪散心？<br>工作、生活、感情…任何難以決定的時刻，</p>
-            <p class="intro-text">讓這座古風轉盤，<br>像一首老歌一樣，輕輕推您向前。</p>
-
-            <p class="song-hint">挪威的森林、淚橋、晚風、突然的自我、世界第一等……<br>那些懂您的歌，都在這裡。</p>
-
-            <p style="margin:30px 0;">請在下方輸入您的選項，每行一個（2~6個最佳）</p>
-
-            <textarea id="user-options" placeholder="例如：&#10;聽挪威的森林&#10;聽淚橋&#10;聽晚風&#10;出去走走&#10;留在家休息&#10;早點睡覺"></textarea>
-
-            <button class="btn" onclick="generateWheel()">生成指引轉盤</button>
-
-            <div id="options-input" style="display:none;">
-                <p>您的選項：</p>
-                <div id="options-list"></div>
-                <button class="btn" onclick="startSpin()">開始轉動</button>
+        <!-- 情绪分类选择 -->
+        <div class="mood-categories" id="moodCategories">
+            <div class="mood-card" data-mood="night-emo">
+                <span class="mood-icon">🌙</span>
+                <h3 class="mood-title">深夜emo</h3>
+                <p class="mood-desc">深夜難眠，思念涌上心頭</p>
+            </div>
+            <div class="mood-card" data-mood="choice-difficulty">
+                <span class="mood-icon">⚖️</span>
+                <h3 class="mood-title">選擇困難</h3>
+                <p class="mood-desc">糾結猶豫，不知道該怎麼選</p>
+            </div>
+            <div class="mood-card" data-mood="work-pressure">
+                <span class="mood-icon">💼</span>
+                <h3 class="mood-title">工作壓力</h3>
+                <p class="mood-desc">焦慮疲憊，職場上的壓力</p>
+            </div>
+            <div class="mood-card" data-mood="life-confused">
+                <span class="mood-icon">🧭</span>
+                <h3 class="mood-title">生活迷茫</h3>
+                <p class="mood-desc">方向不明，找不到人生目標</p>
+            </div>
+            <div class="mood-card" data-mood="nostalgia">
+                <span class="mood-icon">📜</span>
+                <h3 class="mood-title">懷舊傷感</h3>
+                <p class="mood-desc">回憶往事，想念過去時光</p>
+            </div>
+            <div class="mood-card" data-mood="mood-low">
+                <span class="mood-icon">🌧️</span>
+                <h3 class="mood-title">情緒低落</h3>
+                <p class="mood-desc">沮喪無力，提不起精神</p>
+            </div>
+            <div class="mood-card" data-mood="weekend-bored">
+                <span class="mood-icon">🛋️</span>
+                <h3 class="mood-title">週末無聊</h3>
+                <p class="mood-desc">空虛無聊，不知道做什麼</p>
+            </div>
+            <div class="mood-card" data-mood="commute-anxious">
+                <span class="mood-icon">🚇</span>
+                <h3 class="mood-title">通勤焦慮</h3>
+                <p class="mood-desc">通勤路上，心情煩躁不安</p>
             </div>
         </div>
 
-        <div id="wheel-container" style="display:none;">
-            <div id="pointer"></div>
-            <canvas id="wheel" width="340" height="340"></canvas>
+        <p class="hint-text" id="hintText">請先選擇您的當前情緒狀態</p>
+
+        <!-- 情绪详细说明 -->
+        <div class="mood-detail" id="moodDetail">
+            <h2 class="detail-title" id="detailTitle"></h2>
+            <div id="detailContent"></div>
+
+            <!-- 转盘区域 -->
+            <div class="wheel-container hidden" id="wheelContainer"></div>
         </div>
 
-        <div class="card" id="result-card">
-            <h3>古風指引：</h3>
-            <p id="final-choice"></p>
-            <p id="inspiration"></p>
-            <button class="btn" id="share-btn" onclick="shareResult()">分享這份指引</button>
-            <button class="btn" onclick="resetWheel()" style="margin-top:10px; background:#666;">重新指引</button>
+        <!-- 推荐结果 -->
+        <div class="mood-detail" id="resultSection">
+            <h2 class="detail-title">🎡 古風指引為您推薦</h2>
+            <div id="recommendations"></div>
+            <button class="spin-btn reset-btn" onclick="resetSelection()">重新選擇情緒</button>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="mood-detail" style="display: block; margin-top: 50px;">
+            <h2 class="detail-title">📖 使用說明</h2>
+            <p class="detail-scenario">1. <strong>選擇情緒</strong>：點擊上方最符合您當前心境的卡片</p>
+            <p class="detail-scenario">2. <strong>了解情境</strong>：閱讀該情緒的詳細場景說明</p>
+            <p class="detail-scenario">3. <strong>轉動轉盤</strong>：點擊轉盤按鈕，獲得隨機療癒建議</p>
+            <p class="detail-scenario">4. <strong>獲得指引</strong>：查看推薦的老歌、古風建議和古人故事</p>
+            <p class="detail-scenario" style="margin-top: 20px; text-align: center; font-style: italic;">
+                這不是心理諮詢，只是一個幫您找到共鳴的小工具。
+            </p>
         </div>
 
     </main>
@@ -178,155 +445,389 @@
         <a href="index.html">🏠</a>
         <a href="sign.html">🀄</a>
         <a href="mood.html" class="active">🎡</a>
-		<a href="woobai.html">🎵</a>
+        <a href="woobai.html">🎵</a>
         <a href="ancient.html">📜</a>
         <a href="test.html">🧪</a>
-		<a href="prompt.html">✨</a>
+        <a href="prompt.html">✨</a>
     </nav>
 
-    <!-- 音效檔案 -->
-    <audio id="spin-sound" loop preload="auto">
-        <source src="sounds/spin.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="success-sound" preload="auto">
-        <source src="sounds/success.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
-        let options = [];
-        let canvas, ctx;
-        let spinning = false;
-        let spinAudio, successAudio;
-
-        const inspirations = [
-            "長風破浪會有時，直掛雲帆濟滄海。——跟隨內心，勇往直前。",
-            "人生如逆旅，我亦是行人。——蘇軾 這條路雖難，亦是必經。",
-            "山重水複疑無路，柳暗花明又一村。——轉角處自有驚喜。",
-            "天生我材必有用，千金散盡還復來。——李白 每條路都值得一試。",
-            "海到無邊天作岸，山登絕頂我為峰。——您已站在最高處。",
-            "舉杯邀明月，對影成三人。——孤獨時，也要好好愛自己。",
-            "莫聽穿林打葉聲，何妨吟嘯且徐行。——從容面對，一切皆安。",
-            "一簾幽夢任平生。——像一首老歌，跟隨內心，那便是最好的歸宿。"
-        ];
-
-        window.onload = function() {
-            spinAudio = document.getElementById('spin-sound');
-            successAudio = document.getElementById('success-sound');
+        // 情绪数据
+        const moodData = {
+            'night-emo': {
+                title: '深夜emo',
+                scenarios: [
+                    '凌晨兩點，突然想聽伍佰的《挪威的森林》',
+                    '躺在床上，翻來覆去無法入眠',
+                    '手機刷了又刷，卻什麼都不想看',
+                    '突然想起某個人、某段往事',
+                    '覺得全世界都睡了，只有自己醒著'
+                ],
+                wheelOptions: [
+                    '聽伍佰', '聽羅文', '聽李宗盛', '聽張雨生',
+                    '看古人歪說', '抽支籤', '去睡覺', '寫下心事'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《挪威的森林》《淚橋》《晚風》，深夜單曲循環最適合'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的趙匡胤陳橋兵變，看看古人如何面對人生的突然變化'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '帶上耳機，戴上降噪，讓音樂陪伴你。不強迫自己入睡，允許自己有這個emo時刻。明天又是新的一天。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「無心過問妳的心裡我的吻，厭倦我的虧欠代替妳所愛的人」——有時候，放手也是一種溫柔'
+                    }
+                ]
+            },
+            'choice-difficulty': {
+                title: '選擇困難',
+                scenarios: [
+                    '兩個工作機會，不知道該選哪個',
+                    '週末想出去，卻不知道該去哪裡',
+                    '想吃什麼想很久，最後點了跟上次一樣的',
+                    '買房子、換工作，人生大事不敢決定',
+                    '總是擔心選錯了，後悔一輩子'
+                ],
+                wheelOptions: [
+                    '跟隨直覺', '問朋友', '先做一個', '都不選',
+                    '睡醒再決定', '轉盤決定', '列出優缺點', '相信命運'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《突然的自我》，「揮揑灑灑，將自然看通透」——有時候太理性反而迷失'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的宋徽宗，有時候選擇放棄藝術去治理國家，反而是最壞的選擇'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '給自己一個時限，比如10分鐘做決定。如果10分鐘決定不了，就選第一個想到的。猶豫不決本身就是一種決定。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「聽見你說，朝陽起又落，晴雨難測，道路是腳步多」——人生本來就充滿不確定，接受這點就輕鬆了'
+                    }
+                ]
+            },
+            'work-pressure': {
+                title: '工作壓力',
+                scenarios: [
+                    '老闆今天又罵了，心裡憋屈',
+                    '項目快到期限了，焦慮得睡不着',
+                    '同事勾心鬥角，覺得累',
+                    '這份工作做了好幾年，越來越沒成就感',
+                    '覺得自己被壓榨，又不敢辭職'
+                ],
+                wheelOptions: [
+                    '深呼吸', '聽老歌', '找朋友喝酒', '運動一下',
+                    '睡一覺', '辭職算了', '找老闆談', '先苟著'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《世界第一等》，「一杯酒兩角銀，三不五時嘛來湊陣」——有情有義才是真的'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的辛棄疾，壯志難酬卻依然堅持，至少你有選擇'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '工作只是生活的一部分，不是全部。給自己設定一個離職倒計時，或者一個具體目標。有了期限，壓力就減半了。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「人生的環境，乞食嘛會出頭天，莫怨天莫尤人，命順命歹攏是一生」——命運靠自己走出來'
+                    }
+                ]
+            },
+            'life-confused': {
+                title: '生活迷茫',
+                scenarios: [
+                    '不知道自己想成為什麼樣的人',
+                    '感覺生活每天都在重複，沒意思',
+                    '看到別人都成功了，自己卻原地踏步',
+                    '不知道該往哪個方向努力',
+                    '覺得自己這輩子可能就這樣了'
+                ],
+                wheelOptions: [
+                    '設定小目標', '學個新技能', '去旅行', '見新朋友',
+                    '寫下遺憾', '問自己三問', '隨遇而安', '先活好今天'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《浪人情歌》，「離開真的殘酷嗎，或者溫柔更殘酷」——迷茫的時候，先別急著做決定'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的蘇軾，從朝堂高官到貶謫黃州，卻活出了第二人生'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '迷茫是好事，說明你還想改變。從今天開始，每天做一件以前沒做過的事。哪怕只是換條路回家，也是突破。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「我只是行走在黑夜的旅人，用我疲憊的雙腳慢慢的尋找」——找不到方向時，先走起來就是方向'
+                    }
+                ]
+            },
+            'nostalgia': {
+                title: '懷舊傷感',
+                scenarios: [
+                    '突然想起年輕時的自己',
+                    '翻到老照片，發現朋友們都漸行漸遠',
+                    '聽到某首老歌，眼淚就止不住',
+                    '想念以前簡單快樂的日子',
+                    '覺得現在的生活，不如從前'
+                ],
+                wheelOptions: [
+                    '聽老歌', '見老朋友', '去老地方', '寫回憶',
+                    '看舊照片', '好好過今天', '接受時光', '創造新回憶'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《晚風》，「晚風輕拂澎湖灣，白浪逐沙灘」——回憶雖美，但也要活在當下'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的李煜，沉溺回憶反而最痛苦。有時候放下，才是對過去最好的告別'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '懷舊很正常，但別讓回憶困住你。給老朋友打個電話，或者去那個老地方看看。你會發現，現在的生活也不錯。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「那時候的月光，照在我臉上，讓我看見，這輩子最美的模樣」——記住最美的，其他的就放下吧'
+                    }
+                ]
+            },
+            'mood-low': {
+                title: '情緒低落',
+                scenarios: [
+                    '最近總是提不起精神',
+                    '感覺什麼都沒意思，不想動',
+                    '容易疲勞，睡眠也不好',
+                    '對以前喜歡的事也沒興趣了',
+                    '覺得自己很失敗'
+                ],
+                wheelOptions: [
+                    '運動一下', '見陽光', '找人聊天', '吃點好吃的',
+                    '睡覺', '聽音樂', '看搞笑片', '寫下感受'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《痛哭的人》，「痛哭的人不能在家裡痛哭，只好走上街頭」——難受就讓它出來，別憋著'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的陸秀夫，人生最後一刻依然有選擇權，你也可以'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '低落時別逼自己振作，允許自己這樣過幾天。但記得吃好睡好，出門見見陽光。如果持續超過兩週，建議找專業諮詢師聊聊。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「寂寞的人，總是習慣寂寞的安穩，至少我們直線，曾經交叉過」——即使現在不順，回憶裡也有過美好'
+                    }
+                ]
+            },
+            'weekend-bored': {
+                title: '週末無聊',
+                scenarios: [
+                    '週末兩天，不知道該怎麼過',
+                    '不想工作，但也不想出門',
+                    '刷手機刷到眼睛疼，還是很無聊',
+                    '想約朋友，但不知道約誰',
+                    '覺得週末比上班還累'
+                ],
+                wheelOptions: [
+                    '去公園', '看部電影', '整理房間', '學個新菜',
+                    '睡個懶覺', '聽老歌', '逛書店', '什麼都不做'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '羅文《滿江紅》，聽點激昂的，把無聊踢走'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '看看 <a href="ancient.html">古人歪說錄</a> 中的古人，他們沒有手機、沒有wifi，卻過得很精彩。你也可以試試'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '無聊是因為太依賴外部刺激。試試「數字排毒」，關掉手機半天。或者做一件以前想做但沒時間的事，比如學做一道菜。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「揮揑灑灑，將自然看通透」——有時候什麼都不做，也是一種週末'
+                    }
+                ]
+            },
+            'commute-anxious': {
+                title: '通勤焦慮',
+                scenarios: [
+                    '地鐵擠得窒息，心情很差',
+                    '堵在路上，又遲到了',
+                    '想到要上班，就不想起床',
+                    '通勤路上想著工作，心情沉重',
+                    '覺得通勤浪費生命'
+                ],
+                wheelOptions: [
+                    '聽音樂', '聽podcast', '看本書', '冥想',
+                    '觀察路人', '規劃週末', '什麼都不想', '早點起床'
+                ],
+                recommendations: [
+                    {
+                        type: '🎵 老歌推薦',
+                        content: '伍佰《世界第一等》，讓音樂把通勤變成演唱會'
+                    },
+                    {
+                        type: '📜 古人歪說',
+                        content: '古人趕考一走就是幾個月，想想他們，你的通勤其實不算什麼'
+                    },
+                    {
+                        type: '🎯 療癒建議',
+                        content: '把通勤時間當作「中場休息」，而不是「上班前奏」。聽聽音樂、看本書，或者什麼都不想，享受這段獨處時間。'
+                    },
+                    {
+                        type: '💭 伍佰金句',
+                        content: '「人生的風景，親像大海的風湧，有時猛有時平」——堵車也是人生風景的一部分，別跟自己過不去'
+                    }
+                ]
+            }
         };
 
-        function generateWheel() {
-            const input = document.getElementById('user-options').value.trim();
-            if (!input) { 
-                alert('請至少輸入兩個選項～'); 
-                return; 
-            }
-            options = input.split('\n').map(s => s.trim()).filter(s => s);
-            if (options.length < 2 || options.length > 6) { 
-                alert('請輸入 2~6 個選項哦～'); 
-                return; 
-            }
+        let selectedMood = null;
+        let moodWheel = null;
+        let currentMoodData = null;
 
-            const list = document.getElementById('options-list');
-            list.innerHTML = '';
-            options.forEach(opt => {
-                const tag = document.createElement('span');
-                tag.className = 'option-tag';
-                tag.textContent = opt;
-                list.appendChild(tag);
+        // 初始化情绪卡片点击事件
+        document.querySelectorAll('.mood-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 移除所有卡片的选中状态
+                document.querySelectorAll('.mood-card').forEach(c => c.classList.remove('selected'));
+                
+                // 添加当前卡片的选中状态
+                this.classList.add('selected');
+                
+                // 获取情绪数据
+                const mood = this.getAttribute('data-mood');
+                selectedMood = mood;
+                
+                // 显示情绪详细说明
+                showMoodDetail(mood);
+            });
+        });
+
+        // 显示情绪详细说明
+        function showMoodDetail(mood) {
+            const data = moodData[mood];
+            const detailSection = document.getElementById('moodDetail');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailContent = document.getElementById('detailContent');
+            const wheelContainer = document.getElementById('wheelContainer');
+            const hintText = document.getElementById('hintText');
+            const resultSection = document.getElementById('resultSection');
+
+            // 设置标题
+            detailTitle.textContent = data.title;
+
+            // 生成场景说明
+            let scenariosHtml = '<h3 style="color: var(--gold); margin: 20px 0 15px; font-size: 1.3em;">這些情況熟悉嗎？</h3>';
+            data.scenarios.forEach((scenario, index) => {
+                scenariosHtml += `<p class="detail-scenario"><strong>${index + 1}.</strong> ${scenario}</p>`;
+            });
+            detailContent.innerHTML = scenariosHtml;
+
+            // 显示元素
+            detailSection.classList.add('show');
+            wheelContainer.classList.remove('hidden');
+            hintText.textContent = '點擊轉盤按鈕，獲得療癒指引';
+
+            // 隐藏结果区域
+            resultSection.classList.remove('show');
+            resultSection.style.display = 'none';
+
+            // 保存当前情绪数据
+            currentMoodData = data;
+
+            // 滚动到情绪详细说明
+            detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 创建新的转盘
+            if (moodWheel) {
+                moodWheel.reset();
+            }
+            moodWheel = new MoodWheel('wheelContainer', data.wheelOptions, (result) => {
+                showRecommendations(data, result);
+            });
+        }
+
+        // 显示推荐结果
+        function showRecommendations(data, wheelResult) {
+            const resultSection = document.getElementById('resultSection');
+            const recommendations = document.getElementById('recommendations');
+
+            // 生成推荐内容
+            let recHtml = `
+                <div class="recommendation-card" style="background: linear-gradient(135deg, #ffe6d9 0%, #fff 100%); border-left-color: var(--accent);">
+                    <div class="rec-type">🎯 轉盤指引</div>
+                    <div class="rec-content" style="font-size: 1.3em; font-weight: bold; color: var(--accent);">${wheelResult}</div>
+                </div>
+            `;
+
+            data.recommendations.forEach(rec => {
+                recHtml += `
+                    <div class="recommendation-card">
+                        <div class="rec-type">${rec.type}</div>
+                        <div class="rec-content">${rec.content}</div>
+                    </div>
+                `;
             });
 
-            document.getElementById('options-input').style.display = 'block';
-            document.getElementById('wheel-container').style.display = 'block';
-            drawWheel();
+            recommendations.innerHTML = recHtml;
+            resultSection.style.display = 'block';
+            resultSection.classList.add('show');
         }
 
-        function drawWheel() {
-            canvas = document.getElementById('wheel');
-            ctx = canvas.getContext('2d');
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = canvas.width / 2 - 25;
+        // 重置选择
+        function resetSelection() {
+            // 移除所有选中状态
+            document.querySelectorAll('.mood-card').forEach(c => c.classList.remove('selected'));
 
-            const colors = ['#f5f0e8', '#ece6de', '#e3dcd4', '#dad3ca', '#d1cac0', '#c8c1b6'];
-            const segmentAngle = (2 * Math.PI) / options.length;
+            // 隐藏详细说明和结果
+            document.getElementById('moodDetail').classList.remove('show');
+            document.getElementById('resultSection').classList.remove('show');
+            document.getElementById('resultSection').style.display = 'none';
 
-            options.forEach((option, i) => {
-                const startAngle = i * segmentAngle - Math.PI / 2;
-                const endAngle = (i + 1) * segmentAngle - Math.PI / 2;
-
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-                ctx.closePath();
-                ctx.fillStyle = colors[i % colors.length];
-                ctx.fill();
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 6;
-                ctx.stroke();
-
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(startAngle + segmentAngle / 2);
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = '#333';
-                ctx.font = 'bold 20px KaiTi, STKaiTi, serif';
-                ctx.fillText(option.substring(0, 10), radius / 2 + 5, 0);
-                ctx.restore();
-            });
-        }
-
-        function startSpin() {
-            if (spinning) return;
-            spinning = true;
-            document.querySelectorAll('button').forEach(b => b.disabled = true);
-
-            const winningIndex = Math.floor(Math.random() * options.length);
-            const segmentAngleDeg = 360 / options.length;
-            const randomOffset = (Math.random() - 0.5) * segmentAngleDeg * 0.5;
-            const exactTarget = (winningIndex * segmentAngleDeg) + (segmentAngleDeg / 2) + randomOffset;
-            const spins = 5 + Math.random();
-            const animationFinal = exactTarget + spins * 360;
-
-            // 轉動音效
-            if (spinAudio) {
-                spinAudio.currentTime = 0;
-                spinAudio.play().catch(() => {});
+            // 重置转盘
+            if (moodWheel) {
+                moodWheel.reset();
             }
 
-            canvas.style.transition = 'transform 5.2s cubic-bezier(0.22, 0.68, 0.35, 1)';
-            canvas.style.transform = `rotate(${animationFinal}deg)`;
+            // 重置提示文本
+            document.getElementById('hintText').textContent = '請先選擇您的當前情緒狀態';
 
-            setTimeout(() => {
-                // 停止轉動音效
-                if (spinAudio) spinAudio.pause();
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                // 播放成功音效
-                if (successAudio) {
-                    successAudio.currentTime = 0;
-                    successAudio.play().catch(() => {});
-                }
-
-                // 強制校正最終位置（這一步保證100%一致）
-                canvas.style.transition = 'none';
-                canvas.style.transform = `rotate(${exactTarget}deg)`;
-
-                document.getElementById('final-choice').textContent = options[winningIndex];
-                document.getElementById('inspiration').textContent = inspirations[Math.floor(Math.random() * inspirations.length)];
-                document.getElementById('result-card').style.display = 'block';
-                spinning = false;
-                document.querySelectorAll('button').forEach(b => b.disabled = false);
-            }, 5400);
-        }
-
-        function resetWheel() { 
-            location.reload(); 
-        }
-
-        function shareResult() {
-            const choice = document.getElementById('final-choice').textContent || '這份指引';
-            const text = `古風指引給了我答案：${choice} 🍃 像一首伍佰的老歌，跟隨內心。`;
-            prompt('複製以下文字，分享到微信或朋友圈：', text + '\n\nhttps://jasyooc.com/mood.html');
+            selectedMood = null;
+            currentMoodData = null;
         }
     </script>
 </body>

@@ -4,119 +4,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>伍佰歌詞療癒錄 - 江湖禪心｜挪威的森林淚橋晚風深夜共鳴</title>
-    <meta name="description" content="伍佰《挪威的森林》《淚橋》《世界第一等》《突然的自我》歌詞深度解讀，中年男人深夜聽歌時的療癒共鳴，古風歪說版。">
-    <meta name="keywords" content="伍佰,挪威的森林,淚橋,晚風,世界第一等,突然的自我,情緒療癒,中年男人懷舊,深夜聽歌">
+    <meta name="description" content="伍佰《挪威的森林》《淚橋》《世界第一等》《突然的自我》《Last Dance》《浪人情歌》《痛哭的人》《白鴿》《晚風》《愛情的盡頭》歌詞深度解讀，中年男人深夜聽歌時的療癒共鳴。">
+    <meta name="keywords" content="伍佰,挪威的森林,淚橋,晚風,世界第一等,突然的自我,Last Dance,浪人情歌,痛哭的人,白鴿,愛情的盡頭,情緒療癒,中年男人懷舊,深夜聽歌">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/favicon.png">
     <link rel="canonical" href="https://jasyooc.com/woobai.html">
     <link rel="stylesheet" href="css/style.css">
     <style>
-    body {
-        font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-        -webkit-font-smoothing: antialiased;
-    }
-    h1, h2, h3 {
-        font-family: 'KaiTi', 'STKaiTi', serif !important;
-        letter-spacing: 2px;
-    }
-    h1 {
-        font-size: 2.2em;
-        font-weight: bold;
-    }
-    .intro-text {
-        font-size: 1.2em;
-        line-height: 1.8;
-        margin: 20px 0;
-        color: #555;
-        text-align: center;
-    }
-
-    /* 關鍵：卡片寬度與 ancient.html 完全一致 */
-    .card {
-        background: white;
-        margin: 35px auto;
-        max-width: 90%;
-        border-radius: 16px;
-        padding: 35px;
-        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-
-    .song-title {
-        font-size: 1.9em; /* 與 ancient.html story-title 一致 */
-        color: var(--gold);
-        margin-bottom: 25px;
-    }
-    .lyrics {
-        font-size: 1.3em;
-        line-height: 2.1;
-        color: var(--accent);
-        margin: 35px 0;
-        font-style: italic;
-        font-weight: bold;
-    }
-    .insight {
-        font-size: 1.2em;
-        line-height: 1.9;
-        margin: 25px 0;
-        color: #444;
-    }
-    .history-link {
-        font-size: 1.1em;
-        color: #777;
-        margin: 20px 0;
-    }
-
-    /* 手機端優化（與 ancient.html 同步） */
-    @media (max-width: 768px) {
-        .song-title {
-            font-size: 1.7em;
+        /* ==================== CSS 優化版本 ==================== */
+        
+        /* 1. 全局字体设置 - 统一管理 */
+        body {
+            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .lyrics {
-            font-size: 1.15em;
-            line-height: 1.9;
-        }
-        .insight {
-            font-size: 1.1em;
-        }
-        .card {
-            padding: 28px;
-            margin: 25px auto;
-            max-width: 92%;
-        }
-    }
 
-    /* 桌面端歌名稍大 */
-    @media (min-width: 769px) {
+        h1, h2, h3, h4, h5, h6 {
+            font-family: inherit;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* 2. 卡片基础样式 - 统一管理所有卡片 */
+        .card,
+        .intro-card,
+        .song-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            margin: 35px auto;
+            padding: 35px;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
+
+        /* 3. 引导文案卡片 */
+        .intro-card {
+            text-align: center;
+            background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%);
+        }
+
+        .intro-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+            margin: 15px 0;
+        }
+
+        /* 4. 歌曲卡片样式 */
+        .song-card {
+            text-align: center;
+        }
+
         .song-title {
             font-size: 1.9em;
+            color: var(--gold);
+            margin: 0 0 25px 0;
         }
-    }
-	
-	.lyrics {
-    font-size: 1.25em;
-    line-height: 2.2;
-    color: var(--accent);
-    margin: 35px 0;
-    font-style: normal;
-    white-space: pre-wrap;
-    font-family: 'KaiTi', 'STKaiTi', serif !important;
-    text-align: left;
-    padding: 20px;
-    background: #f8f5f0;
-    border-radius: 12px;
-    overflow-x: auto;
-}
 
-@media (max-width: 768px) {
-    .lyrics {
-        font-size: 1.15em;
-        line-height: 2;
-        padding: 15px;
-    }
-}
-</style>
+        .lyrics {
+            font-size: 1.25em;
+            line-height: 2.2;
+            color: var(--accent);
+            background: #f8f5f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 35px 0;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+
+        .insight {
+            font-size: 1.2em;
+            line-height: 1.9;
+            color: #444;
+            margin: 25px 0;
+        }
+
+        .history-link {
+            font-size: 1.1em;
+            color: #777;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .history-link a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .history-link a:hover {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* 5. YouTube 按钮样式 */
+        .youtube-btn {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .youtube-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        /* 6. 响应式设计 - 平板 (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .card,
+            .intro-card,
+            .song-card {
+                max-width: 85%;
+                padding: 30px;
+            }
+
+            .song-title {
+                font-size: 1.8em;
+            }
+
+            .lyrics {
+                font-size: 1.2em;
+                line-height: 2;
+                padding: 18px;
+            }
+        }
+
+        /* 7. 响应式设计 - 手机 (<768px) */
+        @media (max-width: 768px) {
+            .card,
+            .intro-card,
+            .song-card {
+                max-width: 95%;
+                padding: 25px 20px;
+                margin: 20px auto;
+            }
+
+            .intro-text {
+                font-size: 1.1em;
+                line-height: 1.7;
+            }
+
+            .song-title {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+            }
+
+            .lyrics {
+                font-size: 1.1em;
+                line-height: 2;
+                padding: 15px;
+                margin: 25px 0;
+            }
+
+            .insight {
+                font-size: 1.05em;
+                line-height: 1.8;
+            }
+
+            .history-link {
+                font-size: 1em;
+            }
+
+            .youtube-btn {
+                font-size: 1.1em;
+                padding: 12px 30px;
+            }
+        }
+
+        /* 8. 响应式设计 - 大屏幕 (>1024px) */
+        @media (min-width: 1025px) {
+            .card,
+            .intro-card,
+            .song-card {
+                max-width: 900px;
+                padding: 40px 50px;
+            }
+
+            .lyrics {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* 9. 打印样式优化 */
+        @media print {
+            .youtube-btn,
+            nav,
+            footer {
+                display: none;
+            }
+
+            .card,
+            .song-card {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -125,126 +226,233 @@
     </header>
 
     <main>
-        <div class="card">
+        <!-- 引导文案 -->
+        <div class="intro-card">
             <p class="intro-text">那些年，我們在挪威的森林裡迷路，<br>在淚橋上站了太久，<br>被晚風吹得清醒又迷茫。</p>
             <p class="intro-text">伍佰的歌，從來不講大道理，<br>只是把中年男人的無奈、灑脫、遺憾、堅持，<br>唱得我們心照不宣。</p>
-            <p class="intro-text">以下五首經典，配深夜共鳴與古人歪說，<br>願你聽完，像抽了一支上籤。</p>
+            <p class="intro-text">以下十首經典，配深夜共鳴與古人歪說，<br>願你聽完，像抽了一支上籤。</p>
         </div>
 
-        <!-- 歌1：挪威的森林 -->
-<div class="card">
-    <h2 class="song-title">挪威的森林</h2>
-    
-    <pre class="lyrics">讓我將妳心兒摘下 試著將它慢慢溶化 看我在妳心中是否仍完美無暇
+        <!-- 歌曲1：挪威的森林 -->
+        <article class="song-card">
+            <h2 class="song-title">挪威的森林</h2>
+            
+            <pre class="lyrics">讓我將妳心兒摘下 試著將它慢慢溶化 看我在妳心中是否仍完美無暇
 是否依然為我絲絲牽掛 依然愛我無法自拔 心中是否有我未曾到過的地方啊
 那裡湖面總是澄清 那裡空氣充滿寧靜 雪白明月照在大地 藏著妳不願提起的回憶
 妳說真心總是可以從頭 真愛總是可以長久 為何妳的眼神還有孤獨時的落寞
 是否我只是妳一種寄託 填滿妳感情的缺口 心中那片森林何時能讓我停留
 那裡湖面總是澄清 那裡空氣充滿寧靜 雪白明月照在大地 藏著妳最深處的秘密
 或許我 不該問 讓妳平靜的心再起漣漪 只是愛妳的心超出了界限 我想擁有妳所有一切
-應該是 我不該問 不該讓妳再將往事重提 只是心中枷鎖 該如何才能解脫
-
-（重複副歌）
-讓我將妳心兒摘下 試著將它慢慢溶化 看我在妳心中是否仍完美無暇
-是否依然為我絲絲牽掛 依然愛我無法自拔 心中是否有我未曾到過的地方啊
-那裡湖面總是澄清 那裡空氣充滿寧靜 雪白明月照在大地 藏著妳最深處的祕密
-或許我 不該問 讓妳平靜的心再起漣 只是愛妳的心超出了界限 我想擁有妳所有一切
 應該是 我不該問 不該讓妳再將往事重提 只是心中枷鎖 該如何才能解脫</pre>
 
-    <p class="insight">這首歌最懂的，是「放不下又不得不放」的感覺。<br>
+            <p class="insight">這首歌最懂的，是「放不下又不得不放」的感覺。<br>
 中年男人總有幾段往事，埋了又挖，挖了又埋。<br>
 不是不灑脫，是太懂「有些人錯過了就是一輩子」。<br>
 那片挪威的森林，其實藏在每個人心底最深處，<br>
 湖水再澄清，也映得出當年的自己。</p>
 
-    <p class="history-link">古人歪說版：沉迷藝術與享樂，忽略現實危機，最終一無所有——
+            <p class="history-link">古人歪說版：沉迷藝術與享樂，忽略現實危機，最終一無所有——
 中年男人最怕的，不是失敗，而是曾經擁有一切卻親手丟掉。<br>
-完整故事看 <a href="ancient.html">古人歪說錄·《建炎的森林》</a></p>
-</div>
+完整故事看 <a href="ancient.html">古人歪說錄·建炎的森林</a></p>
+        </article>
 
-        <!-- 歌2：淚橋 -->
-<div class="card">
-    <h2 class="song-title">淚橋</h2>
-    
-    <pre class="lyrics">無心過問妳的心裡我的吻 厭倦 我的虧欠代替妳所愛的人 這個時候我心落花一樣飄落下來 
-頓時 我的視線失去了色彩 知道妳也一樣不善於表白 想像 妳的相愛編織的謊言懈怠 
-甜美鏡頭竟也落花一樣飄落下來 從此 我的生命變成了塵埃
-寂寞的人 總是習慣寂寞的安穩 至少 我們直線 曾經交叉過 就像站在烈日驕陽大橋上 
-眼淚狂奔滴落在我的臉龐 知道妳也一樣不善於表白 想像 妳的相愛編織的謊言懈怠 
+        <!-- 歌曲2：淚橋 -->
+        <article class="song-card">
+            <h2 class="song-title">淚橋</h2>
+            
+            <pre class="lyrics">無心過問妳的心裡我的吻 厭倦 我的虧欠代替妳所愛的人 
+這個時候我心落花一樣飄落下來 頓時 我的視線失去了色彩 
+知道妳也一樣不善於表白 想像 妳的相愛編織的謊言懈怠 
 甜美鏡頭竟也落花一樣飄落下來 從此 我的生命變成了塵埃
 寂寞的人 總是習慣寂寞的安穩 至少 我們直線 曾經交叉過 
 就像站在烈日驕陽大橋上 眼淚狂奔滴落在我的臉龐</pre>
 
-    <p class="insight">這首歌最戳的，是那種「明明還愛，卻只能遠遠看著」的無力。<br>
+            <p class="insight">這首歌最戳的，是那種「明明還愛，卻只能遠遠看著」的無力。<br>
 中年男人總有幾段感情，像站在大橋上，<br>
 眼淚狂奔，卻過不去那座淚橋。<br>
 不是不善表白，是知道說了也沒用，<br>
 只能讓甜蜜的回憶落花一樣飄落，變成塵埃。</p>
 
-    <p class="history-link">古人歪說版：像趙匡胤陳橋兵變，<br>
-喝醉醒來突然黃袍加身，人生軌跡永遠改變。<br>
-曾經的兄弟情、軍旅夢，像落花一樣飄落，<br>
-從此站在烈日驕陽的大橋上，再也回不去。<br>
-完整故事看 <a href="ancient.html">古人歪說錄·《陳橋兵變》</a></p>
-</div>
+            <p class="history-link">古人歪說版：像趙匡胤陳橋兵變，喝醉醒來突然黃袍加身，人生軌跡永遠改變。<br>
+曾經的兄弟情、軍旅夢，像落花一樣飄落。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·陳橋兵變</a></p>
+        </article>
 
-       <!-- 歌3：世界第一等 -->
-<div class="card">
-    <h2 class="song-title">世界第一等</h2>
-    
-    <pre class="lyrics">人生的風景 親像大海的風湧 有時猛有時平 親愛朋友你著小心 
+        <!-- 歌曲3：世界第一等 -->
+        <article class="song-card">
+            <h2 class="song-title">世界第一等</h2>
+            
+            <pre class="lyrics">人生的風景 親像大海的風湧 有時猛有時平 親愛朋友你著小心 
 人生的環境 乞食嘛會出頭天 莫怨天莫尤人 命順命歹攏是一生
 一杯酒兩角銀 三不五時嘛來湊陣 若要講博感情 我是世界第一等
 是緣份是註定 好漢剖腹來參見 嘸驚風嘸驚湧 有情有義好兄弟
-短短仔的光陰迫逍著少年時 求名利無了時 千金難買好人生
+短短仔的光陰迫逍著少年時 求名利無了時 千金難買好人生</pre>
 
-一杯酒兩角銀 三不五時嘛來湊陣 若要講博感情 我是世界第一等
-是緣份是註定 好漢剖腹來參見 嘸驚風嘸驚湧 有情有義好兄弟
-短短仔的光陰迫逍著少年時 求名利無了時 千金難買好人生
-求名利無了時 千金難買好人生 吧吧吧~~~~~</pre>
+            <p class="insight">這首歌最療癒的，是那種「不求名利，只重義氣」的灑脫。<br>
+中年男人看盡風湧後明白：一杯酒、幾個兄弟，勝過千金。<br>
+人生短暫，求名利無了時，有情有義，才是世界第一等。</p>
+           
+            <p class="history-link">古人歪說版：像蘇軾被貶黃州，從朝堂高官到江湖散人。<br>
+但他反而懂了：一壺濁酒、三五好友，這才是世界第一等的人生。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·蘇軾的世界第一等</a></p>
+        </article>
 
-    <p class="insight">這首歌最療癒的，是那種「不求名利，只重義氣」的灑脫。<br>
-中年男人看盡風湧後明白：<br>
-一杯酒、幾個兄弟，勝過千金。<br>
-人生短暫，求名利無了時，<br>
-有情有義，才是世界第一等。</p>
-   
- <p class="history-link">古人歪說版：像趙匡胤陳橋兵變，<br>
-喝醉醒來突然黃袍加身，人生軌跡永遠改變。<br>
-曾經的兄弟情、軍旅夢，像落花一樣飄落，<br>
-從此站在烈日驕陽的大橋上，再也回不去。<br>
-完整故事看<a href="ancient.html">古人歪說錄·《蘇超第一等》</a></p>
-</div>
-
-        <!-- 歌4：突然的自我 -->
-       <div class="card">
-    <h2 class="song-title">突然的自我</h2>
-    
-    <pre class="lyrics">聽見你說 朝陽起又落 晴雨難測 道路是腳步多 我已習慣 你突然間的自我 
+        <!-- 歌曲4：突然的自我 -->
+        <article class="song-card">
+            <h2 class="song-title">突然的自我</h2>
+            
+            <pre class="lyrics">聽見你說 朝陽起又落 晴雨難測 道路是腳步多 我已習慣 你突然間的自我 
 揮揮灑灑 將自然看通透 那就不要留 時光一過不再有 你遠眺的天空 掛更多的彩虹
-我會緊緊的 將你豪情放在心頭 在寒冬時候 就回憶你溫柔 把開懷填進我的心扉 傷心也是帶著微笑的眼淚
-數不盡相逢 等不完守候 如果僅有此生 又何用待從頭
-（來來來 喝完這一杯還有一杯）
-（再喝完這一杯 還有三杯）
-那就不要留 時光一過不再有 你遠眺的天空 掛更多的彩虹 我會緊緊的 將你豪情放在心頭 
-在寒冬時候 就回憶你溫柔 把開懷填進我的心扉 傷心也是帶著微笑的眼淚
+我會緊緊的 將你豪情放在心頭 在寒冬時候 就回憶你溫柔 
+把開懷填進我的心扉 傷心也是帶著微笑的眼淚
 數不盡相逢 等不完守候 如果僅有此生 又何用待從頭</pre>
 
-    <p class="insight">這首歌最戳的，是「人生總有太多突然」的無奈與灑脫。<br>
-中年男人習慣了突然升職、突然失業、突然孩子長大、突然父母老去……<br>
-像朝陽起又落，晴雨難測。<br>
-學會了揮灑自如，也學會了在寒冬回憶溫柔，<br>
+            <p class="insight">這首歌最戳的，是「人生總有太多突然」的無奈與灑脫。<br>
+中年男人習慣了突然升職、突然失業、突然孩子長大……<br>
+像朝陽起又落，晴雨難測。學會了揮灑自如，也學會了在寒冬回憶溫柔，<br>
 因為時光一過不再有，如果僅有此生，又何必待從頭。</p>
-   
- <p class="history-link">從趙匡胤突然黃袍加身，到宋徽宗突然盛世成空，<br>
+           
+            <p class="history-link">從趙匡胤突然黃袍加身，到宋徽宗突然盛世成空，<br>
 人生最無常的，就是這些「突然的自我」。<br>
-學會接受，學會回憶溫柔，<br>
-因為如果僅有此生，又何必待從頭。<br>
-完整故事看<a href="ancient.html">古人歪說錄·《徽宗的自我》</a></p>
-</div>
-        <div class="card">
-            <p style="font-size:1.3em; line-height:1.8;">今晚你聽哪首伍佰療傷？</p>
-            <p style="font-size:1.1em; color:#777;">留言告訴我們，或轉一轉 <a href="mood.html">古風決策轉盤</a> 讓古人幫你選～</p>
+完整故事看 <a href="ancient.html">古人歪說錄·徽宗的自我</a></p>
+        </article>
+
+        <!-- 歌曲5：Last Dance -->
+        <article class="song-card">
+            <h2 class="song-title">Last Dance</h2>
+            
+            <pre class="lyrics">是否還能再見你 已經不重要 因為今夜我要將你擁抱
+是否能夠說愛你 已經不重要 因為今夜我要對你微笑
+我們曾經相愛過 我們曾經恨過彼此 想著一句話卻說不出口的惶恐
+想起你那溫柔體貼 想起你那美麗笑容 這一切的一切早已經成空
+我只有 我只有 將這首歌唱給你聽 當作最後一支舞
+我只有 我只有 將眼淚擦去心中 當作最後一支舞</pre>
+
+            <p class="insight">這首歌最動人的，是那種「最後一次擁抱」的決絕與溫柔。<br>
+中年男人最懂的，不是歇斯底里的挽留，<br>
+而是明知今夜過後再也不見，卻還要笑著跳完最後一支舞。<br>
+是否還能再見你已不重要，因為今夜，我只想好好記住你的樣子。</p>
+
+            <p class="history-link">古人歪說版：像陸秀夫背著小皇帝跳海前，最後看一眼崖山的夕陽。<br>
+像項羽在烏江邊，最後唱一曲《垓下歌》。明知是最後一次，也要笑著揮別。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·崖山海戰</a></p>
+        </article>
+
+        <!-- 歌曲6：浪人情歌 -->
+        <article class="song-card">
+            <h2 class="song-title">浪人情歌</h2>
+            
+            <pre class="lyrics">離開真的殘酷嗎 或者溫柔更殘酷 或者孤獨的你 死了心
+難道沒有你 我就活不下去 也曾背著你 偷偷的流淚
+其實你真的不錯 只是我已不想要 那些曾經和回憶 讓它封存在心底
+愛著你 想念你 捨不得你 卻必須離開你
+像天空飄著的雲 難以預料的方向 我不是無情的人 我不是冷血動物
+請別這樣看我 我是真心愛過你</pre>
+
+            <p class="insight">這首歌最殘忍的，是「明明還愛，卻必須離開」的撕裂。<br>
+中年男人最懂的，不是不愛了才分開，而是太愛了反而不能在一起。<br>
+像天空飄著的雲，難以預料的方向，<br>
+愛著你、想念你、捨不得你，卻必須離開你。</p>
+
+            <p class="history-link">古人歪說版：像李煜被擄北上前，最後看一眼金陵城。<br>
+像岳飛寫下《滿江紅》後，知道自己回不了前線。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·李煜亡國</a></p>
+        </article>
+
+        <!-- 歌曲7：痛哭的人 -->
+        <article class="song-card">
+            <h2 class="song-title">痛哭的人</h2>
+            
+            <pre class="lyrics">痛哭的人 痛哭的人 在街上痛哭的人
+痛哭的人 痛哭的人 他想要怎樣痛哭
+也許他的心裡有很多苦 也許他有很多想不通的路
+也許今夜他想要一個人獨處 也許此刻他已完全清楚
+痛哭的人不能在家裡痛哭 痛哭的人只好走上街頭
+讓眼淚流下來 讓悲傷出來 讓寂寞的心得到安慰
+痛哭的人 痛哭的人 深夜痛哭的人</pre>
+
+            <p class="insight">這首歌最真實的，是「中年男人也會哭」的坦承。<br>
+不能在家裡哭，怕孩子看見；不能在公司哭，怕同事笑話；<br>
+只好深夜走上街頭，讓眼淚流下來，讓悲傷出來，<br>
+讓寂寞的心得到安慰。明天還要怎樣過？不知道，<br>
+但至少今夜，讓自己好好哭一場。</p>
+
+            <p class="history-link">古人歪說版：像辛棄疾被罷官後，深夜登上京口北固亭，<br>
+看著長江，想著收復失地的夢想，只能獨自痛哭。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·辛棄疾的痛哭</a></p>
+        </article>
+
+        <!-- 歌曲8：白鴿 -->
+        <article class="song-card">
+            <h2 class="song-title">白鴿</h2>
+            
+            <pre class="lyrics">白鴿 白鴿 請你不要跟我走 我並不像你那樣美麗溫柔
+白鴿 白鴿 請你不要跟我走 我並不像你那樣潔白自由
+我只是行走在黑夜的旅人 用我疲憊的雙腳 慢慢的尋找
+尋找一個可以容納我的地方 讓我不再漂泊流浪
+白鴿 白鴿 你飛向遠方 我看著你飛越山川飛越海洋
+白鴿 白鴿 你自由的飛翔 而我只能仰望</pre>
+
+            <p class="insight">這首歌最孤獨的，是「只能仰望，不能飛翔」的無奈。<br>
+中年男人看著年輕人，像看著白鴿，美麗溫柔、潔白自由，<br>
+而自己只是行走在黑夜的旅人，用疲憊的雙腳慢慢尋找，<br>
+一個可以容納自己的地方，讓自己不再漂泊流浪。</p>
+
+            <p class="history-link">古人歪說版：像陶淵明看著歸去來兮的白鴿，知道自己已經回不去官場。<br>
+像杜甫看著秋天的大雁，知道自己已經飛不動了。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·陶淵明的白鴿</a></p>
+        </article>
+
+        <!-- 歌曲9：晚風 -->
+        <article class="song-card">
+            <h2 class="song-title">晚風</h2>
+            
+            <pre class="lyrics">晚風輕拂澎湖灣 白浪逐沙灘 沒有椰林綴斜陽 只是一片海藍藍
+坐在門前的矮牆上 一遍遍懷想 也是黃昏的沙灘上 有著腳印兩對半
+那是外婆拄著杖 將我手輕輕挽 踩著薄暮 走向餘暉 
+溫暖我心窩的 是那隻粗糙的手掌
+啊 澎湖灣 澎湖灣 外婆的澎湖灣</pre>
+
+            <p class="insight">這首歌最溫柔的，是「回不去的童年」的思念。<br>
+中年男人最懂的，不是失去了什麼，<br>
+而是再也回不去那個被外婆牽著手的黃昏。<br>
+晚風輕拂，白浪逐沙灘，溫暖心窩的，是那隻粗糙的手掌，<br>
+和那些再也回不去的時光。</p>
+
+            <p class="history-link">古人歪說版：像蘇軾夢見亡妻，「十年生死兩茫茫，不思量，自難忘」。<br>
+那些回不去的時光，像晚風一樣，輕輕拂過，留下的只有思念。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·蘇軾的晚風</a></p>
+        </article>
+
+        <!-- 歌曲10：愛情的盡頭 -->
+        <article class="song-card">
+            <h2 class="song-title">愛情的盡頭</h2>
+            
+            <pre class="lyrics">我看見你的眼睛 在黑夜裡發亮 像是星星的光芒 卻又比星星更迷茫
+我聽見你的聲音 在風裡輕輕唱 像是海浪的聲音 卻又比海浪更悲傷
+我們走到愛情的盡頭 卻還捨不得放手
+我們走到感情的終點 卻還不願說再見
+也許是我們太倔強 也許是我們太善良
+也許我們只是不想承認 愛情已經到了盡頭</pre>
+
+            <p class="insight">這首歌最痛的，是「走到盡頭還捨不得放手」的執著。<br>
+中年男人最懂的，不是不知道該結束了，<br>
+而是明明知道卻還不願說再見。<br>
+也許是太倔強，也許是太善良，<br>
+也許只是不想承認，愛情已經到了盡頭。</p>
+
+            <p class="history-link">古人歪說版：像李煜寫《虞美人》時，明知道自己已經亡國，<br>
+卻還在懷念「雕欄玉砌應猶在，只是朱顏改」。走到盡頭，還捨不得放手。<br>
+完整故事看 <a href="ancient.html">古人歪說錄·李煜的盡頭</a></p>
+        </article>
+
+        <!-- 結尾卡片 -->
+        <div class="intro-card">
+            <p style="font-size:1.3em; line-height:1.8; font-weight: bold;">今晚你聽哪首伍佰療傷？</p>
+            <p style="font-size:1.1em; color:#777; margin: 20px 0;">
+                每首歌都是一段人生，每段歌詞都是一次共鳴。<br>
+                留言告訴我們或轉一轉 <a href="mood.html">古風決策轉盤</a> 讓古人幫你選～</p>
             <a href="https://www.youtube.com/@TangSongRock" class="youtube-btn" target="_blank">訂閱YouTube，聽更多老歌歪說</a>
         </div>
 
