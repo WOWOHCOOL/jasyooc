@@ -113,38 +113,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             border: 4px solid var(--gold);
             border-radius: 50%;
-        }
-
-        .wheel-center-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 10;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'KaiTi', 'STKaiTi', serif !important;
-            border: 3px solid #fff;
-            line-height: 1;
-        }
-
-        .wheel-center-btn:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-
-        .wheel-center-btn:active {
-            transform: translate(-50%, -50%) scale(0.95);
         }
 
         /* 情绪详细说明 */
@@ -255,6 +224,76 @@
                 grid-template-columns: 1fr;
                 gap: 12px;
             }
+
+            .mood-card {
+                padding: 18px;
+            }
+
+            .wheel-container {
+                width: 280px;
+                height: 280px;
+                margin: 15px auto;
+            }
+
+            .perfect-wheel-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+
+            .perfect-wheel-canvas {
+                width: 280px;
+                height: 280px;
+            }
+
+            .perfect-wheel-canvas:active {
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            .wheel-indicator {
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-top: 25px solid var(--accent);
+            }
+
+            .mood-icon {
+                font-size: 2em;
+            }
+
+            .mood-title {
+                font-size: 1.2em;
+            }
+
+            .mood-desc {
+                font-size: 0.9em;
+            }
+
+            .detail-scenario {
+                font-size: 1em;
+                padding: 0 5px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mood-categories {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1000px;
+            }
+
+            .wheel-container {
+                width: 320px;
+                height: 320px;
+            }
+
+            .perfect-wheel-wrapper {
+                width: 320px;
+                height: 320px;
+            }
+
+            .perfect-wheel-canvas {
+                width: 320px;
+                height: 320px;
+            }
+        }
 
             .mood-card {
                 padding: 18px;
