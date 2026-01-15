@@ -3,136 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>江湖禪心 - 伍佰滿江紅挪威的森林情緒療癒港灣</title>
-    <meta name="description" content="江湖禪心，古風決策轉盤、今日一籤、江湖性格測試、古人歪說錄。專為中年男人提供伍佰、滿江紅、挪威的森林、淚橋等老歌懷舊療癒。深夜難眠、情緒低落時的心靈港灣。">
-    <meta name="keywords" content="伍佰,挪威的森林,淚橋,滿江紅,唐宋搖滾,晚風,鐵血丹心,羅文,李白,岳飛,情緒療癒,中年男人懷舊,古風療癒,深夜聽歌,選擇困難,心靈慰藉">
+    <title>江湖禪心 - 伍佰滿江紅挪威的森林懷舊音樂港灣</title>
+    <meta name="description" content="江湖禪心，古風決策轉盤、今日一籤、江湖性格測試、古人歪說錄。為喜愛懷舊音樂的朋友提供伍佰、滿江紅、挪威的森林、淚橋等經典歌曲欣賞。音樂共鳴娛樂站。">
+    <meta name="keywords" content="伍佰,挪威的森林,淚橋,滿江紅,唐宋搖滾,晚風,鐵血丹心,羅文,李白,岳飛,懷舊音樂,中年男人懷舊,古風娛樂,深夜聽歌,選擇遊戲,音樂分享">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="江湖禪心 - 伍佰滿江紅挪威的森林懷舊音樂港灣">
+    <meta property="og:description" content="古風決策轉盤、今日一籤、江湖性格測試、古人歪說錄。為喜愛懷舊音樂的朋友提供經典歌曲欣賞，音樂共鳴娛樂站。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jasyooc.com/">
+    <meta property="og:image" content="https://jasyooc.com/images/og-home.jpg">
+    <meta property="og:site_name" content="江湖禪心">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="江湖禪心 - 伍佰滿江紅挪威的森林情緒療癒港灣">
+    <meta property="twitter:description" content="古風決策轉盤、今日一籤、江湖性格測試、古人歪說錄。專為中年男人提供懷舊療癒。">
+    <meta property="twitter:image" content="https://jasyooc.com/images/twitter-home.jpg">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/favicon.png">
     <link rel="canonical" href="https://jasyooc.com/">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "江湖禪心",
+        "description": "古風決策轉盤、今日一籤、江湖性格測試、古人歪說錄。專為中年男人提供懷舊療癒。",
+        "url": "https://jasyooc.com/",
+        "inLanguage": "zh-TW",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://jasyooc.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* 基礎 card 樣式（保持原有） */
-        .card, .feature-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px 25px;
-            margin: 20px auto;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-
-        /* 電腦端加寬（大螢幕） */
-        @media (min-width: 1025px) {
-            .feature-card,
-            .recommend-card,
-            .intro-card {
-                max-width: 1000px;
-                margin: 30px auto;
-                padding: 40px 60px;
-                font-size: 1.15em;
-            }
-            
-            .recommend-card {
-                max-width: 1000px;
-                margin-top: 50px;
-            }
-        }
-
-        /* 手機端保持不變（全寬或自動） */
-        @media (max-width: 768px) {
-            .feature-card,
-            .recommend-card,
-            .intro-card {
-                max-width: 100%;
-                margin: 15px 10px;
-                padding: 25px 20px;
-                font-size: 1em;
-            }
-            
-            .recommend-card {
-                margin-top: 30px;
-            }
-        }
-
-        /* hover 效果（電腦專用） */
-        @media (hover: hover) {
-            .feature-card:hover,
-            .recommend-card:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            }
-        }
-
-        /* 強制全站使用楷體，繁體優化 */
-        body {
-            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-            -webkit-font-smoothing: antialiased;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'KaiTi', 'STKaiTi', serif !important;
-            letter-spacing: 2px;
-        }
-        h1 {
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-        h2 {
-            font-size: 1.6em;
-            font-weight: bold;
-            margin: 40px 0 20px;
-            color: var(--gold);
-        }
-        .card h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-        small {
-            font-size: 0.9em;
-            color: #666;
-        }
-        .btn {
-            font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif !important;
-            font-size: 1.2em !important;
-            font-weight: bold !important;
-        }
-        .youtube-btn {
-            font-family: 'KaiTi', 'STKaiTi', serif !important;
-        }
-
-        /* 新增：引導文案樣式 */
-        .intro-card {
-            background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%);
-            border-left: 4px solid var(--gold);
-        }
-        .intro-text {
-            font-size: 1.2em;
-            line-height: 2;
-            color: #444;
-            margin: 15px 0;
-            text-align: left;
-        }
-        .highlight-text {
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-    </style>
+    <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-    <header>
+    <header role="banner">
         <h1>江湖禪心</h1>
-        <p style="font-size:1.3em; margin:15px 0;">唐宋搖滾·滿江紅·挪威的森林·伍佰情緒療癒港灣</p>
+        <p>唐宋搖滾·滿江紅·挪威的森林·伍佰懷舊音樂港灣</p>
         <button class="btn" onclick="location.href='ancient.html'">深夜聽伍佰時，來這裡</button>
     </header>
 
-    <main>
-        <!-- 新增：網站介紹區 -->
+    <main role="main">
+        <!-- 網站介紹區 -->
         <div class="intro-card">
             <p class="intro-text">
                 <span class="highlight-text">深夜兩點，突然想聽伍佰的《挪威的森林》？</span><br>
@@ -140,21 +68,21 @@
                 情緒低落時，想找一首懂你的老歌？
             </p>
             <p class="intro-text">
-                江湖禪心，是一處專為中年男人打造的線上避風港。<br>
+                江湖禪心，是一處為喜愛懷舊音樂朋友打造的線上音樂站。<br>
                 這裡沒有大道理，只有那些年陪我們走過的老歌——<br>
                 伍佰的《淚橋》《晚風》《突然的自我》《世界第一等》，<br>
                 羅文的《滿江紅》《鐵血丹心》《世間始終你好》，<br>
                 李宗盛的《夢醒時分》，張雨生的《大海》……
             </p>
             <p class="intro-text">
-                我們把這些歌詞，配上古人的故事、古風的工具，<br>
-                在你深夜難眠、通勤無聊、選擇困難、情緒低落時，<br>
-                給你一點慰藉，一點共鳴，一點灑脫。
+                我們把這些歌詞，配上古人的故事、古風的娛樂工具，<br>
+                在你深夜難眠、通勤無聊、選擇困難時，<br>
+                給你一些懷舊回憶，一些音樂共鳴，一些娛樂放鬆。
             </p>
         </div>
 
-        <h2>當您需要時</h2>
-
+        <h2>核心功能</h2>
+        
         <div class="feature-card" onclick="location.href='woobai.html'">
             <h3>🎵 伍佰歌詞療癒錄</h3>
             <small>挪威的森林、淚橋、晚風、突然的自我、世界第一等…<br>
@@ -184,25 +112,24 @@
         </div>
 
         <div class="feature-card" onclick="location.href='mood.html'">
-            <h3>🎡 古風決策指引</h3>
-            <small>選擇困難時，轉一轉這座古風轉盤。<br>
-            像一首老歌輕輕推你向前，讓古人幫你做決定。<br>
-            今晚聽哪首伍佰？週末去哪散心？讓轉盤告訴你答案。</small>
+            <h3>🎡 古風決策轉盤</h3>
+            <small>週末做什麼？聽什麼歌？處理情緒？人生方向？<br>
+            讓古人幫你做決定。18個決策類別，<br>
+            轉盤一轉，答案自現，還配有古風解釋。</small>
         </div>
 
         <div class="feature-card" onclick="location.href='test.html'">
-            <h3>🧪 您的江湖人格</h3>
-            <small>6道輕鬆題，測測您的江湖人格。<br>
-            是李白般的灑脫浪子、岳飛般的仗義俠客、<br>
-            還是蘇軾般的隱世高人、或禪意居士？</small>
+            <h3>🧪 江湖性格測試</h3>
+            <small>你是伍佰、羅文、還是李白？<br>
+            通過音樂喜好、人生經歷、價值觀測試，<br>
+            找出你的江湖性格類型。</small>
         </div>
 
-        <!-- 新增：為什麼選擇江湖禪心 -->
         <div class="intro-card" style="margin-top: 60px;">
-            <h2 style="text-align: center; margin-top: 0;">為什麼選擇江湖禪心？</h2>
+            <h2 style="text-align: center; margin-top: 0;">為什麼是這些老歌？</h2>
             <p class="intro-text">
-                <span class="highlight-text">🎵 懂你的老歌</span><br>
-                不是網紅神曲，而是伍佰、羅文、李宗盛那些真正陪你走過青春與低谷的歌。
+                <span class="highlight-text">🎵 觸動記憶</span><br>
+                這些歌不是網紅神曲，而是伍佰、羅文、李宗盛那些真正陪你走過青春與低谷的歌。
             </p>
             <p class="intro-text">
                 <span class="highlight-text">📜 有趣的歷史</span><br>
@@ -257,10 +184,10 @@
 
     </main>
 
-    <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-        <img src="images/logo.webp" alt="江湖禪心 Logo" 
-     width="200" height="200" <style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
-        <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
+    <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
+        <img src="images/logo.webp" alt="江湖禪心 Logo" style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+        <p style="margin:10px 0;"><strong>🎭 免責聲明：本站僅供娛樂用途，不提供任何專業建議</strong></p>
+        <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
         <p style="margin:10px 0;">
             <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
             <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
@@ -269,14 +196,17 @@
         <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
     </footer>
 
-    <nav>
-        <a href="index.html" class="active">🏠</a>
-        <a href="sign.html">🀄</a>
-        <a href="mood.html">🎡</a>
-        <a href="woobai.html">🎵</a>
-        <a href="ancient.html">📜</a>
-        <a href="test.html">🧪</a>
-        <a href="prompt.html">✨</a>
+    <nav role="navigation" aria-label="主要功能">
+        <a href="index.html" aria-label="首頁" class="active">🏠</a>
+        <a href="sign.html" aria-label="今日一籤">🀄</a>
+        <a href="mood.html" aria-label="古風決策">🎡</a>
+        <a href="woobai.html" aria-label="伍佰歌詞">🎵</a>
+        <a href="ancient.html" aria-label="古人歪說">📜</a>
+        <a href="test.html" aria-label="江湖測試">🧪</a>
+        <a href="prompt.html" aria-label="提示詞錄">✨</a>
     </nav>
+
+<script src="js/wheel.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

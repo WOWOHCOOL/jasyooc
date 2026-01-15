@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隨心一籤 - 江湖禪心｜伍佰老歌金句深夜療癒激勵</title>
-    <meta name="description" content="深夜難眠、通勤無聊時，隨機抽取一句激勵語句，配上伍佰、羅文、李白、蘇軾等老歌與古詩金句。純娛樂情緒舒緩工具，給您即時的心靈慰藉與正能量。">
-    <meta name="keywords" content="伍佰,挪威的森林,淚橋,滿江紅,唐宋搖滾,晚風,鐵血丹心,羅文,李宗盛,情緒療癒,中年男人懷舊,深夜激勵,隨機名言,正能量">
+    <title>隨心一籤 - 江湖禪心｜伍佰老歌金句懷舊娛樂</title>
+    <meta name="description" content="深夜難眠、通勤無聊時，隨機抽取一句經典語句，配上伍佰、羅文、李白、蘇軾等老歌與古詩金句。純娛樂懷舊音樂欣賞工具，給您一些懷舊回憶與音樂共鳴。">
+    <meta name="keywords" content="伍佰,挪威的森林,淚橋,滿江紅,唐宋搖滾,晚風,鐵血丹心,羅文,李宗盛,懷舊音樂,中年男人懷舊,深夜娛樂,隨機名言,經典金句">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="隨心一籤 - 江湖禪心">
+    <meta property="og:description" content="深夜難眠、通勤無聊時，隨機抽取一句經典語句，配上伍佰、羅文、李白、蘇軾等老歌與古詩金句。純娛樂懷舊音樂欣賞工具，給您一些懷舊回憶與音樂共鳴。">
+    <meta property="og:url" content="https://jasyooc.com/sign.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jasyooc.com/images/og-home.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="隨心一籤 - 江湖禪心">
+    <meta name="twitter:description" content="深夜難眠、通勤無聊時，隨機抽取一句激勵語句，配上伍佰、羅文、李白、蘇軾等老歌與古詩金句。純娛樂情緒舒緩工具，給您即時的心靈慰藉與正能量。">
+    <meta name="twitter:image" content="https://jasyooc.com/images/twitter-home.jpg">
+    
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/favicon.png">
@@ -27,18 +41,11 @@
             font-weight: bold;
         }
 
-        /* 2. 卡片统一样式 */
+        /* 2. 卡片统一样式 - 继承全局样式，只添加必要覆盖 */
         .card,
         .intro-card,
         .result-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-            margin: 25px auto;
-            padding: 35px 30px;
-            max-width: 90%;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
+            margin: clamp(20px, 4vw, 40px) auto;
         }
 
         /* 3. 引导说明卡片 */
@@ -350,9 +357,9 @@
 
     </main>
 
-    <footer style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
+    <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
         <img src="images/logo.webp" alt="江湖禪心 Logo" 
-     width="200" height="200" <style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+     style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
         <p style="margin:10px 0;">© 2025 江湖禪心 · 古風情緒療癒港灣</p>
         <p style="margin:10px 0;">
             <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
@@ -362,18 +369,51 @@
         <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
     </footer>
 
-    <nav>
-        <a href="index.html">🏠</a>
-        <a href="sign.html" class="active">🀄</a>
-        <a href="mood.html">🎡</a>
-        <a href="woobai.html">🎵</a>
-        <a href="ancient.html">📜</a>
-        <a href="test.html">🧪</a>
-        <a href="prompt.html">✨</a>
+    <nav role="navigation" aria-label="主要功能">
+        <a href="index.html" aria-label="首頁">🏠</a>
+        <a href="sign.html" aria-label="隨心一籤" class="active">🀄</a>
+        <a href="mood.html" aria-label="古風決策">🎡</a>
+        <a href="woobai.html" aria-label="伍佰歌詞">🎵</a>
+        <a href="ancient.html" aria-label="古人歪說">📜</a>
+        <a href="test.html" aria-label="江湖測試">🧪</a>
+        <a href="prompt.html" aria-label="提示詞錄">✨</a>
     </nav>
 
     <script>
         // ==================== JavaScript 优化版本 ====================
+        
+        // 音效管理
+        const SoundManager = {
+            // 创建音频对象
+            spinSound: new Audio('sounds/spin.mp3'),
+            successSound: new Audio('sounds/success.mp3'),
+            
+            // 播放音效
+            play: function(soundName) {
+                try {
+                    const sound = this[soundName + 'Sound'];
+                    if (sound) {
+                        sound.currentTime = 0; // 重置到开头
+                        sound.play().catch(e => {
+                            // 静默处理音效播放失败
+                            console.log('音效播放失败:', e);
+                        });
+                    }
+                } catch (e) {
+                    console.log('音效初始化失败:', e);
+                }
+            },
+            
+            // 播放转盘音效
+            playSpin: function() {
+                this.play('spin');
+            },
+            
+            // 播放成功音效
+            playSuccess: function() {
+                this.play('success');
+            }
+        };
         
         // 激励语句库 - 从10条扩展到35条
         const inspirationQuotes = [
@@ -427,6 +467,9 @@
             const resultDiv = document.getElementById('signResult');
             const shareBtn = document.getElementById('share-btn');
             
+            // 播放转盘音效
+            SoundManager.playSpin();
+            
             // 添加抽签动画
             btn.classList.add('drawing');
             btn.textContent = '正在抽籤...';
@@ -437,6 +480,9 @@
             
             // 模拟抽签延迟，增加仪式感
             setTimeout(() => {
+                // 播放成功音效
+                SoundManager.playSuccess();
+                
                 // 随机选择一句
                 const randomIndex = Math.floor(Math.random() * inspirationQuotes.length);
                 const selectedQuote = inspirationQuotes[randomIndex];
