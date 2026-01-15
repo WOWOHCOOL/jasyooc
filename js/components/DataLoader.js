@@ -22,21 +22,27 @@ class DataLoader {
         }
 
         try {
-            // 从JSON文件加载数据
-            const response = await fetch('data/prompts.json');
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            // 首先尝试从文件加载（用于web服务器环境）
+            if (window.location.protocol !== 'file:') {
+                const response = await fetch('data/prompts.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                // 缓存数据
+                this.cache.set(cacheKey, {
+                    data: data,
+                    timestamp: Date.now()
+                });
+                
+                return data;
+            } else {
+                // 如果是file://协议，使用内联数据
+                console.warn('检测到file://协议，使用内联数据');
+                return this.getInlineData();
             }
-            
-            const data = await response.json();
-            
-            // 缓存数据
-            this.cache.set(cacheKey, {
-                data: data,
-                timestamp: Date.now()
-            });
-            
-            return data;
         } catch (error) {
             console.error('加载提示词数据失败:', error);
             
@@ -48,6 +54,156 @@ class DataLoader {
             
             throw error;
         }
+    }
+
+    /**
+     * 获取内联数据（用于本地文件访问）
+     * @returns {Object} 提示词数据
+     */
+    getInlineData() {
+        return {
+            "metadata": {
+                "version": "2.0",
+                "lastUpdated": "2025-01-15",
+                "totalPrompts": 8,
+                "categories": 1
+            },
+            "categories": [
+                {
+                    "id": "photography",
+                    "name": "摄影提示词",
+                    "icon": "📷",
+                    "description": "专业摄影AI提示词",
+                    "prompts": [
+                        {
+                            "id": "photo_001",
+                            "title": "路口转角反光镜",
+                            "type": "portrait",
+                            "difficulty": "advanced",
+                            "tags": ["夜景", "自拍", "凸面镜", "8K"],
+                            "description": "超精致夜景自拍提示词",
+                            "prompt": {
+                                "positive": "创作，最佳画质，超高清8K分辨率，清晰对焦，电影级光影，景深完美，构图精妙，获得殊榮的专业摄影风格，对细节的极致追求，精致的纹理，1:1微距特写，一位美丽的中国女偶像在夜色笼罩的城市十字路口，对着大型凸面交通安全镜距特写。她可爱的脸庞，明亮的大眼睛，精致的五官，柔顺的黑色长发，戴着白色兔耳朵发箍，脖子上围着舒适的棕白条纹围巾，甜美的偶像气质扑面而来。凸面镜的倒影呈现出十字路口的广角扭曲全景，她可爱的身影、汽车、行人、建筑物、路灯都以戏剧性的鱼眼畸变呈现。她纤细的手戴着优雅的梵克雅宝Alhambra手链（金色四叶草图案），伸出手拿着手机自拍。柔和舒适的夜色氛围，路灯和霓虹灯的温暖金光照亮了场景和镜面，展现黄金时刻的迷人风采。色调融合柔和的夜蓝色，高动态范围，逼真的玻璃凸面镜纹理，强烈的镜面反射，照片级逼真的肌肤、珠宝和金属细节，鲜艳而温馨的色彩，无文字，无水印。 ar3:4",
+                                "negative": "貝面提示：低品质、模糊、脸部和手部畸形、解剖结构错误、多余肢体、变异、丑陋、复制粗糙、水印、文字、签名、曝光过度、曝光不足、卡通、3D渲染、恐怖、白天强光。"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/1.webp",
+                                "full": "images/prompt/1.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_002",
+                            "title": "极简空间的向上凝视",
+                            "type": "portrait",
+                            "difficulty": "advanced",
+                            "tags": ["俯视", "极简", "广角透视", "工作室"],
+                            "description": "极简俯视内省肖像提示词",
+                            "prompt": {
+                                "positive": "最佳画质，8K分辨率，电影级光影，从极高角度拍摄的全身照，强烈的广角透视夸张，戴眼镜的年轻人，深棕色夹克，圆脸柔和的下颌线条，俯视视角，工作室环境，光滑无缝的地板，渐变背景",
+                                "negative": "低品质，模糊，白天强光，喧闹背景，过多的杂物，不自然的透视畸变"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/2.webp",
+                                "full": "images/prompt/2.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_003",
+                            "title": "活力四射的自拍",
+                            "type": "portrait",
+                            "difficulty": "expert",
+                            "tags": ["自拍", "K-Pop", "Y2K", "偶像"],
+                            "description": "超精致自拍提示词",
+                            "prompt": {
+                                "positive": "K-Pop偶像，圆形眼镜，甜美可爱，粉彩色调，圆形眼镜，甜美偶像气质，圆形眼镜，韩式流行风格眼妆，明亮的大眼睛，玻璃肌效果",
+                                "negative": "丑陋，粗糙质感，白天强光，不自然的姿势，模糊，像素化"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/3.webp",
+                                "full": "images/prompt/3.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_004",
+                            "title": "与手机原图同框的铅笔肖像",
+                            "type": "portrait",
+                            "difficulty": "expert",
+                            "tags": ["素描", "铅笔", "写实", "艺术"],
+                            "description": "提示词",
+                            "prompt": "｛perfect composition, impeccable attention to detail, highest quality, rich detail, sharp focus, 8K/4K resolution, clear edges, exquisite details, perfect composition, depth of field, cinematic lighting, vibrant colors, award-winning style, professional level, perfect depiction. Create an extremely detailed, hyper-realistic 3D graphite pencil sketch depicting face of a Chinese idol girl, drawn on textured white notebook paper with clear paper quality, delicate details, and subtle imperfections. The facial sketch should be perfectly identical to reference photo displayed on an iPhone placed next to notebook. The iPhone screen clearly displays artist original portrait photograph with natural reflections and soft sunlight reflections on glass.｝",
+                            "images": {
+                                "thumbnail": "images/prompt/4.webp",
+                                "full": "images/prompt/4.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_005",
+                            "title": "咖啡館的雨天小确幸",
+                            "type": "portrait",
+                            "difficulty": "advanced",
+                            "tags": ["雨天", "咖啡馆", "暖色", "温馨"],
+                            "description": "超精致自拍提示词",
+                            "prompt": {
+                                "positive": "年轻女子，东亚裔，柔顺的黑色长发，奶油白粗针织毛衣，咖啡馆窗边，雨天氛围，温暖的木质镶板，柔和的漫射窗光，胶片摄影风格",
+                                "negative": "强光，白天，喧闹，冷色调，不自然的姿势，低品质"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/5.webp",
+                                "full": "images/prompt/5.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_006",
+                            "title": "逆光发梢的温柔忧郁",
+                            "type": "portrait",
+                            "difficulty": "expert",
+                            "tags": ["逆光", "长发", "戏剧性光线", "胶片"],
+                            "description": "超精致自拍提示词",
+                            "prompt": {
+                                "positive": "逆光，长发，戏剧性光线，胶片质感，年轻东亚女性，回头看，深棕色夹克，长长的松散的波浪卷，强烈的背光照射，光晕效果",
+                                "negative": "正面光，白天，低品质，不自然的逆光效果，模糊"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/6.webp",
+                                "full": "images/prompt/6.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_007",
+                            "title": "冬日晴空下的闺蜜团",
+                            "type": "group",
+                            "difficulty": "expert",
+                            "tags": ["团体照", "逆光", "冬日", "朋友"],
+                            "description": "超精致自拍提示词",
+                            "prompt": {
+                                "positive": "5个女孩，圆形合影，低角度拍摄，纯蓝色天空，高key自然光，白色毛绒耳套，深色外套，黑贝雷帽，高清晰度，K-pop风格",
+                                "negative": "模糊的脸部，丑陋的牙齿，坏的解剖结构，多云天空，建筑物，鱼眼畸变"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/7.webp",
+                                "full": "images/prompt/7.webp"
+                            }
+                        },
+                        {
+                            "id": "photo_008",
+                            "title": "K-Pop偶像报纸时尚概念",
+                            "type": "portrait",
+                            "difficulty": "expert",
+                            "tags": ["K-Pop", "报纸", "时尚", "创意"],
+                            "description": "超精致自拍提示词",
+                            "prompt": {
+                                "positive": "韩国K-Pop偶像，无肩带迷你连衣裙，真正的再生报纸页面，建筑风格的折纸褶皱，棕褐色调的纸张，大号纤细银圈耳环，极简主义",
+                                "negative": "低品质，模糊，不自然的姿势，白天强光，不对的报纸纹理"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/8.webp",
+                                "full": "images/prompt/8.webp"
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
     }
 
     /**

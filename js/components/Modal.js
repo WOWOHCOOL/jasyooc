@@ -4,32 +4,53 @@
  */
 class Modal {
     constructor() {
-        this.isOpen = false;
-        this.currentPrompt = null;
-        this.touchStartTime = 0;
-        this.touchStartY = 0;
-        
-        this.init();
+        try {
+            console.log('Modal构造函数开始...');
+            this.isOpen = false;
+            this.currentPrompt = null;
+            this.touchStartTime = 0;
+            this.touchStartY = 0;
+            
+            this.init();
+            console.log('Modal构造函数完成');
+        } catch (error) {
+            console.error('Modal构造函数失败:', error);
+            throw error;
+        }
     }
 
     /**
      * 初始化模态框
      */
     init() {
+        console.log('开始初始化模态框...');
+        
         this.elements = {
             modal: document.getElementById('modal'),
             modalImage: document.getElementById('modal-image'),
             modalTitle: document.getElementById('modal-title'),
             modalPrompt: document.getElementById('modal-prompt'),
-            closeBtn: document.getElementById('close-modal')
+            closeBtn: document.getElementById('close-modal'),
+            modalImgContainer: document.getElementById('modal-img-container')
         };
 
-        if (!this.elements.modal) {
-            console.error('模态框元素未找到');
-            return;
+        // 检查所有必需的元素
+        const missingElements = [];
+        Object.keys(this.elements).forEach(key => {
+            if (!this.elements[key]) {
+                missingElements.push(key);
+            }
+        });
+
+        if (missingElements.length > 0) {
+            console.error('以下模态框元素未找到:', missingElements);
+            console.error('请检查HTML中是否有这些元素:', missingElements);
+            throw new Error('模态框元素缺失: ' + missingElements.join(', '));
         }
 
+        console.log('所有模态框元素找到成功');
         this.bindEvents();
+        console.log('模态框初始化完成');
     }
 
     /**
@@ -56,11 +77,10 @@ class Modal {
         });
 
         // 触摸事件处理
-        const modalImageContainer = this.elements.modal.querySelector('.modal-img');
-        if (modalImageContainer) {
-            modalImageContainer.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
-            modalImageContainer.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: false });
-            modalImageContainer.addEventListener('touchcancel', (e) => this.handleTouchEnd(e), { passive: false });
+        if (this.elements.modalImgContainer) {
+            this.elements.modalImgContainer.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+            this.elements.modalImgContainer.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: false });
+            this.elements.modalImgContainer.addEventListener('touchcancel', (e) => this.handleTouchEnd(e), { passive: false });
         }
     }
 
@@ -107,7 +127,7 @@ class Modal {
     /**
      * 格式化提示词显示
      * @param {Object|string} prompt 提示词数据
-     * @returns {string} 格式化后的提示词
+     * @returns {string} 格式化后的文本
      */
     formatPrompt(prompt) {
         if (typeof prompt === 'string') {
@@ -119,7 +139,30 @@ class Modal {
             return `【正向提示】\n${prompt.positive}\n\n【负向提示】\n${prompt.negative}`;
         }
         
-        // 其他复杂对象格式
+        // 检查是否包含其他重要字段
+        if (prompt.positive) {
+            return `【正向提示】\n${prompt.positive}`;
+        }
+        
+        if (prompt.negative) {
+            return `【负向提示】\n${prompt.negative}`;
+        }
+        
+        // 如果对象有其他有意义的内容，尝试美化显示
+        const keys = Object.keys(prompt);
+        if (keys.length > 0) {
+            let result = '';
+            keys.forEach(key => {
+                if (typeof prompt[key] === 'string') {
+                    result += `【${key}】\n${prompt[key]}\n\n`;
+                } else if (typeof prompt[key] === 'object') {
+                    result += `【${key}】\n${JSON.stringify(prompt[key], null, 2)}\n\n`;
+                }
+            });
+            return result.trim();
+        }
+        
+        // 最后的备选方案：JSON格式化
         return JSON.stringify(prompt, null, 2);
     }
 

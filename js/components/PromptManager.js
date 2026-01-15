@@ -14,8 +14,6 @@ class PromptManager {
             type: 'all',
             tags: []
         };
-        
-        this.init();
     }
 
     /**
@@ -23,14 +21,20 @@ class PromptManager {
      */
     async init() {
         try {
+            // 首先更新加载状态
+            const countElement = document.getElementById('result-count');
+            if (countElement) {
+                countElement.textContent = '正在加载数据...';
+            }
+            
             // 加载数据
             await this.loadData();
             
             // 初始化组件
             this.initComponents();
             
-            // 绑定事件
-            this.bindEvents();
+            // 绑定基础事件（移除筛选相关事件）
+            this.bindBasicEvents();
             
             // 初始渲染
             this.renderAllPrompts();
@@ -38,6 +42,13 @@ class PromptManager {
             console.log('提示词管理器初始化完成');
         } catch (error) {
             console.error('提示词管理器初始化失败:', error);
+            
+            // 更新结果计数显示错误
+            const countElement = document.getElementById('result-count');
+            if (countElement) {
+                countElement.textContent = '❌ 初始化失败';
+            }
+            
             this.showError('加载数据失败，请刷新页面重试');
         }
     }
@@ -63,32 +74,14 @@ class PromptManager {
     }
 
     /**
-     * 绑定事件
+     * 绑定基础事件（保留标签筛选功能）
      */
-    bindEvents() {
+    bindBasicEvents() {
         // 搜索功能
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
                 this.searchTerm = e.target.value.trim();
-                this.applyFilters();
-            });
-        }
-
-        // 难度筛选
-        const difficultyFilter = document.getElementById('difficulty-filter');
-        if (difficultyFilter) {
-            difficultyFilter.addEventListener('change', (e) => {
-                this.filters.difficulty = e.target.value;
-                this.applyFilters();
-            });
-        }
-
-        // 类型筛选
-        const typeFilter = document.getElementById('type-filter');
-        if (typeFilter) {
-            typeFilter.addEventListener('change', (e) => {
-                this.filters.type = e.target.value;
                 this.applyFilters();
             });
         }
@@ -184,28 +177,72 @@ class PromptManager {
     }
 
     /**
-     * 应用所有筛选条件
+     * 应用筛选条件（搜索 + 标签）
      */
     applyFilters() {
-        const filter = {
-            ...this.filters,
-            search: this.searchTerm
-        };
-
-        this.promptCard.filter(filter);
+        const allCards = this.promptCard.getAllCards();
+        const searchLower = this.searchTerm.toLowerCase();
+        const selectedTags = this.filters.tags;
+        
+        allCards.forEach(card => {
+            let shouldShow = true;
+            
+            // 搜索筛选
+            if (this.searchTerm) {
+                const title = card.dataset.title?.toLowerCase() || '';
+                shouldShow = title.includes(searchLower);
+            }
+            
+            // 标签筛选
+            if (shouldShow && selectedTags.length > 0) {
+                const promptId = card.dataset.promptId;
+                const prompt = this.findPromptById(promptId);
+                const promptTags = prompt?.tags || [];
+                shouldShow = selectedTags.some(tag => promptTags.includes(tag));
+            }
+            
+            card.style.display = shouldShow ? 'block' : 'none';
+        });
+        
         this.updateResultCount();
     }
 
     /**
-     * 更新结果数量
+     * 根据ID查找提示词
+     * @param {string} promptId 提示词ID
+     * @returns {Object|null} 提示词对象
+     */
+    findPromptById(promptId) {
+        for (const category of this.categories) {
+            const prompt = category.prompts.find(p => p.id === promptId);
+            if (prompt) {
+                return prompt;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 更新结果数量（简化版）
      */
     updateResultCount() {
-        const visibleCount = this.promptCard.getVisibleCards().length;
-        const totalCount = this.promptCard.getAllCards().length;
-        
         const countElement = document.getElementById('result-count');
-        if (countElement) {
-            countElement.textContent = `显示 ${visibleCount} / ${totalCount} 个提示词`;
+        if (!countElement) return;
+        
+        try {
+            const visibleCount = this.promptCard.getVisibleCards().length;
+            const totalCount = this.promptCard.getAllCards().length;
+            
+            if (totalCount === 0) {
+                countElement.textContent = '加载中...';
+            } else if (visibleCount === totalCount) {
+                countElement.textContent = `共 ${totalCount} 个提示词`;
+            } else {
+                countElement.textContent = `显示 ${visibleCount} / ${totalCount} 个提示词`;
+            }
+        } catch (error) {
+            console.error('更新结果数量失败:', error);
+            countElement.textContent = '加载失败';
         }
     }
 
@@ -381,6 +418,12 @@ class PromptManager {
      * @param {string} message 错误消息
      */
     showError(message) {
+        // 更新结果计数显示错误
+        const countElement = document.getElementById('result-count');
+        if (countElement) {
+            countElement.textContent = '❌ 加载失败';
+        }
+        
         const container = document.getElementById('prompt-container');
         if (container) {
             container.innerHTML = `

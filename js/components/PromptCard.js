@@ -78,18 +78,32 @@ class PromptCard {
         card.className = 'prompt-card';
         card.dataset.promptId = prompt.id;
         card.dataset.title = prompt.title;
-        card.dataset.img = prompt.images.thumbnail;
-        card.dataset.prompt = JSON.stringify(prompt.prompt);
+        
+        // 安全地处理图片路径
+        const thumbnail = prompt.images?.thumbnail || 'images/prompt/default.webp';
+        card.dataset.img = thumbnail;
+        
+        // 安全地处理prompt数据
+        const promptData = prompt.prompt || '提示词数据';
+        if (typeof promptData === 'object') {
+            card.dataset.prompt = JSON.stringify(promptData);
+        } else {
+            card.dataset.prompt = promptData;
+        }
+        
+        // 安全地处理描述
+        const description = prompt.description || '暂无描述';
         
         card.innerHTML = `
-            <img src="${prompt.images.thumbnail}" alt="${prompt.title}" loading="lazy">
+            <img src="${thumbnail}" alt="${this.escapeHtml(prompt.title)}" loading="lazy" 
+                 onerror="this.src='images/prompt/default.webp'">
             <h3>${this.escapeHtml(prompt.title)}</h3>
-            <p>${this.escapeHtml(prompt.description)}</p>
+            <p>${this.escapeHtml(description)}</p>
             <div class="card-meta">
-                <span class="difficulty ${prompt.difficulty}">${this.getDifficultyLabel(prompt.difficulty)}</span>
+                <span class="difficulty ${prompt.difficulty || 'beginner'}">${this.getDifficultyLabel(prompt.difficulty)}</span>
                 <span class="type">${this.getTypeLabel(prompt.type)}</span>
             </div>
-            ${this.createTagsHtml(prompt.tags)}
+            ${this.createTagsHtml(prompt.tags || [])}
         `;
         
         // 延迟添加动画类以实现交错效果
@@ -154,24 +168,63 @@ class PromptCard {
      * @param {HTMLElement} card 卡片元素
      */
     handleCardClick(card) {
-        const promptId = card.dataset.promptId;
-        const title = card.dataset.title;
-        const img = card.dataset.img;
-        const promptData = JSON.parse(card.dataset.prompt);
-        
-        // 触发全局模态框显示事件
-        window.modal.show({
-            id: promptId,
-            title: title,
-            prompt: promptData,
-            images: {
-                full: img,
-                thumbnail: img
+        try {
+            const promptId = card.dataset.promptId;
+            const title = card.dataset.title;
+            const img = card.dataset.img;
+            
+            // 安全地解析prompt数据
+            let promptData;
+            try {
+                promptData = JSON.parse(card.dataset.prompt);
+            } catch (parseError) {
+                // 如果不是JSON，直接使用字符串
+                promptData = card.dataset.prompt;
             }
-        });
-        
-        // 添加点击反馈
-        this.addClickFeedback(card);
+            
+            // 检查模态框是否可用
+            if (!window.modal) {
+                console.error('模态框对象未找到');
+                alert('模态框对象未找到，请检查Modal.js是否正确加载');
+                return;
+            }
+            
+            if (typeof window.modal.show !== 'function') {
+                console.error('模态框show方法不存在', window.modal);
+                alert('模态框show方法不存在，请检查Modal.js');
+                return;
+            }
+            
+            console.log('准备调用模态框show，数据:', {
+                id: promptId,
+                title: title,
+                promptType: typeof promptData,
+                hasImages: !!(img)
+            });
+            
+            // 触发全局模态框显示事件
+            try {
+                window.modal.show({
+                    id: promptId,
+                    title: title,
+                    prompt: promptData,
+                    images: {
+                        full: img,
+                        thumbnail: img
+                    }
+                });
+                console.log('模态框show调用成功');
+            } catch (modalError) {
+                console.error('调用模态框show时出错:', modalError);
+                alert('打开模态框失败: ' + modalError.message);
+            }
+            
+            // 添加点击反馈
+            this.addClickFeedback(card);
+        } catch (error) {
+            console.error('处理卡片点击时出错:', error);
+            alert('打开卡片详情失败: ' + error.message);
+        }
     }
 
     /**
