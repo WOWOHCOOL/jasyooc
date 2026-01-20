@@ -259,21 +259,21 @@
         /* 提示词网格布局 - 优化版 */
         .prompt-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(260px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(4, minmax(300px, 1fr));
+            gap: 6px;
             margin-bottom: 20px;
-            padding: 0 4px;
+            padding: 0 8px;
         }
         
         .prompt-card {
             border: 1px solid #e0e0e0;
             border-radius: 12px;
-            padding: 14px;
+            padding: 18px;
             background: white;
             cursor: pointer;
             transition: all 0.3s ease;
             height: auto;
-            min-height: 320px;
+            min-height: 380px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -305,10 +305,10 @@
         
         .prompt-card img {
             width: 100%;
-            height: 160px;
+            height: 200px;
             object-fit: cover;
             border-radius: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             transition: transform 0.3s ease;
         }
         
@@ -375,25 +375,32 @@
         /* 大屏幕优化 (1920px+) */
         @media (min-width: 1920px) {
             .prompt-grid {
-                grid-template-columns: repeat(5, minmax(280px, 1fr));
-                gap: 10px;
+                grid-template-columns: repeat(5, minmax(320px, 1fr));
+                gap: 6px;
                 max-width: 1600px;
                 margin: 0 auto 20px auto;
+            }
+            .prompt-card {
+                min-height: 400px;
+                padding: 20px;
+            }
+            .prompt-card img {
+                height: 220px;
             }
         }
         
         /* 中等屏幕优化 (1200px - 1920px) */
         @media (max-width: 1200px) {
             .prompt-grid {
-                grid-template-columns: repeat(3, minmax(240px, 1fr));
-                gap: 8px;
+                grid-template-columns: repeat(3, minmax(280px, 1fr));
+                gap: 6px;
             }
             .prompt-card {
-                min-height: 300px;
-                padding: 12px;
+                min-height: 360px;
+                padding: 16px;
             }
             .prompt-card img {
-                height: 140px;
+                height: 180px;
             }
         }
         
@@ -401,20 +408,20 @@
         @media (max-width: 768px) {
             .prompt-grid {
                 grid-template-columns: repeat(2, minmax(200px, 1fr));
-                gap: 6px;
+                gap: 8px;
                 padding: 0 8px;
             }
             .prompt-card {
-                min-height: 280px;
-                padding: 10px;
+                min-height: 300px;
+                padding: 12px;
             }
             .prompt-card img {
-                height: 130px;
+                height: 140px;
                 border-radius: 8px;
             }
             .prompt-card h3 {
                 font-size: 14px;
-                min-height: 38px;
+                min-height: 40px;
             }
             .prompt-card p {
                 font-size: 12px;
@@ -440,16 +447,16 @@
         @media (max-width: 480px) and (orientation: portrait) {
             .prompt-grid {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 12px;
                 padding: 0 12px;
             }
             .prompt-card {
-                min-height: 260px;
-                padding: 12px;
+                min-height: 280px;
+                padding: 14px;
                 display: grid;
                 grid-template-columns: 120px 1fr;
                 grid-template-rows: auto auto;
-                gap: 12px;
+                gap: 14px;
                 align-items: start;
             }
             .prompt-card img {
@@ -470,7 +477,7 @@
             }
             .card-meta {
                 grid-column: 2;
-                margin-top: 8px;
+                margin-top: 10px;
             }
         }
         
@@ -480,8 +487,9 @@
                 padding: 0 8px;
             }
             .prompt-card {
-                padding: 10px;
-                min-height: 240px;
+                padding: 12px;
+                min-height: 260px;
+                gap: 12px;
             }
             .prompt-card img {
                 height: 140px;
