@@ -546,13 +546,32 @@
         
         /* 移动端优化 */
         @media (max-width: 768px) {
-            .result-actions {
+            .wheel-actions {
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
-                max-width: 300px;
-                margin: 25px auto 0;
+                max-width: 280px;
+                margin: 20px auto;
             }
+            
+            .wheel-actions .action-button {
+                width: 100%;
+                min-width: auto;
+                max-width: 250px;
+                padding: 14px 20px;
+                font-size: 1em;
+            }
+            
+            /* 确保转盘不覆盖按钮 - 增加上边距 */
+            .wheel-container {
+                margin-top: 30px !important;
+            }
+            
+            /* 转盘区域增加底部间距，避免遮挡 */
+            #wheelSection {
+                padding-bottom: 40px;
+            }
+        }
             
             .result-actions .action-button {
                 width: 100%;
