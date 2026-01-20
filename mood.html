@@ -552,6 +552,9 @@
                 width: 100%;
                 max-width: 280px;
                 margin: 20px auto;
+                /* 确保按钮区域有足够的z-index */
+                position: relative;
+                z-index: 5;
             }
             
             .wheel-actions .action-button {
@@ -562,14 +565,29 @@
                 font-size: 1em;
             }
             
-            /* 确保转盘不覆盖按钮 - 增加上边距 */
+            /* 转盘容器增加上边距，确保不覆盖按钮 */
             .wheel-container {
-                margin-top: 30px !important;
+                margin-top: 40px !important;
+                /* 限制转盘最大尺寸，防止溢出 */
+                max-width: 90vw;
+                position: relative;
+                z-index: 1;
             }
             
-            /* 转盘区域增加底部间距，避免遮挡 */
+            /* 移动端转盘尺寸调整 */
+            .wheel-canvas {
+                width: 280px !important;
+                height: 280px !important;
+            }
+            
+            /* 转盘指针位置调整，确保不影响按钮 */
+            .wheel-pointer {
+                top: -12px;
+            }
+            
+            /* 转盘区域增加间距 */
             #wheelSection {
-                padding-bottom: 40px;
+                padding: 20px 15px 50px 15px;
             }
         }
             
@@ -672,6 +690,9 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             border: 4px solid #8b4513;
             background: white;
+            /* 确保转盘不会溢出容器 */
+            max-width: 100%;
+            box-sizing: border-box;
         }
         
         .wheel-center-hint {
