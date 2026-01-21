@@ -83,14 +83,46 @@
             scroll-behavior: smooth;
         }
         
-        /* 强制重置任何可能的样式冲突 */
+        /* 重置基础样式 */
         #prompt-container,
         main.prompt-grid,
         #prompt-container.prompt-grid,
-        main.prompt-grid {
-            display: grid !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
+        main.prompt-grid.prompt-grid {
+            display: grid;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* 桌面端强制4列布局 */
+        @media (min-width: 1200px) {
+            #prompt-container,
+            main.prompt-grid,
+            #prompt-container.prompt-grid,
+            main.prompt-grid.prompt-grid {
+                grid-template-columns: repeat(4, 320px) !important;
+                max-width: 1400px !important;
+                gap: 24px !important;
+                justify-content: center !important;
+                padding: 0 20px !important;
+                margin: 30px auto !important;
+                align-items: start !important;
+            }
+            
+            #prompt-container .prompt-card,
+            main.prompt-grid .prompt-card,
+            #prompt-container.prompt-grid .prompt-card,
+            main.prompt-grid.prompt-grid .prompt-card {
+                width: 100% !important;
+                min-width: 320px !important;
+                max-width: 320px !important;
+                box-sizing: border-box !important;
+                flex: 0 0 320px !important;
+            }
+            
+            /* 桌面端调试边框 */
+            .prompt-card {
+                outline: 2px solid transparent !important;
+            }
         }
         
         /* 强制4列布局 - 最高优先级 */
@@ -535,14 +567,55 @@
             }
         }
         
-        /* 移动端优化 - 确保1列布局 */
+        /* 移动端优化 - 最终修复版 */
         @media (max-width: 767px) {
             .prompt-grid {
                 grid-template-columns: 1fr !important;
                 gap: 20px;
                 padding: 0 15px;
                 max-width: 100%;
+                margin: 20px auto;
             }
+            
+            .prompt-card {
+                width: 100% !important;
+                min-width: auto !important;
+                max-width: none !important;
+                flex: none !important;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .prompt-content {
+                padding: 20px;
+            }
+            
+            .prompt-card h3 {
+                font-size: 1.1rem;
+                -webkit-line-clamp: 2;
+            }
+            
+            .prompt-card p {
+                font-size: 0.95rem;
+                -webkit-line-clamp: 3;
+            }
+            
+            .card-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding-top: 14px;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            
+            .card-meta span {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                white-space: nowrap;
+                flex: 0 0 auto;
+            }
+        }
             
             .prompt-card {
                 width: 100% !important;
@@ -567,15 +640,17 @@
             }
             
             .card-meta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+                flex-wrap: wrap;
+                gap: 8px;
                 padding-top: 14px;
+                justify-content: flex-start;
             }
             
             .card-meta span {
-                font-size: 0.75rem;
-                padding: 5px 10px;
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                flex: 0 0 auto;
+                white-space: nowrap;
             }
         }
         
@@ -678,9 +753,32 @@
         
         @media (max-width: 480px) {
             .prompt-grid {
-                gap: 18px;
+                gap: 16px;
                 padding: 0 12px;
             }
+            
+            .prompt-content {
+                padding: 18px;
+            }
+            
+            .prompt-card h3 {
+                font-size: 1.05rem;
+            }
+            
+            .prompt-card p {
+                font-size: 0.85rem;
+            }
+            
+            .card-meta {
+                gap: 6px;
+                padding-top: 12px;
+            }
+            
+            .card-meta span {
+                font-size: 0.65rem;
+                padding: 3px 6px;
+            }
+        }
         }
         
         /* 卡片悬停效果 */
@@ -2189,54 +2287,37 @@
                         // 处理图片加载错误
                         setupImageErrorHandling();
                         
-                        // 智能布局设置（桌面4列，移动1列）
-                        console.log('=== 智能布局设置 ===');
+                        // 智能布局验证
+                        console.log('=== 布局验证 ===');
                         console.log('屏幕宽度:', window.innerWidth);
                         console.log('卡片数量:', existingCards.length);
                         
                         const container = document.getElementById('prompt-container');
                         if (container) {
-                            // 清除所有可能的样式
-                            container.style.cssText = '';
+                            // 清除JavaScript强制样式，让CSS完全控制
+                            container.style.removeProperty('grid-template-columns');
+                            container.style.removeProperty('max-width');
+                            container.style.removeProperty('gap');
+                            container.style.removeProperty('justify-content');
+                            container.style.removeProperty('padding');
+                            container.style.removeProperty('margin');
+                            container.style.removeProperty('align-items');
                             
-                            // 根据屏幕宽度设置布局
-                            if (window.innerWidth >= 1200) {
-                                // 桌面端：4列布局
-                                container.style.display = 'grid';
-                                container.style.gridTemplateColumns = 'repeat(4, 320px)';
-                                container.style.maxWidth = '1400px';
-                                container.style.gap = '24px';
-                                container.style.margin = '30px auto';
-                                container.style.padding = '0 20px';
-                                container.style.justifyContent = 'center';
-                                container.style.alignItems = 'start';
-                                
-                                // 桌面端强制卡片宽度
-                                existingCards.forEach((card, index) => {
-                                    card.style.cssText = '';
-                                    card.style.width = '320px';
-                                    card.style.minWidth = '320px';
-                                    card.style.maxWidth = '320px';
-                                    card.style.flex = '0 0 320px';
-                                    
-                                    // 调试边框
-                                    card.style.outline = index === 0 ? '3px solid green' : '';
-                                });
-                                
-                                console.log('设置桌面端4列布局');
-                            } else {
-                                // 移动端：清除强制样式，让CSS响应式生效
-                                existingCards.forEach((card) => {
-                                    card.style.cssText = '';
-                                });
-                                
-                                console.log('设置移动端自适应布局');
-                            }
+                            // 清除所有卡片的强制样式
+                            existingCards.forEach(card => {
+                                card.style.removeProperty('width');
+                                card.style.removeProperty('min-width');
+                                card.style.removeProperty('max-width');
+                                card.style.removeProperty('flex');
+                                card.style.removeProperty('outline');
+                            });
+                            
+                            console.log('已清除JavaScript强制样式，CSS响应式生效');
                             
                             // 验证结果
                             setTimeout(() => {
                                 const computedStyle = window.getComputedStyle(container);
-                                console.log('当前列数:', computedStyle.gridTemplateColumns);
+                                console.log('CSS控制的列数:', computedStyle.gridTemplateColumns);
                                 
                                 if (existingCards.length > 0) {
                                     const firstCard = existingCards[0];
@@ -2246,8 +2327,15 @@
                                         height: rect.height,
                                         deviceType: window.innerWidth >= 1200 ? 'Desktop' : 'Mobile'
                                     });
+                                    
+                                    // 添加临时调试边框
+                                    if (window.innerWidth >= 1200) {
+                                        firstCard.style.outline = '3px solid green';
+                                    } else {
+                                        firstCard.style.outline = '3px solid blue';
+                                    }
                                 }
-                            }, 100);
+                            }, 200);
                         }
                     }, 800);
                     
