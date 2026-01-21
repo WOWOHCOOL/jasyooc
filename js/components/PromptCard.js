@@ -94,16 +94,20 @@ class PromptCard {
         // 安全地处理描述
         const description = prompt.description || '暂无描述';
         
+         // 使用用户定义的标签，移除难度和类型显示
+        const userTags = prompt.tags || [];
+        
         card.innerHTML = `
-            <img src="${thumbnail}" alt="${this.escapeHtml(prompt.title)}" loading="lazy" 
-                 onerror="this.src='images/prompt/default.webp'">
-            <h3>${this.escapeHtml(prompt.title)}</h3>
-            <p>${this.escapeHtml(description)}</p>
-            <div class="card-meta">
-                <span class="difficulty ${prompt.difficulty || 'beginner'}">${this.getDifficultyLabel(prompt.difficulty)}</span>
-                <span class="type">${this.getTypeLabel(prompt.type)}</span>
+            <div class="image-container">
+                <img src="${thumbnail}" alt="${this.escapeHtml(prompt.title)}" loading="lazy" 
+                     onerror="this.src='images/prompt/default.webp'">
+                <div class="image-overlay"></div>
             </div>
-            ${this.createTagsHtml(prompt.tags || [])}
+            <div class="prompt-content">
+                <h3>${this.escapeHtml(prompt.title)}</h3>
+                <p>${this.escapeHtml(description)}</p>
+                ${this.createTagsHtml(userTags)}
+            </div>
         `;
         
         // 延迟添加动画类以实现交错效果
@@ -115,19 +119,22 @@ class PromptCard {
     }
 
     /**
-     * 创建标签HTML
+     * 创建标签HTML - 移除难度和类型
      * @param {Array} tags 标签数组
      * @returns {string} 标签HTML
      */
     createTagsHtml(tags) {
         if (!tags || tags.length === 0) return '';
         
+        // 过滤掉空值和重复值
+        const uniqueTags = [...new Set(tags.filter(tag => tag && tag.trim()))];
+        
         return `
             <div class="card-tags">
-                ${tags.slice(0, 3).map(tag => 
+                ${uniqueTags.slice(0, 4).map(tag => 
                     `<span class="tag">${this.escapeHtml(tag)}</span>`
                 ).join('')}
-                ${tags.length > 3 ? `<span class="tag-more">+${tags.length - 3}</span>` : ''}
+                ${uniqueTags.length > 4 ? `<span class="tag-more">+${uniqueTags.length - 4}</span>` : ''}
             </div>
         `;
     }
