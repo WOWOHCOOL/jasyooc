@@ -36,9 +36,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=20250121">
-    <link rel="stylesheet" href="css/components/PromptCard.css?v=20250121">
-    <link rel="stylesheet" href="css/components/Modal.css?v=20250121">
+    <link rel="stylesheet" href="css/style.css?v=20250121-2">
+    <link rel="stylesheet" href="css/components/PromptCard.css?v=20250121-2">
+    <link rel="stylesheet" href="css/components/Modal.css?v=20250121-2">
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -421,11 +421,42 @@
         /* 桌面端优化 - 4列布局响应式 */
         @media (min-width: 1600px) {
             .prompt-grid {
-                grid-template-columns: repeat(auto-fit, 340px);
-                max-width: 1600px;
-                gap: 28px;
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1800px;
+                gap: 30px;
                 padding: 0 30px;
             }
+            .prompt-card {
+                min-height: 400px;
+                max-height: 400px;
+            }
+        }
+        
+        @media (min-width: 1400px) and (max-width: 1599px) {
+            .prompt-grid {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1600px;
+                gap: 28px;
+                padding: 0 25px;
+            }
+            .prompt-card {
+                min-height: 400px;
+                max-height: 400px;
+            }
+        }
+        
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .prompt-grid {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1400px;
+                gap: 26px;
+                padding: 0 25px;
+            }
+            .prompt-card {
+                min-height: 400px;
+                max-height: 400px;
+            }
+        }
             .prompt-card {
                 min-height: 400px;
             }
@@ -567,15 +598,55 @@
             }
         }
         
-        /* 移动端优化 - 最终修复版 */
+        /* 移动端优化 - 精确控制版本 */
         @media (max-width: 767px) {
             .prompt-grid {
                 grid-template-columns: 1fr !important;
-                gap: 20px;
-                padding: 0 15px;
-                max-width: 100%;
-                margin: 20px auto;
+                gap: 20px !important;
+                padding: 0 15px !important;
+                max-width: 100% !important;
+                margin: 20px auto !important;
             }
+            
+            .prompt-card {
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                flex: none !important;
+                min-height: auto !important;
+                height: auto !important;
+            }
+            
+            .prompt-content {
+                padding: 20px !important;
+            }
+            
+            .prompt-card h3 {
+                font-size: 1.1rem !important;
+                -webkit-line-clamp: 2 !important;
+            }
+            
+            .prompt-card p {
+                font-size: 0.95rem !important;
+                -webkit-line-clamp: 3 !important;
+            }
+            
+            .card-meta {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                padding-top: 14px !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+            }
+            
+            .card-meta span {
+                font-size: 0.7rem !important;
+                padding: 4px 8px !important;
+                white-space: nowrap !important;
+                flex: 0 0 auto !important;
+            }
+        }
             
             .prompt-card {
                 width: 100% !important;
@@ -753,30 +824,36 @@
         
         @media (max-width: 480px) {
             .prompt-grid {
-                gap: 16px;
-                padding: 0 12px;
+                gap: 16px !important;
+                padding: 0 12px !important;
             }
             
             .prompt-content {
-                padding: 18px;
+                padding: 18px !important;
             }
             
             .prompt-card h3 {
-                font-size: 1.05rem;
+                font-size: 1.05rem !important;
             }
             
             .prompt-card p {
-                font-size: 0.85rem;
+                font-size: 0.85rem !important;
             }
             
             .card-meta {
-                gap: 6px;
-                padding-top: 12px;
+                gap: 6px !important;
+                padding-top: 12px !important;
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
             }
             
             .card-meta span {
-                font-size: 0.65rem;
-                padding: 3px 6px;
+                font-size: 0.65rem !important;
+                padding: 3px 6px !important;
+                white-space: nowrap !important;
+                flex: 0 0 auto !important;
             }
         }
         }
@@ -2287,55 +2364,98 @@
                         // 处理图片加载错误
                         setupImageErrorHandling();
                         
-                        // 智能布局验证
-                        console.log('=== 布局验证 ===');
+                        // 最终布局验证和强制修复
+                        console.log('=== 最终布局验证 ===');
                         console.log('屏幕宽度:', window.innerWidth);
                         console.log('卡片数量:', existingCards.length);
+                        console.log('URL协议:', window.location.protocol);
                         
                         const container = document.getElementById('prompt-container');
                         if (container) {
-                            // 清除JavaScript强制样式，让CSS完全控制
-                            container.style.removeProperty('grid-template-columns');
-                            container.style.removeProperty('max-width');
-                            container.style.removeProperty('gap');
-                            container.style.removeProperty('justify-content');
-                            container.style.removeProperty('padding');
-                            container.style.removeProperty('margin');
-                            container.style.removeProperty('align-items');
-                            
-                            // 清除所有卡片的强制样式
+                            // 先清除所有JavaScript样式
+                            container.style.cssText = '';
                             existingCards.forEach(card => {
-                                card.style.removeProperty('width');
-                                card.style.removeProperty('min-width');
-                                card.style.removeProperty('max-width');
-                                card.style.removeProperty('flex');
-                                card.style.removeProperty('outline');
+                                card.style.cssText = '';
                             });
                             
-                            console.log('已清除JavaScript强制样式，CSS响应式生效');
+                            console.log('已清除所有JavaScript强制样式');
                             
-                            // 验证结果
+                            // 验证CSS是否生效
                             setTimeout(() => {
                                 const computedStyle = window.getComputedStyle(container);
-                                console.log('CSS控制的列数:', computedStyle.gridTemplateColumns);
+                                const gridColumns = computedStyle.gridTemplateColumns;
+                                console.log('CSS控制列数:', gridColumns);
+                                console.log('容器最大宽度:', computedStyle.maxWidth);
                                 
                                 if (existingCards.length > 0) {
                                     const firstCard = existingCards[0];
+                                    const cardStyle = window.getComputedStyle(firstCard);
                                     const rect = firstCard.getBoundingClientRect();
-                                    console.log('第一张卡片尺寸:', {
+                                    
+                                    console.log('=== 详细调试信息 ===');
+                                    console.log('设备类型:', window.innerWidth >= 1200 ? 'Desktop' : 'Mobile');
+                                    console.log('第一张卡片计算样式:', {
                                         width: rect.width,
                                         height: rect.height,
-                                        deviceType: window.innerWidth >= 1200 ? 'Desktop' : 'Mobile'
+                                        display: cardStyle.display,
+                                        position: cardStyle.position,
+                                        minWidth: cardStyle.minWidth,
+                                        maxWidth: cardStyle.maxWidth
                                     });
                                     
-                                    // 添加临时调试边框
+                                    // 检查标签区域
+                                    const cardMeta = firstCard.querySelector('.card-meta');
+                                    if (cardMeta) {
+                                        const metaStyle = window.getComputedStyle(cardMeta);
+                                        console.log('标签区域样式:', {
+                                            display: metaStyle.display,
+                                            flexDirection: metaStyle.flexDirection,
+                                            flexWrap: metaStyle.flexWrap
+                                        });
+                                    }
+                                    
+                                    // 添加调试边框
                                     if (window.innerWidth >= 1200) {
                                         firstCard.style.outline = '3px solid green';
+                                        console.log('✅ 桌面端：绿色边框，应为4列等高卡片');
                                     } else {
                                         firstCard.style.outline = '3px solid blue';
+                                        console.log('🔵 移动端：蓝色边框，应为1列自适应高度');
+                                    }
+                                    
+                                    // 检查是否需要强制修复
+                                    if (window.innerWidth < 768) {
+                                        const metaElements = firstCard.querySelectorAll('.card-meta span');
+                                        if (metaElements.length > 2) {
+                                            console.log('⚠️ 移动端检测到标签布局问题，应用强制修复');
+                                            forceMobileLayout(firstCard);
+                                        }
                                     }
                                 }
-                            }, 200);
+                            }, 300);
+                        }
+                        
+                        // 移动端强制修复函数
+                        function forceMobileLayout(card) {
+                            const cardMeta = card.querySelector('.card-meta');
+                            if (cardMeta) {
+                                cardMeta.style.setProperty('display', 'flex', 'important');
+                                cardMeta.style.setProperty('flex-wrap', 'wrap', 'important');
+                                cardMeta.style.setProperty('gap', '6px', 'important');
+                                cardMeta.style.setProperty('padding-top', '12px', 'important');
+                                cardMeta.style.setProperty('justify-content', 'flex-start', 'important');
+                                cardMeta.style.setProperty('align-items', 'center', 'important');
+                                
+                                const spans = cardMeta.querySelectorAll('span');
+                                spans.forEach(span => {
+                                    span.style.setProperty('font-size', '0.65rem', 'important');
+                                    span.style.setProperty('padding', '3px 6px', 'important');
+                                    span.style.setProperty('white-space', 'nowrap', 'important');
+                                    span.style.setProperty('flex', '0 0 auto', 'important');
+                                });
+                                
+                                console.log('✅ 移动端标签布局已强制修复');
+                            }
                         }
                     }, 800);
                     
