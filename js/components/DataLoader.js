@@ -64,8 +64,8 @@ class DataLoader {
         return {
             "metadata": {
                 "version": "2.0",
-                "lastUpdated": "2025-01-15",
-                "totalPrompts": 8,
+                "lastUpdated": "2026-01-21",
+                "totalPrompts": 9,
                 "categories": 1
             },
             "categories": [
@@ -185,6 +185,21 @@ class DataLoader {
                             }
                         },
                         {
+                            "id": "p_mko0jg0q_",
+                            "title": "粉系猫耳少女对镜自拍",
+                            "type": "portrait",
+                            "difficulty": "intermediate",
+                            "tags": [],
+                            "description": "",
+                            "prompt": {
+                                "positive": "{\n  \"image_generation_prompt\": {\n    \"subject\": {\n      \"demographics\": {\n        \"gender\": \"女性\",\n        \"age_group\": \"年轻成人\",\n        \"skin_tone\": \"白皙\"\n      },\n      \"hair\": {\n        \"color\": \"金色\",\n        \"length\": \"长发\",\n        \"style\": \"直发/微卷\",\n        \"accessory\": \"白色毛茸茸猫耳朵发箍\"\n      },\n      \"face\": {\n        \"expression\": {\n          \"mood\": \"俏皮\",\n          \"mouth\": \"吐舌，略带微笑\",\n          \"gaze\": \"向上看向左侧\"\n        },\n        \"makeup\": {\n          \"eyes\": \"淡妆配猫眼眼线\",\n          \"lips\": \"粉色\",\n          \"cheeks\": \"玫瑰色\",\n          \"features\": \"立体鼻梁\"\n        }\n      },\n      \"wardrobe\": {\n        \"upper_body\": {\n          \"item\": \"束身衣\",\n          \"material\": \"织锦\",\n          \"color\": \"粉色\",\n          \"details\": [\n            \"正面系带\",\n            \"镶边\"\n          ]\n        },\n        \"lower_body\": {\n          \"item\": \"迷你裙\",\n          \"pattern\": \"格纹\",\n          \"color\": \"粉色\",\n          \"details\": [\n            \"荷叶边层叠\",\n            \"白色蕾丝镶边\"\n          ]\n        },\n        \"leg_wear\": {\n          \"item\": \"过膝袜\",\n          \"color\": \"白色\",\n          \"details\": \"顶部有粉色条纹\"\n        },\n        \"accessories\": {\n          \"neck\": \"粉色项圈配小银铃\",\n          \"ears\": \"小耳钉\",\n          \"wrist\": \"精致金手链\"\n        }\n      },\n      \"pose\": {\n        \"action\": \"对镜自拍\",\n        \"hand_position\": \"右手持手机\",\n        \"posture\": \"站立\"\n      }\n    },\n    \"scene\": {\n      \"environment\": {\n        \"location\": \"现代公寓室内\",\n        \"flooring\": \"灰色木地板\",\n        \"walls\": \"灰色瓷砖区域\"\n      },\n      \"lighting\": {\n        \"source\": \"自然日光\",\n        \"direction\": \"来自落地窗\",\n        \"quality\": \"明亮\"\n      },\n      \"background_elements\": {\n        \"windows\": \"巨大落地窗，可见明亮日间城市景观与天空\",\n        \"furniture\": {\n          \"left\": \"靠墙的大棕色泰迪熊\",\n          \"right\": [\n            \"白色软垫扶手椅\",\n            \"木质边桌\",\n            \"架子上的透明玻璃花瓶\"\n          ]\n        }\n      },\n      \"foreground_elements\": {\n        \"props\": \"悬挂的绿色人造常春藤\",\n        \"overlays\": {\n          \"text_content\": \"HIII\",\n          \"text_color\": \"白色\",\n          \"position\": \"椅子附近的背景叠加\"\n        }\n      }\n    },\n    \"technical_specifications\": {\n      \"medium\": \"摄影\",\n      \"sub_genre\": \"镜子自拍\",\n      \"device_prop\": \"白色iPhone\",\n      \"composition\": \"反射呈现主体与房间环境\",\n      \"aspect_ratio\": \"2:3\"\n    }\n  }\n}"
+                            },
+                            "images": {
+                                "thumbnail": "images/prompt/9.webp",
+                                "full": "images/prompt/9.webp"
+                            }
+                        },
+                        {
                             "id": "photo_008",
                             "title": "K-Pop偶像报纸时尚概念",
                             "type": "portrait",
@@ -199,7 +214,27 @@ class DataLoader {
                                 "thumbnail": "images/prompt/8.webp",
                                 "full": "images/prompt/8.webp"
                             }
-                        }
+                        },
+						{
+  "id": "p_mko16lop_",
+  "title": "瓷娃娃海岸高角度自拍",
+  "type": "portrait",
+  "difficulty": "intermediate",
+  "tags": [
+    "瓷娃娃",
+    "深V",
+    "海滩",
+    "自拍"
+  ],
+  "description": "",
+  "prompt": {
+    "positive": "{\n  \"format\": {\n    \"type\": \"editorial\",\n    \"intent\": \"candid/selfie/accidental\",\n    \"aspect_ratio\": \"9:16\",\n    \"resolution\": \"4K\"\n  },\n  \"camera_system\": {\n    \"body\": \"iPhone 15 Pro\",\n    \"lens\": \"Main Camera\",\n    \"focal_length\": \"24mm\",\n    \"associative_traits\": \"computational photography, deep depth of field, sharp digital readout, auto-exposure\"\n  },\n  \"subject\": {\n    \"identity\": \"拥有精致瓷娃娃五官的年轻女子\",\n    \"physical_details\": \"无暇苍白肌肤，大而圆的冰蓝色眼睛配清晰睫毛，小巧立体的鼻子，中性嘟唇，铂金色双麻花辫，鲜艳蓝色美甲\",\n    \"clothing\": \"浅蓝色紧身超深V领上衣，显著露出乳沟\",\n    \"action\": \"高角度自拍视角，一手遮眼抵御海岸强光，抬头望向镜头\",\n    \"expression\": \"中性、睁大眼睛、面无表情、空洞的瓷娃娃凝视\"\n  },\n  \"lighting\": {\n    \"source\": \"明亮自然海岸日光+沙滩反光\",\n    \"direction\": \"顶部与全向填充\",\n    \"quality\": \"柔和、漫射却极亮\",\n    \"color_temp\": \"中性日光(5500K)\",\n    \"fill\": \"来自亮白沙滩反射的最大填充光\",\n    \"distribution\": \"均匀照明，极少阴影，对皮肤纹理友好\",\n    \"intent\": \"海滩明媚白日\"\n  },\n  \"environment\": {\n    \"setting\": \"日间沙滩\",\n    \"hero_materials\": [\n      {\n        \"material\": \"沙子\",\n        \"micro_detail\": \"细白颗粒，高反射\"\n      },\n      {\n        \"material\": \"布料\",\n        \"micro_detail\": \"浅蓝色泳装/弹力棉混纺\"\n      },\n      {\n        \"material\": \"肌肤\",\n        \"micro_detail\": \"光滑无毛孔，瓷质纹理，因热度微微湿润\"\n      }\n    ],\n    \"objects\": \"远处模糊的海平面，广阔沙滩\",\n    \"state\": \"明亮、阳光、海岸氛围\"\n  },\n  \"technical_finish\": {\n    \"film_stock\": \"数字源\",\n    \"exposure\": \"明亮曝光(高调)\",\n    \"grain\": \"无/数字噪点\",\n    \"tone_curve\": \"线性中性\",\n    \"color_science\": \"粉彩调色(浅蓝色、白沙滩、苍白肌肤)，自然日光色彩\"\n  },\n  \"constraints\": {\n    \"avoid\": [\n      \"雪\",\n      \"冬季衣物\",\n      \"红色指甲\",\n      \"黑色上衣\",\n      \"保守领口\",\n      \"浓重阴影\"\n    ],\n    \"must_include\": [\n      \"蓝色指甲\",\n      \"浅蓝色上衣\",\n      \"深乳沟\",\n      \"海滩背景\",\n      \"瓷娃娃五官\"\n    ]\n  }\n}"
+  },
+  "images": {
+    "thumbnail": "images/prompt/10.webp",
+    "full": "images/prompt/10.webp"
+  }
+},
                     ]
                 }
             ]
