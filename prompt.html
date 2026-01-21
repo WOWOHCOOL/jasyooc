@@ -36,9 +36,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=20250121-2">
-    <link rel="stylesheet" href="css/components/PromptCard.css?v=20250121-2">
-    <link rel="stylesheet" href="css/components/Modal.css?v=20250121-2">
+    <link rel="stylesheet" href="css/style.css?v=20250121-4">
+    <link rel="stylesheet" href="css/components/PromptCard.css?v=20250121-4">
+    <link rel="stylesheet" href="css/components/Modal.css?v=20250121-4">
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -150,11 +150,12 @@
             flex: 0 0 320px !important;
         }
         
-        /* 调试样式 - 确保卡片有正确的宽度 */
+        /* 移除调试边框 */
         @media (min-width: 1200px) {
             .prompt-card {
-                outline: 2px solid green !important; /* 调试用边框 - 4列成功为绿色 */
+                outline: none !important;
             }
+        }
         }
         
         /* Header 统一样式 - 确保图片路径正确 */
@@ -428,7 +429,7 @@
             }
             .prompt-card {
                 min-height: 400px;
-                max-height: 400px;
+                max-height: none; /* 移除最大高度限制 */
             }
         }
         
@@ -441,7 +442,7 @@
             }
             .prompt-card {
                 min-height: 400px;
-                max-height: 400px;
+                max-height: none; /* 移除最大高度限制 */
             }
         }
         
@@ -454,7 +455,7 @@
             }
             .prompt-card {
                 min-height: 400px;
-                max-height: 400px;
+                max-height: none; /* 移除最大高度限制 */
             }
         }
             .prompt-card {
@@ -598,7 +599,7 @@
             }
         }
         
-        /* 移动端优化 - 精确控制版本 */
+        /* 移动端优化 - 统一标签样式 */
         @media (max-width: 767px) {
             .prompt-grid {
                 grid-template-columns: 1fr !important;
@@ -607,6 +608,47 @@
                 max-width: 100% !important;
                 margin: 20px auto !important;
             }
+            
+            .prompt-card {
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: none !important;
+                flex: none !important;
+                min-height: auto !important;
+                height: auto !important;
+            }
+            
+            .prompt-content {
+                padding: 20px !important;
+            }
+            
+            .prompt-card h3 {
+                font-size: 1.1rem !important;
+                -webkit-line-clamp: 2 !important;
+            }
+            
+            .prompt-card p {
+                font-size: 0.95rem !important;
+                -webkit-line-clamp: 3 !important;
+            }
+            
+            .card-tags {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                padding-top: 14px !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                margin-top: 12px;
+            }
+            
+            .card-tags .tag {
+                font-size: 0.7rem !important;
+                padding: 4px 8px !important;
+                white-space: nowrap !important;
+                flex: 0 0 auto !important;
+            }
+        }
             
             .prompt-card {
                 width: 100% !important;
@@ -840,16 +882,17 @@
                 font-size: 0.85rem !important;
             }
             
-            .card-meta {
+            .card-tags {
                 gap: 6px !important;
                 padding-top: 12px !important;
+                margin-top: 12px;
                 display: flex !important;
                 flex-wrap: wrap !important;
                 justify-content: flex-start !important;
                 align-items: center !important;
             }
             
-            .card-meta span {
+            .card-tags .tag {
                 font-size: 0.65rem !important;
                 padding: 3px 6px !important;
                 white-space: nowrap !important;
@@ -950,34 +993,34 @@
             opacity: 1;
         }
         
-        /* 响应式图片高度 - 确保可见 */
+        /* 响应式图片高度 - 优化内容空间 */
         @media (min-width: 1600px) {
             .prompt-card .image-container {
-                height: 200px;
+                height: 180px; /* 减少图片高度为内容留更多空间 */
             }
         }
         
         @media (min-width: 1400px) and (max-width: 1599px) {
             .prompt-card .image-container {
-                height: 200px;
+                height: 180px;
             }
         }
         
         @media (min-width: 1200px) and (max-width: 1399px) {
             .prompt-card .image-container {
-                height: 210px;
+                height: 180px; /* 桌面端统一减少到180px */
             }
         }
         
         @media (min-width: 1024px) and (max-width: 1199px) {
             .prompt-card .image-container {
-                height: 220px;
+                height: 200px;
             }
         }
         
         @media (min-width: 768px) and (max-width: 1023px) {
             .prompt-card .image-container {
-                height: 240px;
+                height: 220px;
             }
         }
         
@@ -993,13 +1036,22 @@
             }
         }
         
-        /* 内容区域优化 - 修复比例问题 */
+        /* 内容区域优化 - 确保描述可见 */
         .prompt-content {
             padding: 22px;
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
+            min-height: 200px; /* 确保最小高度 */
+        }
+        
+        /* 桌面端内容区域优化 */
+        @media (min-width: 1200px) {
+            .prompt-content {
+                padding: 20px;
+                min-height: 180px; /* 减少内边距确保内容空间 */
+            }
         }
         
         .prompt-card h3 {
@@ -1031,6 +1083,16 @@
             overflow: hidden;
             flex-grow: 1;
             transition: color 0.3s ease;
+            min-height: 4.8em; /* 确保至少4行显示 */
+        }
+        
+        /* 桌面端描述优化 */
+        @media (min-width: 1200px) {
+            .prompt-card p {
+                -webkit-line-clamp: 4;
+                min-height: 6.4em; /* 4行 * 1.6 line-height */
+                max-height: none; /* 不限制最大高度 */
+            }
         }
         
         .prompt-card:hover p {
@@ -1473,9 +1535,9 @@
             border: 1px solid #ffcc80;
         }
         
-        /* 合并标签样式 - 新增 */
-        .card-meta .tag {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        /* 用户标签样式 - 美观统一 */
+        .card-tags .tag {
+            background: linear-gradient(135deg, #f1f3f4, #e9ecef);
             color: #495057;
             padding: 4px 10px;
             border-radius: 12px;
@@ -1485,24 +1547,24 @@
             font-weight: 500;
         }
         
-        .card-meta .tag:hover {
+        .card-tags .tag:hover {
             background: linear-gradient(135deg, var(--accent), #7a9591);
             color: white;
             border-color: var(--accent);
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(140, 168, 155, 0.3);
+            box-shadow: 0 2px 6px rgba(140, 168, 155, 0.3);
         }
         
-        .card-meta .tag-more {
-            background: linear-gradient(135deg, #ffc107, #ffb300);
+        .card-tags .tag-more {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
             color: #fff;
             font-weight: bold;
-            border-color: #ffc107;
+            border-color: #6c757d;
         }
         
-        .card-meta .tag-more:hover {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-            border-color: #ff9800;
+        .card-tags .tag-more:hover {
+            background: linear-gradient(135deg, #5a6268, #495057);
+            border-color: #5a6268;
         }
         
         /* 特殊符号区分样式 */
@@ -2412,6 +2474,52 @@
                                             flexDirection: metaStyle.flexDirection,
                                             flexWrap: metaStyle.flexWrap
                                         });
+                                    }
+                                    
+                                    // 检查内容区域（重点关注描述文本）
+                                    const promptContent = firstCard.querySelector('.prompt-content');
+                                    if (promptContent) {
+                                        const contentStyle = window.getComputedStyle(promptContent);
+                                        const titleElement = firstCard.querySelector('h3');
+                                        const descElement = firstCard.querySelector('p');
+                                        
+                                        console.log('=== 内容区域详细检查 ===');
+                                        console.log('内容区域样式:', {
+                                            height: contentStyle.height,
+                                            minHeight: contentStyle.minHeight,
+                                            display: contentStyle.display,
+                                            flexDirection: contentStyle.flexDirection
+                                        });
+                                        
+                                        if (titleElement) {
+                                            const titleStyle = window.getComputedStyle(titleElement);
+                                            console.log('标题样式:', {
+                                                height: titleStyle.height,
+                                                lineHeight: titleStyle.lineHeight,
+                                                webkitLineClamp: titleStyle.webkitLineClamp
+                                            });
+                                        }
+                                        
+                                        if (descElement) {
+                                            const descStyle = window.getComputedStyle(descElement);
+                                            const descRect = descElement.getBoundingClientRect();
+                                            console.log('📝 描述文本详细检查:', {
+                                                元素高度: descRect.height,
+                                                样式高度: descStyle.height,
+                                                最小高度: descStyle.minHeight,
+                                                行高: descStyle.lineHeight,
+                                                截断行数: descStyle.webkitLineClamp,
+                                                flexGrow: descStyle.flexGrow,
+                                                overflow: descStyle.overflow,
+                                                可见性: descElement.checkVisibility()
+                                            });
+                                            
+                                            // 检查文本是否被遮挡
+                                            const firstTextLine = descElement.firstChild;
+                                            if (firstTextLine && firstTextLine.nodeType === Node.TEXT_NODE) {
+                                                console.log('第一行文本内容:', firstTextLine.textContent.substring(0, 50) + '...');
+                                            }
+                                        }
                                     }
                                     
                                     // 添加调试边框
