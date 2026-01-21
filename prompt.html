@@ -190,6 +190,8 @@
             border-radius: var(--border-radius);
             box-shadow: var(--card-shadow);
             transition: var(--transition);
+            margin: 20px auto;
+            max-width: 95%;
         }
         
         .search-section:hover {
@@ -232,6 +234,8 @@
             border: 1px solid rgba(201, 166, 107, 0.2);
             border-radius: var(--border-radius);
             box-shadow: var(--card-shadow);
+            margin: 20px auto;
+            max-width: 95%;
         }
         
         .filter-title {
@@ -531,13 +535,142 @@
             }
         }
         
+        /* 移动端优化 - 确保1列布局 */
         @media (max-width: 767px) {
             .prompt-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
                 gap: 20px;
                 padding: 0 15px;
                 max-width: 100%;
             }
+            
+            .prompt-card {
+                width: 100% !important;
+                min-width: auto !important;
+                max-width: none !important;
+                flex: none !important;
+                min-height: auto;
+            }
+            
+            .prompt-content {
+                padding: 20px;
+            }
+            
+            .prompt-card h3 {
+                font-size: 1.1rem;
+                -webkit-line-clamp: 2;
+            }
+            
+            .prompt-card p {
+                font-size: 0.95rem;
+                -webkit-line-clamp: 3;
+            }
+            
+            .card-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding-top: 14px;
+            }
+            
+            .card-meta span {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+        }
+        
+        /* 小屏幕手机优化 */
+        @media (max-width: 480px) {
+            .prompt-grid {
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .prompt-content {
+                padding: 18px;
+            }
+            
+            .prompt-card h3 {
+                font-size: 1.05rem;
+            }
+            
+            .prompt-card p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* 移动端搜索和筛选优化 */
+        @media (max-width: 767px) {
+            .search-section,
+            .filter-section,
+            .tag-filter-section {
+                margin: 15px auto;
+                padding: 16px;
+            }
+            
+            .search-input {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+            
+            .filter-controls {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .tag-filter-container {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+            
+            .filter-title {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .search-section,
+            .filter-section,
+            .tag-filter-section {
+                margin: 12px auto;
+                padding: 14px;
+            }
+            
+            .search-input {
+                padding: 12px 16px;
+                font-size: 16px; /* 防止iOS放大 */
+            }
+            
+            .filter-title {
+                font-size: 1rem;
+            }
+        }
+        
+        /* 超小屏幕手机 */
+        @media (max-width: 360px) {
+            .search-section,
+            .filter-section,
+            .tag-filter-section {
+                margin: 10px auto;
+                padding: 12px;
+            }
+            
+            .search-input {
+                padding: 10px 14px;
+                font-size: 16px;
+            }
+        }
+            
+            .prompt-content {
+                padding: 16px;
+            }
+            
+            .card-meta span {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+        }
             .prompt-card {
                 min-height: auto;
             }
@@ -926,11 +1059,18 @@
             content: '📝';
         }
         
-        /* 移动端优化 */
+        /* 移动端图片优化 */
         @media (max-width: 767px) {
-            .prompt-content {
-                padding: 20px;
+            .prompt-card .image-container {
+                height: 220px;
             }
+        }
+        
+        @media (max-width: 480px) {
+            .prompt-card .image-container {
+                height: 200px;
+            }
+        }
             
             .prompt-card h3 {
                 font-size: 1.1rem;
@@ -1429,11 +1569,44 @@
             }
         }
         
-        /* 移动端骨架屏 */
+        /* 移动端骨架屏优化 */
         @media (max-width: 767px) {
             .prompt-grid .prompt-card.skeleton {
+                width: 100% !important;
                 min-height: auto;
             }
+            .prompt-grid .skeleton .image-container {
+                height: 220px;
+            }
+            .prompt-grid .skeleton .prompt-content {
+                padding: 20px;
+            }
+            .prompt-grid .skeleton .skeleton-title {
+                height: 26px;
+            }
+            .prompt-grid .skeleton .skeleton-text {
+                height: 20px;
+            }
+            .prompt-grid .skeleton .card-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                padding-top: 14px;
+            }
+            .prompt-grid .skeleton .skeleton-tag {
+                height: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .prompt-grid .skeleton .image-container {
+                height: 200px;
+            }
+            
+            .prompt-grid .skeleton .prompt-content {
+                padding: 18px;
+            }
+        }
             .prompt-grid .skeleton .image-container {
                 height: 220px;
             }
@@ -2016,8 +2189,8 @@
                         // 处理图片加载错误
                         setupImageErrorHandling();
                         
-                        // 最终强制4列布局
-                        console.log('=== 最终强制4列布局 ===');
+                        // 智能布局设置（桌面4列，移动1列）
+                        console.log('=== 智能布局设置 ===');
                         console.log('屏幕宽度:', window.innerWidth);
                         console.log('卡片数量:', existingCards.length);
                         
@@ -2026,41 +2199,52 @@
                             // 清除所有可能的样式
                             container.style.cssText = '';
                             
-                            // 重新设置4列布局
-                            container.style.display = 'grid';
-                            container.style.gridTemplateColumns = 'repeat(4, 320px)';
-                            container.style.maxWidth = '1400px';
-                            container.style.gap = '24px';
-                            container.style.margin = '30px auto';
-                            container.style.padding = '0 20px';
-                            container.style.justifyContent = 'center';
-                            container.style.alignItems = 'start';
-                            
-                            // 强制所有卡片宽度
-                            existingCards.forEach((card, index) => {
-                                card.style.cssText = '';
-                                card.style.width = '320px';
-                                card.style.minWidth = '320px';
-                                card.style.maxWidth = '320px';
-                                card.style.flex = '0 0 320px';
+                            // 根据屏幕宽度设置布局
+                            if (window.innerWidth >= 1200) {
+                                // 桌面端：4列布局
+                                container.style.display = 'grid';
+                                container.style.gridTemplateColumns = 'repeat(4, 320px)';
+                                container.style.maxWidth = '1400px';
+                                container.style.gap = '24px';
+                                container.style.margin = '30px auto';
+                                container.style.padding = '0 20px';
+                                container.style.justifyContent = 'center';
+                                container.style.alignItems = 'start';
                                 
-                                // 调试边框
-                                card.style.outline = index === 0 ? '3px solid red' : '';
-                            });
-                            
-                            console.log('强制设置完成！');
+                                // 桌面端强制卡片宽度
+                                existingCards.forEach((card, index) => {
+                                    card.style.cssText = '';
+                                    card.style.width = '320px';
+                                    card.style.minWidth = '320px';
+                                    card.style.maxWidth = '320px';
+                                    card.style.flex = '0 0 320px';
+                                    
+                                    // 调试边框
+                                    card.style.outline = index === 0 ? '3px solid green' : '';
+                                });
+                                
+                                console.log('设置桌面端4列布局');
+                            } else {
+                                // 移动端：清除强制样式，让CSS响应式生效
+                                existingCards.forEach((card) => {
+                                    card.style.cssText = '';
+                                });
+                                
+                                console.log('设置移动端自适应布局');
+                            }
                             
                             // 验证结果
                             setTimeout(() => {
                                 const computedStyle = window.getComputedStyle(container);
-                                console.log('最终列数:', computedStyle.gridTemplateColumns);
+                                console.log('当前列数:', computedStyle.gridTemplateColumns);
                                 
                                 if (existingCards.length > 0) {
                                     const firstCard = existingCards[0];
                                     const rect = firstCard.getBoundingClientRect();
-                                    console.log('最终卡片尺寸:', {
+                                    console.log('第一张卡片尺寸:', {
                                         width: rect.width,
-                                        height: rect.height
+                                        height: rect.height,
+                                        deviceType: window.innerWidth >= 1200 ? 'Desktop' : 'Mobile'
                                     });
                                 }
                             }, 100);
