@@ -36,9 +36,85 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=20250121-4">
-    <link rel="stylesheet" href="css/components/PromptCard.css?v=20250121-4">
+    <link rel="stylesheet" href="css/style.css?v=20250121-11">
+    <!-- <link rel="stylesheet" href="css/components/PromptCard.css?v=20250121-4"> -->
     <link rel="stylesheet" href="css/components/Modal.css?v=20250121-4">
+    
+    <!-- 强制卡片间距优化 - 覆盖所有冲突样式 -->
+    <style>
+        /* 完全重置PromptCard.css的样式冲突 */
+        .prompt-card {
+            background: white !important;
+            border-left: none !important;
+            border-radius: 20px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important;
+            border: 1px solid rgba(201, 166, 107, 0.1) !important;
+        }
+        
+        .prompt-card .prompt-content {
+            padding: 14px !important;
+            gap: 2px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+        }
+        
+        .prompt-card h3 {
+            margin: 0 0 4px 0 !important;
+            line-height: 1.3 !important;
+            min-height: auto !important;
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            color: #2c3e50 !important;
+        }
+        
+        .prompt-card p {
+            margin: 0 !important;
+            line-height: 1.5 !important;
+            font-size: 0.9rem !important;
+            color: #666 !important;
+        }
+        
+        .prompt-card .card-tags,
+        .prompt-card .card-meta {
+            padding-top: 0 !important;
+            gap: 5px !important;
+            margin-top: 0 !important;
+            border-top: 1px solid rgba(0,0,0,0.05) !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .prompt-card img {
+            margin-bottom: 0 !important;
+        }
+        
+        /* 移动端进一步优化 */
+        @media (max-width: 767px) {
+            .prompt-card .prompt-content {
+                padding: 12px !important;
+                gap: 1px !important;
+            }
+            
+            .prompt-card h3 {
+                margin: 0 0 3px 0 !important;
+                font-size: 1.0rem !important;
+            }
+            
+            .prompt-card p {
+                margin: 0 !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .prompt-card .card-tags,
+            .prompt-card .card-meta {
+                padding-top: 0 !important;
+                gap: 4px !important;
+            }
+        }
+    </style>
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -619,7 +695,8 @@
             }
             
             .prompt-content {
-                padding: 20px !important;
+                padding: 16px !important;
+                gap: 5px !important;
             }
             
             .prompt-card h3 {
@@ -635,11 +712,11 @@
             .card-tags {
                 display: flex !important;
                 flex-wrap: wrap !important;
-                gap: 8px !important;
-                padding-top: 14px !important;
+                gap: 6px !important;
+                padding-top: 6px !important;
                 justify-content: flex-start !important;
                 align-items: center !important;
-                margin-top: 12px;
+                margin-top: 6px;
             }
             
             .card-tags .tag {
@@ -871,11 +948,13 @@
             }
             
             .prompt-content {
-                padding: 18px !important;
+                padding: 14px !important;
+                gap: 4px !important;
             }
             
             .prompt-card h3 {
                 font-size: 1.05rem !important;
+                margin-bottom: 4px !important;
             }
             
             .prompt-card p {
@@ -883,9 +962,9 @@
             }
             
             .card-tags {
-                gap: 6px !important;
-                padding-top: 12px !important;
-                margin-top: 12px;
+                gap: 5px !important;
+                padding-top: 8px !important;
+                margin-top: 8px;
                 display: flex !important;
                 flex-wrap: wrap !important;
                 justify-content: flex-start !important;
@@ -1038,33 +1117,35 @@
         
         /* 内容区域优化 - 确保描述可见 */
         .prompt-content {
-            padding: 22px;
+            padding: 16px;
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
             min-height: 200px; /* 确保最小高度 */
+            gap: 6px; /* 进一步减少各元素之间的间距 */
         }
         
         /* 桌面端内容区域优化 */
         @media (min-width: 1200px) {
             .prompt-content {
-                padding: 20px;
+                padding: 16px;
                 min-height: 180px; /* 减少内边距确保内容空间 */
+                gap: 5px; /* 桌面端进一步减少间距 */
             }
         }
         
         .prompt-card h3 {
             font-size: 1.1rem;
             font-weight: 600;
-            margin: 0 0 12px 0;
-            line-height: 1.4;
+            margin: 0 0 4px 0;
+            line-height: 1.3;
             color: #2c3e50;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 2.8em;
+            min-height: 2.6em;
             transition: color 0.3s ease;
         }
         
@@ -1075,23 +1156,24 @@
         .prompt-card p {
             font-size: 0.9rem;
             color: #666;
-            line-height: 1.6;
-            margin: 0 0 16px 0;
+            line-height: 1.5;
+            margin: 0 0 6px 0;
             display: -webkit-box;
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             overflow: hidden;
             flex-grow: 1;
             transition: color 0.3s ease;
-            min-height: 4.8em; /* 确保至少4行显示 */
+            min-height: 4.5em; /* 确保至少4行显示 */
         }
         
         /* 桌面端描述优化 */
         @media (min-width: 1200px) {
             .prompt-card p {
                 -webkit-line-clamp: 4;
-                min-height: 6.4em; /* 4行 * 1.6 line-height */
+                min-height: 6.0em; /* 4行 * 1.5 line-height */
                 max-height: none; /* 不限制最大高度 */
+                line-height: 1.5; /* 与全局保持一致 */
             }
         }
         
@@ -1106,7 +1188,7 @@
             align-items: center;
             gap: 8px;
             margin-top: auto;
-            padding-top: 16px;
+            padding-top: 8px;
             border-top: 1px solid rgba(0,0,0,0.05);
             flex-wrap: wrap;
         }
@@ -1475,30 +1557,31 @@
         }
         
         .prompt-content {
-            padding: 20px;
+            padding: 16px !important;
             flex: 1;
             display: flex;
             flex-direction: column;
+            gap: 5px !important;
         }
         
         .prompt-card h3 {
             font-size: clamp(1rem, 2.5vw, 1.2rem);
             font-weight: 600;
-            margin: 0 0 10px 0;
-            line-height: 1.4;
+            margin: 0 0 6px 0 !important;
+            line-height: 1.3;
             color: #2c3e50;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 2.8em;
+            min-height: 2.6em;
         }
         
         .prompt-card p {
             font-size: clamp(0.85rem, 2vw, 0.95rem);
             color: #666;
-            line-height: 1.6;
-            margin: 0 0 12px 0;
+            line-height: 1.5;
+            margin: 0 0 8px 0 !important;
             display: -webkit-box;
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
@@ -1513,6 +1596,8 @@
             gap: 8px;
             flex-wrap: wrap;
             margin-top: auto;
+            padding-top: 8px !important;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
         
         .card-meta span {
@@ -2649,6 +2734,42 @@
                 });
             }
             
+            // 强制卡片间距优化
+            function forceCardSpacingOptimization() {
+                const cards = document.querySelectorAll('.prompt-card:not(.skeleton)');
+                if (cards.length === 0) return;
+                
+                cards.forEach(card => {
+                    // 强制设置内容区域间距
+                    const content = card.querySelector('.prompt-content');
+                    if (content) {
+                        content.style.setProperty('padding', '14px !important');
+                        content.style.setProperty('gap', '4px !important');
+                    }
+                    
+                    // 强制设置标题间距
+                    const title = card.querySelector('.prompt-card h3');
+                    if (title) {
+                        title.style.setProperty('margin-bottom', '4px !important');
+                        title.style.setProperty('line-height', '1.3 !important');
+                    }
+                    
+                    // 强制设置描述间距
+                    const desc = card.querySelector('.prompt-card p');
+                    if (desc) {
+                        desc.style.setProperty('margin-bottom', '6px !important');
+                        desc.style.setProperty('line-height', '1.5 !important');
+                    }
+                    
+                    // 强制设置标签间距
+                    const tags = card.querySelector('.card-tags, .card-meta');
+                    if (tags) {
+                        tags.style.setProperty('padding-top', '6px !important');
+                        tags.style.setProperty('gap', '5px !important');
+                    }
+                });
+            }
+            
             // 现代化卡片布局优化
             function optimizeCardLayout() {
                 const grid = document.getElementById('prompt-container');
@@ -2656,6 +2777,9 @@
                 
                 const cards = grid.querySelectorAll('.prompt-card:not(.skeleton)');
                 if (cards.length === 0) return;
+                
+                // 立即应用间距优化
+                forceCardSpacingOptimization();
                 
                 // 为新加载的卡片添加渐入动画
                 cards.forEach((card, index) => {
@@ -2683,6 +2807,29 @@
                     }
                 });
             }
+            // 页面加载完成后强制应用间距优化
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(forceCardSpacingOptimization, 100);
+                setTimeout(forceCardSpacingOptimization, 500);
+                setTimeout(forceCardSpacingOptimization, 1000);
+            });
+            
+            // 监听卡片变化，动态应用优化
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        setTimeout(forceCardSpacingOptimization, 50);
+                    }
+                });
+            });
+            
+            // 观察容器变化
+            setTimeout(() => {
+                const container = document.getElementById('prompt-container');
+                if (container) {
+                    observer.observe(container, { childList: true, subtree: true });
+                }
+            }, 100);
         })();
     </script>
 </body>
