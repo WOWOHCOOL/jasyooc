@@ -2,7 +2,7 @@
   "metadata": {
     "version": "2.0",
     "lastUpdated": "2026-01-22",
-    "totalPrompts": 12,
+    "totalPrompts": 14,
     "categories": 1
   },
   "categories": [
@@ -68,7 +68,7 @@
           "type": "landscape",
           "difficulty": "intermediate",
           "prompt": {
-            "positive": "霓虹灯，车流光轨，建筑轮廓，深蓝天空，清晰对焦"
+            "positive": "{\n  \"portrait_prompt\": {\n    \"subject\": \"一位年轻亚洲女性的特写，她留着刘海，身穿红色细肩带连衣裙。她微微仰头，下巴高高抬起，慵懒放松地露出优雅的颈部。一只手正轻轻将一颗小红樱桃番茄按在她的锁骨区域。背景中可见红色丝带。\",\n    \"composition\": \"极致特写，从胸部下方拍摄，对角线向上取景。浅景深（约f/2.0）虚化背景，同时保持面部、颈部与肩膀的清晰对焦。50mm镜头。\",\n    \"camera_angle\": \"从胸部下方低角度，对角向上拍摄，营造亲密与高挑感。\",\n    \"lighting\": \"强烈的自然逆光来自上方窗户或天窗。高调照明配合柔和梦幻的光晕（光渗）效果。光线环绕她的侧脸，形成发光轮廓光。\",\n    \"color_palette\": \"温暖复古胶卷美学。主色为鲜艳红色与温暖奶油肤色。略微过曝的高光带来怀旧夏日氛围，类似Kodak Portra 400胶卷，带胶片颗粒。\",\n    \"mood\": \"亲密、感性、氛围感、梦幻，日系写真风格，捕捉夏日炽热与放松的稍纵即逝瞬间。\",\n    \"negative_prompt\": \"不真实的特征、解剖错误、僵硬姿势、生硬阴影、冷色调、低分辨率、构图差、手部变形、多余手指、水印、文字、黑暗环境\"\n  }\n}"
           },
           "images": {
             "thumbnail": "images/prompt/11.webp",
@@ -255,10 +255,12 @@
         {
           "id": "4",
           "title": "与手机原图同框的铅笔肖像",
-          "description": "关于\"与手机原图同框的铅笔肖像\"的摄影提示词卡片，适合人像摄影，难度中级。",
+          "description": "与手机原图同框的铅笔肖像",
           "tags": [
             "人像",
-            "中级"
+            "中级",
+            "手机",
+            "铅笔"
           ],
           "type": "portrait",
           "difficulty": "intermediate",
@@ -268,6 +270,53 @@
           "images": {
             "thumbnail": "images/prompt/4.webp",
             "full": "images/prompt/4.webp"
+          }
+        },
+        {
+          "id": "13",
+          "title": "高定女王LED巨幕",
+          "description": "一位女性的高定系列肖像",
+          "tags": [
+            "人像",
+            "中级",
+            "夜景",
+            "8K",
+            "现代",
+            "建筑"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "电影感的米兰奢侈品区夜景，现代建筑与时装屋林立。整栋建筑的LED广告牌展示着同一位女性的高定系列肖像，戏剧性阴影，编辑式灯光。广告牌上用奢华字体写着\"MAESTRIA\"。前景中，她自信地站立，身着雕塑感黑色礼服，大理石地面反射着温暖灯光，豪华汽车驶过，情绪色调，高级时尚广告风格，超现实主义，1:1，8K。"
+          },
+          "images": {
+            "thumbnail": "images/prompt/13.webp",
+            "full": "images/prompt/13.webp"
+          }
+        },
+        {
+          "id": "14",
+          "title": "纯白九宫格湿发超模",
+          "description": "几缕湿发轻贴脸颊与下颌线",
+          "tags": [
+            "人像",
+            "中级",
+            "光线",
+            "补光",
+            "特写",
+            "柔和",
+            "自然",
+            "表情",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"type\": \"图生图\",\n  \"model\": \"stable-diffusion-xl\",\n  \"prompt\": \"保持相同面孔与身份。垂直高端时尚美妆拼贴，以3×3网格排列的特写肖像，置于干净无接缝的纯白工作室背景。明亮均匀的正向工作室照明配柔和补光，消除刺眼阴影并营造光泽 editorial 造型。颧骨、鼻梁、嘴唇以及白色T恤领口处带微妙高光，背景始终保持均匀纯白。年轻女性从颈部中段以上取景，双肩端正、每格均正对镜头。长而松散湿润的头发自然垂落肩头，部分覆于面部，几缕湿发轻贴脸颊与下颌线，一些垂向嘴唇，增添动感与原始随性的美感。湿发质感带柔和光泽反射光线，光泽与自然不完美形成对比。整个网格中她大幅度变换面部表情；其中一个表情包括伸舌头。\",\n  \"negative_prompt\": \"低分辨率、模糊、刺眼阴影、不均匀照明、色偏、背景纹理、多余肢体、面部扭曲、过曝高光、欠曝区域\",\n  \"aspect_ratio\": \"2:3\",\n  \"style\": \"高端时尚 editorial\",\n  \"lighting\": \"明亮均匀工作室照明、柔和补光\",\n  \"background\": \"纯白无接缝工作室\",\n  \"output\": {\n    \"grid\": \"3x3\",\n    \"orientation\": \"垂直\",\n    \"framing\": \"颈部中段以上\"\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/14.webp",
+            "full": "images/prompt/14.webp"
           }
         }
       ]
