@@ -28,6 +28,8 @@
     <style>
         /* ==================== CSS 優化版本 ==================== */
         
+        /* 伍佰页面专用样式 - 不影响其他页面 */
+        
         /* 1. 全局字体设置 - 统一管理 */
         body {
             font-family: 'KaiTi', 'STKaiTi', 'BiauKai', 'DFKai-SB', 'LiKaiTi', serif;
@@ -231,6 +233,162 @@
                 border: 1px solid #ddd;
             }
         }
+
+        /* 10. 歌词高亮功能 - 伍佰页面专用 */
+        .lyrics-container {
+            position: relative;
+        }
+
+        .lyrics-line {
+            display: block;
+            padding: 8px 12px;
+            margin: 4px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .lyrics-line:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .lyrics-line.highlighted {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 193, 7, 0.1));
+            border-left: 4px solid var(--gold);
+            padding-left: 16px;
+            font-weight: bold;
+        }
+
+        .lyrics-tooltip {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gold);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .lyrics-line.highlighted .lyrics-tooltip {
+            opacity: 1;
+        }
+
+        /* 11. 深色模式 - 伍佰页面专用 */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 深色模式样式 */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .card,
+        body.dark-mode .intro-card,
+        body.dark-mode .song-card {
+            background: #2d2d44;
+            color: #e0e0e0;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .intro-card {
+            background: linear-gradient(135deg, #2d2d44 0%, #3d3d5c 100%);
+        }
+
+        body.dark-mode .song-title {
+            color: #ffd700;
+        }
+
+        body.dark-mode .lyrics {
+            background: #1f1f33;
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .lyrics-line:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        body.dark-mode .lyrics-line.highlighted {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 193, 7, 0.15));
+        }
+
+        body.dark-mode .insight {
+            color: #d0d0d0;
+        }
+
+        body.dark-mode .history-link {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .history-link a {
+            color: #ffd700;
+        }
+
+        body.dark-mode .history-link a:hover {
+            color: #ffed4e;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: rgba(45, 45, 68, 0.9);
+            color: #ffd700;
+        }
+
+        body.dark-mode .intro-text {
+            color: #d0d0d0;
+        }
+
+        body.dark-mode footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+            color: #b0b0b0;
+            border-top: 1px solid #3d3d5c;
+        }
+
+        body.dark-mode footer a {
+            color: #ffd700;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode footer a:hover {
+            color: #ffed4e;
+        }
+
+
+
+        /* 响应式调整深色模式按钮 */
+        @media (max-width: 768px) {
+            .dark-mode-toggle {
+                top: 15px;
+                right: 15px;
+                font-size: 1em;
+                padding: 6px 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -245,6 +403,12 @@
             <p class="intro-text">那些年，我們在挪威的森林裡迷路，<br>在淚橋上站了太久，<br>被晚風吹得清醒又迷茫。</p>
             <p class="intro-text">伍佰的歌，從來不講大道理，<br>只是把中年男人的無奈、灑脫、遺憾、堅持，<br>唱得我們心照不宣。</p>
             <p class="intro-text">以下十首經典，配深夜共鳴與古人歪說，<br>願你聽完，像抽了一支上籤。</p>
+            <p class="intro-text" style="background: linear-gradient(135deg, #fff9e6, #fff3cd); padding: 15px; border-radius: 12px; margin-top: 20px; color: #664d03;">
+                🌟 <strong>新功能体验：</strong><br>
+                🎯 点击歌词行可标记重点<br>
+                🌙 右上角切换深夜模式<br>
+                ⌨️ 快捷键 Ctrl+D 切换主题
+            </p>
         </div>
 
         <!-- 歌曲1：挪威的森林 -->
@@ -472,6 +636,11 @@
 
     </main>
 
+    <!-- 深色模式切换按钮 -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换深色模式">
+        🌙
+    </button>
+
     <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
         <img src="images/logo.webp" alt="江湖禪心 Logo" 
      style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
@@ -493,5 +662,177 @@
         <a href="test.html" aria-label="江湖測試">🧪</a>
         <a href="prompt.html" aria-label="提示詞錄">✨</a>
     </nav>
+
+    <script>
+        // 歌词重点句子数据库
+        const keyLyrics = {
+            '挪威的森林': [
+                '那裡湖面總是澄清 那裡空氣充滿寧靜',
+                '讓我將妳心兒摘下 試著將它慢慢溶化',
+                '是否我只是妳一種寄託 填滿妳感情的缺口',
+                '心中那片森林何時能讓我停留'
+            ],
+            '淚橋': [
+                '寂寞的人 總是習慣寂寞的安穩',
+                '就像站在烈日驕陽大橋上 眼淚狂奔滴落在我的臉龐',
+                '甜美鏡頭竟也落花一樣飄落下來 從此 我的生命變成了塵埃'
+            ],
+            '世界第一等': [
+                '一杯酒兩角銀 三不五時嘛來湊陣',
+                '是緣份是註定 好漢剖腹來參見',
+                '短短仔的光陰迫逍著少年時 求名利無了時 千金難買好人生'
+            ],
+            '突然的自我': [
+                '我已習慣 你突然間的自我',
+                '揮揑灑灑 將自然看通透 那就不要留',
+                '傷心也是帶著微笑的眼淚',
+                '如果僅有此生 又何用待從頭'
+            ],
+            'Last Dance': [
+                '是否還能再見你 已經不重要 因為今夜我要將你擁抱',
+                '想起你那溫柔體貼 想起你那美麗笑容 這一切的一切早已經成空',
+                '我只有 我只有 將這首歌唱給你聽 當作最後一支舞'
+            ],
+            '浪人情歌': [
+                '愛著你 想念你 捨不得你 卻必須離開你',
+                '像天空飄著的雲 難以預料的方向',
+                '請別這樣看我 我是真心愛過你'
+            ],
+            '痛哭的人': [
+                '痛哭的人不能在家裡痛哭 痛哭的人只好走上街頭',
+                '讓眼淚流下來 讓悲傷出來 讓寂寞的心得到安慰'
+            ],
+            '白鴿': [
+                '我只是行走在黑夜的旅人 用我疲憊的雙腳 慢慢的尋找',
+                '白鴿 白鴿 你自由的飛翔 而我只能仰望'
+            ],
+            '晚風': [
+                '坐在門前的矮牆上 一遍遍懷想',
+                '溫暖我心窩的 是那隻粗糙的手掌',
+                '啊 澎湖灣 澎湖灣 外婆的澎湖灣'
+            ],
+            '愛情的盡頭': [
+                '我們走到愛情的盡頭 卻還捨不得放手',
+                '我們走到感情的終點 卻還不願說再見',
+                '也許是我們太倔強 也許是我們太善良'
+            ]
+        };
+
+        // 深色模式功能
+        function toggleDarkMode() {
+            const body = document.body;
+            const button = document.querySelector('.dark-mode-toggle');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                button.textContent = '🌙';
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                body.classList.add('dark-mode');
+                button.textContent = '☀️';
+                localStorage.setItem('darkMode', 'true');
+            }
+        }
+
+        // 初始化深色模式
+        function initDarkMode() {
+            const savedMode = localStorage.getItem('darkMode');
+            const button = document.querySelector('.dark-mode-toggle');
+            
+            if (savedMode === 'true') {
+                document.body.classList.add('dark-mode');
+                button.textContent = '☀️';
+            } else {
+                button.textContent = '🌙';
+            }
+        }
+
+        // 处理歌词显示
+        function processLyrics() {
+            document.querySelectorAll('.song-card').forEach(card => {
+                const titleElement = card.querySelector('.song-title');
+                const lyricsElement = card.querySelector('.lyrics');
+                
+                if (!titleElement || !lyricsElement) return;
+                
+                const title = titleElement.textContent.trim();
+                const keyLines = keyLyrics[title] || [];
+                
+                // 创建歌词容器
+                const container = document.createElement('div');
+                container.className = 'lyrics-container';
+                
+                // 将歌词按行分割并处理
+                const lines = lyricsElement.textContent.split('\n').filter(line => line.trim());
+                
+                lines.forEach(line => {
+                    const lineElement = document.createElement('span');
+                    lineElement.className = 'lyrics-line';
+                    lineElement.textContent = line;
+                    
+                    // 检查是否为重点歌词
+                    const isKeyLine = keyLines.some(keyLine => 
+                        line.trim().includes(keyLine.trim()) || 
+                        keyLine.trim().includes(line.trim())
+                    );
+                    
+                    if (isKeyLine) {
+                        lineElement.classList.add('highlighted');
+                        const tooltip = document.createElement('span');
+                        tooltip.className = 'lyrics-tooltip';
+                        tooltip.textContent = '重点歌词';
+                        lineElement.appendChild(tooltip);
+                    }
+                    
+                    // 添加点击事件
+                    lineElement.addEventListener('click', function() {
+                        // 移除其他高亮
+                        this.parentElement.querySelectorAll('.lyrics-line').forEach(l => {
+                            if (l !== this) {
+                                l.classList.remove('highlighted');
+                                const tooltip = l.querySelector('.lyrics-tooltip');
+                                if (tooltip) tooltip.remove();
+                            }
+                        });
+                        
+                        // 切换当前行高亮
+                        if (this.classList.contains('highlighted')) {
+                            this.classList.remove('highlighted');
+                            const tooltip = this.querySelector('.lyrics-tooltip');
+                            if (tooltip) tooltip.remove();
+                        } else {
+                            this.classList.add('highlighted');
+                            const tooltip = document.createElement('span');
+                            tooltip.className = 'lyrics-tooltip';
+                            tooltip.textContent = '已标记';
+                            this.appendChild(tooltip);
+                        }
+                    });
+                    
+                    container.appendChild(lineElement);
+                    container.appendChild(document.createElement('br'));
+                });
+                
+                // 替换原始歌词
+                lyricsElement.style.display = 'none';
+                lyricsElement.parentNode.insertBefore(container, lyricsElement.nextSibling);
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initDarkMode();
+            processLyrics();
+        });
+
+        // 添加键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + D 切换深色模式
+            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                e.preventDefault();
+                toggleDarkMode();
+            }
+        });
+    </script>
 </body>
 </html>
