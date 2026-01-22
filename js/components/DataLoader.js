@@ -22,277 +22,358 @@ class DataLoader {
         }
 
         try {
-            // 临时优先使用内联数据以确保服务器环境正常工作
+            // 优先使用内联数据以确保服务器环境正常工作
             console.warn('服务器环境：优先使用内联数据确保稳定性');
             return this.getInlineData();
-            
-            /* 原有逻辑暂时注释
-            // 首先尝试从文件加载（用于web服务器环境）
-            if (window.location.protocol !== 'file:') {
-                const response = await fetch('data/prompts.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const data = await response.json();
-                
-                // 缓存数据
-                this.cache.set(cacheKey, {
-                    data: data,
-                    timestamp: Date.now()
-                });
-                
-                return data;
-            } else {
-                // 如果是file://协议，使用内联数据
-                console.warn('检测到file://协议，使用内联数据');
-                return this.getInlineData();
-            }
-            */
         } catch (error) {
             console.error('加载提示词数据失败:', error);
-            
-            // 返回备用数据或抛出错误
-            if (cached) {
-                console.warn('使用缓存数据');
-                return cached.data;
-            }
-            
-            throw error;
+            return this.getInlineData();
         }
     }
 
     /**
      * 获取内联数据（用于本地文件访问）
-     * @returns {Object} 提示词数据
+     * @returns {Object} 内联数据
      */
     getInlineData() {
         return {
-            "metadata": {
-                "version": "2.0",
-                "lastUpdated": "2026-01-21",
-                "totalPrompts": 9,
-                "categories": 1
-            },
-            "categories": [
-                {
-                    "id": "photography",
-                    "name": "摄影提示词",
-                    "icon": "📷",
-                    "description": "专业摄影AI提示词",
-                    "prompts": [
-                        {
-                            "id": "photo_001",
-                            "title": "路口转角反光镜",
-                            "type": "portrait",
-                            "difficulty": "advanced",
-                            "tags": ["夜景", "自拍", "凸面镜", "8K"],
-                            "description": "超精致夜景自拍提示词",
-                            "prompt": {
-                                "positive": "创作，最佳画质，超高清8K分辨率，清晰对焦，电影级光影，景深完美，构图精妙，获得殊榮的专业摄影风格，对细节的极致追求，精致的纹理，1:1微距特写，一位美丽的中国女偶像在夜色笼罩的城市十字路口，对着大型凸面交通安全镜距特写。她可爱的脸庞，明亮的大眼睛，精致的五官，柔顺的黑色长发，戴着白色兔耳朵发箍，脖子上围着舒适的棕白条纹围巾，甜美的偶像气质扑面而来。凸面镜的倒影呈现出十字路口的广角扭曲全景，她可爱的身影、汽车、行人、建筑物、路灯都以戏剧性的鱼眼畸变呈现。她纤细的手戴着优雅的梵克雅宝Alhambra手链（金色四叶草图案），伸出手拿着手机自拍。柔和舒适的夜色氛围，路灯和霓虹灯的温暖金光照亮了场景和镜面，展现黄金时刻的迷人风采。色调融合柔和的夜蓝色，高动态范围，逼真的玻璃凸面镜纹理，强烈的镜面反射，照片级逼真的肌肤、珠宝和金属细节，鲜艳而温馨的色彩，无文字，无水印。 ar3:4",
-                                "negative": "貝面提示：低品质、模糊、脸部和手部畸形、解剖结构错误、多余肢体、变异、丑陋、复制粗糙、水印、文字、签名、曝光过度、曝光不足、卡通、3D渲染、恐怖、白天强光。"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/1.webp",
-                                "full": "images/prompt/1.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_002",
-                            "title": "极简空间的向上凝视",
-                            "type": "portrait",
-                            "difficulty": "advanced",
-                            "tags": ["俯视", "极简", "广角透视", "工作室"],
-                            "description": "极简俯视内省肖像提示词",
-                            "prompt": {
-                                "positive": "最佳画质，8K分辨率，电影级光影，从极高角度拍摄的全身照，强烈的广角透视夸张，戴眼镜的年轻人，深棕色夹克，圆脸柔和的下颌线条，俯视视角，工作室环境，光滑无缝的地板，渐变背景",
-                                "negative": "低品质，模糊，白天强光，喧闹背景，过多的杂物，不自然的透视畸变"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/2.webp",
-                                "full": "images/prompt/2.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_003",
-                            "title": "活力四射的自拍",
-                            "type": "portrait",
-                            "difficulty": "expert",
-                            "tags": ["自拍", "K-Pop", "Y2K", "偶像"],
-                            "description": "超精致自拍提示词",
-                            "prompt": {
-                                "positive": "K-Pop偶像，圆形眼镜，甜美可爱，粉彩色调，圆形眼镜，甜美偶像气质，圆形眼镜，韩式流行风格眼妆，明亮的大眼睛，玻璃肌效果",
-                                "negative": "丑陋，粗糙质感，白天强光，不自然的姿势，模糊，像素化"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/3.webp",
-                                "full": "images/prompt/3.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_004",
-                            "title": "与手机原图同框的铅笔肖像",
-                            "type": "portrait",
-                            "difficulty": "expert",
-                            "tags": ["素描", "铅笔", "写实", "艺术"],
-                            "description": "提示词",
-                            "prompt": "｛perfect composition, impeccable attention to detail, highest quality, rich detail, sharp focus, 8K/4K resolution, clear edges, exquisite details, perfect composition, depth of field, cinematic lighting, vibrant colors, award-winning style, professional level, perfect depiction. Create an extremely detailed, hyper-realistic 3D graphite pencil sketch depicting face of a Chinese idol girl, drawn on textured white notebook paper with clear paper quality, delicate details, and subtle imperfections. The facial sketch should be perfectly identical to reference photo displayed on an iPhone placed next to notebook. The iPhone screen clearly displays artist original portrait photograph with natural reflections and soft sunlight reflections on glass.｝",
-                            "images": {
-                                "thumbnail": "images/prompt/4.webp",
-                                "full": "images/prompt/4.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_005",
-                            "title": "咖啡館的雨天小确幸",
-                            "type": "portrait",
-                            "difficulty": "advanced",
-                            "tags": ["雨天", "咖啡馆", "暖色", "温馨"],
-                            "description": "超精致自拍提示词",
-                            "prompt": {
-                                "positive": "年轻女子，东亚裔，柔顺的黑色长发，奶油白粗针织毛衣，咖啡馆窗边，雨天氛围，温暖的木质镶板，柔和的漫射窗光，胶片摄影风格",
-                                "negative": "强光，白天，喧闹，冷色调，不自然的姿势，低品质"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/5.webp",
-                                "full": "images/prompt/5.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_006",
-                            "title": "逆光发梢的温柔忧郁",
-                            "type": "portrait",
-                            "difficulty": "expert",
-                            "tags": ["逆光", "长发", "戏剧性光线", "胶片"],
-                            "description": "超精致自拍提示词",
-                            "prompt": {
-                                "positive": "逆光，长发，戏剧性光线，胶片质感，年轻东亚女性，回头看，深棕色夹克，长长的松散的波浪卷，强烈的背光照射，光晕效果",
-                                "negative": "正面光，白天，低品质，不自然的逆光效果，模糊"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/6.webp",
-                                "full": "images/prompt/6.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_007",
-                            "title": "冬日晴空下的闺蜜团",
-                            "type": "group",
-                            "difficulty": "expert",
-                            "tags": ["团体照", "逆光", "冬日", "朋友"],
-                            "description": "超精致自拍提示词",
-                            "prompt": {
-                                "positive": "5个女孩，圆形合影，低角度拍摄，纯蓝色天空，高key自然光，白色毛绒耳套，深色外套，黑贝雷帽，高清晰度，K-pop风格",
-                                "negative": "模糊的脸部，丑陋的牙齿，坏的解剖结构，多云天空，建筑物，鱼眼畸变"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/7.webp",
-                                "full": "images/prompt/7.webp"
-                            }
-                        },
-                        {
-                            "id": "p_mko0jg0q_",
-                            "title": "粉系猫耳少女对镜自拍",
-                            "type": "portrait",
-                            "difficulty": "intermediate",
-                            "tags": [],
-                            "description": "",
-                            "prompt": {
-                                "positive": "{\n  \"image_generation_prompt\": {\n    \"subject\": {\n      \"demographics\": {\n        \"gender\": \"女性\",\n        \"age_group\": \"年轻成人\",\n        \"skin_tone\": \"白皙\"\n      },\n      \"hair\": {\n        \"color\": \"金色\",\n        \"length\": \"长发\",\n        \"style\": \"直发/微卷\",\n        \"accessory\": \"白色毛茸茸猫耳朵发箍\"\n      },\n      \"face\": {\n        \"expression\": {\n          \"mood\": \"俏皮\",\n          \"mouth\": \"吐舌，略带微笑\",\n          \"gaze\": \"向上看向左侧\"\n        },\n        \"makeup\": {\n          \"eyes\": \"淡妆配猫眼眼线\",\n          \"lips\": \"粉色\",\n          \"cheeks\": \"玫瑰色\",\n          \"features\": \"立体鼻梁\"\n        }\n      },\n      \"wardrobe\": {\n        \"upper_body\": {\n          \"item\": \"束身衣\",\n          \"material\": \"织锦\",\n          \"color\": \"粉色\",\n          \"details\": [\n            \"正面系带\",\n            \"镶边\"\n          ]\n        },\n        \"lower_body\": {\n          \"item\": \"迷你裙\",\n          \"pattern\": \"格纹\",\n          \"color\": \"粉色\",\n          \"details\": [\n            \"荷叶边层叠\",\n            \"白色蕾丝镶边\"\n          ]\n        },\n        \"leg_wear\": {\n          \"item\": \"过膝袜\",\n          \"color\": \"白色\",\n          \"details\": \"顶部有粉色条纹\"\n        },\n        \"accessories\": {\n          \"neck\": \"粉色项圈配小银铃\",\n          \"ears\": \"小耳钉\",\n          \"wrist\": \"精致金手链\"\n        }\n      },\n      \"pose\": {\n        \"action\": \"对镜自拍\",\n        \"hand_position\": \"右手持手机\",\n        \"posture\": \"站立\"\n      }\n    },\n    \"scene\": {\n      \"environment\": {\n        \"location\": \"现代公寓室内\",\n        \"flooring\": \"灰色木地板\",\n        \"walls\": \"灰色瓷砖区域\"\n      },\n      \"lighting\": {\n        \"source\": \"自然日光\",\n        \"direction\": \"来自落地窗\",\n        \"quality\": \"明亮\"\n      },\n      \"background_elements\": {\n        \"windows\": \"巨大落地窗，可见明亮日间城市景观与天空\",\n        \"furniture\": {\n          \"left\": \"靠墙的大棕色泰迪熊\",\n          \"right\": [\n            \"白色软垫扶手椅\",\n            \"木质边桌\",\n            \"架子上的透明玻璃花瓶\"\n          ]\n        }\n      },\n      \"foreground_elements\": {\n        \"props\": \"悬挂的绿色人造常春藤\",\n        \"overlays\": {\n          \"text_content\": \"HIII\",\n          \"text_color\": \"白色\",\n          \"position\": \"椅子附近的背景叠加\"\n        }\n      }\n    },\n    \"technical_specifications\": {\n      \"medium\": \"摄影\",\n      \"sub_genre\": \"镜子自拍\",\n      \"device_prop\": \"白色iPhone\",\n      \"composition\": \"反射呈现主体与房间环境\",\n      \"aspect_ratio\": \"2:3\"\n    }\n  }\n}"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/9.webp",
-                                "full": "images/prompt/9.webp"
-                            }
-                        },
-                        {
-                            "id": "photo_008",
-                            "title": "K-Pop偶像报纸时尚概念",
-                            "type": "portrait",
-                            "difficulty": "expert",
-                            "tags": ["K-Pop", "报纸", "时尚", "创意"],
-                            "description": "超精致自拍提示词",
-                            "prompt": {
-                                "positive": "韩国K-Pop偶像，无肩带迷你连衣裙，真正的再生报纸页面，建筑风格的折纸褶皱，棕褐色调的纸张，大号纤细银圈耳环，极简主义",
-                                "negative": "低品质，模糊，不自然的姿势，白天强光，不对的报纸纹理"
-                            },
-                            "images": {
-                                "thumbnail": "images/prompt/8.webp",
-                                "full": "images/prompt/8.webp"
-                            }
-                        },
-						{
-  "id": "p_mko16lop_",
-  "title": "瓷娃娃海岸高角度自拍",
-  "type": "portrait",
-  "difficulty": "intermediate",
-  "tags": [
-    "瓷娃娃",
-    "深V",
-    "海滩",
-    "自拍"
-  ],
-  "description": "",
-  "prompt": {
-    "positive": "{\n  \"format\": {\n    \"type\": \"editorial\",\n    \"intent\": \"candid/selfie/accidental\",\n    \"aspect_ratio\": \"9:16\",\n    \"resolution\": \"4K\"\n  },\n  \"camera_system\": {\n    \"body\": \"iPhone 15 Pro\",\n    \"lens\": \"Main Camera\",\n    \"focal_length\": \"24mm\",\n    \"associative_traits\": \"computational photography, deep depth of field, sharp digital readout, auto-exposure\"\n  },\n  \"subject\": {\n    \"identity\": \"拥有精致瓷娃娃五官的年轻女子\",\n    \"physical_details\": \"无暇苍白肌肤，大而圆的冰蓝色眼睛配清晰睫毛，小巧立体的鼻子，中性嘟唇，铂金色双麻花辫，鲜艳蓝色美甲\",\n    \"clothing\": \"浅蓝色紧身超深V领上衣，显著露出乳沟\",\n    \"action\": \"高角度自拍视角，一手遮眼抵御海岸强光，抬头望向镜头\",\n    \"expression\": \"中性、睁大眼睛、面无表情、空洞的瓷娃娃凝视\"\n  },\n  \"lighting\": {\n    \"source\": \"明亮自然海岸日光+沙滩反光\",\n    \"direction\": \"顶部与全向填充\",\n    \"quality\": \"柔和、漫射却极亮\",\n    \"color_temp\": \"中性日光(5500K)\",\n    \"fill\": \"来自亮白沙滩反射的最大填充光\",\n    \"distribution\": \"均匀照明，极少阴影，对皮肤纹理友好\",\n    \"intent\": \"海滩明媚白日\"\n  },\n  \"environment\": {\n    \"setting\": \"日间沙滩\",\n    \"hero_materials\": [\n      {\n        \"material\": \"沙子\",\n        \"micro_detail\": \"细白颗粒，高反射\"\n      },\n      {\n        \"material\": \"布料\",\n        \"micro_detail\": \"浅蓝色泳装/弹力棉混纺\"\n      },\n      {\n        \"material\": \"肌肤\",\n        \"micro_detail\": \"光滑无毛孔，瓷质纹理，因热度微微湿润\"\n      }\n    ],\n    \"objects\": \"远处模糊的海平面，广阔沙滩\",\n    \"state\": \"明亮、阳光、海岸氛围\"\n  },\n  \"technical_finish\": {\n    \"film_stock\": \"数字源\",\n    \"exposure\": \"明亮曝光(高调)\",\n    \"grain\": \"无/数字噪点\",\n    \"tone_curve\": \"线性中性\",\n    \"color_science\": \"粉彩调色(浅蓝色、白沙滩、苍白肌肤)，自然日光色彩\"\n  },\n  \"constraints\": {\n    \"avoid\": [\n      \"雪\",\n      \"冬季衣物\",\n      \"红色指甲\",\n      \"黑色上衣\",\n      \"保守领口\",\n      \"浓重阴影\"\n    ],\n    \"must_include\": [\n      \"蓝色指甲\",\n      \"浅蓝色上衣\",\n      \"深乳沟\",\n      \"海滩背景\",\n      \"瓷娃娃五官\"\n    ]\n  }\n}"
+  "metadata": {
+    "version": "2.0",
+    "lastUpdated": "2026-01-22",
+    "totalPrompts": 12,
+    "categories": 1
   },
-  "images": {
-    "thumbnail": "images/prompt/10.webp",
-    "full": "images/prompt/10.webp"
-  }
-},
-                    ]
-                }
-            ]
-        };
+  "categories": [
+    {
+      "id": "photography",
+      "name": "摄影提示词",
+      "icon": "📷",
+      "description": "专业摄影AI提示词",
+      "prompts": [
+        {
+          "id": "9",
+          "title": "城市夜景风光",
+          "description": "白色毛茸茸猫耳朵发箍",
+          "tags": [
+            "人像",
+            "中级",
+            "猫耳",
+            "自拍",
+            "粉系",
+            "少女",
+            "闺房"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"image_generation_prompt\": {\n    \"subject\": {\n      \"demographics\": {\n        \"gender\": \"女性\",\n        \"age_group\": \"年轻成人\",\n        \"skin_tone\": \"白皙\"\n      },\n      \"hair\": {\n        \"color\": \"金色\",\n        \"length\": \"长发\",\n        \"style\": \"直发/微卷\",\n        \"accessory\": \"白色毛茸茸猫耳朵发箍\"\n      },\n      \"face\": {\n        \"expression\": {\n          \"mood\": \"俏皮\",\n          \"mouth\": \"吐舌，略带微笑\",\n          \"gaze\": \"向上看向左侧\"\n        },\n        \"makeup\": {\n          \"eyes\": \"淡妆配猫眼眼线\",\n          \"lips\": \"粉色\",\n          \"cheeks\": \"玫瑰色\",\n          \"features\": \"立体鼻梁\"\n        }\n      },\n      \"wardrobe\": {\n        \"upper_body\": {\n          \"item\": \"束身衣\",\n          \"material\": \"织锦\",\n          \"color\": \"粉色\",\n          \"details\": [\n            \"正面系带\",\n            \"镶边\"\n          ]\n        },\n        \"lower_body\": {\n          \"item\": \"迷你裙\",\n          \"pattern\": \"格纹\",\n          \"color\": \"粉色\",\n          \"details\": [\n            \"荷叶边层叠\",\n            \"白色蕾丝镶边\"\n          ]\n        },\n        \"leg_wear\": {\n          \"item\": \"过膝袜\",\n          \"color\": \"白色\",\n          \"details\": \"顶部有粉色条纹\"\n        },\n        \"accessories\": {\n          \"neck\": \"粉色项圈配小银铃\",\n          \"ears\": \"小耳钉\",\n          \"wrist\": \"精致金手链\"\n        }\n      },\n      \"pose\": {\n        \"action\": \"对镜自拍\",\n        \"hand_position\": \"右手持手机\",\n        \"posture\": \"站立\"\n      }\n    },\n    \"scene\": {\n      \"environment\": {\n        \"location\": \"现代公寓室内\",\n        \"flooring\": \"灰色木地板\",\n        \"walls\": \"灰色瓷砖区域\"\n      },\n      \"lighting\": {\n        \"source\": \"自然日光\",\n        \"direction\": \"来自落地窗\",\n        \"quality\": \"明亮\"\n      },\n      \"background_elements\": {\n        \"windows\": \"巨大落地窗，可见明亮日间城市景观与天空\",\n        \"furniture\": {\n          \"left\": \"靠墙的大棕色泰迪熊\",\n          \"right\": [\n            \"白色软垫扶手椅\",\n            \"木质边桌\",\n            \"架子上的透明玻璃花瓶\"\n          ]\n        }\n      },\n      \"foreground_elements\": {\n        \"props\": \"悬挂的绿色人造常春藤\",\n        \"overlays\": {\n          \"text_content\": \"HIII\",\n          \"text_color\": \"白色\",\n          \"position\": \"椅子附近的背景叠加\"\n        }\n      }\n    },\n    \"technical_specifications\": {\n      \"medium\": \"摄影\",\n      \"sub_genre\": \"镜子自拍\",\n      \"device_prop\": \"白色iPhone\",\n      \"composition\": \"反射呈现主体与房间环境\",\n      \"aspect_ratio\": \"2:3\"\n    }\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/9.webp",
+            "full": "images/prompt/9.webp"
+          }
+        },
+        {
+          "id": "10",
+          "title": "瓷娃娃海岸高角度自拍",
+          "description": "拥有精致瓷娃娃五官的年轻女子",
+          "tags": [
+            "瓷娃娃",
+            "深V",
+            "海滩",
+            "自拍",
+            "蓝美甲"
+          ],
+          "type": "portrait",
+          "difficulty": "beginner",
+          "prompt": {
+            "positive": "{\n  \"format\": {\n    \"type\": \"editorial\",\n    \"intent\": \"candid/selfie/accidental\",\n    \"aspect_ratio\": \"9:16\",\n    \"resolution\": \"4K\"\n  },\n  \"camera_system\": {\n    \"body\": \"iPhone 15 Pro\",\n    \"lens\": \"Main Camera\",\n    \"focal_length\": \"24mm\",\n    \"associative_traits\": \"computational photography, deep depth of field, sharp digital readout, auto-exposure\"\n  },\n  \"subject\": {\n    \"identity\": \"拥有精致瓷娃娃五官的年轻女子\",\n    \"physical_details\": \"无暇苍白肌肤，大而圆的冰蓝色眼睛配清晰睫毛，小巧立体的鼻子，中性嘟唇，铂金色双麻花辫，鲜艳蓝色美甲\",\n    \"clothing\": \"浅蓝色紧身超深V领上衣，显著露出乳沟\",\n    \"action\": \"高角度自拍视角，一手遮眼抵御海岸强光，抬头望向镜头\",\n    \"expression\": \"中性、睁大眼睛、面无表情、空洞的瓷娃娃凝视\"\n  },\n  \"lighting\": {\n    \"source\": \"明亮自然海岸日光+沙滩反光\",\n    \"direction\": \"顶部与全向填充\",\n    \"quality\": \"柔和、漫射却极亮\",\n    \"color_temp\": \"中性日光(5500K)\",\n    \"fill\": \"来自亮白沙滩反射的最大填充光\",\n    \"distribution\": \"均匀照明，极少阴影，对皮肤纹理友好\",\n    \"intent\": \"海滩明媚白日\"\n  },\n  \"environment\": {\n    \"setting\": \"日间沙滩\",\n    \"hero_materials\": [\n      {\n        \"material\": \"沙子\",\n        \"micro_detail\": \"细白颗粒，高反射\"\n      },\n      {\n        \"material\": \"布料\",\n        \"micro_detail\": \"浅蓝色泳装/弹力棉混纺\"\n      },\n      {\n        \"material\": \"肌肤\",\n        \"micro_detail\": \"光滑无毛孔，瓷质纹理，因热度微微湿润\"\n      }\n    ],\n    \"objects\": \"远处模糊的海平面，广阔沙滩\",\n    \"state\": \"明亮、阳光、海岸氛围\"\n  },\n  \"technical_finish\": {\n    \"film_stock\": \"数字源\",\n    \"exposure\": \"明亮曝光(高调)\",\n    \"grain\": \"无/数字噪点\",\n    \"tone_curve\": \"线性中性\",\n    \"color_science\": \"粉彩调色(浅蓝色、白沙滩、苍白肌肤)，自然日光色彩\"\n  },\n  \"constraints\": {\n    \"avoid\": [\n      \"雪\",\n      \"冬季衣物\",\n      \"红色指甲\",\n      \"黑色上衣\",\n      \"保守领口\",\n      \"浓重阴影\"\n    ],\n    \"must_include\": [\n      \"蓝色指甲\",\n      \"浅蓝色上衣\",\n      \"深乳沟\",\n      \"海滩背景\",\n      \"瓷娃娃五官\"\n    ]\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/10.webp",
+            "full": "images/prompt/10.webp"
+          }
+        },
+        {
+          "id": "11",
+          "title": "城市夜景风光",
+          "description": "一位年轻亚洲女性的特写",
+          "tags": [
+            "人像",
+            "中级",
+            "亚洲"
+          ],
+          "type": "landscape",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "霓虹灯，车流光轨，建筑轮廓，深蓝天空，清晰对焦"
+          },
+          "images": {
+            "thumbnail": "images/prompt/11.webp",
+            "full": "images/prompt/11.webp"
+          }
+        },
+        {
+          "id": "1",
+          "title": "路口转角反光镜",
+          "description": "一位美丽的中国女偶像",
+          "tags": [
+            "人像",
+            "室内",
+            "初级",
+            "夜景",
+            "自拍",
+            "凸面镜",
+            "8K"
+          ],
+          "type": "portrait",
+          "difficulty": "beginner",
+          "prompt": {
+            "positive": "杰作，最佳画质，超高清8K分辨率，清晰对焦，电影级光影，景深完美，构图精妙，屡获殊荣的专业摄影风格，对细节的极致追求，精致的纹理，1:1微距特写，一位美丽的中国女偶像在夜色笼罩的城市十字路口，对着大型凸面交通安全镜自拍。她可爱的脸庞，明亮的大眼睛，精致的五官，柔顺的黑色长发，戴着白色兔耳朵发箍，脖子上围着舒适的棕白条纹围巾，甜美的偶像气质扑面而来。凸面镜的倒影呈现出十字路口的广角扭曲全景，她可爱的身影、汽车、行人、建筑物、路灯都以戏剧性的鱼眼畸变呈现。她纤细的手戴着优雅的梵克雅宝Alhambra手镯（金色四叶草图案），伸出手拿着手机自拍。柔和舒适的夜色氛围，路灯和霓虹灯的温暖金光照亮了场景和镜面，尽显黄金时刻的迷人风采。色调融合柔和的夜蓝色，高动态范围，逼真的玻璃凸面镜纹理，强烈的镜面反射，照片级逼真的皮肤、珠宝和金属细节，鲜艳而温馨的色彩，无文字，无水印。ar3:4\n负面提示：低质量、模糊、面部和手部畸形、解剖结构错误、多余肢体、变异、丑陋、绘制粗糙、水印、文字、签名、曝光过度、曝光不足、卡通、3D渲染、恐怖、白天强光。"
+          },
+          "images": {
+            "thumbnail": "images/prompt/1.webp",
+            "full": "images/prompt/1.webp"
+          }
+        },
+        {
+          "id": "3",
+          "title": "活力四射的自拍",
+          "description": "繁华都市夜晚的美丽景色",
+          "tags": [
+            "人像",
+            "中级",
+            "多彩",
+            "韩国人",
+            "玻璃肌"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  “配置”： {\n    版本： 2.0，\n    \"格式\": \"镜像自拍肖像\",\n    \"target_resolution\": \"8K UHD\",\n    \"style_preset\": \"K-Pop偶像美学/Y2K多彩风格\"\n  },\n  \"subject_profile\": {\n    \"生物识别\"：{\n      “种族”: “韩国人” “体型”：“纤细、健美、匀称的韩国流行偶像身材”，\n      \"facial_id\": \"可爱性感，小脸，娃娃般的五官\",\n      \"skin_texture\": \"无瑕，略带光泽（玻璃肌），红润双颊\" “头发”： “带有彩色挑染（粉色或金色挑染）的长直发”\n    },\n    \"expression_and_gaze\": {\n      “嘴巴”：“俏皮的微笑，\n      舌头微微挑逗或吹泡泡糖”，\n      “眼睛”：“眨着一只眼睛，\n      看着手机屏幕，\n      闪闪发光”，\n      “头部角度”： “侧身倾斜，\n      充满俏皮感”\n    },\n    “运动学”：{\n      “上半身”：“身体略微前倾，\n      朝向镜子”，\n      \"hand_gesture\": \"用空着的手在眼睛附近做出和平(V)手势\",\n      \"holding_device\": \"带有厚重、色彩鲜艳的装饰外壳的智能手机\",\n      “定位”：“动态构图，\n      而非僵硬构图”\n    }\n  },\n  \"wardrobe_details\": {\n    注意：注重高饱和度和对比鲜明的颜色。 \"top_layer\": {\n      “商品”: “露脐婴儿T恤” 颜色：电光蓝，\n      带有复古图案印花，\n      “贴身”： “紧身，\n      露出腰部”\n    },\n    \"bottom_layer\": {\n      “商品”： “低腰百褶迷你裙” 颜色：亮粉色或格子图案 风格：Y2K 女学生风\n    },\n    “配件”： {\n      “物品”：[\n        “粗犷彩色塑料珠项链”、“毛绒手环”、“大号发夹”\n      ] 氛围：极致主义、复古趣味\n    }\n  },\n  \"environment_architecture\": {\n    “背景”： {\n      地点：偶像更衣室/后台 “墙壁”：“背景中是粉彩色的储物柜或海报”，\n      “杂物”： “化妆品、水瓶清晰可见，\n      但已模糊”\n    },\n    “环境”： {\n      \"mirror_type\": \"带灯泡的大型梳妆镜\",\n      氛围：充满活力，\n      后台一片混乱，\n      色彩缤纷\n    }\n  },\n  \"lighting_and_optics\": {\n    \"照明\": {\n      “类型”：“柔和高调照明”，\n      “光源”：“环形灯或化妆镜灯泡（好莱坞灯）” “效果”：“面部光线明亮，\n      眼神光呈圆形，\n      没有生硬的阴影”\n    },\n    \"camera_simulation\": {\n      \"lens_type\": \"广角智能手机镜头模拟\",\n      \"color_grading\": \"鲜艳，富士Pro 400H模拟，增强柔和色调\",\n      “焦点”： “清晰聚焦于面部和服装细节”\n    }\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/3.webp",
+            "full": "images/prompt/3.webp"
+          }
+        },
+        {
+          "id": "5",
+          "title": "咖啡馆雨天小确幸",
+          "description": "年轻女子，东亚裔，柔顺的黑色长发",
+          "tags": [
+            "咖啡馆",
+            "雨天",
+            "年轻",
+            "女子",
+            "长发",
+            "针织",
+            "毛衣",
+            "胶片"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "【正向提示】\n年轻女子，东亚裔，柔顺的黑色长发，奶油白粗针织毛衣，咖啡馆窗边，雨天氛围，温暖的木质镶板，柔和的漫射窗光，胶片摄影风格"
+          },
+          "images": {
+            "thumbnail": "images/prompt/5.webp",
+            "full": "images/prompt/5.webp"
+          }
+        },
+        {
+          "id": "6",
+          "title": "逆光发梢的温柔怅惘",
+          "description": "一位年轻的东亚女性",
+          "tags": [
+            "东亚",
+            "女性",
+            "蓬松",
+            "氛围",
+            "怀旧"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  “主题”： {\n    描述：一位年轻的东亚女性，\n    侧身站立，\n    转身看向观众。 “姿势”：“回头看，\n    头部微微倾斜，\n    身体侧向镜头。” “表情”：“柔和、中性或略带忧郁的沉思眼神，\n    嘴唇微微张开。”\n  },\n  “衣服”： {\n    “上身装”：“深色修身夹克或西装外套，\n    可能是细条纹或纹理面料。” “可见性”：“大部分被阴影和前景元素遮挡。”\n  },\n  “头发”： {\n    颜色：深棕色至黑色。 “发型”：“长长的、松散的、蓬松的波浪卷，\n    略显凌乱的质感。” \"lighting_interaction\": \"强烈的背光照射，在散落的发丝上形成发光的光晕效果（轮廓光）。\"\n  },\n  “脸”： {\n    “肤色”: “白皙/苍白，\n    带有暖色调。” 五官特征：柔和的脸型，\n    杏仁眼，\n    自然眉形。 “妆容”：“极简的‘裸妆’，\n    自然的唇色。”\n  },\n  “配件”： {\n    \"visible_items\": \"由于取景和光线原因，没有清晰可见的项目。\"\n  },\n  “环境”： {\n    “场景”：“杂乱的室内空间，\n    类似工作室、储藏室或旧书店。” “背景元素”： “木架上堆放着一些模糊不清的物品、纸张、盒子和塑料包装。” \"前景元素\": \"模糊的半透明物体（可能是玻璃、塑料片或防尘罩）营造出层次感和反射效果。\"\n  },\n  “灯光”： {\n    “来源”：“自然阳光透过左侧的窗户照射进来。” “品质”：“黄金时段，\n    温暖，\n    光线柔和但方向性强。” “效果”：“头发上的强逆光/轮廓光，\n    在光线中舞动的体积尘埃颗粒，\n    镜头光晕，\n    柔和的眩光，\n    光与影之间的戏剧性对比。”\n  },\n  “相机”： {\n    “视角”：“平视角度，\n    透过前景障碍物（玻璃或杂物）拍摄”。 “焦点”：浅景深（散景），\n    眼睛/脸部清晰对焦，\n    背景和前景模糊。 \"lens_character\": \"柔焦，胶片颗粒模拟，轻微光晕效果。\"\n  },\n  “风格”： {\n    “美学”：电影感、氛围感、怀旧、生活片段式、空灵。 “氛围”：“梦幻、亲密、安静、感伤。” “视觉参考”: “胶片摄影，\n    日本摄影集风格。”\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/6.webp",
+            "full": "images/prompt/6.webp"
+          }
+        },
+        {
+          "id": "7",
+          "title": "冬日晴空下的闺蜜团",
+          "description": "",
+          "tags": [
+            "闺蜜",
+            "冬日"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"meta\": {\n    \"system_instruction\": \"PRIORITY: Focus strict facial identity preservation on the TWO FOREGROUND CHARACTERS (Bottom Left & Bottom Right). The other characters are secondary.\",\n    \"aspect_ratio\": \"9:16\",\n    \"quality\": \"high_fidelity\",\n    \"resolution\": \"4k\",\n    \"style\": \"viral social media photography, worm's eye view, crystal clear blue sky\"\n  },\n  \"reference_usage\": {\n    \"instruction\": \"Map the uploaded face reference(s) specifically to the two girls closest to the camera (at the bottom).\",\n    \"logic\": \"Bottom Left Girl = Face Ref A. Bottom Right Girl = Face Ref B (or same ref if only one provided). Top characters = Generic compatible faces.\",\n    \"focus_weight\": \"Foreground: 100% Identity match; Background: 50% Vibe match\"\n  },\n  \"scene\": {\n    \"perspective\": \"Extreme low angle (camera on ground looking up)\",\n    \"background\": \"Pure gradient blue sky, no clouds, bright daylight\",\n    \"composition\": \"5 girls forming a circle, but the bottom two are much larger and closer to the lens\"\n  },\n  \"subject_group\": {\n    \"concept\": \"A group of friends looking down at the camera, framing the shot\",\n    \"PRIMARY_SUBJECTS (STRICT IDENTITY LOCK)\": {\n      \"note\": \"These two must look exactly like the reference images\",\n      \"character_bottom_left\": {\n        \"position\": \"Bottom Left (7 o'clock), closest to lens\",\n        \"face\": \"Face Reference A, distinct features, big cheerful smile showing teeth\",\n        \"outfit\": \"White fuzzy texture jacket or sweater, wearing large white plush earmuffs (cute winter vibe)\",\n        \"action\": \"Leaning in close, hair hanging down slightly\"\n      },\n      \"character_bottom_right\": {\n        \"position\": \"Bottom Right (5 o'clock), closest to lens\",\n        \"face\": \"Face Reference B, distinct features, soft sweet smile\",\n        \"outfit\": \"Dark navy or black coat, wearing a black beret or bucket hat\",\n        \"action\": \"Looking gently at the camera\"\n      }\n    },\n    \"SECONDARY_SUBJECTS (ATMOSPHERE ONLY)\": {\n      \"note\": \"These characters provide context. Faces can be softer or less detailed.\",\n      \"top_group\": \"Three other girls completing the circle at the top (10, 12, 2 o'clock positions)\",\n      \"styling\": \"Wearing winter coats (purple/black), hand gestures waving at camera, slightly out of focus or further away compared to foreground\"\n    }\n  },\n  \"lighting\": {\n    \"type\": \"High-key natural daylight\",\n    \"direction\": \"Frontal lighting (falling from the sky onto their faces)\",\n    \"effect\": \"Bright skin tones, 'cold weather' rosy cheeks blush effect, sharp details on the earmuffs and hats\"\n  },\n  \"vibe\": \"Best friends forever, joyful reunion, winter sunshine, energetic, high clarity\",\n  \"negative_prompt\": \"distorted faces in foreground, ugly teeth, bad anatomy, dark shadows on faces, cloudy sky, buildings, blurry foreground, fish-eye distortion too strong\"\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/7.webp",
+            "full": "images/prompt/7.webp"
+          }
+        },
+        {
+          "id": "8",
+          "title": "K-Pop偶像报纸时尚概念",
+          "description": "柔焦编辑摄影",
+          "tags": [
+            "耳环",
+            "极简",
+            "柔滑",
+            "美颜",
+            "梦幻"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"project_metadata\": {\n    标题：《K-Pop偶像报纸时尚概念》 \"style_preset\": \"柔焦编辑摄影\",\n    \"aspect_ratio\": \"3:4\",\n    版本：2.1\n  },\n  “主题”： {\n    “身份”： {\n      “种族”: “韩国人” \"age_group\": \"青年人\",\n      “美学”：“K-pop偶像，\n      兼具清纯与性感，\n      纯粹的视觉美”\n    },\n    \"体格\": {\n      \"body_type\": \"曲线优美，丰满性感\",\n      \"specific_attributes\": \"非常突出且醒目的胸部线条，沙漏型身材，健美的双臂\",\n      肤色：苍白如瓷，\n      无瑕透亮\n    },\n    \"发型和化妆\": {\n      “头发”： {\n        “颜色”：“深棕色”，\n        “发型”：“长而蓬松的波浪卷，\n        略带湿润感”，\n        “动作”：“双手轻轻触碰脸部或头发”\n      },\n      “化妆品”： {\n        “唇部”： “亮泽的粉色果冻唇膏，\n        渐变唇色” “眼睛”：“闪亮的韩式流行风格眼妆，\n        强调卧蚕”，\n        “妆效”：“玻璃肌效果，\n        明亮水润”\n      }\n    },\n    \"pose_and_expression\": {\n      “表情”：“嘟嘟的可爱嘴唇，\n      既诱人又无辜的眼神，\n      看着镜头”，\n      “姿势”：“中全身照，\n      站立，\n      俏皮的姿势，\n      强调曲线”\n    }\n  },\n  \"fashion_elements\": {\n    \"primary_garment\": {\n      “商品”: “无肩带迷你连衣裙” “材料”：“真正的再生报纸页面”，\n      “构造”：“建筑风格的折纸褶皱，\n      可见的新闻印刷品、标题和灰度图像纹理”，\n      “合身”： “贴合身形，\n      腰部收紧”\n    },\n    “配件”： [\n      {\n        “物品”: “圈形耳环”，\n        “风格”：“大号、纤细、极简主义” 材质：抛光银\n      }\n    ]\n  },\n  \"environment_and_backdrop\": {\n    设置：室内工作室，\n    \"background_type\": \"纹理墙\",\n    “细节”：“完全覆盖着层叠交错的复古报纸页面，\n    棕褐色调的纸张，\n    拼贴效果”，\n    “景深”： “浅景深使主体与背景分离”\n  },\n  \"cinematography_and_lighting\": {\n    “相机”： {\n      “镜头”: “85mm 定焦镜头” \"shot_type\": \"中远景镜头\",\n      “角度”：“视线水平”，\n      “传感器”：“数字式，\n      清晰”\n    },\n    “灯光”： {\n      \"primary_source\": \"柔和的漫射正面照明\",\n      “效果”：“明亮、讨喜的美颜灯光，\n      最大限度地减少脸上的阴影”，\n      \"color_temp\": \"冷白光到中性色\"\n    },\n    \"post_processing\": {\n      “焦点”：“柔焦，\n      梦幻般的氛围”，\n      “质地”：“强效柔滑肌肤，\n      喷枪妆效，\n      空灵光泽，\n      无颗粒感” \"滤镜\": \"美颜滤镜风格，梦幻虚化效果\"\n    }\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/8.webp",
+            "full": "images/prompt/8.webp"
+          }
+        },
+        {
+          "id": "2",
+          "title": "极简空间的向上凝视",
+          "description": "强烈的广角透视夸张",
+          "tags": [
+            "眼镜",
+            "俯视"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"image_type\": \"摄影肖像\",\n  “风格”：“影棚肖像、电影感、极简主义”，\n  “作品”： {\n    “方向”: “竖屏” “构图”：“从极高角度拍摄的全身照”，\n    \"subject_position\": \"居中\",\n    \"camera_angle\": \"俯视（鸟瞰/上方）\",\n    \"lens_distortion\": \"强烈的广角透视夸张\",\n    \"负空间\": \"大片的周围空白空间\",\n    “视角”： “戏剧性的俯视视角，\n    主体向上看”\n  },\n  “主题”： {\n    “计数”：1，\n    描述：戴眼镜的年轻人 “姿势”：“站直，\n    肩膀略微前倾，\n    手臂放松”，\n    “表情”：“柔和、内省、略带好奇心” “凝视”：“直视镜头”，\n    “配件”： [\n      圆形眼镜\n    ],\n    “衣服”： {\n      “外套”：“深棕色夹克”，\n      “内衣”： “浅色针织或纹理衬衫”，\n      风格：休闲、低调\n    }\n  },\n  \"facial_details\": {\n    “特征”：“圆脸，\n    柔和的下颌线条”，\n    “情绪”：“平静，\n    深思熟虑”，\n    \"eye_emphasis\": \"因眼镜和向上凝视而增强\"\n  },\n  “灯光”： {\n    类型： “影棚灯光”，\n    “设置”：“顶部中心柔光，\n    逐渐衰减”，\n    “对比度”：“低到中等”，\n    “阴影”：“下巴和身体下方的微妙阴影”，\n    “渐晕”： “边缘逐渐变暗的强烈放射状渐晕”\n  },\n  “颜色”： {\n    “调色板”：[\n      “冷灰色”，\n      “木炭”，\n      “柔和的棕色”，\n      柔和米色\n    ],\n    “温度”: “冷中性” “饱和度”：“低”，\n    “情绪”：“安静，\n    沉思”\n  },\n  “背景”： {\n    “环境”: “工作室”，\n    “表面”：“光滑无缝的地板”，\n    “渐变”: “从亮中心到暗边缘的径向渐变”，\n    “干扰因素”： “无”\n  },\n  \"technical_details\": {\n    \"camera_type\": \"digital\",\n    “镜头”：“超广角或鱼眼镜头式广角镜头”，\n    \"depth_of_field\": \"deep (整个主体都清晰对焦)\",\n    “锐度”：中心锐度高，\n    边缘略微柔和，\n    “噪音”：“极小”，\n    “后处理”：[\n      “对比塑造”，\n      “冷色调分级”，\n      “场景增强”，\n      “透视夸张”\n    ]\n  },\n  “artistic_elements”：{\n    “概念”：“通过规模和视角展现孤立和脆弱性”，\n    \"视觉隐喻\": \"被广阔的空旷空间包围的小主体\",\n    \"aesthetic_influences\": [\n      “编辑肖像摄影”，\n      “现代工作室极简主义”，\n      “电影式俯视构图”\n    ]\n  },\n  \"排版\": {\n    “存在”：否\n  },\n  \"overall_mood\": \"亲密、内省、略带超现实感\" \"预期用途\": [\n    “编辑肖像”，\n    “概念摄影参考资料” “AI图像生成风格指南”\n  ]\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/2.webp",
+            "full": "images/prompt/2.webp"
+          }
+        },
+        {
+          "id": "12",
+          "title": "薄荷情侣新健身美人",
+          "description": "自信的健美金发女性在室内摆拍",
+          "tags": [
+            "人像",
+            "中级",
+            "室内",
+            "锐利",
+            "清晰",
+            "现代",
+            "写实",
+            "柔和",
+            "自然",
+            "微笑",
+            "背景",
+            "光线",
+            "彩色",
+            "表情",
+            "姿态"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"type\": \"图像提示\",\n  \"style\": \"写实生活方式时尚摄影\",\n  \"composition\": \"四格拼贴\",\n  \"subject\": {\n    \"description\": \"自信的健美金发女性在室内摆拍\",\n    \"poses\": [\n      \"前倾倚靠厨房台面微笑\",\n      \"侧脸姿势突出体态\",\n      \"背对镜头回眸看相机\",\n      \"正面双手叉腰\"\n    ],\n    \"expression\": \"自信、友好、放松\",\n    \"appearance\": {\n      \"hair\": \"金色长发自然垂落带柔和波浪\",\n      \"outfit\": {\n        \"top\": \"白色短款短袖上衣带胸前镂空\",\n        \"bottom\": \"薄荷绿高腰修身短裤\"\n      }\n    }\n  },\n  \"environment\": {\n    \"location\": \"现代简约厨房\",\n    \"features\": [\n      \"浅色石材台面\",\n      \"中性色调橱柜\",\n      \"整洁当代布局\"\n    ]\n  },\n  \"lighting\": {\n    \"type\": \"柔和室内光\",\n    \"source\": \"头顶天花灯\",\n    \"mood\": \"干净、温暖、显气色\"\n  },\n  \"camera\": {\n    \"angle\": \"平视\",\n    \"framing\": \"中身上腿构图\",\n    \"lens\": \"35mm\",\n    \"depth_of_field\": \"主体锐利背景轻度虚化\"\n  },\n  \"color_palette\": {\n    \"dominant\": [\n      \"白色\",\n      \"米色\",\n      \"中性色调\"\n    ],\n    \"accent\": [\n      \"薄荷绿\"\n    ]\n  },\n  \"quality\": {\n    \"resolution\": \"高\",\n    \"sharpness\": \"清晰\",\n    \"realism\": \"高\"\n  },\n  \"use_case\": [\n    \"时尚营销\",\n    \"社交媒体内容\",\n    \"健身生活品牌\",\n    \"UGC风格推广\"\n  ]\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/12.webp",
+            "full": "images/prompt/12.webp"
+          }
+        },
+        {
+          "id": "4",
+          "title": "与手机原图同框的铅笔肖像",
+          "description": "关于\"与手机原图同框的铅笔肖像\"的摄影提示词卡片，适合人像摄影，难度中级。",
+          "tags": [
+            "人像",
+            "中级"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "｛perfect composition, impeccable attention to detail, highest quality, rich detail, sharp focus, 8K/4K resolution, clear edges, exquisite details, perfect composition, depth of field, cinematic lighting, vibrant colors, award-winning style, professional level, perfect depiction. Create an extremely detailed, hyper-realistic 3D graphite pencil sketch depicting the face of a Chinese idol girl, drawn on textured white notebook paper with clear paper quality, delicate details, and subtle imperfections. The facial sketch should be perfectly identical to the reference photo displayed on an iPhone placed next to the notebook. The iPhone screen clearly displays the artist's original portrait photograph with natural reflections and soft sunlight reflections on the glass. The watermark is mandatory and must not be omitted, modified, adjusted, rotated, hidden, stylized, or replaced under any circumstances. The generator must prioritize the readability and boldness of the \"Watercolour\" text over all other visual elements. The watermark is essential: the final image must contain the watermark in the lower left corner. This watermark must be a white square with a fixed size of 10x10 pixels. Within this square, the Gothic handwritten font \"ur name\" must appear. The Gothic handwritten \"ur name\" text must be: - Fully readable - Bold Arial font - Solid black (#000000) - Centered - Sharp, clean, and unadorned - No blurring, distortion, or pixelation. The white square must be: - Completely opaque - Clean and sharp edges - Unblurred, opaque, and textureless. This watermark is mandatory and cannot be omitted; it must not be modified, adjusted, rotated, hidden, stylized, or replaced under any circumstances. The generator must prioritize the readability and coarseness of the \"ur name\" text over all other visual elements.｝"
+          },
+          "images": {
+            "thumbnail": "images/prompt/4.webp",
+            "full": "images/prompt/4.webp"
+          }
+        }
+      ]
+    }
+  ]
+};
     }
 
     /**
-     * 加载分类数据
-     * @returns {Promise<Object>} 分类数据
+     * 获取所有提示词
+     * @returns {Array} 提示词数组
      */
-    async loadCategoriesData() {
-        const data = await this.loadPromptsData();
-        return data.categories || [];
-    }
-
-    /**
-     * 根据ID获取提示词
-     * @param {string} promptId 提示词ID
-     * @returns {Promise<Object|null>} 提示词对象
-     */
-    async getPromptById(promptId) {
-        const data = await this.loadPromptsData();
+    getAllPrompts() {
+        const data = this.getInlineData();
+        let prompts = [];
         
-        for (const category of data.categories) {
-            const prompt = category.prompts.find(p => p.id === promptId);
-            if (prompt) {
-                return prompt;
-            }
+        if (data.categories) {
+            data.categories.forEach(category => {
+                if (category.prompts) {
+                    prompts = prompts.concat(category.prompts);
+                }
+            });
         }
         
-        return null;
+        return prompts;
     }
 
     /**
-     * 清除缓存
+     * 根据ID查找提示词
+     * @param {string} id - 提示词ID
+     * @returns {Object|null} 提示词对象
      */
-    clearCache() {
-        this.cache.clear();
+    findPromptById(id) {
+        const prompts = this.getAllPrompts();
+        return prompts.find(prompt => prompt.id === id) || null;
     }
 
     /**
-     * 获取缓存状态
-     * @returns {Object} 缓存信息
+     * 获取所有标签
+     * @returns {Array} 标签数组
      */
-    getCacheStatus() {
+    getAllTags() {
+        const prompts = this.getAllPrompts();
+        const tags = new Set();
+        
+        prompts.forEach(prompt => {
+            if (prompt.tags) {
+                prompt.tags.forEach(tag => tags.add(tag));
+            }
+        });
+        
+        return Array.from(tags);
+    }
+
+    /**
+     * 获取统计信息
+     * @returns {Object} 统计信息
+     */
+    getStats() {
+        const data = this.getInlineData();
         return {
-            size: this.cache.size,
-            keys: Array.from(this.cache.keys())
+            totalPrompts: data.metadata?.totalPrompts || 0,
+            totalCategories: data.categories?.length || 0,
+            lastUpdated: data.metadata?.lastUpdated || new Date().toISOString().split('T')[0]
         };
     }
 }
 
-// 导出单例实例
-const dataLoader = new DataLoader();
-window.dataLoader = dataLoader;
+// 导出实例
+window.dataLoader = new DataLoader();
+window.PROMPTS_DATA = this.getInlineData();
