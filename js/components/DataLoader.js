@@ -22,6 +22,11 @@ class DataLoader {
         }
 
         try {
+            // 临时优先使用内联数据以确保服务器环境正常工作
+            console.warn('服务器环境：优先使用内联数据确保稳定性');
+            return this.getInlineData();
+            
+            /* 原有逻辑暂时注释
             // 首先尝试从文件加载（用于web服务器环境）
             if (window.location.protocol !== 'file:') {
                 const response = await fetch('data/prompts.json');
@@ -43,6 +48,7 @@ class DataLoader {
                 console.warn('检测到file://协议，使用内联数据');
                 return this.getInlineData();
             }
+            */
         } catch (error) {
             console.error('加载提示词数据失败:', error);
             
