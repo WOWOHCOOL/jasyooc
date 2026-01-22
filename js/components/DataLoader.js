@@ -40,7 +40,7 @@ class DataLoader {
   "metadata": {
     "version": "2.0",
     "lastUpdated": "2026-01-22",
-    "totalPrompts": 14,
+    "totalPrompts": 21,
     "categories": 1
   },
   "categories": [
@@ -355,6 +355,173 @@ class DataLoader {
           "images": {
             "thumbnail": "images/prompt/14.webp",
             "full": "images/prompt/14.webp"
+          }
+        },
+        {
+          "id": "15",
+          "title": "网红健身房对镜自拍",
+          "description": "社交媒体生活照",
+          "tags": [
+            "人像",
+            "中级",
+            "健身房自拍",
+            "网红风",
+            "身材展示",
+            "工业灰",
+            "冷白光"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"image_analysis\": {\n    \"overall_style\": {\n      \"genre\": \"社交媒体生活照 (Social Media Lifestyle)\",\n      \"sub_genre\": \"健身房对镜自拍 (Gym Mirror Selfie)\",\n      \"aesthetic\": \"网红风 (Influencer Aesthetic)\",\n      \"vibe\": \"休闲运动、身材展示、年轻潮流\"\n    },\n    \"color_palette\": {\n      \"dominant_colors\": [\n        {\n          \"color\": \"Industrial Grey\",\n          \"hex_approx\": \"#7D7D7D\",\n          \"usage\": \"地面、天花板、主体服装\"\n        },\n        {\n          \"color\": \"Matte Black\",\n          \"hex_approx\": \"#1A1A1A\",\n          \"usage\": \"健身器材框架、导轨\"\n        }\n      ],\n      \"accent_colors\": [\n        {\n          \"color\": \"Safety Orange\",\n          \"hex_approx\": \"#FF5722\",\n          \"usage\": \"健身房柱子、器械调节旋钮/配重片\"\n        },\n        {\n          \"color\": \"Millennial Pink\",\n          \"hex_approx\": \"#FFC0CB\",\n          \"usage\": \"手机壳 (作为视觉中心的小点缀)\"\n        }\n      ],\n      \"lighting_temperature\": \"冷白光带有轻微暖色环境光\"\n    },\n    \"composition_and_camera\": {\n      \"framing\": \"全身肖像 (Full-body shot)\",\n      \"perspective\": \"广角透视 (Wide-angle perspective)\",\n      \"angle\": \"平视略微仰拍 (Eye-level to low angle)\",\n      \"technique\": \"镜像反射 (Mirror reflection)\",\n      \"focus\": \"主体清晰，背景景深较深 (Deep depth of field)\",\n      \"visual_weight\": \"中心构图，利用背景透视线引导视线\"\n    },\n    \"lighting_and_shadow\": {\n      \"source\": \"室内人造顶光 (Indoor overhead artificial lighting)\",\n      \"quality\": \"硬光 (Hard light)\",\n      \"shadows\": \"地面有明显的人物投影，光线垂直向下\",\n      \"highlights\": \"大腿和发丝上有明显的高光反射\"\n    },\n    \"subject_elements\": {\n      \"outfit\": {\n        \"garment\": \"灰色紧身连体衣/连体短裤 (Grey tight bodysuit/romper)\",\n        \"footwear\": \"黑色运动袜配黑白条纹拖鞋 (Black socks with slides)\",\n        \"style\": \"Athleisure (运动休闲)\"\n      },\n      \"pose\": {\n        \"description\": \"站立，单腿前伸 (Standing, one leg extended forward)\",\n        \"body_language\": \"手持手机遮挡面部，展示腰臀比\",\n        \"hair\": \"深棕色长直发 (Long straight brown hair)\"\n      }\n    },\n    \"environment_and_props\": {\n      \"location\": \"商业健身房 (Commercial Gym)\",\n      \"background_elements\": [\n        \"龙门架 (Cable machine)\",\n        \"哑铃架 (Dumbbell rack)\",\n        \"工业风天花板管道 (Exposed industrial ceiling pipes)\",\n        \"镜子 (Large wall mirror)\"\n      ],\n      \"text_elements\": [\n        \"背景墙上的海报文字 (模糊)\",\n        \"LED数字钟 (绿色显示 '35')\"\n      ]\n    },\n    \"visual_effects_and_processing\": {\n      \"distortion\": \"轻微的广角拉伸效果 (Elongating effect on legs)\",\n      \"texture\": \"光滑 (Smooth skin texture)\",\n      \"clarity\": \"高锐度 (High sharpness on subject)\"\n    }\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/15.webp",
+            "full": "images/prompt/15.webp"
+          }
+        },
+        {
+          "id": "16",
+          "title": "冰镇雪碧信息图",
+          "description": "一张现代简洁的产品信息图",
+          "tags": [
+            "人像",
+            "中级",
+            "柔光",
+            "高清",
+            "超高清",
+            "现代",
+            "柔和",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "一张现代简洁的产品信息图，构图中央是一瓶冰镇雪碧。瓶子垂直立于极简台面上，表面布满冰凝水滴与轻霜；标志性的绿色雪碧标签鲜亮清新。柠檬青柠色调主导画面。背景为柔光浅灰，渐变微妙、阴影柔和，呈现清爽高端的商业质感。\n\n围绕中央雪碧瓶，以极简扁平插画风格整齐排列配料与元素图标：苏打水、柠檬片、青柠片、冰块、气泡、玻璃瓶图标。纤细弧形箭头自各图标流向瓶身，构成干净平衡的信息图布局。\n\n右侧带柔和阴影的圆角白色步骤卡片展示流程：\n\n1. Chill the Bottle 冰镇瓶子\n\n2. Add Ice 加入冰块\n\n3. Pour Sprite 倒入雪碧\n\n4. Serve Refreshing 清爽奉上\n\n每一步均配简洁小图（冰桶、倒汽水、带冰气泡的玻璃杯）与干净短文本。\n\n底角处，极简信息徽章标注：饮用温度、清爽度、碳酸度、每份卡路里、每份规格。\n\n极简UI设计，现代字体，平衡留白，高端饮品广告风格，逼真瓶身纹理，光泽高光，超高清分辨率，编辑级汽水信息图，适配Instagram。\n\n画幅比例：1:1\n\n图像尺寸：1080 × 1080像素"
+          },
+          "images": {
+            "thumbnail": "images/prompt/16.webp",
+            "full": "images/prompt/16.webp"
+          }
+        },
+        {
+          "id": "17",
+          "title": "潮流萌酷3D头像",
+          "description": "潮流萌酷3D头像",
+          "tags": [
+            "人像",
+            "中级",
+            "光线",
+            "写实",
+            "彩色",
+            "表情",
+            "眼神",
+            "姿态",
+            "服装",
+            "配饰",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "<instruction>\n \nInput A is a Character Persona or Archetype (e.g., Tired Student, Sassy Influencer, Grumpy Dad, Cool Gamer).\nAnalyze the persona to generate  3 Character Assets :\n     The Outfit (The Look):  Identify casual, textured clothing.\n         (e.g., Oversized Hoodie, Flannel Shirt, Leather Jacket). \n     The Prop (The Drink):  Identify the beverage container.\n         (e.g., Ceramic Coffee Mug, Bubble Tea Cup, Energy Drink Can). \n     The Slogan (The Mood):  Generate a short, punchy, one-word text for the prop.\n         (e.g., \"NOPE,\" \"BRUH,\" \"MONDAY,\" \"LOADING...\"). \n\n  2.  Container (The 3D Render):  \n \n     The Style:    Stylized Realism.   Large expressive eyes, smooth skin with subsurface scattering, and slightly exaggerated head proportions.\n     The Quality:  High-end 3D animation render (Blender Cycles/Octane). Focus on hair particle systems and fabric fuzz.\n\n  3. The Pose (The Attitude):  \n     The Gesture:  One hand is performing a distinct, dismissive, or directional gesture (e.g., Pointing away, Hand up in \"Stop\" motion, Facepalm).\n     The Grip:  The other hand holds the \"Prop\" (Mug) at chest level, label facing the camera.\n     The Expression:    Unimpressed or Sassy.   Half-lidded eyes, raised eyebrow, or a slight smirk. Direct eye contact with the viewer.\n\n  4. Visual  (Texture & Detail):  \n     Hair:  Incredibly detailed strand-based hair (e.g., tight curls, messy bun, braids) with realistic sheen.\n     Accessories:  Distinctive eyewear (oversized glasses), jewelry (hoops), or tech (headphones) to frame the face.\n     Materials:  The clothing must have visible   Fabric Texture   (knitted wool, fleece, denim).\n\n  5. Atmosphere:  \n     Background:    Solid Gradient Backdrop.   A clean, bright color (Cyan, Pink, or Yellow) that contrasts with the outfit.\n     Lighting:    Soft Commercial Studio Lighting.   A strong rim light to separate the hair from the background, and a soft key light to illuminate the face without harsh shadows.\n\n  Output:   ONE image, 1:1 Aspect Ratio, 3D Character Design, \"Social Media Sticker\" aesthetic, High Cuteness.\n</instruction>"
+          },
+          "images": {
+            "thumbnail": "images/prompt/17.webp",
+            "full": "images/prompt/17.webp"
+          }
+        },
+        {
+          "id": "18",
+          "title": "北欧极简温馨插画",
+          "description": "斯堪的纳维亚风格极简插画",
+          "tags": [
+            "人像",
+            "中级",
+            "现代",
+            "柔和"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "斯堪的纳维亚风格极简插画，[SUBJECT]，柔和粉彩配色，扁平设计，柔和渐变，温馨现代美学，干净形状，生活方式插画感。"
+          },
+          "images": {
+            "thumbnail": "images/prompt/18.webp",
+            "full": "images/prompt/18.webp"
+          }
+        },
+        {
+          "id": "19",
+          "title": "俯视角立体教育模型",
+          "description": "微缩3D教育立体模型",
+          "tags": [
+            "人像",
+            "中级",
+            "细节",
+            "清晰",
+            "柔和",
+            "对比度",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "创建一个清晰的45°俯视角等距微缩3D教育立体模型，用于解释[过程/概念]。\n\n使用柔和精致的纹理、逼真的PBR材质和柔和逼真的光照。\n\n构建阶梯式或分层立体模型底座，展示过程的每个阶段，并用微妙的箭头或路径指示。\n\n包含与每个阶段互动的微型风格化人偶（无面部细节）。\n\n使用干净的纯色[背景颜色]背景。\n在顶部中央，以大型粗体字显示[过程名称]，在其正下方显示简短说明副标题，并在下方放置一个极简象征图标。\n\n所有文本必须自动匹配背景对比度（白色或黑色）。"
+          },
+          "images": {
+            "thumbnail": "images/prompt/19.webp",
+            "full": "images/prompt/19.webp"
+          }
+        },
+        {
+          "id": "20",
+          "title": "几何折纸男人肖像",
+          "description": "超精细高清数字纸艺肖像",
+          "tags": [
+            "人像",
+            "中级",
+            "高清",
+            "4K",
+            "锐利",
+            "清晰",
+            "现代",
+            "艺术",
+            "写实",
+            "柔和",
+            "对比度",
+            "微笑",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "超精细高清数字纸艺肖像，年轻男子，几何低多边形纸雕风格，分层折叠纸形状构成面部与头发，温暖棕色纸调用于肤色与头发，细微胡须与髭须，细圆框眼镜，柔和自信微笑，高度写实纸张纹理，锐利边缘与整洁折痕，工作室灯光，柔和阴影，居中构图，白色极简背景，现代艺术雕塑外观，超清晰对焦，4K分辨率，高对比度，专业艺术渲染"
+          },
+          "images": {
+            "thumbnail": "images/prompt/20.webp",
+            "full": "images/prompt/20.webp"
+          }
+        },
+        {
+          "id": "21",
+          "title": "抽象海马流光溢彩",
+          "description": "一只色彩丰富的海马",
+          "tags": [
+            "人像",
+            "中级",
+            "细节",
+            "创意",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "一只色彩丰富的海马以抽象风格呈现，细节极少，背景为蓝色渐变。该插图采用数字绘画技术创作，包含如贝壳上旋转的水彩纹理和强调动感的流动线条等元素。此设计强调创意，并通过色彩和形状的运用传达美感。"
+          },
+          "images": {
+            "thumbnail": "images/prompt/21.webp",
+            "full": "images/prompt/21.webp"
           }
         }
       ]
