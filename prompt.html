@@ -2663,8 +2663,15 @@
                     
                 } catch (error) {
                     console.error('页面初始化失败:', error);
+                    console.error('错误详情:', {
+                        message: error.message,
+                        stack: error.stack,
+                        userAgent: navigator.userAgent,
+                        protocol: window.location.protocol,
+                        hostname: window.location.hostname
+                    });
                     
-                    // 显示错误信息
+                    // 显示详细错误信息
                     const countElement = document.getElementById('result-count');
                     if (countElement) {
                         countElement.innerHTML = `<span style="color: var(--error);">❌ 加载失败: ${error.message || '未知错误'}</span>`;
@@ -2673,10 +2680,17 @@
                     const container = document.getElementById('prompt-container');
                     if (container) {
                         container.innerHTML = `
-                            <div class="error-message" style="grid-column: 1 / -1;">
-                                <h3>⚠️ 加载失败</h3>
-                                <p>${error.message || '页面加载失败，请刷新重试'}</p>
-                                <button onclick="location.reload()" class="btn" style="margin-top: 20px;">重新加载</button>
+                            <div class="error-message" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                                <h3>⚠️ 页面加载失败</h3>
+                                <p><strong>错误信息:</strong> ${error.message || '未知错误'}</p>
+                                <p><strong>访问协议:</strong> ${window.location.protocol}</p>
+                                <p><strong>服务器地址:</strong> ${window.location.hostname}</p>
+                                <details style="margin: 20px 0; text-align: left;">
+                                    <summary>详细错误信息</summary>
+                                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 10px; font-size: 12px; overflow: auto;">${error.stack || '无堆栈信息'}</pre>
+                                </details>
+                                <button onclick="location.reload()" class="btn" style="margin: 10px;">🔄 重新加载</button>
+                                <button onclick="window.open('https://jasyooc.com/prompt.html','_blank')" class="btn" style="margin: 10px;">🌐 访问正式版</button>
                             </div>
                         `;
                     }
