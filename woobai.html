@@ -354,6 +354,22 @@
             color: #ffed4e;
         }
 
+        /* 结尾卡片深色模式样式 */
+        body.dark-mode .intro-card p[style*="color:#777"] {
+            color: #d0d0d0 !important;
+        }
+
+        body.dark-mode .intro-card a {
+            color: #ffd700 !important;
+            border-bottom-color: #ffd700 !important;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .intro-card a:hover {
+            color: #ffed4e !important;
+            border-bottom-color: #ffed4e !important;
+        }
+
         body.dark-mode .dark-mode-toggle {
             background: rgba(45, 45, 68, 0.9);
             color: #ffd700;
@@ -641,9 +657,8 @@
         🌙
     </button>
 
-    <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-        <img src="images/logo.webp" alt="江湖禪心 Logo" 
-     style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <img src="images/logo.webp" alt="江湖禪心" class="footer-logo" onclick="location.href='index.html'">
         <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
         <p style="margin:10px 0;">
             <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>

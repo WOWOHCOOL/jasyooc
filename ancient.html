@@ -142,6 +142,179 @@
                 max-width: 70%;
             }
         }
+
+        /* 深色模式优化 */
+        body.dark-mode .story-card {
+            background: #2d2d44;
+            color: var(--text);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .story-title {
+            color: var(--gold);
+        }
+
+        body.dark-mode .歪說 {
+            color: var(--text);
+        }
+
+        body.dark-mode .歌詞 {
+            color: var(--gold);
+        }
+
+        body.dark-mode .共鳴 {
+            color: var(--text);
+        }
+
+        body.dark-mode .intro-text {
+            color: var(--text);
+        }
+
+        /* 動畫與互動效果 */
+        .story-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .story-card:hover::before {
+            left: 100%;
+        }
+
+        .story-card.animate-in {
+            animation: slideUp 0.6s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .story-title {
+            transition: color 0.3s ease;
+        }
+
+        .story-card:hover .story-title {
+            color: var(--gold);
+            text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .歪說, .歌詞, .共鳴 {
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover .歪說 {
+            color: #333;
+        }
+
+        .story-card:hover .歌詞 {
+            color: var(--gold);
+            transform: scale(1.02);
+        }
+
+        .story-card:hover .共鳴 {
+            color: #555;
+        }
+
+        /* 頁面載入動畫 */
+        header {
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .intro-text {
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 按鈕互動增強 */
+        .youtube-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .youtube-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* 滾動顯示動畫 */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 響應式優化 */
+        @media (max-width: 768px) {
+            .story-card:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* 深色模式互動 */
+        body.dark-mode .story-card:hover {
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -154,7 +327,7 @@
         <p class="intro-text">歷史不正經講，老歌來療傷。<br>那些曾讓我們心潮澎湃、淚濕衣襟的故事，<br>原來古人也經歷過。</p>
 
         <!-- 故事1：趙匡胤 -->
-        <div class="story-card">
+        <div class="story-card scroll-reveal">
             <h2 class="story-title">趙匡胤 · 陳橋兵變</h2>
             <p class="歪說">深夜聽伍佰《淚橋》時，總想起趙匡胤：一個大兵喝醉睡一覺，醒來被兄弟們披上黃袍，直接當了皇帝。演都不用演，「恭敬不如從命」，這劇本比任何宮鬥劇都離譜。他大概心裡想：這杯酒，我喝得太突然了。</p>
             <p class="歌詞">改編《陳橋》（伍佰《淚橋》旋律）<br>
@@ -168,11 +341,27 @@
             <div class="youtube-embed">
                 <iframe src="https://www.youtube.com/embed/WFGHwI1qLdI" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
+            
+            <!-- 觀後感受互動區 -->
+            <div class="feedback-section" style="margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.4em;">看完這個故事，您有什麼感受？</h3>
+                <div class="emotion-buttons" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <button class="emotion-btn" data-emotion="共鳴" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😢 深感共鳴</button>
+                    <button class="emotion-btn" data-emotion="震撼" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😲 心靈震撼</button>
+                    <button class="emotion-btn" data-emotion="感慨" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🤔 人生感慨</button>
+                    <button class="emotion-btn" data-emotion="慰藉" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🤗 得到慰藉</button>
+                </div>
+                <div class="feedback-input" style="display: none; margin-top: 20px;">
+                    <textarea id="feedback-text-1" placeholder="分享您的具體感受（選填）" style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; resize: vertical; min-height: 80px; font-family: inherit; font-size: 1.1em;"></textarea>
+                    <button class="submit-feedback" data-story="趙匡胤" style="margin-top: 15px; padding: 12px 30px; background: var(--gold); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; transition: all 0.3s;">分享感受</button>
+                </div>
+                <div class="feedback-result" style="display: none; margin-top: 15px; padding: 15px; background: var(--gold); color: white; border-radius: 8px; font-size: 1.1em;"></div>
+            </div>
             <!-- 已刪除單集「去YouTube看完整版」按鈕 -->
         </div>
 
         <!-- 故事2：崖山海戰 · 陸秀夫背帝投海 -->
-        <div class="story-card">
+        <div class="story-card scroll-reveal">
             <h2 class="story-title">崖山海戰 · 陸秀夫背帝投海</h2>
             <p class="歪說">深夜聽張雨生《大海》時，總想起崖山：十萬南宋軍民隨樓船沉沒，陸秀夫背著八歲小皇帝躍入茫茫大海，「宋可亡，天下不可亡」。那一刻，海水不是哀愁，而是最後的忠義與不屈。歷史上最悲壯的一躍，比任何悲劇都讓人心碎。</p>
             <p class="歌詞">改編《大海》（崖山版 · 張雨生《大海》旋律）<br>
@@ -189,11 +378,27 @@
             <div class="youtube-embed">
                 <iframe src="https://www.youtube.com/embed/pcFSm7EBHVA" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
+            
+            <!-- 觀後感受互動區 -->
+            <div class="feedback-section" style="margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.4em;">看完這個悲壯故事，您的心情？</h3>
+                <div class="emotion-buttons" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <button class="emotion-btn" data-emotion="悲痛" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😭 深感悲痛</button>
+                    <button class="emotion-btn" data-emotion="敬佩" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🙏 肅然敬佩</button>
+                    <button class="emotion-btn" data-emotion="感傷" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">💔 無限感傷</button>
+                    <button class="emotion-btn" data-emotion="反思" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🤷 深度反思</button>
+                </div>
+                <div class="feedback-input" style="display: none; margin-top: 20px;">
+                    <textarea id="feedback-text-2" placeholder="這個故事讓您想到了什麼？（選填）" style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; resize: vertical; min-height: 80px; font-family: inherit; font-size: 1.1em;"></textarea>
+                    <button class="submit-feedback" data-story="崖山海戰" style="margin-top: 15px; padding: 12px 30px; background: var(--gold); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; transition: all 0.3s;">分享感受</button>
+                </div>
+                <div class="feedback-result" style="display: none; margin-top: 15px; padding: 15px; background: var(--gold); color: white; border-radius: 8px; font-size: 1.1em;"></div>
+            </div>
             <!-- 已刪除單集按鈕 -->
         </div>
 
         <!-- 故事3：李煜 · 南唐亡國 -->
-        <div class="story-card">
+        <div class="story-card scroll-reveal">
             <h2 class="story-title">李煜 · 南唐亡國</h2>
             <p class="歪說">深夜聽劉德華《孤星淚》時，總想起李煜：前半生是風流詞人，後宮佳麗三千，寫盡春花秋月；後半生成了階下囚，一首《虞美人》換來毒酒一杯。自古多情難為帝王，他大概心裡想：如果能重來，我寧願只做個詞人，不做皇帝。</p>
             <p class="歌詞">改編《孤星淚》（劉德華《孤星淚》旋律）<br>
@@ -210,11 +415,27 @@
             <div class="youtube-embed">
                 <iframe src="https://www.youtube.com/embed/SPHe5o6iA_0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
+            
+            <!-- 觀後感受互動區 -->
+            <div class="feedback-section" style="margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.4em;">李煜的故事觸動了您什麼？</h3>
+                <div class="emotion-buttons" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <button class="emotion-btn" data-emotion="遺憾" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😔 無限遺憾</button>
+                    <button class="emotion-btn" data-emotion="同情" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😢 深表同情</button>
+                    <button class="emotion-btn" data-emotion="感悟" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">💭 人生感悟</button>
+                    <button class="emotion-btn" data-emotion="共鳴" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🤝 情感共鳴</button>
+                </div>
+                <div class="feedback-input" style="display: none; margin-top: 20px;">
+                    <textarea id="feedback-text-3" placeholder="您是否也有類似的遺憾經歷？（選填）" style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; resize: vertical; min-height: 80px; font-family: inherit; font-size: 1.1em;"></textarea>
+                    <button class="submit-feedback" data-story="李煜" style="margin-top: 15px; padding: 12px 30px; background: var(--gold); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; transition: all 0.3s;">分享感受</button>
+                </div>
+                <div class="feedback-result" style="display: none; margin-top: 15px; padding: 15px; background: var(--gold); color: white; border-radius: 8px; font-size: 1.1em;"></div>
+            </div>
             <!-- 已刪除單集按鈕 -->
         </div>
 
         <!-- 故事4：宋徽宗 · 靖康恥 -->
-        <div class="story-card">
+        <div class="story-card scroll-reveal">
             <h2 class="story-title">宋徽宗 · 靖康恥</h2>
             <p class="歪說">深夜聽伍佰《挪威的森林》時，總想起宋徽宗父子：一天到晚畫畫寫字搞花石綱，夢想豐亨豫大，結果金人南下，東京淪陷，二聖被擄北上。從燈火闌珊的上元之夜，到五國城裡的囚徒生活，這落差，比任何悲劇都慘。</p>
             <p class="歌詞">改編《建炎的森林》（伍佰《挪威的森林》旋律）<br>
@@ -231,11 +452,27 @@
             <div class="youtube-embed">
                 <iframe src="https://www.youtube.com/embed/ARKoG9ZQ0jo" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
+            
+            <!-- 觀後感受互動區 -->
+            <div class="feedback-section" style="margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.4em;">面對盛極而衰，您有何感觸？</h3>
+                <div class="emotion-buttons" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <button class="emotion-btn" data-emotion="警示" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">⚠️ 深刻警示</button>
+                    <button class="emotion-btn" data-emotion="惋惜" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😥 無限惋惜</button>
+                    <button class="emotion-btn" data-emotion="反思" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🤷 自我反思</button>
+                    <button class="emotion-btn" data-emotion="感悟" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">💡 人生感悟</button>
+                </div>
+                <div class="feedback-input" style="display: none; margin-top: 20px;">
+                    <textarea id="feedback-text-4" placeholder="從這個故事中您學到了什麼？（選填）" style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; resize: vertical; min-height: 80px; font-family: inherit; font-size: 1.1em;"></textarea>
+                    <button class="submit-feedback" data-story="宋徽宗" style="margin-top: 15px; padding: 12px 30px; background: var(--gold); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; transition: all 0.3s;">分享感受</button>
+                </div>
+                <div class="feedback-result" style="display: none; margin-top: 15px; padding: 15px; background: var(--gold); color: white; border-radius: 8px; font-size: 1.1em;"></div>
+            </div>
             <!-- 已刪除單集按鈕 -->
         </div>
 		
 		<!-- 故事5：宋徽宗 · 靖康恥 -->
-<div class="story-card">
+<div class="story-card scroll-reveal">
     <h2 class="story-title">宋徽宗 · 靖康恥2</h2>
     <p class="歪說">深夜聽伍佰《突然的自我》時，總想起宋徽宗：前半生瘦金體揮灑、宣和瓷繪盡錦繡，夢想豐亨豫大；後半生突然北狩五國城，坐井觀天，月如霜。人生最無常的，就是這些「突然的自我」——盛世一夜成空，再也回不去。</p>
     
@@ -256,20 +493,51 @@
     <div class="youtube-embed">
         <iframe src="https://www.youtube.com/embed/2m1wDW1FVG0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
+    
+    <!-- 觀後感受互動區 -->
+    <div class="feedback-section" style="margin-top: 30px; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center;">
+        <h3 style="color: var(--gold); margin-bottom: 20px; font-size: 1.4em;">「突然的自我」讓您想到什麼？</h3>
+        <div class="emotion-buttons" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+            <button class="emotion-btn" data-emotion="無常" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">😱 人生無常</button>
+            <button class="emotion-btn" data-emotion="警醒" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🔔 及時警醒</button>
+            <button class="emotion-btn" data-emotion="珍惜" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">💝 珍惜當下</button>
+            <button class="emotion-btn" data-emotion="感悟" style="padding: 10px 20px; border: 2px solid var(--gold); background: white; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-size: 1.1em;">🎭 深刻感悟</button>
+        </div>
+        <div class="feedback-input" style="display: none; margin-top: 20px;">
+            <textarea id="feedback-text-5" placeholder="您的人生中有過「突然的自我」時刻嗎？（選填）" style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; resize: vertical; min-height: 80px; font-family: inherit; font-size: 1.1em;"></textarea>
+            <button class="submit-feedback" data-story="徽宗的自我" style="margin-top: 15px; padding: 12px 30px; background: var(--gold); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1em; font-weight: bold; transition: all 0.3s;">分享感受</button>
+        </div>
+        <div class="feedback-result" style="display: none; margin-top: 15px; padding: 15px; background: var(--gold); color: white; border-radius: 8px; font-size: 1.1em;"></div>
+    </div>
     <!-- 已刪除單集按鈕，只留結尾訂閱 -->
 </div>
 
         <!-- 結尾呼籲區（只保留訂閱按鈕） -->
         <div class="story-card">
             <p style="font-size:1.3em; line-height:1.8; margin-bottom:20px;">哪位古人最戳您？<br>哪首歌最像您的故事？</p>
-            <p style="font-size:1.1em; color:#777; margin:20px 0;">留言告訴我們，下期講誰～</p>
+            <p class="ending-text" style="font-size:1.1em; color:#777; margin:20px 0;">留言告訴我們，下期講誰～</p>
             <a href="https://www.youtube.com/@TangSongRock" class="youtube-btn" target="_blank">訂閱YouTube</a>
+        </div>
+
+        <!-- 社群情感匯總 -->
+        <div class="story-card">
+            <h3 style="color: var(--gold); margin-bottom: 25px; font-size: 1.6em;">江湖朋友的情感共鳴</h3>
+            <div id="community-emotions" style="text-align: center; margin: 30px 0;">
+                <div id="emotion-display" style="font-size: 1.3em; margin: 20px 0; color: #666;">
+                    📊 正在統計大家的感受...
+                </div>
+                <div id="emotion-charts" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <!-- 情感統計圖表將在這裡動態生成 -->
+                </div>
+                <button id="clear-feedbacks" style="margin-top: 20px; padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 1em;">
+                    清除所有感受記錄
+                </button>
+            </div>
         </div>
     </main>
 
-    <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-        <img src="images/logo.webp" alt="江湖禪心 Logo" 
-     style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <img src="images/logo.webp" alt="江湖禪心" class="footer-logo" onclick="location.href='index.html'">
         <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
         <p style="margin:10px 0;">
             <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
@@ -278,6 +546,402 @@
         </p>
         <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
     </footer>
+
+    <script src="js/darkmode.js"></script>
+    <script>
+        // 頁面載入動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const storyCards = document.querySelectorAll('.story-card');
+            storyCards.forEach((card, index) => {
+                card.classList.add('animate-in');
+                card.style.animationDelay = `${0.2 * index}s`;
+            });
+
+            // 滾動顯示效果
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            // 為故事卡片添加滾動監聽
+            storyCards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // 故事卡片點擊互動
+            storyCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 如果點擊的是YouTube按鈕，不觸發卡片動畫
+                    if (e.target.classList.contains('youtube-btn')) return;
+                    
+                    // 添加點擊反饋動畫
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+
+            // YouTube按鈕點擊統計
+            const youtubeBtn = document.querySelector('.youtube-btn');
+            if (youtubeBtn) {
+                youtubeBtn.addEventListener('click', function(e) {
+                    // 添加點擊波紋效果
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255,255,255,0.6)';
+                    ripple.style.width = ripple.style.height = '40px';
+                    ripple.style.top = (e.clientY - this.offsetTop - 20) + 'px';
+                    ripple.style.left = (e.clientX - this.offsetLeft - 20) + 'px';
+                    ripple.style.animation = 'ripple 0.6s ease-out';
+                    ripple.style.pointerEvents = 'none';
+                    
+                    this.style.position = 'relative';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            }
+        });
+
+        // 觀後感受互動邏輯
+        document.querySelectorAll('.emotion-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const emotion = this.dataset.emotion;
+                const feedbackSection = this.closest('.feedback-section');
+                const emotionButtons = feedbackSection.querySelectorAll('.emotion-btn');
+                const feedbackInput = feedbackSection.querySelector('.feedback-input');
+                const feedbackResult = feedbackSection.querySelector('.feedback-result');
+                
+                // 重置所有按鈕樣式
+                emotionButtons.forEach(button => {
+                    button.style.background = 'white';
+                    button.style.color = '#333';
+                });
+                
+                // 高亮選中的按鈕
+                this.style.background = 'var(--gold)';
+                this.style.color = 'white';
+                this.style.transform = 'scale(1.05)';
+                
+                // 顯示輸入區域
+                feedbackInput.style.display = 'block';
+                feedbackInput.style.animation = 'slideUp 0.3s ease-out';
+                
+                // 隱藏之前的結果
+                feedbackResult.style.display = 'none';
+            });
+        });
+
+        // 提交感受
+        document.querySelectorAll('.submit-feedback').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const story = this.dataset.story;
+                const feedbackSection = this.closest('.feedback-section');
+                const selectedEmotion = feedbackSection.querySelector('.emotion-btn[style*="var(--gold)"]');
+                const feedbackText = feedbackSection.querySelector('textarea').value;
+                const feedbackResult = feedbackSection.querySelector('.feedback-result');
+                
+                if (!selectedEmotion) {
+                    feedbackResult.textContent = '請先選擇您的感受～';
+                    feedbackResult.style.display = 'block';
+                    feedbackResult.style.background = '#ff6b6b';
+                    return;
+                }
+                
+                const emotion = selectedEmotion.dataset.emotion;
+                
+                // 模擬提交反饋
+                this.textContent = '分享中...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    // 保存反饋到本地存儲
+                    const feedbacks = JSON.parse(localStorage.getItem('ancient_feedbacks') || '[]');
+                    const newFeedback = {
+                        story: story,
+                        emotion: emotion,
+                        text: feedbackText,
+                        timestamp: new Date().toISOString()
+                    };
+                    feedbacks.push(newFeedback);
+                    localStorage.setItem('ancient_feedbacks', JSON.stringify(feedbacks));
+                    
+                    // 顯示成功訊息
+                    feedbackResult.innerHTML = `
+                        <div style="font-weight: bold;">感謝分享！</div>
+                        <div style="margin-top: 8px; font-size: 0.9em;">
+                            您的感受：${emotion}${feedbackText ? ' - ' + feedbackText.substring(0, 20) + '...' : ''}
+                        </div>
+                        <div style="margin-top: 8px; font-size: 0.8em; opacity: 0.8;">
+                            已有 ${feedbacks.length} 位朋友分享了他們的感受
+                        </div>
+                    `;
+                    feedbackResult.style.display = 'block';
+                    feedbackResult.style.background = 'var(--gold)';
+                    
+                    // 重置按鈕
+                    this.textContent = '分享感受';
+                    this.disabled = false;
+                    
+                    // 清空輸入
+                    feedbackSection.querySelector('textarea').value = '';
+                    
+                    // 添加動畫效果
+                    feedbackResult.style.animation = 'fadeIn 0.5s ease-out';
+                    
+                    // 更新統計
+                    updateEmotionStats();
+                }, 1000);
+            });
+        });
+
+        // 更新情感統計
+        function updateEmotionStats() {
+            const feedbacks = JSON.parse(localStorage.getItem('ancient_feedbacks') || '[]');
+            const emotionCount = {};
+            
+            feedbacks.forEach(feedback => {
+                emotionCount[feedback.emotion] = (emotionCount[feedback.emotion] || 0) + 1;
+            });
+            
+            console.log('情感統計：', emotionCount);
+        }
+
+        // 檢測是否觀看過視頻（模擬）
+        setTimeout(() => {
+            document.querySelectorAll('.story-card').forEach((card, index) => {
+                setTimeout(() => {
+                    const feedbackSection = card.querySelector('.feedback-section');
+                    if (feedbackSection) {
+                        feedbackSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        feedbackSection.style.animation = 'pulse 2s ease-in-out';
+                    }
+                }, (index + 1) * 3000);
+            });
+        }, 5000);
+
+        // 添加波紋動畫樣式
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+            .emotion-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            }
+            .emotion-btn:active {
+                transform: scale(0.95);
+            }
+            .submit-feedback:hover:not(:disabled) {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            }
+            .submit-feedback:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+            /* 深色模式適配 */
+            body.dark-mode .feedback-section {
+                background: linear-gradient(135deg, #2d2d44 0%, #1a1a2e 100%);
+            }
+            body.dark-mode .emotion-btn {
+                background: #2d2d44;
+                color: var(--text);
+                border-color: var(--gold);
+            }
+            body.dark-mode textarea {
+                background: #2d2d44;
+                color: var(--text);
+                border-color: var(--gold);
+            }
+            /* 結尾卡片深色模式優化 */
+            body.dark-mode .story-card:last-of-type,
+            body.dark-mode .story-card:nth-last-of-type(2) {
+                background: #2d2d44;
+                color: var(--text);
+                border: 1px solid rgba(212, 175, 55, 0.2);
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            }
+            body.dark-mode .story-card:last-of-type h3,
+            body.dark-mode .story-card:nth-last-of-type(2) h3 {
+                color: var(--gold);
+            }
+            body.dark-mode .story-card:last-of-type p,
+            body.dark-mode .story-card:nth-last-of-type(2) p {
+                color: var(--text);
+            }
+            body.dark-mode #emotion-display {
+                color: var(--text);
+            }
+            body.dark-mode #emotion-charts .emotion-bar {
+                background: #3d3d5c;
+                color: var(--text);
+            }
+            body.dark-mode #emotion-charts .story-hotness {
+                background: rgba(212, 175, 55, 0.1);
+            }
+            body.dark-mode #clear-feedbacks {
+                background: var(--gold);
+                color: white;
+            }
+            /* 特定文字深色模式優化 */
+            body.dark-mode .ending-text {
+                color: var(--text) !important;
+                opacity: 0.8;
+            }
+            body.dark-mode .no-feedback-text {
+                color: var(--text) !important;
+                opacity: 0.9;
+            }
+            #emotion-charts .emotion-bar {
+                background: var(--gold);
+                border-radius: 8px;
+                padding: 15px;
+                margin: 10px 0;
+                transition: all 0.3s ease;
+            }
+            #emotion-charts .emotion-bar:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 社群情感統計顯示
+        function displayCommunityEmotions() {
+            const feedbacks = JSON.parse(localStorage.getItem('ancient_feedbacks') || '[]');
+            const emotionDisplay = document.getElementById('emotion-display');
+            const emotionCharts = document.getElementById('emotion-charts');
+            
+            if (feedbacks.length === 0) {
+                emotionDisplay.innerHTML = '<span class="no-feedback-text">🌟 還沒有朋友分享感受，成為第一個分享的人吧！</span>';
+                emotionCharts.innerHTML = '';
+                return;
+            }
+            
+            // 統計情感
+            const emotionStats = {};
+            const storyStats = {};
+            
+            feedbacks.forEach(feedback => {
+                emotionStats[feedback.emotion] = (emotionStats[feedback.emotion] || 0) + 1;
+                storyStats[feedback.story] = (storyStats[feedback.story] || 0) + 1;
+            });
+            
+            // 統計總覽
+            emotionDisplay.innerHTML = `
+                <div style="font-size: 1.2em; color: var(--gold); margin-bottom: 15px;">
+                    🎭 已有 <strong>${feedbacks.length}</strong> 位朋友分享感受
+                </div>
+                <div style="font-size: 1em; color: #666;">
+                    最常見的情感：<strong>${Object.keys(emotionStats).reduce((a, b) => emotionStats[a] > emotionStats[b] ? a : b)}</strong>
+                </div>
+            `;
+            
+            // 情感分布圖表
+            emotionCharts.innerHTML = '';
+            Object.entries(emotionStats).forEach(([emotion, count]) => {
+                const percentage = ((count / feedbacks.length) * 100).toFixed(1);
+                const emotionBar = document.createElement('div');
+                emotionBar.className = 'emotion-bar';
+                emotionBar.innerHTML = `
+                    <div style="font-size: 1.1em; font-weight: bold; margin-bottom: 8px;">
+                        ${getEmotionEmoji(emotion)} ${emotion}
+                    </div>
+                    <div style="background: rgba(255,255,255,0.3); border-radius: 4px; height: 25px; position: relative; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, var(--gold), #ff6b6b); height: 100%; width: ${percentage}%; border-radius: 4px; transition: width 1s ease-out;"></div>
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold;">
+                            ${count}人 (${percentage}%)
+                        </div>
+                    </div>
+                `;
+                emotionCharts.appendChild(emotionBar);
+            });
+            
+            // 故事熱度統計
+            const storyHotness = document.createElement('div');
+            storyHotness.style.marginTop = '30px';
+            storyHotness.style.padding = '20px';
+            storyHotness.style.background = 'rgba(212, 175, 55, 0.1)';
+            storyHotness.style.borderRadius = '12px';
+            storyHotness.innerHTML = `
+                <h4 style="color: var(--gold); margin-bottom: 15px;">📖 最受觸動的故事</h4>
+                ${Object.entries(storyStats)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([story, count], index) => `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                            <span>${index + 1}. ${story}</span>
+                            <span style="color: var(--gold); font-weight: bold;">${count}人</span>
+                        </div>
+                    `).join('')}
+            `;
+            emotionCharts.appendChild(storyHotness);
+        }
+
+        // 獲取情感對應的emoji
+        function getEmotionEmoji(emotion) {
+            const emojiMap = {
+                '共鳴': '🤝',
+                '震撼': '😲',
+                '感慨': '🤔',
+                '慰藉': '🤗',
+                '悲痛': '😭',
+                '敬佩': '🙏',
+                '感傷': '💔',
+                '反思': '🤷',
+                '遺憾': '😔',
+                '同情': '😢',
+                '感悟': '💭',
+                '警示': '⚠️',
+                '惋惜': '😥',
+                '無常': '😱',
+                '警醒': '🔔',
+                '珍惜': '💝',
+                '人生感悟': '💡'
+            };
+            return emojiMap[emotion] || '❤️';
+        }
+
+        // 清除反饋記錄
+        document.getElementById('clear-feedbacks')?.addEventListener('click', function() {
+            if (confirm('確定要清除所有感受記錄嗎？')) {
+                localStorage.removeItem('ancient_feedbacks');
+                displayCommunityEmotions();
+                this.textContent = '已清除';
+                setTimeout(() => {
+                    this.textContent = '清除所有感受記錄';
+                }, 2000);
+            }
+        });
+
+        // 初始化統計顯示
+        displayCommunityEmotions();
+        
+        // 每次提交後更新統計
+        const originalUpdateStats = updateEmotionStats;
+        window.updateEmotionStats = function() {
+            originalUpdateStats();
+            displayCommunityEmotions();
+        };
+    </script>
 
     <nav role="navigation" aria-label="主要功能">
         <a href="index.html" aria-label="首頁">🏠</a>

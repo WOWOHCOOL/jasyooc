@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>您的江湖人格 - 江湖禪心｜李白岳飛伍佰古風測評</title>
-    <meta name="description" content="12道輕鬆題，測出您的江湖人格：李白灑脫浪子、岳飛仗義俠客、伍佰孤獨旅人，還是羅文憂國英雄？滿江紅、挪威的森林、淚橋，哪個最像您？">
-    <meta name="keywords" content="伍佰,挪威的森林,淚橋,滿江紅,唐宋搖滾,晚風,鐵血丹心,羅文,李白,岳飛,情緒療癒,中年男人懷舊,古風人格,性格測試">
+    <title>江湖十六型人格測評 - 江湖禪心｜古風心理測試</title>
+    <meta name="description" content="深度解析您的江湖人格：從李白灑脫浪子、岳飛仗義俠客到伍佰孤獨旅人，結合MBTI十六型人格，探索您的內心世界。伍佰歌詞+古風+現代心理學，獨特體驗。">
+    <meta name="keywords" content="江湖十六型人格,MBTI,古風心理測試,伍佰歌詞測試,李白岳飛人格,中年男人性格,情緒療癒,古風文化,懷舊心理測評,深度人格分析">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="您的江湖人格 - 江湖禪心">
-    <meta property="og:description" content="12道輕鬆題，測出您的江湖人格：李白灑脫浪子、岳飛仗義俠客、伍佰孤獨旅人，還是羅文憂國英雄？">
+    <meta property="og:title" content="江湖十六型人格測評 - 江湖禪心">
+    <meta property="og:description" content="深度解析您的江湖人格，結合MBTI十六型人格理論，用伍佰歌詞和古風文化探索您的內心世界。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jasyooc.com/test.html">
     <meta property="og:image" content="https://jasyooc.com/images/og-test.jpg">
@@ -18,8 +18,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="您的江湖人格 - 江湖禪心">
-    <meta property="twitter:description" content="12道輕鬆題，測出您的江湖人格。李白灑脫浪子、岳飛仗義俠客、伍佰孤獨旅人，你屬哪種？">
+    <meta property="twitter:title" content="江湖十六型人格測評 - 江湖禪心">
+    <meta property="twitter:description" content="結合MBTI理論，用伍佰歌詞和古風文化探索您的內心世界，深度解析您的江湖人格。">
     <meta property="twitter:image" content="https://jasyooc.com/images/twitter-test.jpg">
     
     <!-- Preconnect for performance -->
@@ -221,6 +221,54 @@
             min-width: 200px;
         }
         
+        /* 深色模式优化 */
+        body.dark-mode .option-button {
+            background: #2d2d44;
+            color: var(--text);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        body.dark-mode .option-button:hover,
+        body.dark-mode .option-button:focus {
+            background: var(--accent);
+            color: white;
+        }
+
+        body.dark-mode .result-header {
+            background: linear-gradient(135deg, #2d2d44 0%, #3d3d5c 100%);
+            border-left: 4px solid var(--gold);
+        }
+
+        body.dark-mode .result-section {
+            background: #2d2d44;
+            color: var(--text);
+            border-left: 3px solid var(--accent);
+        }
+
+        body.dark-mode .result-section h4 {
+            color: var(--gold);
+        }
+
+        body.dark-mode .result-content {
+            color: var(--text);
+        }
+
+        body.dark-mode .wu-bai-quote {
+            background: #2d2d44;
+            color: var(--gold);
+            border-left: 4px solid var(--gold);
+        }
+
+        body.dark-mode .poem-text {
+            background: #2d2d44;
+            color: var(--text);
+            border-left: 4px solid var(--accent);
+        }
+
+        body.dark-mode .progress-text {
+            color: var(--text);
+        }
+
         /* 移动端优化 */
         @media (max-width: 768px) {
             .option-button {
@@ -249,8 +297,8 @@
 </head>
 <body>
     <header role="banner">
-        <h1>您的江湖人格</h1>
-        <p>12道題，測出您是李白、岳飛還是伍佰歌詞裡的那個人</p>
+        <h1>江湖十六型人格測評</h1>
+        <p>結合MBTI理論，探索您內心的江湖人格<br>從伍佰歌詞到古風人物，深度解析您的性格特質</p>
     </header>
 
     <main role="main" class="test-container">
@@ -336,9 +384,8 @@
         </div>
     </main>
 
-    <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-        <img src="images/logo.webp" alt="江湖禪心 Logo" 
-     style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <img src="images/logo.webp" alt="江湖禪心" class="footer-logo" onclick="location.href='index.html'">
         <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
         <p style="margin:10px 0;">
             <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
@@ -910,5 +957,6 @@
             }
         });
     </script>
+    <script src="js/darkmode.js"></script>
 </body>
 </html>

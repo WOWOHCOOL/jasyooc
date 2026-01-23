@@ -795,6 +795,56 @@
                 font-size: 14px;
             }
         }
+
+        /* 深色模式优化 */
+        body.dark-mode .category-card {
+            background: #2d2d44;
+            color: var(--text);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .category-card:hover {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #3d3d5c 0%, #4d4d6c 100%);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        body.dark-mode .category-card.active {
+            background: linear-gradient(135deg, #3d3d5c 0%, #4d4d6c 100%);
+            border-color: var(--gold);
+            color: var(--text);
+        }
+
+        body.dark-mode .category-title {
+            color: var(--gold);
+        }
+
+        body.dark-mode .category-desc {
+            color: var(--text);
+        }
+
+        body.dark-mode .content-section .category-card h3 {
+            color: var(--gold);
+        }
+
+        body.dark-mode .content-section .category-card p {
+            color: var(--text);
+        }
+
+        body.dark-mode .result-section {
+            background: #2d2d44;
+            color: var(--text);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        body.dark-mode .result-title {
+            color: var(--gold);
+        }
+
+        body.dark-mode .mood-result {
+            color: var(--text);
+        }
     </style>
 </head>
 <body>
@@ -931,9 +981,8 @@
         </div>
     </main>
 
-    <footer role="contentinfo" style="text-align:center; padding:50px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid #eee; margin-top:40px; background:var(--bg);">
-        <img src="images/logo.webp" alt="江湖禪心 Logo" 
-     style="width:80%; max-width:380px; height:auto; display:block; margin:0 auto 30px; object-fit:contain;">
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <img src="images/logo.webp" alt="江湖禪心" class="footer-logo" onclick="location.href='index.html'">
         <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
         <p style="margin:10px 0;">
             <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
@@ -959,10 +1008,11 @@
     </nav>
 
     <!-- JavaScript -->
-    <script src="js/wheelData.js"></script>
-    <script src="js/wheelComponent.js"></script>
-    <script src="js/moodPage.js"></script>
-    <script src="js/quickFix.js"></script>
+<script src="js/darkmode.js"></script>
+<script src="js/wheelData.js"></script>
+<script src="js/wheelComponent.js"></script>
+<script src="js/moodPage.js"></script>
+<script src="js/quickFix.js"></script>
 
 </body>
 </html>
