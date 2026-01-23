@@ -349,6 +349,48 @@ nav a:hover::after {
     width: 80%;
 }
 
+/* Logo导航样式 */
+nav a[style*="background-image"] {
+    background-size: 24px 24px !important;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+/* Footer小logo样式 */
+.footer-logo {
+    width: 60px;
+    height: 60px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 深色模式footer logo */
+body.dark-mode .footer-logo {
+    opacity: 0.7;
+}
+
+body.dark-mode .footer-logo:hover {
+    opacity: 1;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* 移动端footer logo */
+@media (max-width: 768px) {
+    .footer-logo {
+        width: 50px;
+        height: 50px;
+    }
+}
+
 /* ==================== 广告位优化 ==================== */
 .adsense-placeholder {
     background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
@@ -475,9 +517,271 @@ nav a:hover::after {
     }
 }
 
-/* ==================== 暗色模式预留 ==================== */
+/* ==================== 深色模式支持 ==================== */
+body.dark-mode {
+    --bg: #1a1a2e;
+    --text: #e0e0e0;
+    --accent: #7a9c8e;
+    --gold: #d4af37;
+    --gray: #2d2d44;
+    --shadow-light: rgba(0,0,0,0.3);
+    --shadow-medium: rgba(0,0,0,0.4);
+    --shadow-heavy: rgba(0,0,0,0.5);
+}
+
+/* 深色模式主体样式 */
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+    color: var(--text);
+}
+
+/* 深色模式卡片 */
+body.dark-mode .card,
+body.dark-mode .intro-card,
+body.dark-mode .recommend-card,
+body.dark-mode .feature-card {
+    background: #2d2d44;
+    color: var(--text);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .intro-card {
+    background: linear-gradient(135deg, #2d2d44 0%, #3d3d5c 100%);
+}
+
+/* 深色模式卡片悬停效果 */
+body.dark-mode .card:hover,
+body.dark-mode .intro-card:hover,
+body.dark-mode .recommend-card:hover,
+body.dark-mode .feature-card:hover {
+    background: linear-gradient(135deg, #3d3d5c 0%, #4d4d6c 100%);
+    color: var(--text);
+}
+
+/* 深色模式标题 */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: var(--gold);
+}
+
+/* 深色模式文本 */
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode div {
+    color: var(--text);
+}
+
+body.dark-mode .subtitle,
+body.dark-mode .card-subtitle {
+    color: var(--accent);
+}
+
+/* 深色模式链接 */
+body.dark-mode a {
+    color: var(--gold);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode a:hover {
+    color: #ffed4e;
+}
+
+/* 深色模式按钮 */
+body.dark-mode .btn {
+    background: linear-gradient(135deg, #3d3d5c 0%, #4d4d6c 100%);
+    color: var(--text);
+    border: 1px solid var(--gold);
+}
+
+body.dark-mode .btn:hover {
+    background: linear-gradient(135deg, #4d4d6c 0%, #5d5d7c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+body.dark-mode .btn-primary {
+    background: var(--gold);
+    color: #1a1a2e;
+}
+
+body.dark-mode .btn-primary:hover {
+    background: #ffed4e;
+    color: #0f0f23;
+}
+
+/* 深色模式表单元素 */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: #3d3d5c;
+    color: var(--text);
+    border: 1px solid var(--accent);
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* 深色模式表格 */
+body.dark-mode table {
+    background: #2d2d44;
+    color: var(--text);
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-color: var(--gray);
+}
+
+body.dark-mode th {
+    background: #3d3d5c;
+    color: var(--gold);
+}
+
+/* 深色模式页脚 */
+body.dark-mode footer {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+    color: var(--text);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* 深色模式导航 - 修复上沿线颜色 */
+body.dark-mode nav {
+    background: rgba(45, 45, 68, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* 深色模式导航链接 */
+body.dark-mode nav a {
+    color: var(--text) !important;
+}
+
+body.dark-mode nav a:hover,
+body.dark-mode nav a.active {
+    background: rgba(212, 175, 55, 0.1) !important;
+    color: var(--gold) !important;
+}
+
+body.dark-mode nav a.active::after,
+body.dark-mode nav a:hover::after {
+    background: var(--gold);
+}
+
+/* 深色模式广告占位符 */
+body.dark-mode .adsense-placeholder {
+    background: #2d2d44;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+}
+
+/* 深色模式轮盘特殊处理 */
+body.dark-mode .wheel-container {
+    filter: drop-shadow(0 8px 25px rgba(212, 175, 55, 0.2));
+}
+
+/* 深色模式图片容器 */
+body.dark-mode .image-container {
+    background: #2d2d44;
+    border-color: var(--gray);
+}
+
+/* 深色模式标签 */
+body.dark-mode .tag {
+    background: #3d3d5c;
+    color: var(--text);
+    border: 1px solid var(--accent);
+}
+
+body.dark-mode .tag:hover {
+    background: var(--gold);
+    color: #1a1a2e;
+}
+
+/* 深色模式分页 */
+body.dark-mode .pagination a {
+    background: #3d3d5c;
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+body.dark-mode .pagination a:hover,
+body.dark-mode .pagination .current {
+    background: var(--gold);
+    color: #1a1a2e;
+}
+
+/* 深色模式高亮文本 */
+body.dark-mode .highlight {
+    background: rgba(212, 175, 55, 0.2);
+    color: #ffed4e;
+}
+
+/* 深色模式代码块 */
+body.dark-mode pre,
+body.dark-mode code {
+    background: #1f1f33;
+    color: #d0d0d0;
+    border: 1px solid var(--gray);
+}
+
+body.dark-mode pre {
+    background: #1a1a2e;
+    border-color: var(--accent);
+}
+
+/* 深色模式特殊元素 */
+body.dark-mode .gold-text {
+    color: var(--gold);
+}
+
+body.dark-mode .accent-text {
+    color: var(--accent);
+}
+
+body.dark-mode .muted-text {
+    color: #a0a0a0;
+}
+
+/* 深色模式滚动条 */
+body.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #ffed4e;
+}
+
+/* 深色模式选择文本 */
+body.dark-mode ::selection {
+    background: rgba(212, 175, 55, 0.3);
+    color: var(--text);
+}
+
+/* 深色模式焦点 */
+body.dark-mode :focus {
+    outline-color: var(--gold);
+}
+
 @media (prefers-color-scheme: dark) {
-    /* 为未来暗色模式预留 */
+    /* 为未来系统暗色模式预留 */
 }
 
 /* ==================== 性能优化 ==================== */
