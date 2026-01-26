@@ -835,7 +835,8 @@
         body.dark-mode .result-section {
             background: #2d2d44;
             color: var(--text);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
 
         body.dark-mode .result-title {
@@ -844,6 +845,189 @@
 
         body.dark-mode .mood-result {
             color: var(--text);
+        }
+
+        /* 黑暗模式下按钮样式优化 */
+        body.dark-mode .action-button {
+            background: linear-gradient(135deg, #4a4a6a 0%, #5a5a7a 100%);
+            color: white;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .action-button:hover {
+            background: linear-gradient(135deg, #5a5a7a 0%, #6a6a8a 100%);
+            border-color: var(--gold);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        body.dark-mode .action-button:active {
+            background: linear-gradient(135deg, #3a3a5a 0%, #4a4a6a 100%);
+            transform: translateY(0);
+        }
+
+        /* 黑暗模式下结果高亮样式优化 */
+        body.dark-mode .result-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+            color: var(--gold);
+            padding: 3px 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.2);
+        }
+
+        /* 黑暗模式下重置按钮特殊样式 */
+        body.dark-mode .action-button.reset-button {
+            background: linear-gradient(135deg, #6a4a3a 0%, #7a5a4a 100%);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        body.dark-mode .action-button.reset-button:hover {
+            background: linear-gradient(135deg, #7a5a4a 0%, #8a6a5a 100%);
+            border-color: var(--gold);
+        }
+
+        /* 黑暗模式下转盘中心提示优化 */
+        body.dark-mode .wheel-center-hint {
+            background: var(--gold);
+            color: #2d2d44;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        body.dark-mode .wheel-center-hint:hover {
+            background: #d4af37;
+            color: #1a1a2a;
+        }
+
+        /* 黑暗模式下结果内容区域优化 */
+        body.dark-mode .result-content {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        body.dark-mode .result-content p {
+            color: var(--text);
+            margin: 12px 0;
+        }
+
+        body.dark-mode .result-content strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        body.dark-mode .result-content .mood-advice {
+            color: var(--accent);
+            font-style: italic;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* 黑暗模式下转盘结果中的人生启示区域优化 */
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #e8f4f0"] {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%) !important;
+            border: 1px solid rgba(76, 175, 80, 0.3) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #e8f4f0"] h4 {
+            color: #4caf50 !important;
+        }
+
+        body.dark-mode .result-content > div[style*="color: #333"] {
+            color: var(--text) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="color: #444"] {
+            color: var(--text) !important;
+        }
+
+        /* 黑暗模式下古人解讀区域优化 */
+        body.dark-mode .result-content > div[style*="background: white"] {
+            background: #2d2d44 !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="background: white"] h4 {
+            color: var(--gold) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="background: white"] div[style*="color: #444"] {
+            color: var(--text) !important;
+        }
+
+        /* 黑暗模式下结果解释文本区域优化 */
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #f8f5f0"] {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #f8f5f0"] strong {
+            color: var(--gold) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #f8f5f0"] span {
+            color: var(--gold) !important;
+        }
+
+        /* 黑暗模式下所有result-highlight的增强 */
+        body.dark-mode .result-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%) !important;
+            border: 1px solid rgba(212, 175, 55, 0.4) !important;
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.3) !important;
+            color: var(--gold) !important;
+            font-weight: 600 !important;
+        }
+
+        /* 黑暗模式下今日行动区域优化 */
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #fff3e0"] {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%) !important;
+            border: 1px solid rgba(255, 152, 0, 0.3) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #fff3e0"] h4 {
+            color: #ff9800 !important;
+        }
+
+        body.dark-mode .result-content > div[style*="color: #444"] {
+            color: var(--text) !important;
+        }
+
+        body.dark-mode .result-content > div[style*="color: #ff9800"] {
+            color: #ff9800 !important;
+        }
+
+        /* 黑暗模式下列表项优化 */
+        body.dark-mode .result-content li[style*="color: #ff9800"] {
+            color: #ff9800 !important;
+        }
+
+        body.dark-mode .result-content li[style*="color: #444"] {
+            color: var(--text) !important;
+        }
+
+        /* 黑暗模式下转盘显示结果区域的通用文本优化 */
+        body.dark-mode .result-content {
+            color: var(--text) !important;
+        }
+
+        body.dark-mode .result-content p,
+        body.dark-mode .result-content div,
+        body.dark-mode .result-content span {
+            color: var(--text) !important;
+        }
+
+        /* 黑暗模式下今日行动区域的文本颜色优化 */
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #fff3e0"] p,
+        body.dark-mode .result-content > div[style*="background: linear-gradient(135deg, #fff3e0"] li {
+            color: var(--text) !important;
+        }
+
+        /* 黑暗模式下转盘结果区域的所有深色文本强制改为浅色 */
+        body.dark-mode .result-content *[style*="color: #333"],
+        body.dark-mode .result-content *[style*="color: #444"],
+        body.dark-mode .result-content *[style*="color: #555"],
+        body.dark-mode .result-content *[style*="color: #666"] {
+            color: var(--text) !important;
         }
     </style>
 </head>
@@ -999,12 +1183,10 @@
 
     <nav role="navigation" aria-label="主要功能">
         <a href="index.html" aria-label="首頁">🏠</a>
-        <a href="sign.html" aria-label="隨心一籤">🀄</a>
-        <a href="mood.html" aria-label="古風決策" class="active">🎡</a>
-        <a href="woobai.html" aria-label="伍佰歌詞">🎵</a>
-        <a href="ancient.html" aria-label="古人歪說">📜</a>
-        <a href="test.html" aria-label="江湖測試">🧪</a>
-        <a href="prompt.html" aria-label="提示詞錄">✨</a>
+        <a href="music.html" aria-label="音樂世界">🎵</a>
+        <a href="culture.html" aria-label="文化傳承">📜</a>
+        <a href="tools.html" aria-label="實用工具">🛠️</a>
+        <a href="discover.html" aria-label="更多發現">⭐</a>
     </nav>
 
     <!-- JavaScript -->
@@ -1012,7 +1194,6 @@
 <script src="js/wheelData.js"></script>
 <script src="js/wheelComponent.js"></script>
 <script src="js/moodPage.js"></script>
-<script src="js/quickFix.js"></script>
 
 </body>
 </html>

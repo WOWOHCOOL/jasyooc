@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心情追蹤器 - 江湖禪心｜情緒記錄與心理健康管理</title>
+    <meta name="description" content="心情追蹤器提供每日情緒記錄、心理健康分析、情緒趨勢統計。通過古風界面設計，結合現代心理學知識，幫助您了解內心世界，提升情商與生活品質。">
+    <meta name="keywords" content="心情追蹤,情緒記錄,心理健康,情緒管理,心理測試,壓力管理,焦慮緩解,心情日記,心理健康工具,情緒分析">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="心情追蹤器 - 江湖禪心">
+    <meta property="og:description" content="每日情緒記錄與心理健康分析，古風設計的心靈夥伴。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jasyooc.com/mood-tracker.html">
+    <meta property="og:image" content="https://jasyooc.com/images/og-mood-tracker.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="心情追蹤器 - 江湖禪心">
+    <meta name="twitter:description" content="每日情緒記錄與心理健康分析，古風設計的心靈夥伴。">
+    <meta name="twitter:image" content="https://jasyooc.com/images/twitter-mood-tracker.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jasyooc.com/mood-tracker.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Chart.js for statistics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* Mood Tracker Specific Styles */
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .mood-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+        
+        .mood-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .mood-item.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+        }
+        
+        .mood-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .mood-label {
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .mood-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            background: var(--bg);
+            color: var(--text);
+        }
+        
+        .mood-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(201, 166, 107, 0.2);
+        }
+        
+        .stats-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 30px var(--shadow-light);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 15px;
+            border: 1px solid rgba(201, 166, 107, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+        
+        .mood-history {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--gray);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .mood-entry {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .mood-entry-date {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .mood-entry-text {
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .save-btn {
+            background: linear-gradient(135deg, var(--gold), #b8945f);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(201, 166, 107, 0.3);
+        }
+        
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 166, 107, 0.4);
+        }
+        
+        .save-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .tip-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode .mood-item {
+            background: linear-gradient(135deg, #2d2d44, #3d3d5c);
+        }
+        
+        body.dark-mode .mood-item.selected {
+            background: linear-gradient(135deg, #4d4d6c, #5d5d7c);
+        }
+        
+        body.dark-mode .mood-input {
+            background: #3d3d5c;
+            color: var(--text);
+            border-color: var(--accent);
+        }
+        
+        body.dark-mode .stats-container {
+            background: #2d2d44;
+        }
+        
+        body.dark-mode .stat-card {
+            background: linear-gradient(135deg, #3d3d5c, #4d4d6c);
+        }
+        
+        body.dark-mode .mood-history {
+            background: #2d2d44;
+        }
+        
+        body.dark-mode .mood-entry {
+            background: #3d3d5c;
+        }
+        
+        body.dark-mode .tips-section {
+            background: linear-gradient(135deg, #2d4433, #3d5c4d);
+        }
+        
+        body.dark-mode .tip-item {
+            background: #2d4433;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .mood-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .mood-emoji {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+        }
+    </style>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "心情追蹤器",
+        "description": "每日情緒記錄與心理健康分析工具",
+        "url": "https://jasyooc.com/mood-tracker.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "江湖禪心"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "江湖禪心",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://jasyooc.com/images/logo.webp"
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <header role="banner">
+        <h1>心情追蹤器</h1>
+        <p>情緒記錄 · 心理分析 · 健康管理</p>
+        <button class="btn" onclick="location.href='tools.html'">返回實用工具</button>
+    </header>
+
+    <main role="main">
+        <div class="intro-card">
+            <p class="intro-text">
+                <span class="highlight-text">記錄心情，了解內心</span><br>
+                在這個古風數位空間裡，<br>
+                追蹤你的情緒變化，找回內心的平靜。
+            </p>
+        </div>
+
+        <h2>今日心情如何？</h2>
+        
+        <div class="feature-card">
+            <h3>🎯 選擇你的心情</h3>
+            <div class="mood-grid">
+                <div class="mood-item" onclick="selectMood('excellent', '😄')">
+                    <span class="mood-emoji">😄</span>
+                    <span class="mood-label">非常開心</span>
+                </div>
+                <div class="mood-item" onclick="selectMood('good', '😊')">
+                    <span class="mood-emoji">😊</span>
+                    <span class="mood-label">愉快</span>
+                </div>
+                <div class="mood-item" onclick="selectMood('calm', '😌')">
+                    <span class="mood-emoji">😌</span>
+                    <span class="mood-label">平靜</span>
+                </div>
+                <div class="mood-item" onclick="selectMood('tired', '😔')">
+                    <span class="mood-emoji">😔</span>
+                    <span class="mood-label">疲憊</span>
+                </div>
+                <div class="mood-item" onclick="selectMood('anxious', '😰')">
+                    <span class="mood-emoji">😰</span>
+                    <span class="mood-label">焦慮</span>
+                </div>
+                <div class="mood-item" onclick="selectMood('sad', '😢')">
+                    <span class="mood-emoji">😢</span>
+                    <span class="mood-label">難過</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <h3>📝 記錄今天的感受</h3>
+            <textarea 
+                id="moodNote" 
+                class="mood-input" 
+                placeholder="今天發生了什麼事？讓你有這樣的感受...&#10;&#10;例如：&#10;• 工作中遇到的挑戰&#10;• 與朋友家人的溫馨時光&#10;• 對未來的期待與憂慮&#10;• 內心的感悟與成長"
+            ></textarea>
+            <button class="save-btn" onclick="saveMoodEntry()" id="saveBtn" disabled>
+                💾 保存今日心情
+            </button>
+        </div>
+
+        <!-- Google AdSense 廣告位 - 符合政策 -->
+        <div class="adsense-placeholder">
+            <p>廣告位 - 心理健康相關推薦</p>
+        </div>
+
+        <h2>心情統計分析</h2>
+        
+        <div class="stats-container">
+            <h3 style="text-align: center; color: var(--gold); margin-bottom: 20px;">📊 本週心情總覽</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalEntries">0</div>
+                    <div class="stat-label">記錄天數</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgMood">😌</div>
+                    <div class="stat-label">平均心情</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bestStreak">0</div>
+                    <div class="stat-label">最佳連續</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="currentStreak">0</div>
+                    <div class="stat-label">當前連續</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="moodChart"></canvas>
+            </div>
+        </div>
+
+        <h2>心情歷史記錄</h2>
+        
+        <div class="feature-card">
+            <h3>📅 過往心情回顧</h3>
+            <div class="mood-history" id="moodHistory">
+                <p style="text-align: center; color: var(--accent); padding: 40px;">
+                    還沒有心情記錄，開始記錄你的第一個心情吧！
+                </p>
+            </div>
+            <button class="btn" onclick="exportData()">
+                📥 導出數據
+            </button>
+        </div>
+
+        <!-- 第二個廣告位 -->
+        <div class="adsense-placeholder">
+            <p>廣告位 - 正念冥想應用推薦</p>
+        </div>
+
+        <h2>心理健康小貼士</h2>
+        
+        <div class="tips-section">
+            <h3 style="color: #4caf50; margin-bottom: 15px;">🌱 情緒管理指南</h3>
+            
+            <div class="tip-item">
+                <strong>😌 深呼吸練習</strong><br>
+                當感到焦慮時，試試4-7-8呼吸法：吸氣4秒，屏息7秒，呼氣8秒。
+            </div>
+            
+            <div class="tip-item">
+                <strong>🚶‍♂️ 戶外散步</strong><br>
+                每天30分鐘的戶外活動，能有效改善心情，減輕壓力。
+            </div>
+            
+            <div class="tip-item">
+                <strong>📝 寫作療法</strong><br>
+                將煩惱寫下來，整理思緒，往往能找到解決問題的線索。
+            </div>
+            
+            <div class="tip-item">
+                <strong>🎵 音樂療癒</strong><br>
+                聽聽輕柔的古典音樂或自然音效，有助於放鬆身心。
+            </div>
+            
+            <div class="tip-item">
+                <strong>👥 社交支持</strong><br>
+                與信任的朋友或家人分享感受，不要孤獨面對困難。
+            </div>
+            
+            <div class="tip-item">
+                <strong>⏰ 規律作息</strong><br>
+                保持充足的睡眠和規律的生活節奏，對情緒穩定很重要。
+            </div>
+        </div>
+
+        <h2>專業建議</h2>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2 style="text-align: center; margin-top: 0;">何時尋求專業幫助</h2>
+            <p class="intro-text">
+                <span class="highlight-text">⚠️ 警示信號</span><br>
+                如果情緒低落持續超過兩週，嚴重影響日常生活，請考慮尋求專業幫助。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🏥 專業資源</span><br>
+                心理諮詢師、精神科醫師、心理治療師都能提供專業的幫助和支持。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🆘 緊急情況</span><br>
+                如有自傷或傷害他人的念頭，請立即撥打當地心理危機干預熱線。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">💪 正視問題</span><br>
+                尋求幫助是勇氣的表現，心理健康和身體健康同樣重要。
+            </p>
+        </div>
+
+    </main>
+
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <div style="margin-bottom: 20px;">
+            <img src="images/logo.webp" alt="江湖禪心" style="width:60px; height:60px; opacity:0.6; transition: opacity 0.3s ease; cursor: pointer;" onclick="location.href='index.html'" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+        </div>
+        <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
+        <p style="margin:10px 0;">
+            <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+            <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+            <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+        </p>
+        <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+    </footer>
+
+    <nav role="navigation" aria-label="主要功能">
+        <a href="index.html" aria-label="首頁">🏠</a>
+        <a href="music.html" aria-label="音樂世界">🎵</a>
+        <a href="culture.html" aria-label="文化傳承">📜</a>
+        <a href="tools.html" aria-label="實用工具" class="active">🛠️</a>
+        <a href="discover.html" aria-label="更多發現">⭐</a>
+    </nav>
+
+    <script src="js/darkmode.js"></script>
+    
+    <script>
+        // Mood Tracker JavaScript
+        let selectedMood = null;
+        let selectedEmoji = null;
+        let moodChart = null;
+        let moodData = [];
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMoodData();
+            updateStatistics();
+            updateMoodHistory();
+            initChart();
+            
+            // Enable/disable save button based on mood selection
+            document.getElementById('moodNote').addEventListener('input', function() {
+                updateSaveButton();
+            });
+        });
+
+        function selectMood(mood, emoji) {
+            // Remove previous selection
+            document.querySelectorAll('.mood-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selection to clicked item
+            event.currentTarget.classList.add('selected');
+            
+            selectedMood = mood;
+            selectedEmoji = emoji;
+            
+            updateSaveButton();
+        }
+
+        function updateSaveButton() {
+            const saveBtn = document.getElementById('saveBtn');
+            const hasMood = selectedMood !== null;
+            const hasNote = document.getElementById('moodNote').value.trim().length > 0;
+            
+            saveBtn.disabled = !(hasMood && hasNote);
+        }
+
+        function saveMoodEntry() {
+            const note = document.getElementById('moodNote').value.trim();
+            
+            if (!selectedMood || !note) {
+                alert('請選擇心情並填寫感受');
+                return;
+            }
+
+            const entry = {
+                date: new Date().toISOString(),
+                mood: selectedMood,
+                emoji: selectedEmoji,
+                note: note,
+                timestamp: Date.now()
+            };
+
+            moodData.push(entry);
+            saveMoodData();
+            
+            // Reset form
+            selectedMood = null;
+            selectedEmoji = null;
+            document.getElementById('moodNote').value = '';
+            document.querySelectorAll('.mood-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.getElementById('saveBtn').disabled = true;
+            
+            // Update displays
+            updateStatistics();
+            updateMoodHistory();
+            updateChart();
+            
+            // Show success message
+            showSuccessMessage();
+        }
+
+        function saveMoodData() {
+            localStorage.setItem('moodTrackerData', JSON.stringify(moodData));
+        }
+
+        function loadMoodData() {
+            const saved = localStorage.getItem('moodTrackerData');
+            if (saved) {
+                moodData = JSON.parse(saved);
+            }
+        }
+
+        function updateStatistics() {
+            // Filter last 7 days
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            
+            const weekData = moodData.filter(entry => 
+                new Date(entry.date) >= weekAgo
+            );
+
+            document.getElementById('totalEntries').textContent = weekData.length;
+            
+            // Calculate average mood
+            if (weekData.length > 0) {
+                const moodValues = {
+                    'excellent': 5,
+                    'good': 4,
+                    'calm': 3,
+                    'tired': 2,
+                    'anxious': 1,
+                    'sad': 0
+                };
+                
+                const avgValue = weekData.reduce((sum, entry) => 
+                    sum + moodValues[entry.mood], 0) / weekData.length;
+                
+                const avgEmojis = ['😢', '😰', '😔', '😌', '😊', '😄'];
+                document.getElementById('avgMood').textContent = avgEmojis[Math.round(avgValue)];
+            }
+            
+            // Calculate streaks
+            let bestStreak = 0;
+            let currentStreak = 0;
+            let tempStreak = 0;
+            
+            const sortedData = [...moodData].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+            
+            for (let i = 0; i < sortedData.length; i++) {
+                const currentDate = new Date(sortedData[i].date);
+                const nextDate = i < sortedData.length - 1 ? 
+                    new Date(sortedData[i + 1].date) : null;
+                
+                if (!nextDate || (currentDate - nextDate) > 86400000) { // More than 1 day gap
+                    tempStreak++;
+                    bestStreak = Math.max(bestStreak, tempStreak);
+                    if (i === 0) currentStreak = tempStreak;
+                } else {
+                    tempStreak = 1;
+                }
+            }
+            
+            document.getElementById('bestStreak').textContent = bestStreak;
+            document.getElementById('currentStreak').textContent = currentStreak;
+        }
+
+        function updateMoodHistory() {
+            const historyContainer = document.getElementById('moodHistory');
+            
+            if (moodData.length === 0) {
+                historyContainer.innerHTML = `
+                    <p style="text-align: center; color: var(--accent); padding: 40px;">
+                        還沒有心情記錄，開始記錄你的第一個心情吧！
+                    </p>
+                `;
+                return;
+            }
+
+            const sortedData = [...moodData].sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+
+            historyContainer.innerHTML = sortedData.slice(0, 10).map(entry => `
+                <div class="mood-entry">
+                    <div class="mood-entry-date">
+                        ${new Date(entry.date).toLocaleDateString('zh-TW', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })} ${entry.emoji}
+                    </div>
+                    <div class="mood-entry-text">${entry.note}</div>
+                </div>
+            `).join('');
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('moodChart').getContext('2d');
+            moodChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: '心情變化',
+                        data: [],
+                        borderColor: 'rgb(201, 166, 107)',
+                        backgroundColor: 'rgba(201, 166, 107, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    const emojis = ['😢', '😰', '😔', '😌', '😊', '😄'];
+                                    return emojis[value] || value;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            updateChart();
+        }
+
+        function updateChart() {
+            if (!moodChart) return;
+            
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            
+            const weekData = moodData.filter(entry => 
+                new Date(entry.date) >= weekAgo
+            );
+
+            const moodValues = {
+                'excellent': 5,
+                'good': 4,
+                'calm': 3,
+                'tired': 2,
+                'anxious': 1,
+                'sad': 0
+            };
+
+            const dailyData = {};
+            for (let i = 0; i < 7; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toLocaleDateString('zh-TW', {
+                    month: 'short',
+                    day: 'numeric'
+                });
+                dailyData[dateStr] = null;
+            }
+
+            weekData.forEach(entry => {
+                const dateStr = new Date(entry.date).toLocaleDateString('zh-TW', {
+                    month: 'short',
+                    day: 'numeric'
+                });
+                if (dailyData.hasOwnProperty(dateStr)) {
+                    dailyData[dateStr] = moodValues[entry.mood];
+                }
+            });
+
+            moodChart.data.labels = Object.keys(dailyData).reverse();
+            moodChart.data.datasets[0].data = Object.values(dailyData).reverse();
+            moodChart.update();
+        }
+
+        function showSuccessMessage() {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--gold);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 15px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                animation: fadeInOut 2s ease-in-out;
+            `;
+            message.textContent = '✅ 心情記錄已保存！';
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 2000);
+        }
+
+        function exportData() {
+            if (moodData.length === 0) {
+                alert('沒有數據可以導出');
+                return;
+            }
+
+            const csvContent = [
+                ['日期', '心情', '備註'],
+                ...moodData.map(entry => [
+                    new Date(entry.date).toLocaleString('zh-TW'),
+                    entry.emoji + ' ' + entry.mood,
+                    entry.note.replace(/,/g, '，')
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            const blob = new Blob(['\ufeff' + csvContent], { 
+                type: 'text/csv;charset=utf-8;' 
+            });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `心情記錄_${new Date().toLocaleDateString('zh-TW')}.csv`;
+            link.click();
+        }
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

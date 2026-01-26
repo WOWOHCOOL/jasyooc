@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音樂發展史 - 江湖禪心｜懷舊音樂設備與復古文化傳承</title>
+    <meta name="description" content="江湖禪心音樂發展史專頁，深度介紹CD、卡帶、黑膠唱片等復古音樂設備，探索音樂製作工藝、錄音技術演變，重溫經典音樂文化傳承。">
+    <meta name="keywords" content="音樂發展史,CD,卡帶,黑膠唱片,復古音樂設備,音樂製作工藝,錄音技術,音樂文化傳承,懷舊音樂,音樂歷史,江湖禪心">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="音樂發展史 - 江湖禪心">
+    <meta property="og:description" content="深度介紹CD、卡帶、黑膠唱片等復古音樂設備，探索音樂製作工藝與文化傳承">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jasyooc.com/music-history.html">
+    <meta property="og:image" content="https://jasyooc.com/images/og-music-history.jpg">
+    <meta property="og:site_name" content="江湖禪心">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="音樂發展史 - 江湖禪心">
+    <meta name="twitter:description" content="深度介紹CD、卡帶、黑膠唱片等復古音樂設備，探索音樂製作工藝與文化傳承">
+    <meta name="twitter:image" content="https://jasyooc.com/images/twitter-music-history.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jasyooc.com/music-history.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages.css">
+    
+    <style>
+        /* Music History Specific Styles */
+        .history-timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 40px 0;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold), var(--accent));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            width: calc(50% - 40px);
+            margin: 0 20px;
+            border: 1px solid rgba(201, 166, 107, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            border-color: var(--gold);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 3;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .equipment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(201, 166, 107, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .equipment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .equipment-card:hover::before {
+            left: 100%;
+        }
+        
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px var(--shadow-medium);
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+            border-color: rgba(201, 166, 107, 0.3);
+        }
+        
+        .equipment-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .equipment-title {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .equipment-years {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .equipment-description {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .equipment-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .equipment-features li {
+            background: var(--gray);
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .equipment-features li:hover {
+            background: linear-gradient(135deg, #e8e8e8, #f0f0f0);
+            transform: translateX(5px);
+        }
+        
+        .craft-section {
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .craft-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .craft-icon {
+            font-size: 2.5rem;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .craft-title {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .craft-steps {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .craft-step {
+            background: white;
+            padding: 18px 25px;
+            margin: 12px 0;
+            border-radius: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(201, 166, 107, 0.1);
+        }
+        
+        .craft-step:hover {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transform: translateX(5px);
+            border-color: var(--accent);
+        }
+        
+        .step-number {
+            background: var(--gold);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            min-width: 30px;
+            margin-top: 2px;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .step-description {
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .playlist-section {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 8px 30px var(--shadow-light);
+        }
+        
+        .playlist-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .playlist-card {
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(201, 166, 107, 0.1);
+        }
+        
+        .playlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+        }
+        
+        .playlist-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .playlist-title {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .playlist-desc {
+            font-size: 0.9rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .dark-mode .timeline-content,
+        .dark-mode .equipment-card,
+        .dark-mode .craft-section,
+        .dark-mode .playlist-section {
+            background: linear-gradient(135deg, #2d2d44, #3d3d5c);
+            color: var(--text);
+        }
+        
+        .dark-mode .equipment-features li,
+        .dark-mode .craft-step {
+            background: #3d3d5c;
+        }
+        
+        .dark-mode .equipment-features li:hover,
+        .dark-mode .craft-step:hover {
+            background: linear-gradient(135deg, #4d4d6c, #5d5d7c);
+        }
+        
+        .dark-mode .playlist-card {
+            background: linear-gradient(135deg, #2d2d44, #3d3d5c);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+                margin-left: 40px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .timeline-year {
+                left: 20px;
+                transform: translateX(-20px);
+            }
+            
+            .equipment-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .playlist-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .craft-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "音樂發展史",
+        "description": "深度介紹CD、卡帶、黑膠唱片等復古音樂設備，探索音樂製作工藝與文化傳承",
+        "url": "https://jasyooc.com/music-history.html",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "江湖禪心"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "江湖禪心",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://jasyooc.com/images/logo.webp"
+            }
+        },
+        "mainEntity": {
+            "@type": "CreativeWork",
+            "name": "音樂發展史",
+            "description": "音樂設備演變與製作工藝傳承",
+            "purpose": "音樂文化教育與傳承"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header role="banner">
+        <h1>音樂發展史</h1>
+        <p>復古設備 · 製作工藝 · 文化傳承</p>
+        <button class="btn" onclick="location.href='music.html'">返回音樂世界</button>
+    </header>
+
+    <main role="main">
+        <div class="intro-card">
+            <p class="intro-text">
+                <span class="highlight-text">那些年，我們聽音樂的方式</span><br>
+                從黑膠唱片到CD，從卡帶到數位音樂，<br>
+                每一種媒介都承載著一個時代的記憶。
+            </p>
+            <p class="intro-text">
+                這裡記錄的不只是音樂設備的演變，<br>
+                更是我們與音樂相處方式的變遷。<br>
+                那些轉動的唱片、翻面的卡帶、跳軌的CD...
+            </p>
+        </div>
+
+        <h2>音樂設備演變</h2>
+        
+        <div class="equipment-grid">
+            <div class="equipment-card">
+                <span class="equipment-icon">💿</span>
+                <h3 class="equipment-title">黑膠唱片</h3>
+                <p class="equipment-years">1948年 - 至今</p>
+                <p class="equipment-description">
+                    黑膠唱片是模擬音樂的黃金時代代表，溫暖的音色和獨特的播放儀式感，讓它至今仍是音樂愛好者的最愛。
+                </p>
+                <ul class="equipment-features">
+                    <li>33⅓轉LP專輯，45轉EP單曲</li>
+                    <li>模擬錄音，溫暖音色</li>
+                    <li>需要專門唱盤和唱針</li>
+                    <li>封面藝術精美，收藏價值高</li>
+                    <li>播放時有獨特的「噼啪」聲</li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <span class="equipment-icon">📼</span>
+                <h3 class="equipment-title">卡式磁帶</h3>
+                <p class="equipment-years">1963年 - 2010年代</p>
+                <p class="equipment-description">
+                    卡帶讓音樂變得便攜，可以隨時隨地聽音樂。翻面、倒帶的動作成了一代人的共同記憶。
+                </p>
+                <ul class="equipment-features">
+                    <li>便攜式播放，隨身聽革命</li>
+                    <li>可以錄音，DIY混音帶</li>
+                    <li>音質會隨使用時間下降</li>
+                    <li>經常出現卡帶、斷帶問題</li>
+                    <li>90分鐘/120分鐘標準時長</li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <span class="equipment-icon">💿</span>
+                <h3 class="equipment-title">CD光碟</h3>
+                <p class="equipment-years">1982年 - 至今</p>
+                <p class="equipment-description">
+                    CD帶來了數位音樂革命，清晰的音質和隨機播放功能，徹底改變了我們聽音樂的習慣。
+                </p>
+                <ul class="equipment-features">
+                    <li>數位音質，無雜音完美音色</li>
+                    <li>隨機播放，快速選曲</li>
+                    <li>74分鐘標準容量</li>
+                    <li>耐用性強，不易損壞</li>
+                    <li>小巧便攜，儲存方便</li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <span class="equipment-icon">🎵</span>
+                <h3 class="equipment-title">MP3播放器</h3>
+                <p class="equipment-years">1998年 - 2010年代</p>
+                <p class="equipment-description">
+                    MP3讓音樂真正進入數位時代，千首歌裝進口袋，iPod改變了整個音樂產業。
+                </p>
+                <ul class="equipment-features">
+                    <li>壓縮音頻，儲存空間大</li>
+                    <li>超輕薄便攜</li>
+                    <li>電池續航長</li>
+                    <li>可建立播放列表</li>
+                    <li>iPod經典設計成標誌</li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <span class="equipment-icon">📱</span>
+                <h3 class="equipment-title">串流音樂</h3>
+                <p class="equipment-years">2008年 - 至今</p>
+                <p class="equipment-description">
+                    串流音樂讓我們擁有了無限音樂庫，隨時隨地聽任何歌曲，音樂變成了服務而非產品。
+                </p>
+                <ul class="equipment-features">
+                    <li>雲端儲存，無限曲庫</li>
+                    <li>個人化推薦算法</li>
+                    <li>離線下載功能</li>
+                    <li>高解析度音質選項</li>
+                    <li>社交分享功能強大</li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <span class="equipment-icon">🎧</span>
+                <h3 class="equipment-title">無線耳機</h3>
+                <p class="equipment-years">2015年 - 至今</p>
+                <p class="equipment-description">
+                    無線耳機讓音樂聽覺體驗更加自由，AirPods等真無線耳機成為新一代標配。
+                </p>
+                <ul class="equipment-features">
+                    <li>藍牙連接，無線自由</li>
+                    <li>主動降噪技術</li>
+                    <li>語音助手整合</li>
+                    <li>長續航，快充技術</li>
+                    <li>空間音訊，3D音效</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>音樂製作工藝</h2>
+        
+        <div class="craft-section">
+            <div class="craft-header">
+                <span class="craft-icon">🎙️</span>
+                <span class="craft-title">錄音技術演變</span>
+            </div>
+            <ol class="craft-steps">
+                <li class="craft-step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">聲學錄音時代</div>
+                        <div class="step-description">早期直接用喇叭錄音，聲音通過機械振動刻在蠟盤上，音質粗糙但真實。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">磁帶錄音時代</div>
+                        <div class="step-description">磁帶錄音技術讓多軌錄音成為可能，可以分層錄製不同樂器，音質大幅提升。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">數位錄音時代</div>
+                        <div class="step-description">CD和數位音頻工作站出現，音質達到完美，剪輯和混音變得更加精確。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">電腦製作時代</div>
+                        <div class="step-description">個人電腦成為錄音室，軟體樂器和效果器讓音樂製作門檻大大降低。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">AI製作時代</div>
+                        <div class="step-description">人工智慧開始參與音樂創作，自動作曲、智能混音等技術逐漸成熟。</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="craft-section">
+            <div class="craft-header">
+                <span class="craft-icon">🎸</span>
+                <span class="craft-title">樂器製作工藝</span>
+            </div>
+            <ol class="craft-steps">
+                <li class="craft-step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">手工木吉他</div>
+                        <div class="step-description">選用雲杉、玫瑰木等珍貴木材，經過數年自然風乾，手工打造出溫暖音色。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">電吉他製作</div>
+                        <div class="step-description">實心琴身設計，搭配磁性拾音器，可以產生各種音色，成為搖滾樂核心。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">鋼琴工藝</div>
+                        <div class="step-description">超過一萬個零件精密組裝，琴槌擊弦機制，能產生豐富的動態範圍。</div>
+                    </div>
+                </li>
+                <li class="craft-step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">電子樂器</div>
+                        <div class="step-description">合成器、鼓機等電子樂器，通過電路產生各種音色，開創了電子音樂新紀元。</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <h2>經典播放列表</h2>
+        
+        <div class="playlist-section">
+            <div class="playlist-header">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🎵 時代音樂精選</h3>
+                <p style="color: var(--accent);">根據不同音樂設備時代精心設計的播放列表</p>
+            </div>
+            
+            <div class="playlist-grid">
+                <div class="playlist-card" onclick="openPlaylist('vinyl-classics')">
+                    <div class="playlist-icon">💿</div>
+                    <div class="playlist-title">黑膠經典</div>
+                    <div class="playlist-desc">適合黑膠唱片播放的經典老歌，溫暖模擬音質的最佳體現</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('cassette-memories')">
+                    <div class="playlist-icon">📼</div>
+                    <div class="playlist-title">卡帶回憶</div>
+                    <div class="playlist-desc">80-90年代卡帶時代的流行金曲，青春記憶的背景音樂</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('cd-digital-era')">
+                    <div class="playlist-icon">💿</div>
+                    <div class="playlist-title">CD數位時代</div>
+                    <div class="playlist-desc">CD黃金時期的精選歌曲，完美音質的經典體現</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('mp3-generation')">
+                    <div class="playlist-icon">🎵</div>
+                    <div class="playlist-title">MP3世代</div>
+                    <div class="playlist-desc">千禧年後的數位音樂，年輕一代的共同記憶</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('streaming-modern')">
+                    <div class="playlist-icon">📱</div>
+                    <div class="playlist-title">串流現代</div>
+                    <div class="playlist-desc">當代串流平台的熱門歌曲，現代音樂的精華集錦</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('retro-revival')">
+                    <div class="playlist-icon">🕰️</div>
+                    <div class="playlist-title">復古復興</div>
+                    <div class="playlist-desc">現代音樂人向復古風格致敬的作品，新舊融合的完美體現</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>音樂文化傳承</h2>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2 style="text-align: center; margin-top: 0;">為什麼我們懷念舊音樂？</h2>
+            <p class="intro-text">
+                <span class="highlight-text">🎵 情感連結</span><br>
+                舊音樂承載著我們的青春記憶，每一首歌都對應著特定時刻的心情和故事。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🎧 聽覺體驗</span><br>
+                模擬音樂的溫暖音質、黑膠的噼啪聲、卡帶的雜音，這些「不完美」反而成為了獨特的魅力。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">📀 收藏價值</span><br>
+                實體音樂產品具有收藏價值，封面設計、內頁歌詞、限量版本都讓音樂變得更加珍貴。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🔄 播放儀式感</span><br>
+                放黑膠、換卡帶、選CD的過程本身就是一種儀式，讓聽音樂變得更加有意義。
+            </p>
+        </div>
+
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2 style="text-align: center; margin-top: 0;">音樂設備的未來</h2>
+            <p class="intro-text">
+                <span class="highlight-text">🤖 AI音樂</span><br>
+                人工智慧將深度參與音樂創作和製作，個人化音樂推薦會更加精準。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🎮 沉浸式體驗</span><br>
+                VR/AR技術將帶來全新的音樂體驗，虛擬演唱會、3D音效將成為主流。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🌐 區塊鏈音樂</span><br>
+                區塊鏈技術將重新定義音樂版權和收益分配，讓音樂人獲得更公平的回報。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">♾️ 無限可能</span><br>
+                無論技術如何發展，音樂的核心永遠是情感表達，這是永遠不會改變的本質。
+            </p>
+        </div>
+
+    </main>
+
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <div style="margin-bottom: 20px;">
+            <img src="images/logo.webp" alt="江湖禪心" style="width:60px; height:60px; opacity:0.6; transition: opacity 0.3s ease; cursor: pointer;" onclick="location.href='index.html'" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+        </div>
+        <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
+        <p style="margin:10px 0;">
+            <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+            <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+            <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+        </p>
+        <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+    </footer>
+
+    <nav role="navigation" aria-label="主要功能">
+        <a href="index.html" aria-label="首頁">🏠</a>
+        <a href="music.html" aria-label="音樂世界" class="active">🎵</a>
+        <a href="culture.html" aria-label="文化傳承">📜</a>
+        <a href="tools.html" aria-label="實用工具">🛠️</a>
+        <a href="discover.html" aria-label="更多發現">⭐</a>
+    </nav>
+
+    <script src="js/darkmode.js"></script>
+    
+    <script>
+        // Music History JavaScript
+        function openPlaylist(playlistType) {
+            // YouTube播放列表搜索鏈接
+            const playlistSearchUrls = {
+                'vinyl-classics': 'https://www.youtube.com/results?search_query=黑膠經典+懷舊老歌+播放列表',
+                'cassette-memories': 'https://www.youtube.com/results?search_query=80年代90年代+卡帶回憶+經典歌曲',
+                'cd-digital-era': 'https://www.youtube.com/results?search_query=CD時代+經典老歌+數位音樂',
+                'mp3-generation': 'https://www.youtube.com/results?search_query=千禧年+MP3+流行歌曲+播放列表',
+                'streaming-modern': 'https://www.youtube.com/results?search_query=現代流行音樂+串流平台+熱門歌曲',
+                'retro-revival': 'https://www.youtube.com/results?search_query=復古風格+現代音樂+致敬作品'
+            };
+            
+            const playlistNames = {
+                'vinyl-classics': '黑膠經典歌單',
+                'cassette-memories': '卡帶回憶歌單',
+                'cd-digital-era': 'CD數位時代歌單',
+                'mp3-generation': 'MP3世代歌單',
+                'streaming-modern': '串流現代歌單',
+                'retro-revival': '復古復興歌單'
+            };
+            
+            const searchUrl = playlistSearchUrls[playlistType];
+            
+            if (searchUrl) {
+                // 在新標籤頁打開YouTube播放列表搜索
+                window.open(searchUrl, '_blank', 'noopener,noreferrer');
+                showNotification(`🎵 正在YouTube搜索：${playlistNames[playlistType]}`);
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--gold);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                font-size: 1rem;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease-out;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('音樂發展史頁面已載入');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音樂健康 - 江湖禪心｜伍佰經典歌曲情緒舒緩與心靈放鬆指南</title>
+    <meta name="description" content="音樂健康提供情緒音樂推薦、古風冥想技巧、伍佰經典歌曲欣賞分析、呼吸練習與心靈舒緩。結合挪威的森林、淚橋、晚風等經典歌曲，打造完整的音樂療癒與放鬆體驗。">
+    <meta name="keywords" content="音樂健康,情緒音樂,音樂療癒,冥想技巧,呼吸練習,伍佰歌曲,挪威的森林,淚橋,晚風,情緒管理,音樂放鬆,心靈舒緩,壓力釋放">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="音樂健康 - 江湖禪心">
+    <meta property="og:description" content="情緒音樂處方與古風冥想技巧，專為中年男人提供完整的心靈健康指南。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jasyooc.com/music-wellness.html">
+    <meta property="og:image" content="https://jasyooc.com/images/og-music-wellness.jpg">
+    <meta property="og:site_name" content="江湖禪心">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="音樂健康 - 江湖禪心">
+    <meta name="twitter:description" content="情緒音樂處方與古風冥想技巧，專為中年男人提供完整的心靈健康指南。">
+    <meta name="twitter:image" content="https://jasyooc.com/images/twitter-music-wellness.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jasyooc.com/music-wellness.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages.css">
+    
+    <style>
+        /* Music Wellness Specific Styles */
+        .wellness-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .wellness-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px var(--shadow-light);
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(201, 166, 107, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wellness-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .wellness-card:hover::before {
+            left: 100%;
+        }
+        
+        .wellness-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px var(--shadow-medium);
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+            border-color: rgba(201, 166, 107, 0.3);
+        }
+        
+        .mood-prescription {
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid var(--gold);
+            text-align: left;
+        }
+        
+        .prescription-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+        
+        .prescription-icon {
+            font-size: 2rem;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .prescription-title {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .song-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        
+        .song-item {
+            background: var(--gray);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .song-item:hover {
+            background: linear-gradient(135deg, #e8e8e8, #f0f0f0);
+            transform: translateX(5px);
+        }
+        
+        .song-emoji {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+        
+        .song-info {
+            flex: 1;
+        }
+        
+        .song-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+        
+        .song-effect {
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+        
+        .emotion-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .emotion-btn {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .emotion-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        
+        .emotion-btn.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+        }
+        
+        .emotion-emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .emotion-label {
+            font-size: 1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .wellness-result {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid #4caf50;
+            display: none;
+        }
+        
+        .wellness-result.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .technique-section {
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 4px solid var(--gold);
+            text-align: left;
+        }
+        
+        .technique-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .technique-icon {
+            font-size: 2.5rem;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .technique-title {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .step-item {
+            background: var(--gray);
+            padding: 18px 25px;
+            margin: 12px 0;
+            border-radius: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .step-item:hover {
+            background: linear-gradient(135deg, #e8e8e8, #f0f0f0);
+            transform: translateX(5px);
+        }
+        
+        .step-number {
+            background: var(--gold);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            min-width: 30px;
+            margin-top: 2px;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .step-description {
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .breathing-exercise {
+            background: linear-gradient(135deg, #e3f2fd, #f3f8ff);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .breathing-circle {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent), #6f8a80);
+            border-radius: 50%;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 4s ease-in-out;
+        }
+        
+        .breathing-circle.inhale {
+            transform: scale(1.3);
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+        }
+        
+        .breathing-circle.exhale {
+            transform: scale(0.8);
+            background: linear-gradient(135deg, #ff9800, #ffa726);
+        }
+        
+        .breathing-circle.hold {
+            background: linear-gradient(135deg, #2196f3, #42a5f5);
+        }
+        
+        .playlist-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 30px var(--shadow-light);
+        }
+        
+        .playlist-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .playlist-card {
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(201, 166, 107, 0.1);
+        }
+        
+        .playlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+        }
+        
+        .playlist-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .playlist-title {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .playlist-desc {
+            font-size: 0.9rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .meditation-container {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 35px 0;
+            box-shadow: 0 8px 30px var(--shadow-light);
+        }
+        
+        .meditation-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .meditation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .meditation-card {
+            background: linear-gradient(135deg, #f8f5f0, #fff);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(201, 166, 107, 0.1);
+        }
+        
+        .meditation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+            background: linear-gradient(to bottom, #ffffff, #fafafa);
+        }
+        
+        .meditation-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .meditation-title {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .meditation-desc {
+            font-size: 0.95rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .ancient-wisdom {
+            background: linear-gradient(135deg, #f5f5dc, #faf8f3);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid var(--gold);
+            text-align: center;
+        }
+        
+        .wisdom-quote {
+            font-size: 1.2rem;
+            color: var(--text);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .wisdom-author {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        
+        .dark-mode .wellness-card,
+        .dark-mode .mood-prescription,
+        .dark-mode .playlist-container,
+        .dark-mode .emotion-btn,
+        .dark-mode .technique-section,
+        .dark-mode .meditation-container {
+            background: linear-gradient(135deg, #2d2d44, #3d3d5c);
+            color: var(--text);
+        }
+        
+        .dark-mode .song-item,
+        .dark-mode .step-item {
+            background: #3d3d5c;
+        }
+        
+        .dark-mode .song-item:hover,
+        .dark-mode .step-item:hover {
+            background: linear-gradient(135deg, #4d4d6c, #5d5d7c);
+        }
+        
+        .dark-mode .wellness-result {
+            background: linear-gradient(135deg, #2d4433, #3d5c4d);
+        }
+        
+        .dark-mode .breathing-exercise {
+            background: linear-gradient(135deg, #1a2a3a, #2a3a4a);
+        }
+        
+        .dark-mode .playlist-card,
+        .dark-mode .meditation-card {
+            background: linear-gradient(135deg, #2d2d44, #3d3d5c);
+        }
+        
+        .dark-mode .ancient-wisdom {
+            background: linear-gradient(135deg, #3d3d5c, #4d4d6c);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .wellness-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .emotion-selector {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .playlist-grid,
+            .meditation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .prescription-header,
+            .technique-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .breathing-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .step-item {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "音樂健康",
+        "description": "情緒音樂推薦與古風冥想技巧，專為中年男人提供完整的心靈健康指南",
+        "url": "https://jasyooc.com/music-wellness.html",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "江湖禪心"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "江湖禪心",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://jasyooc.com/images/logo.webp"
+            }
+        },
+        "mainEntity": {
+            "@type": "CreativeWork",
+            "name": "音樂健康指南",
+            "description": "通過音樂欣賞、冥想技巧和呼吸練習進行全面的身心健康管理",
+            "purpose": "情緒舒緩與心靈健康"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header role="banner">
+        <h1>音樂健康</h1>
+        <p>情緒音樂處方 · 古風冥想 · 心靈放鬆</p>
+        <button class="btn" onclick="location.href='music.html'">返回音樂世界</button>
+    </header>
+
+    <main role="main">
+        <div class="intro-card">
+            <p class="intro-text">
+                <span class="highlight-text">音樂是靈魂的慰藉，冥想是心靈的歸宿</span><br>
+                在這個古風音樂健康空間裡，<br>
+                讓伍佰的歌聲與傳統智慧陪伴你的身心。
+            </p>
+            <p class="intro-text" style="background: rgba(201, 166, 107, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <span class="highlight-text">🎵 音樂播放說明</span><br>
+                點擊歌曲鏈接將跳轉至YouTube官方搜索頁面，<br>
+                請選擇合法的官方音源進行欣賞。
+            </p>
+        </div>
+
+        <h2>今日情緒如何？</h2>
+        
+        <div class="feature-card">
+            <h3>🎯 選擇你的情緒狀態</h3>
+            <div class="emotion-selector">
+                <button class="emotion-btn" onclick="selectEmotion('lonely', '🌙')">
+                    <span class="emotion-emoji">🌙</span>
+                    <span class="emotion-label">深夜孤單</span>
+                </button>
+                <button class="emotion-btn" onclick="selectEmotion('tired', '😔')">
+                    <span class="emotion-emoji">😔</span>
+                    <span class="emotion-label">身心疲憊</span>
+                </button>
+                <button class="emotion-btn" onclick="selectEmotion('confused', '🤔')">
+                    <span class="emotion-emoji">🤔</span>
+                    <span class="emotion-label">人生迷茫</span>
+                </button>
+                <button class="emotion-btn" onclick="selectEmotion('nostalgic', '🕰️')">
+                    <span class="emotion-emoji">🕰️</span>
+                    <span class="emotion-label">懷舊感傷</span>
+                </button>
+                <button class="emotion-btn" onclick="selectEmotion('anxious', '😰')">
+                    <span class="emotion-emoji">😰</span>
+                    <span class="emotion-label">焦慮不安</span>
+                </button>
+                <button class="emotion-btn" onclick="selectEmotion('hopeful', '🌅')">
+                    <span class="emotion-emoji">🌅</span>
+                    <span class="emotion-label">尋找希望</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="wellness-result" id="wellnessResult">
+            <!-- 動態生成的健康建議 -->
+        </div>
+
+        <!-- Google AdSense 廣告位 - 符合政策 -->
+        <div class="adsense-placeholder">
+            <p>廣告位 - 音樂健康相關推薦</p>
+        </div>
+
+        <h2>音樂療癒處方</h2>
+        
+        <div class="wellness-grid">
+            <div class="wellness-card">
+                <h3>🌙 深夜失眠音樂推薦</h3>
+                <div class="mood-prescription">
+                    <div class="prescription-header">
+                        <span class="prescription-icon">🎵</span>
+                        <span class="prescription-title">安眠音樂推薦</span>
+                    </div>
+                    <ul class="song-list">
+                        <li class="song-item" onclick="playSong('norwegian-forest')">
+                            <span class="song-emoji">🌲</span>
+                            <div class="song-info">
+                                <div class="song-title">挪威的森林</div>
+                                <div class="song-effect">溫柔旋律，誘入安眠</div>
+                            </div>
+                        </li>
+                        <li class="song-item" onclick="playSong('tear-bridge')">
+                            <span class="song-emoji">🌉</span>
+                            <div class="song-info">
+                                <div class="song-title">淚橋</div>
+                                <div class="song-effect">情感釋放，心靈淨化</div>
+                            </div>
+                        </li>
+                        <li class="song-item" onclick="playSong('evening-wind')">
+                            <span class="song-emoji">🍃</span>
+                            <div class="song-info">
+                                <div class="song-title">晚風</div>
+                                <div class="song-effect">輕柔節奏，放鬆身心</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <p style="margin-top: 15px; color: var(--accent); font-size: 0.9rem;">
+                    💡 音樂建議：睡前30分鐘播放，音量調至輕柔，配合深呼吸練習
+                </p>
+            </div>
+
+            <div class="wellness-card">
+                <h3>😔 情緒低落音樂推薦</h3>
+                <div class="mood-prescription">
+                    <div class="prescription-header">
+                        <span class="prescription-icon">🎵</span>
+                        <span class="prescription-title">開心音樂推薦</span>
+                    </div>
+                    <ul class="song-list">
+                        <li class="song-item" onclick="playSong('suddenly-myself')">
+                            <span class="song-emoji">🎸</span>
+                            <div class="song-info">
+                                <div class="song-title">突然的自我</div>
+                                <div class="song-effect">激勵人心，重拾信心</div>
+                            </div>
+                        </li>
+                        <li class="song-item" onclick="playSong('world-no1')">
+                            <span class="song-emoji">🏆</span>
+                            <div class="song-info">
+                                <div class="song-title">世界第一等</div>
+                                <div class="song-effect">積極向上，充滿力量</div>
+                            </div>
+                        </li>
+                        <li class="song-item" onclick="playSong('wanderer')">
+                            <span class="song-emoji">🚶</span>
+                            <div class="song-info">
+                                <div class="song-title">浪人情歌</div>
+                                <div class="song-effect">自由灑脫，釋放壓力</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <p style="margin-top: 15px; color: var(--accent); font-size: 0.9rem;">
+                    💡 音樂建議：早晨或下午播放，配合輕度運動，提升情緒
+                </p>
+            </div>
+
+            <div class="wellness-card">
+                <h3>🤔 人生迷茫音樂推薦</h3>
+                <div class="mood-prescription">
+                    <div class="prescription-header">
+                        <span class="prescription-icon">🎵</span>
+                        <span class="prescription-title">指引音樂推薦</span>
+                    </div>
+                    <ul class="song-list">
+                        <li class="song-item" onclick="playSong('last-dance')">
+                            <span class="song-emoji">💃</span>
+                            <div class="song-info">
+                                <div class="song-title">Last Dance</div>
+                                <div class="song-effect">珍惜當下，感悟人生</div>
+                            </div>
+                        </li>
+                        <li class="song-item" onclick="playSong('white-dove')">
+                            <span class="song-emoji">🕊️</span>
+                            <div class="song-info">
+                                <div class="song-title">白鴿</div>
+                                <div class="song-effect">希望象徵，心靈啟迪</div>
+                            </div>
+                        </li>
+                        <li class="song-item" onclick="playSong('end-of-love')">
+                            <span class="song-emoji">❤️</span>
+                            <div class="song-info">
+                                <div class="song-title">愛情的盡頭</div>
+                                <div class="song-effect">情感昇華，重新開始</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <p style="margin-top: 15px; color: var(--accent); font-size: 0.9rem;">
+                    💡 音樂建議：安靜環境中播放，配合寫作或思考，尋找內心答案
+                </p>
+            </div>
+        </div>
+
+        <h2>古風放鬆技巧</h2>
+        
+        <div class="wellness-grid">
+            <div class="wellness-card">
+                <h3>🧘 禪修冥想法</h3>
+                <div class="technique-section">
+                    <div class="technique-header">
+                        <span class="technique-icon">🧘</span>
+                        <span class="technique-title">古法靜坐</span>
+                    </div>
+                    <ol class="step-list">
+                        <li class="step-item">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <div class="step-title">選擇安靜環境</div>
+                                <div class="step-description">找一個不受打擾的空間，可點燃檀香增加氛圍</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <div class="step-title">調整坐姿</div>
+                                <div class="step-description">盤腿而坐，背脊挺直，雙手自然放在膝上</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <div class="step-title">閉目調息</div>
+                                <div class="step-description">輕閉雙眼，專注呼吸，讓思緒自然流動</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <div class="step-title">觀照內心</div>
+                                <div class="step-description">不批判地觀察念頭，如雲飄過天空</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <p style="margin-top: 20px; color: var(--accent); font-size: 0.9rem;">
+                    💡 建議時間：每日15-30分鐘，配合伍佰《挪威的森林》等輕柔音樂
+                </p>
+            </div>
+
+            <div class="wellness-card">
+                <h3>🫁 深呼吸調息法</h3>
+                <div class="technique-section">
+                    <div class="technique-header">
+                        <span class="technique-icon">🫁</span>
+                        <span class="technique-title">道家呼吸術</span>
+                    </div>
+                    <ol class="step-list">
+                        <li class="step-item">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <div class="step-title">準備姿勢</div>
+                                <div class="step-description">坐直或躺平，雙肩放鬆，一手置於腹部</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <div class="step-title">腹式呼吸</div>
+                                <div class="step-description">用鼻子深吸4秒，感受腹部隆起</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <div class="step-title">屏息調養</div>
+                                <div class="step-description">屏息7秒，讓氣息在體內循環</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <div class="step-title">緩慢呼出</div>
+                                <div class="step-description">用嘴緩慢呼出8秒，感受身心放鬆</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <p style="margin-top: 20px; color: var(--accent); font-size: 0.9rem;">
+                    💡 建議循環：重復5-10次，可隨時隨地練習
+                </p>
+            </div>
+
+            <div class="wellness-card">
+                <h3>🌙 漸進式肌肉放鬆</h3>
+                <div class="technique-section">
+                    <div class="technique-header">
+                        <span class="technique-icon">🌙</span>
+                        <span class="technique-title">身心鬆弛術</span>
+                    </div>
+                    <ol class="step-list">
+                        <li class="step-item">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <div class="step-title">舒適躺臥</div>
+                                <div class="step-description">平躺於床上，閉眼，調整到最舒適的姿勢</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <div class="step-title">腳趾緊張</div>
+                                <div class="step-description">用力蜷縮腳趾5秒，感受緊張感</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <div class="step-title">快速放鬆</div>
+                                <div class="step-description">突然放鬆，感受溫暖和舒適傳遍腳部</div>
+                            </div>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <div class="step-title">逐步向上</div>
+                                <div class="step-description">按小腿、大腿、腹部、手臂、面部順序進行</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <p style="margin-top: 20px; color: var(--accent); font-size: 0.9rem;">
+                    💡 建議時機：睡前練習，有助於改善睡眠質量
+                </p>
+            </div>
+        </div>
+
+        <h2>療癒播放列表</h2>
+        
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🎵 專屬療癒歌單</h3>
+                <p style="color: var(--accent);">根據不同情緒狀態精心設計的音樂療癒列表</p>
+            </div>
+            
+            <div class="playlist-grid">
+                <div class="playlist-card" onclick="openPlaylist('midnight-healing')">
+                    <div class="playlist-icon">🌙</div>
+                    <div class="playlist-title">深夜療癒</div>
+                    <div class="playlist-desc">適合深夜獨處時聽的溫柔旋律，撫慰孤單的心靈</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('morning-energy')">
+                    <div class="playlist-icon">🌅</div>
+                    <div class="playlist-title">清晨活力</div>
+                    <div class="playlist-desc">開啟美好一天的激勵歌曲，充滿正能量與希望</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('nostalgic-journey')">
+                    <div class="playlist-icon">🕰️</div>
+                    <div class="playlist-title">懷舊之旅</div>
+                    <div class="playlist-desc">重溫經典老歌，找回青春記憶與感動時刻</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('emotional-release')">
+                    <div class="playlist-icon">💧</div>
+                    <div class="playlist-title">情感釋放</div>
+                    <div class="playlist-desc">適合情感宣洩的深度歌曲，讓眼淚撫慰心靈</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('meditation-music')">
+                    <div class="playlist-icon">🧘</div>
+                    <div class="playlist-title">靜心冥想</div>
+                    <div class="playlist-desc">適合冥想與內省的純音樂，幫助心靈回歸平靜</div>
+                </div>
+                
+                <div class="playlist-card" onclick="openPlaylist('driving-music')">
+                    <div class="playlist-icon">🚗</div>
+                    <div class="playlist-title">公路音樂</div>
+                    <div class="playlist-desc">適合開車兜風的節奏歌曲，享受自由與灑脫</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二個廣告位 -->
+        <div class="adsense-placeholder">
+            <p>廣告位 - 心理健康應用推薦</p>
+        </div>
+
+        <h2>冥想引導</h2>
+        
+        <div class="meditation-container">
+            <div class="meditation-header">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🌸 專屬冥想方案</h3>
+                <p style="color: var(--accent);">根據不同需求設計的古風冥想引導</p>
+            </div>
+            
+            <div class="meditation-grid">
+                <div class="meditation-card" onclick="startMeditation('stress-relief')">
+                    <div class="meditation-icon">😌</div>
+                    <div class="meditation-title">壓力釋放冥想</div>
+                    <div class="meditation-desc">10分鐘快速壓力釋放，適合工作間隙或情緒激動時</div>
+                </div>
+                
+                <div class="meditation-card" onclick="startMeditation('sleep-preparation')">
+                    <div class="meditation-icon">🌙</div>
+                    <div class="meditation-title">睡眠準備冥想</div>
+                    <div class="meditation-desc">15分鐘睡前放鬆，幫助快速入眠並提升睡眠質量</div>
+                </div>
+                
+                <div class="meditation-card" onclick="startMeditation('emotional-balance')">
+                    <div class="meditation-icon">⚖️</div>
+                    <div class="meditation-title">情緒平衡冥想</div>
+                    <div class="meditation-desc">20分鐘深度情緒調節，重建內心平靜與和諧</div>
+                </div>
+                
+                <div class="meditation-card" onclick="startMeditation('focus-enhancement')">
+                    <div class="meditation-icon">🎯</div>
+                    <div class="meditation-title">專注力提升冥想</div>
+                    <div class="meditation-desc">12分鐘專注力訓練，增強工作學習效率</div>
+                </div>
+                
+                <div class="meditation-card" onclick="startMeditation('self-compassion')">
+                    <div class="meditation-icon">💝</div>
+                    <div class="meditation-title">自我關懷冥想</div>
+                    <div class="meditation-desc">18分鐘自我接納與關懷，培養內在溫柔力量</div>
+                </div>
+                
+                <div class="meditation-card" onclick="startMeditation('ancient-wisdom')">
+                    <div class="meditation-icon">📜</div>
+                    <div class="meditation-title">古人智慧冥想</div>
+                    <div class="meditation-desc">25分鐘傳統智慧融入，體驗古人的心境與哲思</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>音樂呼吸練習</h2>
+        
+        <div class="breathing-exercise">
+            <h3 style="color: var(--gold); margin-bottom: 15px;">🫁 音樂呼吸練習</h3>
+            <p style="margin-bottom: 20px; color: var(--accent);">配合音樂進行深呼吸練習，快速放鬆身心</p>
+            
+            <div class="breathing-circle" id="breathingCircle" onclick="startBreathing()">
+                開始練習
+            </div>
+            
+            <div style="margin-top: 20px; color: var(--text);">
+                <p><strong>步驟說明：</strong></p>
+                <p>1. 點擊圓圈開始4-7-8呼吸法</p>
+                <p>2. 跟隨圓圈變化調整呼吸節奏</p>
+                <p>3. 配合背景音樂效果更佳</p>
+                <p>4. 建議每天練習5-10分鐘</p>
+            </div>
+        </div>
+
+        <h2>古人放鬆智慧</h2>
+        
+        <div class="ancient-wisdom">
+            <div class="wisdom-quote">
+                "靜以修身，儉以養德。非淡泊無以明志，非寧靜無以致遠。"
+            </div>
+            <div class="wisdom-author">— 諸葛亮《誡子書》</div>
+        </div>
+        
+        <div class="ancient-wisdom">
+            <div class="wisdom-quote">
+                "知止而後有定，定而後能靜，靜而後能安，安而後能慮，慮而後能得。"
+            </div>
+            <div class="wisdom-author">— 《大學》</div>
+        </div>
+        
+        <div class="ancient-wisdom">
+            <div class="wisdom-quote">
+                "天地有大美而不言，四時有明法而不議，萬物有成理而不說。"
+            </div>
+            <div class="wisdom-author">— 莊子《知北遊》</div>
+        </div>
+
+        <h2>音樂健康知識</h2>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2 style="text-align: center; margin-top: 0;">為什麼音樂能舒緩心靈？</h2>
+            <p class="intro-text">
+                <span class="highlight-text">🎵 音樂科學原理</span><br>
+                音樂能夠調節情緒狀態，帶來心靈慰藉。伍佰的歌聲特別能觸動中年男人的情感共鳴。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🧠 情感效應</span><br>
+                懷舊音樂喚起美好回憶，提供情感慰藉。熟悉的旋律給人安全感，幫助應對生活壓力。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">💝 情感共鳴</span><br>
+                伍佰歌詞中的灑脫與情感，正好對應中年男人的心境，讓人感覺被理解、不孤單。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🌱 心靈啟發</span><br>
+                通過音樂反思人生，釋放情感，找到內心的平靜與力量。這不是逃避，而是面對。
+            </p>
+        </div>
+
+        <h2>專業提醒</h2>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2 style="text-align: center; margin-top: 0;">音樂舒緩的範圍</h2>
+            <p class="intro-text">
+                <span class="highlight-text">⚠️ 補充而非替代</span><br>
+                音樂欣賞是情緒輔助方式，不能替代專業心理治療。嚴重心理問題請尋求專業幫助。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🏥 專業資源</span><br>
+                心理諮詢師、精神科醫師能提供更系統的專業幫助。音樂欣賞可作為輔助方式。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">🆘 緊急情況</span><br>
+                如有自傷念頭或嚴重抑鬱症狀，請立即聯繫心理危機干預熱線或專業醫療機構。
+            </p>
+            <p class="intro-text">
+                <span class="highlight-text">💪 正視問題</span><br>
+                接受自己的情緒狀態，尋求幫助是勇氣的表現。心靈健康和身體健康同樣重要。
+            </p>
+        </div>
+
+    </main>
+
+    <footer role="contentinfo" style="text-align:center; padding:40px 20px 30px; font-size:0.9em; color:#666; border-top:1px solid var(--accent); margin-top:40px; background:var(--bg);">
+        <div style="margin-bottom: 20px;">
+            <img src="images/logo.webp" alt="江湖禪心" style="width:60px; height:60px; opacity:0.6; transition: opacity 0.3s ease; cursor: pointer;" onclick="location.href='index.html'" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+        </div>
+        <p style="margin:10px 0;">© 2025 江湖禪心 · 懷舊音樂娛樂站</p>
+        <p style="margin:10px 0;">
+            <a href="https://jasyooc.com/privacy.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">隱私政策</a>
+            <a href="https://jasyooc.com/disclaimer.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">免責聲明</a>
+            <a href="https://jasyooc.com/about.html" style="color:var(--accent); margin:0 15px; text-decoration:none;">關於我們</a>
+        </p>
+        <p style="margin:20px 0 10px; font-size:0.8em;">本站內容僅供娛樂與情緒舒緩，如有嚴重心理問題請尋求專業幫助</p>
+    </footer>
+
+    <nav role="navigation" aria-label="主要功能">
+        <a href="index.html" aria-label="首頁">🏠</a>
+        <a href="music.html" aria-label="音樂世界" class="active">🎵</a>
+        <a href="culture.html" aria-label="文化傳承">📜</a>
+        <a href="tools.html" aria-label="實用工具">🛠️</a>
+        <a href="discover.html" aria-label="更多發現">⭐</a>
+    </nav>
+
+    <script src="js/darkmode.js"></script>
+    
+    <script>
+        // Music Wellness JavaScript
+        let selectedEmotion = null;
+        let breathingInterval = null;
+        let isBreathing = false;
+
+        // Emotion therapy prescriptions
+        const therapyPrescriptions = {
+            lonely: {
+                title: '深夜孤單音樂推薦',
+                description: '當深夜孤單襲來，讓這些歌聲陪伴你',
+                songs: [
+                    { title: '挪威的森林', effect: '溫柔旋律，撫慰孤單心靈', emoji: '🌲' },
+                    { title: '淚橋', effect: '情感共鳴，讓你感覺不孤單', emoji: '🌉' },
+                    { title: 'Last Dance', effect: '溫情回憶，時光陪伴', emoji: '💃' }
+                ],
+                advice: '建議在安靜環境中播放，配合熱茶或溫水，讓自己完全沉浸在音樂中。'
+            },
+            tired: {
+                title: '身心疲憊音樂推薦',
+                description: '當疲憊不堪時，讓音樂給你力量',
+                songs: [
+                    { title: '晚風', effect: '輕柔節奏，放鬆身心', emoji: '🍃' },
+                    { title: '白鴿', effect: '希望象徵，重拾活力', emoji: '🕊️' },
+                    { title: '世界第一等', effect: '激勵人心，恢復元氣', emoji: '🏆' }
+                ],
+                advice: '建議躺下或舒適坐姿播放，閉眼休息，讓音樂幫助你恢復能量。'
+            },
+            confused: {
+                title: '人生迷茫音樂推薦',
+                description: '當迷茫困惑時，讓音樂指引方向',
+                songs: [
+                    { title: '突然的自我', effect: '自我反思，找到內心答案', emoji: '🎸' },
+                    { title: '浪人情歌', effect: '自由灑脫，釋放困惑', emoji: '🚶' },
+                    { title: '愛情的盡頭', effect: '情感昇華，重新思考人生', emoji: '❤️' }
+                ],
+                advice: '建議在安靜環境中播放，配合寫作或思考，記錄下內心的感悟。'
+            },
+            nostalgic: {
+                title: '懷舊感傷音樂推薦',
+                description: '當懷舊情緒湧現，讓經典旋律陪伴回憶',
+                songs: [
+                    { title: '挪威的森林', effect: '經典回憶，時光倒流', emoji: '🌲' },
+                    { title: 'Last Dance', effect: '溫情歲月，美好回憶', emoji: '💃' },
+                    { title: '淚橋', effect: '情感沉澱，回憶昇華', emoji: '🌉' }
+                ],
+                advice: '建議播放時看老照片或回憶往事，讓情感自然流動，這是療癒的過程。'
+            },
+            anxious: {
+                title: '焦慮不安音樂推薦',
+                description: '當焦慮來襲時，讓音樂平靜心靈',
+                songs: [
+                    { title: '晚風', effect: '平靜旋律，緩解焦慮', emoji: '🍃' },
+                    { title: '白鴿', effect: '安詳音樂，心靈平靜', emoji: '🕊️' },
+                    { title: '挪威的森林', effect: '溫柔氛圍，放鬆神經', emoji: '🌲' }
+                ],
+                advice: '建議配合深呼吸練習，慢慢調整呼吸節奏，讓焦慮隨音樂流走。'
+            },
+            hopeful: {
+                title: '尋找希望音樂推薦',
+                description: '當需要希望時，讓音樂給你力量',
+                songs: [
+                    { title: '世界第一等', effect: '積極向上，充滿希望', emoji: '🏆' },
+                    { title: '突然的自我', effect: '重拾信心，勇往直前', emoji: '🎸' },
+                    { title: '浪人情歌', effect: '自由精神，追求夢想', emoji: '🚶' }
+                ],
+                advice: '建議在早晨或下午播放，配合戶外散步或運動，讓希望隨音樂成長。'
+            }
+        };
+
+        function selectEmotion(emotion, emoji) {
+            // Remove previous selection
+            document.querySelectorAll('.emotion-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selection to clicked button
+            event.currentTarget.classList.add('selected');
+            
+            selectedEmotion = emotion;
+            showWellnessResult(emotion);
+        }
+
+        function showWellnessResult(emotion) {
+            const resultDiv = document.getElementById('wellnessResult');
+            const prescription = therapyPrescriptions[emotion];
+            
+            if (!prescription) return;
+            
+            const songsHTML = prescription.songs.map(song => `
+                <li class="song-item" onclick="playSong('${song.title}')">
+                    <span class="song-emoji">${song.emoji}</span>
+                    <div class="song-info">
+                        <div class="song-title">${song.title}</div>
+                        <div class="song-effect">${song.effect}</div>
+                    </div>
+                </li>
+            `).join('');
+            
+            resultDiv.innerHTML = `
+                <h3 style="color: var(--gold); margin-bottom: 20px; text-align: center;">
+                    🎵 ${prescription.title}
+                </h3>
+                <p style="margin-bottom: 20px; line-height: 1.8; color: var(--text);">
+                    ${prescription.description}
+                </p>
+                <div class="mood-prescription">
+                    <ul class="song-list">
+                        ${songsHTML}
+                    </ul>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(201, 166, 107, 0.1); border-radius: 10px;">
+                    <strong style="color: var(--gold);">💡 音樂建議：</strong>
+                    <span style="color: var(--text);">${prescription.advice}</span>
+                </div>
+            `;
+            
+            resultDiv.classList.add('show');
+        }
+
+        // 合法的YouTube搜索鏈接映射
+        const youtubeSearchLinks = {
+            'norwegian-forest': 'https://www.youtube.com/results?search_query=伍佰+挪威的森林+官方MV',
+            'tear-bridge': 'https://www.youtube.com/results?search_query=伍佰+淚橋+官方MV',
+            'evening-wind': 'https://www.youtube.com/results?search_query=伍佰+晚風+官方MV',
+            'suddenly-myself': 'https://www.youtube.com/results?search_query=伍佰+突然的自我+官方MV',
+            'world-no1': 'https://www.youtube.com/results?search_query=伍佰+世界第一等+官方MV',
+            'wanderer': 'https://www.youtube.com/results?search_query=伍佰+浪人情歌+官方MV',
+            'last-dance': 'https://www.youtube.com/results?search_query=伍佰+Last+Dance+官方MV',
+            'white-dove': 'https://www.youtube.com/results?search_query=伍佰+白鴿+官方MV',
+            'end-of-love': 'https://www.youtube.com/results?search_query=伍佰+愛情的盡頭+官方MV',
+            '挪威的森林': 'https://www.youtube.com/results?search_query=伍佰+挪威的森林+官方MV',
+            '淚橋': 'https://www.youtube.com/results?search_query=伍佰+淚橋+官方MV',
+            '晚風': 'https://www.youtube.com/results?search_query=伍佰+晚風+官方MV',
+            '突然的自我': 'https://www.youtube.com/results?search_query=伍佰+突然的自我+官方MV',
+            '世界第一等': 'https://www.youtube.com/results?search_query=伍佰+世界第一等+官方MV',
+            '浪人情歌': 'https://www.youtube.com/results?search_query=伍佰+浪人情歌+官方MV',
+            'Last Dance': 'https://www.youtube.com/results?search_query=伍佰+Last+Dance+官方MV',
+            '白鴿': 'https://www.youtube.com/results?search_query=伍佰+白鴿+官方MV',
+            '愛情的盡頭': 'https://www.youtube.com/results?search_query=伍佰+愛情的盡頭+官方MV'
+        };
+
+        function playSong(songTitle) {
+            const searchUrl = youtubeSearchLinks[songTitle];
+            
+            if (searchUrl) {
+                // 在新標籤頁打開YouTube搜索頁面
+                window.open(searchUrl, '_blank', 'noopener,noreferrer');
+                showNotification(`🎵 正在YouTube搜索：${songTitle}`);
+            } else {
+                // 如果沒有預設鏈接，使用通用搜索
+                const genericSearchUrl = `https://www.youtube.com/results?search_query=伍佰+${encodeURIComponent(songTitle)}+官方MV`;
+                window.open(genericSearchUrl, '_blank', 'noopener,noreferrer');
+                showNotification(`🎵 正在YouTube搜索：${songTitle}`);
+            }
+        }
+
+        function openPlaylist(playlistType) {
+            // YouTube播放列表搜索鏈接
+            const playlistSearchUrls = {
+                'midnight-healing': 'https://www.youtube.com/results?search_query=伍佰+深夜+歌曲+播放列表',
+                'morning-energy': 'https://www.youtube.com/results?search_query=伍佰+勵志+歌曲+播放列表',
+                'nostalgic-journey': 'https://www.youtube.com/results?search_query=伍佰+經典+懷舊+播放列表',
+                'emotional-release': 'https://www.youtube.com/results?search_query=伍佰+情感+歌曲+播放列表',
+                'meditation-music': 'https://www.youtube.com/results?search_query=伍佰+輕音樂+播放列表',
+                'driving-music': 'https://www.youtube.com/results?search_query=伍佰+公路+歌曲+播放列表'
+            };
+            
+            const playlistNames = {
+                'midnight-healing': '深夜療癒歌單',
+                'morning-energy': '清晨活力歌單',
+                'nostalgic-journey': '懷舊之旅歌單',
+                'emotional-release': '情感釋放歌單',
+                'meditation-music': '靜心冥想歌單',
+                'driving-music': '公路音樂歌單'
+            };
+            
+            const searchUrl = playlistSearchUrls[playlistType];
+            
+            if (searchUrl) {
+                // 在新標籤頁打開YouTube播放列表搜索
+                window.open(searchUrl, '_blank', 'noopener,noreferrer');
+                showNotification(`🎵 正在YouTube搜索：${playlistNames[playlistType]}`);
+            }
+        }
+
+        function startMeditation(type) {
+            const meditationTypes = {
+                'stress-relief': '壓力釋放冥想',
+                'sleep-preparation': '睡眠準備冥想',
+                'emotional-balance': '情緒平衡冥想',
+                'focus-enhancement': '專注力提升冥想',
+                'self-compassion': '自我關懷冥想',
+                'ancient-wisdom': '古人智慧冥想'
+            };
+            
+            showNotification(`🧠 正在啟動：${meditationTypes[type]}`);
+            
+            // 這裡可以添加實際的冥想引導邏輯
+            // 例如：播放引導音頻、顯示冥想計時器等
+        }
+
+        function startBreathing() {
+            const circle = document.getElementById('breathingCircle');
+            
+            if (isBreathing) {
+                stopBreathing();
+                return;
+            }
+            
+            isBreathing = true;
+            circle.textContent = '吸氣中...';
+            circle.classList.add('inhale');
+            
+            // 4-7-8 呼吸法
+            breathingInterval = setInterval(() => {
+                if (circle.classList.contains('inhale')) {
+                    circle.classList.remove('inhale');
+                    circle.classList.add('hold');
+                    circle.textContent = '屏息...';
+                    
+                    setTimeout(() => {
+                        circle.classList.remove('hold');
+                        circle.classList.add('exhale');
+                        circle.textContent = '呼氣中...';
+                    }, 7000);
+                    
+                    setTimeout(() => {
+                        circle.classList.remove('exhale');
+                        circle.classList.add('inhale');
+                        circle.textContent = '吸氣中...';
+                    }, 15000);
+                }
+            }, 22000); // 4秒吸氣 + 7秒屏息 + 8秒呼氣 + 3秒休息 = 22秒
+        }
+
+        function stopBreathing() {
+            isBreathing = false;
+            clearInterval(breathingInterval);
+            
+            const circle = document.getElementById('breathingCircle');
+            circle.classList.remove('inhale', 'exhale', 'hold');
+            circle.textContent = '開始練習';
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--gold);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                font-size: 1rem;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease-out;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('音樂健康頁面已載入');
+        });
+    </script>
+</body>
+</html>
