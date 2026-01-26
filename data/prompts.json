@@ -1,8 +1,8 @@
 {
   "metadata": {
     "version": "2.0",
-    "lastUpdated": "2026-01-22",
-    "totalPrompts": 21,
+    "lastUpdated": "2026-01-26",
+    "totalPrompts": 24,
     "categories": 1
   },
   "categories": [
@@ -484,6 +484,89 @@
           "images": {
             "thumbnail": "images/prompt/21.webp",
             "full": "images/prompt/21.webp"
+          }
+        },
+        {
+          "id": "22",
+          "title": "岩板四味符号",
+          "description": "岩板四味符号",
+          "tags": [
+            "风景",
+            "中级",
+            "数学",
+            "符号",
+            "字母"
+          ],
+          "type": "landscape",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "输入 A 是一个数学符号、字母或常数（例如 Pi、Sigma、Infinity、Delta）。  \n生成 4 种不同的烹饪介质来呈现该符号：  \n介质 1（液体）：一种粘稠的酱汁或蘸料（例如红色 Salsa、Pesto、融化巧克力）。  \n介质 2（颗粒）：一种谷物或组合单元（例如寿司米饭、玉米粒、咖啡豆）。  \n介质 3（固体）：一种烘焙或烹饪结构（例如披萨饼皮、椒盐卷饼面团、烤肉）。  \n介质 4（粉末）：一种鲜艳的香料或粉末（例如姜黄、面粉、抹茶粉）。  \n\n2. 容器  \n目标：“可食用字体”食物摄影。  \n格式：2x2 网格构图。  \n画布：每个面板展示一块带纹理的黑色岩板餐盘，置于质朴的木桌上。  \n主体：符号（输入 A）用该面板指定的介质在岩板中央塑形。  \n\n3. 构图（摆盘）：  \n面板 1（液体/凌乱）：用酱汁绘制符号。周围摆放蘸食小食（薯片、面包）与点缀（奶酪碎、香草）。  \n面板 2（颗粒/精确）：用紧密排列的谷物或寿司卷拼成符号。周围放置工具（筷子、勺子）。  \n面板 3（固体/结构）：符号被烘焙或雕刻，具有高度与 3D 体积。表面装饰配料（橄榄、意大利辣肠）。  \n面板 4（粉末/地形）：符号以负形或堆叠香料脊线呈现。  \n微细节：1:87 比例小工人/矿工人偶与粉末互动，将其当作景观（铲姜黄、铺设轨道）。  \n\n4. 语法（激发食欲）：  \n色彩：高饱和度。食物颜色（红色酱汁、黄色香料、白色米饭）必须在黑色石板上突出。  \n质感：酱汁可见水分，面包可见碎屑，香料可见颗粒。  \n\n输出：单张图像，1:1 宽高比，2x2 网格，食物摄影，“平铺”美学，高质感。"
+          },
+          "images": {
+            "thumbnail": "images/prompt/22.webp",
+            "full": "images/prompt/22.webp"
+          }
+        },
+        {
+          "id": "23",
+          "title": "萌宠零食派对",
+          "description": "照片级真实结合风格化真实感",
+          "tags": [
+            "人像",
+            "中级",
+            "近景",
+            "高清",
+            "8K",
+            "超高清",
+            "细节",
+            "锐利",
+            "暖色",
+            "写实",
+            "彩色",
+            "柔和",
+            "浅景深",
+            "背景虚化",
+            "微笑",
+            "背景",
+            "光线",
+            "眼神",
+            "姿态",
+            "动作",
+            "配饰"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "{\n  \"global_settings\": {\n    \"resolution\": \"8K超高清\",\n    \"aspect_ratio\": \"3:4竖幅\",\n    \"image_quality\": \"极致细节，超锐焦点\",\n    \"lighting_style\": \"温暖电影光效配金色散景背景\",\n    \"depth_of_field\": \"浅景深，主体强烈分离\",\n    \"render_style\": \"AI精修，超写实，照片级真实结合风格化真实感\",\n    \"color_grading\": \"暖色调，金色高光，柔和阴影\",\n    \"background\": \"失焦的金色圆形散景光点\"\n  },\n  \"Module_1_Image_1_Style\": {\n    \"subject\": \"猫咪形状玉米片\",\n    \"primary_container\": {\n      \"type\": \"红色纸制零食袋\",\n      \"design\": \"正面大幅卡通猫插画\",\n      \"graphics\": \"简约面部特征，柔和粉彩色调\",\n      \"material\": \"哑光纸质纹理\"\n    },\n    \"chip_details\": {\n      \"shape\": \"带尖耳的猫头\",\n      \"color\": \"金橙色油炸质感\",\n      \"surface\": \"酥脆起泡，略不平整\",\n      \"facial_features\": {\n        \"eyes\": \"小黑圆点\",\n        \"mouth\": \"简单弧线\",\n        \"whiskers\": \"细暗线\"\n      }\n    },\n    \"poses_and_interactions\": {\n      \"one_chip\": \"手持三角奶酪片\",\n      \"foreground_chips\": \"放在袋外表面\"\n    },\n    \"composition\": {\n      \"camera_angle\": \"略高于视线\",\n      \"framing\": \"紧凑竖幅构图\",\n      \"focus\": \"玉米片锐利，背景虚化\"\n    }\n  },\n  \"Module_2_Image_2_Style\": {\n    \"subject\": \"绵羊形状爆米花人偶\",\n    \"primary_container\": {\n      \"type\": \"经典爆米花桶\",\n      \"design\": \"红白竖条纹\",\n      \"material\": \"纸板配柔和哑光表面\"\n    },\n    \"sheep_details\": {\n      \"body\": \"全由玉米粒构成\",\n      \"head\": \"光滑白色圆脸\",\n      \"ears\": \"小圆耳，内耳淡黄\",\n      \"eyes\": \"极小黑点\",\n      \"mouth\": \"细弯微笑线\"\n    },\n    \"poses_and_accessories\": {\n      \"one_sheep\": \"握黑色电视遥控器\",\n      \"multiple_sheep\": \"从爆米花堆后探头\"\n    },\n    \"composition\": {\n      \"layering\": \"绵羊层叠聚集\",\n      \"foreground\": \"底部散落额外爆米花\",\n      \"focus\": \"中央绵羊锐利对焦\"\n    }\n  },\n  \"Module_3_Image_3_Style\": {\n    \"subject\": \"熊形状炸鸡爆米花块\",\n    \"primary_container\": {\n      \"type\": \"白色爆米花桶\",\n      \"branding\": \"文字为'Chicken Popcorn'\",\n      \"graphics\": \"文字上方简约厨师帽图标\",\n      \"decoration\": \"小彩色波点\"\n    },\n    \"nugget_details\": {\n      \"shape\": \"泰迪熊剪影\",\n      \"color\": \"金棕油炸外壳\",\n      \"texture\": \"酥脆裹粉表面\",\n      \"facial_features\": {\n        \"eyes\": \"小黑珠\",\n        \"nose\": \"圆黑鼻头\",\n        \"mouth\": \"极小暗线\"\n      }\n    },\n    \"poses_and_accessories\": {\n      \"one_nugget\": \"握苏打杯配吸管\",\n      \"foreground_nuggets\": \"立于桶外\"\n    },\n    \"composition\": {\n      \"camera_distance\": \"中近景\",\n      \"bucket_position\": \"垂直居中\",\n      \"lighting\": \"暖高光突出质感\"\n    }\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/23.webp",
+            "full": "images/prompt/23.webp"
+          }
+        },
+        {
+          "id": "24",
+          "title": "乐高糖果幻境漂流",
+          "description": "俏皮且欢乐",
+          "tags": [
+            "人像",
+            "中级",
+            "彩色",
+            "柔和",
+            "风景",
+            "光线",
+            "表情",
+            "动作",
+            "背景"
+          ],
+          "type": "portrait",
+          "difficulty": "intermediate",
+          "prompt": {
+            "positive": "\"atmosphere\": {\n      \"mood\": \"俏皮且欢乐\",\n      \"mist\": \"柔和薄雾\",\n      \"lighting\": \"柔和粉彩照明\"\n    }\n  },\n  \"river\": {\n    \"type\": \"融化的焦糖与巧克力\",\n    \"motion\": \"如糖浆般轻柔旋转\",\n    \"texture\": \"光滑、光亮、流动\"\n  },\n  \"boats\": {\n    \"style\": \"乐高风格\",\n    \"materials\": [\"威化饼\", \"巧克力\"],\n    \"details\": {\n      \"toppings\": [\"彩色糖针\", \"棉花糖\"],\n      \"scale\": \"玩具比例\"\n    },\n    \"movement\": \"顺流漂浮\"\n  },\n  \"characters\": {\n    \"type\": \"乐高角色\",\n    \"actions\": [\n      \"欢快地划糖果船\",\n      \"将手浸入焦糖和巧克力河流\"\n    ],\n    \"expressions\": \"快乐且俏皮\"\n  },\n  \"background\": {\n    \"landscape_elements\": [\n      \"棉花糖山丘\",\n      \"软糖树\",\n      \"糖果桥\"\n    ],\n    \"connections\": \"连接糖果景观各部分的桥梁\"\n  },\n  \"style\": {\n    \"visual_style\": \"俏皮卡通3D\",\n    \"color_palette\": \"柔和粉彩色\",\n    \"render_quality\": \"高质量异想天开渲染\"\n  }\n}"
+          },
+          "images": {
+            "thumbnail": "images/prompt/24.webp",
+            "full": "images/prompt/24.webp"
           }
         }
       ]

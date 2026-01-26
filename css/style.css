@@ -321,9 +321,15 @@ nav a {
     font-size: clamp(1.2rem, 3vw, 1.8rem);
     padding: 8px;
     text-decoration: none;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 nav a::after {
@@ -342,6 +348,15 @@ nav a.active, nav a:hover {
     opacity: 1; 
     color: var(--gold);
     transform: translateY(-2px);
+    background: rgba(201, 166, 107, 0.1);
+    box-shadow: 0 4px 12px rgba(201, 166, 107, 0.2);
+}
+
+nav a:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    opacity: 1;
+    background: rgba(201, 166, 107, 0.1);
 }
 
 nav a.active::after,
@@ -373,6 +388,452 @@ nav a[style*="background-image"] {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* ==================== 音樂人專頁樣式 ==================== */
+.musician-card {
+    background: white;
+    border-radius: 24px;
+    padding: clamp(30px, 5vw, 50px);
+    margin: clamp(30px, 5vw, 60px) auto;
+    box-shadow: 0 12px 40px var(--shadow-medium);
+    text-align: left;
+    border: 1px solid rgba(201, 166, 107, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.musician-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--gold), var(--accent), var(--gold));
+    border-radius: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.musician-card:hover::before {
+    opacity: 0.3;
+}
+
+.musician-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px var(--shadow-heavy);
+}
+
+/* 音樂人頭部信息 */
+.musician-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gray);
+}
+
+.musician-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+    border: 3px solid var(--gold);
+    box-shadow: 0 4px 20px var(--shadow-medium);
+    flex-shrink: 0;
+}
+
+.musician-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.musician-card:hover .musician-avatar img {
+    transform: scale(1.05);
+}
+
+.musician-info h3 {
+    margin: 0 0 8px 0;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    color: var(--text);
+}
+
+.musician-title {
+    color: var(--accent);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    margin: 4px 0;
+    font-weight: 500;
+}
+
+.musician-years {
+    color: #888;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* 音樂人內容區 */
+.musician-content {
+    display: grid;
+    gap: 25px;
+}
+
+.musician-story,
+.musician-hits,
+.musician-quotes {
+    padding: 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--gray) 0%, rgba(248, 245, 240, 0.5) 100%);
+}
+
+.musician-story h4,
+.musician-hits h4,
+.musician-quotes h4 {
+    margin: 0 0 15px 0;
+    color: var(--gold);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 歌曲列表 */
+.song-list {
+    display: grid;
+    gap: 12px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+.song-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px var(--shadow-medium);
+}
+
+.song-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.song-year {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0 15px;
+}
+
+.play-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn:hover {
+    background: var(--gold);
+    transform: scale(1.1);
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+/* 歌詞引用 */
+.lyric-quote {
+    margin: 0 0 15px 0;
+    padding: 20px;
+    background: white;
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    font-style: italic;
+    color: var(--text);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+.lyric-quote:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--shadow-medium);
+}
+
+.lyric-quote small {
+    display: block;
+    margin-top: 8px;
+    color: #888;
+    font-style: normal;
+    font-size: 0.85rem;
+}
+
+/* 互動區域 */
+.interaction-area {
+    display: grid;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.story-prompt {
+    text-align: center;
+}
+
+.story-prompt label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.story-prompt textarea {
+    width: 100%;
+    max-width: 600px;
+    min-height: 100px;
+    padding: 15px;
+    border: 2px solid var(--gray);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.story-prompt textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(140, 168, 155, 0.2);
+}
+
+.submit-btn {
+    margin-top: 15px;
+    padding: 12px 30px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--shadow-medium);
+}
+
+/* 投票區域 */
+.musician-vote {
+    text-align: center;
+}
+
+.musician-vote h4 {
+    margin: 0 0 20px 0;
+    color: var(--gold);
+}
+
+.vote-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.vote-btn {
+    padding: 12px 20px;
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.vote-btn:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--shadow-medium);
+}
+
+.vote-btn:disabled {
+    background: var(--gray);
+    border-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 投票結果 */
+.vote-chart {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px var(--shadow-light);
+}
+
+.vote-chart h5 {
+    margin: 0 0 20px 0;
+    color: var(--text);
+    text-align: center;
+}
+
+.vote-bar {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.vote-name {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.vote-progress {
+    height: 24px;
+    background: var(--gray);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.vote-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    transition: width 1s ease;
+    border-radius: 12px;
+}
+
+.vote-count {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.total-votes {
+    text-align: center;
+    margin: 15px 0 0 0;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* 通知提示 */
+.play-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: slideInRight 0.3s ease;
+}
+
+.notification-content {
+    background: var(--text);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 20px var(--shadow-heavy);
+    min-width: 250px;
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+}
+
+.notification-text {
+    flex: 1;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+/* 消息提示 */
+.message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 4px 20px var(--shadow-heavy);
+    animation: slideInDown 0.3s ease;
+}
+
+.message-success {
+    background: var(--accent);
+    color: white;
+}
+
+.message-warning {
+    background: var(--gold);
+    color: white;
+}
+
+.message-info {
+    background: var(--text);
+    color: white;
+}
+
+/* 動畫 */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
 /* 深色模式footer logo */
 body.dark-mode .footer-logo {
     opacity: 0.7;
@@ -388,6 +849,112 @@ body.dark-mode .footer-logo:hover {
     .footer-logo {
         width: 50px;
         height: 50px;
+    }
+    
+    /* 移动端导航图标优化 */
+    nav a {
+        font-size: 1.4rem;
+        min-width: 40px;
+        min-height: 40px;
+        padding: 6px;
+    }
+    
+    /* 深色模式移动端优化 */
+    body.dark-mode nav a {
+        text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        filter: drop-shadow(0 1px 2px rgba(212, 175, 55, 0.4));
+    }
+    
+    body.dark-mode nav a:hover,
+    body.dark-mode nav a.active {
+        text-shadow: 0 1px 2px rgba(212, 175, 55, 0.5);
+        filter: drop-shadow(0 1px 3px rgba(212, 175, 55, 0.7));
+    }
+    
+    /* 音樂人專頁移動端優化 */
+    .musician-card {
+        padding: 25px 20px;
+        margin: 25px 10px;
+    }
+    
+    .musician-header {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .musician-avatar {
+        width: 80px;
+        height: 80px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .musician-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .musician-story,
+    .musician-hits,
+    .musician-quotes {
+        padding: 15px;
+    }
+    
+    .song-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .song-name {
+        font-size: 0.95rem;
+    }
+    
+    .song-year {
+        margin: 0;
+        font-size: 0.8rem;
+    }
+    
+    .play-btn {
+        align-self: flex-end;
+        width: 32px;
+        height: 32px;
+    }
+    
+    .vote-options {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .vote-bar {
+        grid-template-columns: 60px 1fr;
+        gap: 10px;
+    }
+    
+    .vote-count {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 5px;
+    }
+    
+    .play-notification {
+        right: 10px;
+        left: 10px;
+        top: 10px;
+    }
+    
+    .notification-content {
+        min-width: auto;
+        padding: 12px 15px;
+    }
+    
+    .message {
+        left: 10px;
+        right: 10px;
+        transform: none;
+        padding: 12px 20px;
     }
 }
 
@@ -658,22 +1225,40 @@ body.dark-mode nav {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* 深色模式导航链接 */
 body.dark-mode nav a {
     color: var(--text) !important;
+    opacity: 0.9 !important;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.2);
+    filter: drop-shadow(0 1px 2px rgba(212, 175, 55, 0.3));
+    font-weight: 500;
 }
 
 body.dark-mode nav a:hover,
 body.dark-mode nav a.active {
-    background: rgba(212, 175, 55, 0.1) !important;
+    background: rgba(212, 175, 55, 0.2) !important;
     color: var(--gold) !important;
+    opacity: 1 !important;
+    text-shadow: 0 1px 3px rgba(212, 175, 55, 0.4);
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.6));
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 body.dark-mode nav a.active::after,
 body.dark-mode nav a:hover::after {
     background: var(--gold);
+}
+
+body.dark-mode nav a:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    opacity: 1 !important;
+    background: rgba(212, 175, 55, 0.15) !important;
+    text-shadow: 0 1px 3px rgba(212, 175, 55, 0.4);
 }
 
 /* 深色模式广告占位符 */
